@@ -1,0 +1,59 @@
+{
+  "blockTypes": 5,
+  "city": "seoul",
+  "columns": 8,
+  "id": "seoul-005",
+  "materials": [
+    {
+      "column": 2,
+      "row": 0
+    },
+    {
+      "column": 5,
+      "row": 0
+    }
+  ],
+  "moves": 15,
+  "obstacles": [
+    {
+      "column": 1,
+      "hp": 1,
+      "row": 8,
+      "type": "concrete"
+    },
+    {
+      "column": 2,
+      "hp": 1,
+      "row": 8,
+      "type": "concrete"
+    },
+    {
+      "column": 3,
+      "hp": 1,
+      "row": 8,
+      "type": "concrete"
+    },
+    {
+      "column": 5,
+      "hp": 1,
+      "row": 8,
+      "type": "concrete"
+    },
+    {
+      "column": 6,
+      "hp": 1,
+      "row": 8,
+      "type": "concrete"
+    }
+  ],
+  "rewards": [
+    "extraMoves"
+  ],
+  "rows": 16,
+  "seed": 1005,
+  "starScores": [
+    3200,
+    4000
+  ],
+  "tutorial": "보드 아래의 아이템은 이동 횟수를 쓰지 않아요. 망치는 누른 칸 하나를 부수고, 바꾸기는 맞지 않는 두 블록도 바꿔 주고, 섞기는 블록을 다시 섞어요. 막혔을 때 아껴서 써 보세요. 오염 물질과 벽에는 망치가 통하지 않아요."
+}

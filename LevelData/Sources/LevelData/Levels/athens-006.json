@@ -1,0 +1,122 @@
+{
+  "blockTypes" : 5,
+  "city" : "athens",
+  "columns" : 8,
+  "id" : "athens-006",
+  "materials" : [
+    {
+      "column" : 0,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 2,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 7,
+      "row" : 4,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 5,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 5,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 11,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 11,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 11,
+      "type" : "sticky"
+    },
+    {
+      "column" : 1,
+      "row" : 13,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 13,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 13,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 13,
+      "type" : "sticky"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 27,
+  "seed" : 22306723,
+  "starScores" : [
+    5800,
+    6900
+  ]
+}

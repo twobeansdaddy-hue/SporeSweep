@@ -1,0 +1,105 @@
+{
+  "blockTypes" : 5,
+  "city" : "paris",
+  "columns" : 8,
+  "id" : "paris-016",
+  "materials" : [
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 40,
+  "obstacles" : [
+    {
+      "column" : 5,
+      "kind" : "plastic",
+      "row" : 5,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 6,
+      "kind" : "brick",
+      "row" : 5,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 3,
+      "row" : 8,
+      "type" : "cage"
+    },
+    {
+      "column" : 2,
+      "row" : 9,
+      "type" : "cage"
+    },
+    {
+      "column" : 0,
+      "row" : 9,
+      "type" : "cage"
+    },
+    {
+      "column" : 2,
+      "row" : 12,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 12,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 13,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 13,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 14,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 14,
+      "type" : "wall"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 7,
+      "depth" : 8
+    }
+  ],
+  "rewards" : [
+    "beam",
+    "bomb",
+    "core",
+    "extraMoves"
+  ],
+  "rows" : 28,
+  "seed" : 22916831,
+  "starScores" : [
+    6400,
+    7700
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "blockTypes" : 5,
+  "city" : "newyork",
+  "columns" : 8,
+  "id" : "newyork-016",
+  "materials" : [
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 0,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 40,
+  "obstacles" : [
+    {
+      "column" : 0,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 0,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 7,
+      "type" : "shield"
+    },
+    {
+      "column" : 2,
+      "row" : 7,
+      "type" : "shield"
+    },
+    {
+      "column" : 3,
+      "row" : 7,
+      "type" : "shield"
+    },
+    {
+      "column" : 4,
+      "row" : 7,
+      "type" : "shield"
+    },
+    {
+      "column" : 1,
+      "row" : 8,
+      "type" : "shield"
+    },
+    {
+      "column" : 2,
+      "row" : 8,
+      "type" : "shield"
+    },
+    {
+      "column" : 3,
+      "row" : 8,
+      "type" : "shield"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "shield"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "beam",
+    "bomb",
+    "core",
+    "extraMoves"
+  ],
+  "rows" : 29,
+  "seed" : 24116867,
+  "starScores" : [
+    7300,
+    8600
+  ]
+}

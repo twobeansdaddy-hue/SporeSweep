@@ -1,0 +1,152 @@
+{
+  "blockTypes" : 5,
+  "city" : "rome",
+  "columns" : 8,
+  "id" : "rome-015",
+  "materials" : [
+    {
+      "column" : 2,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 6,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 35,
+  "obstacles" : [
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 5,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 1,
+      "row" : 8,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 8,
+      "type" : "sticky"
+    },
+    {
+      "column" : 5,
+      "row" : 8,
+      "type" : "sticky"
+    },
+    {
+      "column" : 0,
+      "row" : 10,
+      "type" : "sticky"
+    },
+    {
+      "column" : 1,
+      "row" : 10,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 10,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 10,
+      "type" : "sticky"
+    },
+    {
+      "column" : 0,
+      "row" : 12,
+      "type" : "sticky"
+    },
+    {
+      "column" : 1,
+      "row" : 12,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 12,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 12,
+      "type" : "sticky"
+    },
+    {
+      "column" : 0,
+      "row" : 14,
+      "type" : "sticky"
+    },
+    {
+      "column" : 1,
+      "row" : 14,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 14,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 14,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 14,
+      "type" : "sticky"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "extraMoves"
+  ],
+  "rows" : 29,
+  "seed" : 21115768,
+  "starScores" : [
+    5800,
+    6900
+  ]
+}

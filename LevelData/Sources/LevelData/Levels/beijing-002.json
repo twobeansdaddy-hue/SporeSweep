@@ -1,0 +1,68 @@
+{
+  "blockTypes" : 4,
+  "city" : "beijing",
+  "columns" : 8,
+  "id" : "beijing-002",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 0,
+      "row" : 4,
+      "type" : "cage"
+    },
+    {
+      "column" : 7,
+      "row" : 4,
+      "type" : "cage"
+    },
+    {
+      "column" : 3,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 0,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 2,
+      "hp" : 1,
+      "row" : 8,
+      "type" : "concrete"
+    },
+    {
+      "column" : 3,
+      "hp" : 1,
+      "row" : 8,
+      "type" : "concrete"
+    },
+    {
+      "column" : 4,
+      "hp" : 1,
+      "row" : 8,
+      "type" : "concrete"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 21,
+  "seed" : 2302087,
+  "starScores" : [
+    11800,
+    16500
+  ]
+}

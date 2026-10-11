@@ -1,0 +1,123 @@
+{
+  "blockTypes" : 5,
+  "city" : "newyork",
+  "columns" : 8,
+  "id" : "newyork-002",
+  "materials" : [
+    {
+      "column" : 0,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 35,
+  "obstacles" : [
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 6,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 6,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 6,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 6,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 6,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 6,
+      "type" : "fog"
+    },
+    {
+      "column" : 6,
+      "row" : 6,
+      "type" : "fog"
+    },
+    {
+      "column" : 7,
+      "row" : 10,
+      "type" : "boulder"
+    },
+    {
+      "column" : 4,
+      "row" : 9,
+      "type" : "boulder"
+    },
+    {
+      "column" : 1,
+      "row" : 9,
+      "type" : "boulder"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 5,
+      "depth" : 6
+    }
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 25,
+  "seed" : 24102741,
+  "starScores" : [
+    5600,
+    6700
+  ]
+}

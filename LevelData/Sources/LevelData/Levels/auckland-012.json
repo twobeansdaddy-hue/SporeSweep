@@ -1,0 +1,107 @@
+{
+  "blockTypes" : 5,
+  "city" : "auckland",
+  "columns" : 8,
+  "id" : "auckland-012",
+  "materials" : [
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 6,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 2,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 3,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 6,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 5,
+      "row" : 8,
+      "type" : "cage"
+    },
+    {
+      "column" : 7,
+      "row" : 7,
+      "type" : "cage"
+    },
+    {
+      "column" : 4,
+      "row" : 11,
+      "type" : "nest"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 30,
+  "seed" : 28112951,
+  "starScores" : [
+    5700,
+    6700
+  ]
+}

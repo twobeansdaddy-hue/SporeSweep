@@ -1,0 +1,140 @@
+{
+  "blockTypes" : 5,
+  "city" : "dubai",
+  "columns" : 8,
+  "id" : "dubai-014",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 40,
+  "obstacles" : [
+    {
+      "column" : 1,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 6,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 5,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 6,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 1,
+      "row" : 9,
+      "type" : "egg"
+    },
+    {
+      "column" : 7,
+      "row" : 9,
+      "type" : "egg"
+    },
+    {
+      "column" : 3,
+      "row" : 9,
+      "type" : "egg"
+    },
+    {
+      "column" : 2,
+      "hp" : 2,
+      "row" : 12,
+      "type" : "concrete"
+    },
+    {
+      "column" : 3,
+      "hp" : 1,
+      "row" : 12,
+      "type" : "concrete"
+    },
+    {
+      "column" : 4,
+      "hp" : 2,
+      "row" : 12,
+      "type" : "concrete"
+    },
+    {
+      "column" : 5,
+      "hp" : 1,
+      "row" : 12,
+      "type" : "concrete"
+    },
+    {
+      "column" : 6,
+      "hp" : 2,
+      "row" : 12,
+      "type" : "concrete"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 2,
+      "depth" : 6
+    }
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 28,
+  "seed" : 17314645,
+  "starScores" : [
+    7800,
+    8900
+  ]
+}

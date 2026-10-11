@@ -1,0 +1,125 @@
+{
+  "blockTypes" : 4,
+  "city" : "paris",
+  "columns" : 8,
+  "id" : "paris-011",
+  "materials" : [
+    {
+      "column" : 2,
+      "height" : 2,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 40,
+  "obstacles" : [
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "cage"
+    },
+    {
+      "column" : 1,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 0,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 0,
+      "row" : 4,
+      "type" : "cage"
+    },
+    {
+      "column" : 2,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 3,
+      "row" : 9,
+      "type" : "chain"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "chain"
+    },
+    {
+      "column" : 0,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 0,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 13,
+      "type" : "fog"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 28,
+  "seed" : 22911786,
+  "starScores" : [
+    13900,
+    16500
+  ]
+}

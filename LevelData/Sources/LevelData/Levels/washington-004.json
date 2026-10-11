@@ -1,0 +1,126 @@
+{
+  "blockTypes" : 5,
+  "city" : "washington",
+  "columns" : 8,
+  "id" : "washington-004",
+  "materials" : [
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 7,
+      "row" : 5,
+      "type" : "egg"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "egg"
+    },
+    {
+      "column" : 1,
+      "row" : 5,
+      "type" : "egg"
+    },
+    {
+      "column" : 0,
+      "row" : 8,
+      "type" : "rubble"
+    },
+    {
+      "column" : 1,
+      "row" : 9,
+      "type" : "rubble"
+    },
+    {
+      "column" : 4,
+      "row" : 9,
+      "type" : "rubble"
+    },
+    {
+      "column" : 7,
+      "row" : 8,
+      "type" : "rubble"
+    },
+    {
+      "column" : 1,
+      "row" : 8,
+      "type" : "rubble"
+    },
+    {
+      "column" : 1,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 13,
+      "type" : "fog"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 26,
+  "seed" : 25704807,
+  "starScores" : [
+    5800,
+    7000
+  ]
+}

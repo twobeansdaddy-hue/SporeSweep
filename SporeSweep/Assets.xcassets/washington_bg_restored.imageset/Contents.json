@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "washington_bg_restored.jpg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

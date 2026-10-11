@@ -1,0 +1,102 @@
+{
+  "blockTypes" : 5,
+  "city" : "amsterdam",
+  "columns" : 8,
+  "id" : "amsterdam-005",
+  "materials" : [
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "cage"
+    },
+    {
+      "column" : 2,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 7,
+      "row" : 10,
+      "type" : "rubble"
+    },
+    {
+      "column" : 6,
+      "row" : 8,
+      "type" : "rubble"
+    },
+    {
+      "column" : 0,
+      "row" : 10,
+      "type" : "rubble"
+    },
+    {
+      "column" : 1,
+      "row" : 10,
+      "type" : "rubble"
+    },
+    {
+      "column" : 3,
+      "row" : 9,
+      "type" : "rubble"
+    },
+    {
+      "column" : 4,
+      "row" : 12,
+      "type" : "chain"
+    },
+    {
+      "column" : 0,
+      "row" : 12,
+      "type" : "chain"
+    },
+    {
+      "column" : 3,
+      "row" : 13,
+      "type" : "chain"
+    },
+    {
+      "column" : 5,
+      "row" : 12,
+      "type" : "chain"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "bomb"
+  ],
+  "rows" : 27,
+  "seed" : 23905762,
+  "starScores" : [
+    5500,
+    6700
+  ]
+}

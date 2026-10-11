@@ -1,0 +1,91 @@
+{
+  "blockTypes" : 5,
+  "city" : "sydney",
+  "columns" : 8,
+  "id" : "sydney-010",
+  "materials" : [
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 20,
+  "obstacles" : [
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 2,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 3,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 5,
+      "row" : 7,
+      "type" : "nest"
+    },
+    {
+      "column" : 1,
+      "row" : 12,
+      "type" : "boulder"
+    },
+    {
+      "column" : 1,
+      "row" : 11,
+      "type" : "boulder"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "core"
+  ],
+  "rows" : 28,
+  "seed" : 27710921,
+  "starScores" : [
+    4200,
+    5300
+  ]
+}

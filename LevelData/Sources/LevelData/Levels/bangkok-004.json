@@ -1,0 +1,52 @@
+{
+  "blockTypes" : 4,
+  "city" : "bangkok",
+  "columns" : 8,
+  "id" : "bangkok-004",
+  "materials" : [
+    {
+      "column" : 2,
+      "height" : 1,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 20,
+  "obstacles" : [
+    {
+      "column" : 1,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 2,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 6,
+      "row" : 10,
+      "turns" : 10,
+      "type" : "timer"
+    },
+    {
+      "column" : 7,
+      "row" : 10,
+      "turns" : 10,
+      "type" : "timer"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 23,
+  "seed" : 7304255,
+  "starScores" : [
+    11300,
+    15000
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "blockTypes" : 5,
+  "city" : "bangkok",
+  "columns" : 8,
+  "id" : "bangkok-006",
+  "materials" : [
+    {
+      "column" : 0,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 1,
+      "row" : 4,
+      "type" : "nest"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 24,
+  "seed" : 7306273,
+  "starScores" : [
+    5300,
+    6200
+  ]
+}

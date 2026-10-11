@@ -1,0 +1,42 @@
+{
+  "blockTypes" : 5,
+  "city" : "tokyo",
+  "columns" : 8,
+  "id" : "tokyo-004",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 15,
+  "obstacles" : [
+    {
+      "column" : 5,
+      "kind" : "plastic",
+      "row" : 4,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 7,
+      "kind" : "wood",
+      "row" : 5,
+      "type" : "cocoon"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 20,
+  "seed" : 1104069,
+  "starScores" : [
+    2600,
+    3600
+  ]
+}

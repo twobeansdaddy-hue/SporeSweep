@@ -1,0 +1,88 @@
+{
+  "blockTypes" : 4,
+  "city" : "antarctica",
+  "columns" : 8,
+  "id" : "antarctica-002",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 2,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 6,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 7,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 6,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 7,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 1,
+      "hp" : 1,
+      "row" : 7,
+      "type" : "concrete"
+    },
+    {
+      "column" : 2,
+      "hp" : 2,
+      "row" : 7,
+      "type" : "concrete"
+    },
+    {
+      "column" : 3,
+      "hp" : 1,
+      "row" : 7,
+      "type" : "concrete"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 26,
+  "seed" : 28302867,
+  "starScores" : [
+    11000,
+    13300
+  ]
+}

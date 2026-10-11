@@ -1,0 +1,45 @@
+{
+  "blockTypes" : 5,
+  "city" : "sample",
+  "columns" : 8,
+  "id" : "sample-008",
+  "materials" : [
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 15,
+  "obstacles" : [
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "cage"
+    },
+    {
+      "column" : 7,
+      "row" : 4,
+      "type" : "cage"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 19,
+  "seed" : 708093,
+  "starScores" : [
+    3500,
+    4300
+  ]
+}

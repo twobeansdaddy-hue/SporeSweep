@@ -1,0 +1,61 @@
+{
+  "blockTypes" : 5,
+  "city" : "bangkok",
+  "columns" : 8,
+  "id" : "bangkok-001",
+  "materials" : [
+    {
+      "column" : 0,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 2,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 35,
+  "obstacles" : [
+    {
+      "column" : 2,
+      "row" : 5,
+      "turns" : 8,
+      "type" : "timer"
+    },
+    {
+      "column" : 6,
+      "row" : 4,
+      "turns" : 8,
+      "type" : "timer"
+    },
+    {
+      "column" : 1,
+      "row" : 5,
+      "turns" : 9,
+      "type" : "timer"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 23,
+  "seed" : 7301228,
+  "starScores" : [
+    6400,
+    7600
+  ],
+  "tutorial" : "시한 포자는 블록에 달라붙어 턴마다 숫자가 줄어요. 0이 되면 터져서 주변을 슬러지로 덮어요. 그 전에 포자가 붙은 블록을 맞추거나 특수 블록으로 없애세요."
+}

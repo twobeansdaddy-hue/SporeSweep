@@ -1,0 +1,16 @@
+# macOS, Xcode, SwiftPM
+.DS_Store
+.build/
+DerivedData/
+xcuserdata/
+*.xcuserstate
+
+# 사람마다 다른 설정. 서명 팀, 광고 ID, Firebase 설정 파일.
+Config/Local.xcconfig
+SporeSweep/GoogleService-Info.plist
+
+# 저장소에 올리지 않는 자료. 사업 계획, 홍보 자료, 그림의 원본 작업 파일.
+PLAN.md
+Marketing/
+Art/incoming/
+*.zip

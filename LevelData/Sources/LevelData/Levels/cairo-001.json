@@ -1,0 +1,78 @@
+{
+  "blockTypes" : 5,
+  "city" : "cairo",
+  "columns" : 8,
+  "id" : "cairo-001",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 20,
+  "obstacles" : [
+    {
+      "column" : 0,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 1,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 0,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 1,
+      "row" : 6,
+      "type" : "sticky"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 22,
+  "seed" : 15101462,
+  "starScores" : [
+    4600,
+    5700
+  ],
+  "tutorial" : "끈끈이 바닥 위의 블록은 밀 수 없어요. 옆의 블록을 밀어 넣어 그 블록을 맞추거나 특수 블록의 효과가 닿으면 끈끈이가 사라져요."
+}

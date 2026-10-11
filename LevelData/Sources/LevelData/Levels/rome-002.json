@@ -1,0 +1,115 @@
+{
+  "blockTypes" : 4,
+  "city" : "rome",
+  "columns" : 8,
+  "id" : "rome-002",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 2,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 0,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 0,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 0,
+      "row" : 7,
+      "type" : "sticky"
+    },
+    {
+      "column" : 1,
+      "row" : 7,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 7,
+      "type" : "sticky"
+    },
+    {
+      "column" : 0,
+      "row" : 9,
+      "type" : "sticky"
+    },
+    {
+      "column" : 1,
+      "row" : 9,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 9,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 9,
+      "type" : "sticky"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 25,
+  "seed" : 21102651,
+  "starScores" : [
+    12000,
+    15800
+  ]
+}

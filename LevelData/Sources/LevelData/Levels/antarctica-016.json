@@ -1,0 +1,100 @@
+{
+  "blockTypes" : 5,
+  "city" : "antarctica",
+  "columns" : 8,
+  "id" : "antarctica-016",
+  "materials" : [
+    {
+      "column" : 0,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 45,
+  "obstacles" : [
+    {
+      "column" : 0,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 7,
+      "row" : 4,
+      "type" : "cage"
+    },
+    {
+      "column" : 2,
+      "hp" : 2,
+      "row" : 8,
+      "type" : "concrete"
+    },
+    {
+      "column" : 3,
+      "hp" : 1,
+      "row" : 8,
+      "type" : "concrete"
+    },
+    {
+      "column" : 4,
+      "hp" : 2,
+      "row" : 8,
+      "type" : "concrete"
+    },
+    {
+      "column" : 5,
+      "hp" : 1,
+      "row" : 8,
+      "type" : "concrete"
+    },
+    {
+      "column" : 2,
+      "row" : 11,
+      "type" : "boulder"
+    },
+    {
+      "column" : 6,
+      "row" : 12,
+      "type" : "boulder"
+    },
+    {
+      "column" : 5,
+      "row" : 13,
+      "type" : "boulder"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "beam",
+    "bomb",
+    "core",
+    "extraMoves"
+  ],
+  "rows" : 30,
+  "seed" : 28316993,
+  "starScores" : [
+    7800,
+    9200
+  ]
+}

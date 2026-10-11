@@ -1,0 +1,19 @@
+{
+  "id": "seoul",
+  "name": "서울",
+  "landmark": {
+    "id": "sungnyemun",
+    "name": "숭례문",
+    "parts": [
+      { "id": "gate", "name": "홍예문", "cost": 3 },
+      { "id": "wallLeft", "name": "왼쪽 석축", "cost": 3 },
+      { "id": "wallRight", "name": "오른쪽 석축", "cost": 3 },
+      { "id": "floor1", "name": "1층 문루", "cost": 5 },
+      { "id": "floor2", "name": "2층 문루", "cost": 6, "requires": ["floor1"] },
+      { "id": "pollution", "name": "오염 제거", "cost": 3 },
+      { "id": "ground", "name": "잔해 정리", "cost": 2 },
+      { "id": "greenery", "name": "녹지", "cost": 2, "requires": ["ground"] },
+      { "id": "sky", "name": "맑은 하늘", "cost": 3, "requires": ["pollution"] }
+    ]
+  }
+}

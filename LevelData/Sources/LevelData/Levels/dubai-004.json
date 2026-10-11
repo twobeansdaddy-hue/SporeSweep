@@ -1,0 +1,40 @@
+{
+  "blockTypes" : 4,
+  "city" : "dubai",
+  "columns" : 8,
+  "id" : "dubai-004",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "egg"
+    },
+    {
+      "column" : 1,
+      "row" : 5,
+      "type" : "egg"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 26,
+  "seed" : 17304555,
+  "starScores" : [
+    12600,
+    17000
+  ]
+}

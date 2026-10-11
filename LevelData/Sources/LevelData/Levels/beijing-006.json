@@ -1,0 +1,35 @@
+{
+  "blockTypes" : 4,
+  "city" : "beijing",
+  "columns" : 8,
+  "id" : "beijing-006",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 20,
+  "obstacles" : [
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "sludge"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 23,
+  "seed" : 2306123,
+  "starScores" : [
+    9100,
+    12100
+  ]
+}

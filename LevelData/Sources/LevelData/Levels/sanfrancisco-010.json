@@ -1,0 +1,119 @@
+{
+  "blockTypes" : 5,
+  "city" : "sanfrancisco",
+  "columns" : 8,
+  "id" : "sanfrancisco-010",
+  "materials" : [
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 40,
+  "obstacles" : [
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 6,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 6,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "egg"
+    },
+    {
+      "column" : 2,
+      "row" : 7,
+      "type" : "egg"
+    },
+    {
+      "column" : 6,
+      "row" : 7,
+      "type" : "egg"
+    },
+    {
+      "column" : 7,
+      "row" : 11,
+      "type" : "egg"
+    },
+    {
+      "column" : 1,
+      "row" : 12,
+      "type" : "egg"
+    },
+    {
+      "column" : 5,
+      "row" : 11,
+      "type" : "egg"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 2,
+      "depth" : 7
+    }
+  ],
+  "rewards" : [
+    "core"
+  ],
+  "rows" : 29,
+  "seed" : 25110843,
+  "starScores" : [
+    6800,
+    7700
+  ]
+}

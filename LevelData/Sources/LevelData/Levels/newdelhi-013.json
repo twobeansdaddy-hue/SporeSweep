@@ -1,0 +1,139 @@
+{
+  "blockTypes" : 5,
+  "city" : "newdelhi",
+  "columns" : 8,
+  "id" : "newdelhi-013",
+  "materials" : [
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 6,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 40,
+  "obstacles" : [
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "kind" : "glass",
+      "row" : 10,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 4,
+      "kind" : "plastic",
+      "row" : 10,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 1,
+      "kind" : "glass",
+      "row" : 11,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 7,
+      "row" : 14,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 15,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 15,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 16,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 16,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 16,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 17,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 17,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 18,
+      "type" : "wall"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 25,
+  "seed" : 3113210,
+  "starScores" : [
+    5300,
+    6000
+  ]
+}

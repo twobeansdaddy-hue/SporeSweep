@@ -1,0 +1,79 @@
+{
+  "blockTypes" : 5,
+  "city" : "amsterdam",
+  "columns" : 8,
+  "id" : "amsterdam-001",
+  "materials" : [
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 2,
+      "hp" : 1,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 3,
+      "hp" : 1,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 4,
+      "hp" : 1,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 5,
+      "hp" : 1,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 2,
+      "row" : 7,
+      "turns" : 9,
+      "type" : "timer"
+    },
+    {
+      "column" : 4,
+      "row" : 7,
+      "turns" : 9,
+      "type" : "timer"
+    },
+    {
+      "column" : 2,
+      "row" : 11,
+      "type" : "sludge"
+    },
+    {
+      "column" : 3,
+      "row" : 11,
+      "type" : "sludge"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 7,
+      "depth" : 10
+    }
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 24,
+  "seed" : 23901726,
+  "starScores" : [
+    5100,
+    6100
+  ]
+}

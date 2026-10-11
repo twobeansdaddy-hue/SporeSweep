@@ -1,0 +1,101 @@
+{
+  "blockTypes" : 5,
+  "city" : "capetown",
+  "columns" : 8,
+  "id" : "capetown-014",
+  "materials" : [
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 45,
+  "obstacles" : [
+    {
+      "column" : 6,
+      "row" : 4,
+      "turns" : 9,
+      "type" : "timer"
+    },
+    {
+      "column" : 3,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 11,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 11,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 12,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 12,
+      "type" : "wall"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 7,
+      "depth" : 8
+    }
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 28,
+  "seed" : 19314705,
+  "starScores" : [
+    7200,
+    8300
+  ]
+}

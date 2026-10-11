@@ -1,0 +1,84 @@
+{
+  "blockTypes" : 5,
+  "city" : "bangkok",
+  "columns" : 8,
+  "id" : "bangkok-005",
+  "materials" : [
+    {
+      "column" : 2,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 0,
+      "row" : 6,
+      "turns" : 10,
+      "type" : "timer"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "turns" : 9,
+      "type" : "timer"
+    },
+    {
+      "column" : 0,
+      "row" : 4,
+      "turns" : 10,
+      "type" : "timer"
+    },
+    {
+      "column" : 3,
+      "hp" : 1,
+      "row" : 8,
+      "type" : "concrete"
+    },
+    {
+      "column" : 4,
+      "hp" : 2,
+      "row" : 8,
+      "type" : "concrete"
+    },
+    {
+      "column" : 5,
+      "hp" : 1,
+      "row" : 8,
+      "type" : "concrete"
+    },
+    {
+      "column" : 6,
+      "hp" : 2,
+      "row" : 8,
+      "type" : "concrete"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "bomb"
+  ],
+  "rows" : 23,
+  "seed" : 7305264,
+  "starScores" : [
+    4200,
+    5100
+  ]
+}

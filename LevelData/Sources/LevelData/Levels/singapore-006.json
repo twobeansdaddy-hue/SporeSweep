@@ -1,0 +1,191 @@
+{
+  "blockTypes" : 5,
+  "city" : "singapore",
+  "columns" : 8,
+  "id" : "singapore-006",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 20,
+  "obstacles" : [
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "sludge"
+    },
+    {
+      "column" : 0,
+      "row" : 7,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 7,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 7,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 7,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 7,
+      "type" : "fog"
+    },
+    {
+      "column" : 0,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 0,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 0,
+      "row" : 11,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 11,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 11,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 11,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 11,
+      "type" : "fog"
+    },
+    {
+      "column" : 0,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 0,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 13,
+      "type" : "fog"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 26,
+  "seed" : 13106447,
+  "starScores" : [
+    3900,
+    5200
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "blockTypes" : 5,
+  "city" : "bangkok",
+  "columns" : 8,
+  "id" : "bangkok-016",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 6,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 45,
+  "obstacles" : [
+    {
+      "column" : 6,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 3,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "cage"
+    },
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "cage"
+    },
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 11,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 11,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 12,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 12,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "kind" : "glass",
+      "row" : 16,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 7,
+      "kind" : "wood",
+      "row" : 15,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 2,
+      "kind" : "plastic",
+      "row" : 15,
+      "type" : "cocoon"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "beam",
+    "bomb",
+    "core",
+    "extraMoves"
+  ],
+  "rows" : 29,
+  "seed" : 7316363,
+  "starScores" : [
+    6800,
+    8200
+  ]
+}

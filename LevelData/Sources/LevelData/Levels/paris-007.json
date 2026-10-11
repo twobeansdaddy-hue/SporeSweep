@@ -1,0 +1,72 @@
+{
+  "blockTypes" : 5,
+  "city" : "paris",
+  "columns" : 8,
+  "id" : "paris-007",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 6,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 1,
+      "row" : 6,
+      "turns" : 9,
+      "type" : "timer"
+    },
+    {
+      "column" : 3,
+      "row" : 6,
+      "turns" : 9,
+      "type" : "timer"
+    },
+    {
+      "column" : 6,
+      "kind" : "glass",
+      "row" : 8,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 0,
+      "kind" : "glass",
+      "row" : 8,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 3,
+      "kind" : "scrap",
+      "row" : 8,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 4,
+      "kind" : "wood",
+      "row" : 9,
+      "type" : "cocoon"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 27,
+  "seed" : 22907750,
+  "starScores" : [
+    4800,
+    6100
+  ]
+}

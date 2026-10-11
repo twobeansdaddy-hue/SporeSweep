@@ -1,0 +1,177 @@
+{
+  "blockTypes" : 5,
+  "city" : "auckland",
+  "columns" : 8,
+  "id" : "auckland-008",
+  "materials" : [
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 7,
+      "row" : 5,
+      "type" : "ice"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "ice"
+    },
+    {
+      "column" : 1,
+      "row" : 5,
+      "type" : "ice"
+    },
+    {
+      "column" : 3,
+      "row" : 7,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 7,
+      "type" : "sticky"
+    },
+    {
+      "column" : 5,
+      "row" : 7,
+      "type" : "sticky"
+    },
+    {
+      "column" : 6,
+      "row" : 7,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 9,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 9,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 9,
+      "type" : "sticky"
+    },
+    {
+      "column" : 5,
+      "row" : 9,
+      "type" : "sticky"
+    },
+    {
+      "column" : 6,
+      "row" : 9,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 11,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 11,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 11,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 11,
+      "type" : "fog"
+    },
+    {
+      "column" : 6,
+      "row" : 11,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 6,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 6,
+      "row" : 13,
+      "type" : "fog"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 28,
+  "seed" : 28108915,
+  "starScores" : [
+    5800,
+    7100
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "blockTypes" : 4,
+  "city" : "sample",
+  "columns" : 8,
+  "id" : "sample-009",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 20,
+  "obstacles" : [
+    {
+      "column" : 2,
+      "hp" : 1,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 3,
+      "hp" : 1,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 4,
+      "hp" : 1,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 5,
+      "hp" : 1,
+      "row" : 4,
+      "type" : "concrete"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 21,
+  "seed" : 709102,
+  "starScores" : [
+    11900,
+    14900
+  ]
+}

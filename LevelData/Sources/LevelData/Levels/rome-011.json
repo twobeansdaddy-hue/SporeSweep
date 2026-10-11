@@ -1,0 +1,127 @@
+{
+  "blockTypes" : 5,
+  "city" : "rome",
+  "columns" : 8,
+  "id" : "rome-011",
+  "materials" : [
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 0,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 40,
+  "obstacles" : [
+    {
+      "column" : 1,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 6,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 6,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 6,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 6,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 6,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 9,
+      "type" : "egg"
+    },
+    {
+      "column" : 1,
+      "row" : 8,
+      "type" : "egg"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 27,
+  "seed" : 21111732,
+  "starScores" : [
+    7500,
+    8500
+  ]
+}

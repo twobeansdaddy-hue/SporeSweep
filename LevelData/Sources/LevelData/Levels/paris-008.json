@@ -1,0 +1,121 @@
+{
+  "blockTypes" : 5,
+  "city" : "paris",
+  "columns" : 8,
+  "id" : "paris-008",
+  "materials" : [
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 2,
+      "row" : 5,
+      "type" : "chain"
+    },
+    {
+      "column" : 6,
+      "row" : 5,
+      "type" : "chain"
+    },
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "chain"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "chain"
+    },
+    {
+      "column" : 2,
+      "row" : 8,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 8,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "sticky"
+    },
+    {
+      "column" : 6,
+      "row" : 8,
+      "type" : "sticky"
+    },
+    {
+      "column" : 7,
+      "row" : 8,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 10,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 10,
+      "type" : "sticky"
+    },
+    {
+      "column" : 5,
+      "row" : 10,
+      "type" : "sticky"
+    },
+    {
+      "column" : 6,
+      "row" : 10,
+      "type" : "sticky"
+    },
+    {
+      "column" : 7,
+      "row" : 10,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 12,
+      "type" : "chain"
+    },
+    {
+      "column" : 0,
+      "row" : 12,
+      "type" : "chain"
+    },
+    {
+      "column" : 1,
+      "row" : 12,
+      "type" : "chain"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 27,
+  "seed" : 22908759,
+  "starScores" : [
+    5500,
+    6900
+  ]
+}

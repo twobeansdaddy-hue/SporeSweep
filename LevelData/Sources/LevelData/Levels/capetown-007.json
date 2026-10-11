@@ -1,0 +1,124 @@
+{
+  "blockTypes" : 4,
+  "city" : "capetown",
+  "columns" : 8,
+  "id" : "capetown-007",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 1,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 6,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 6,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "hp" : 1,
+      "row" : 7,
+      "type" : "concrete"
+    },
+    {
+      "column" : 4,
+      "hp" : 1,
+      "row" : 7,
+      "type" : "concrete"
+    },
+    {
+      "column" : 5,
+      "hp" : 1,
+      "row" : 7,
+      "type" : "concrete"
+    },
+    {
+      "column" : 6,
+      "hp" : 1,
+      "row" : 7,
+      "type" : "concrete"
+    },
+    {
+      "column" : 1,
+      "row" : 11,
+      "type" : "egg"
+    },
+    {
+      "column" : 5,
+      "row" : 10,
+      "type" : "egg"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 28,
+  "seed" : 19307642,
+  "starScores" : [
+    14000,
+    16600
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "blockTypes" : 5,
+  "city" : "rome",
+  "columns" : 8,
+  "id" : "rome-008",
+  "materials" : [
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 0,
+      "row" : 4,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 5,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "row" : 5,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 12,
+      "type" : "cage"
+    },
+    {
+      "column" : 7,
+      "row" : 12,
+      "type" : "cage"
+    },
+    {
+      "column" : 4,
+      "row" : 17,
+      "type" : "rubble"
+    },
+    {
+      "column" : 7,
+      "row" : 17,
+      "type" : "rubble"
+    },
+    {
+      "column" : 2,
+      "row" : 15,
+      "type" : "rubble"
+    },
+    {
+      "column" : 4,
+      "row" : 16,
+      "type" : "rubble"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 6,
+      "depth" : 6
+    }
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 26,
+  "seed" : 21108705,
+  "starScores" : [
+    5300,
+    6200
+  ]
+}

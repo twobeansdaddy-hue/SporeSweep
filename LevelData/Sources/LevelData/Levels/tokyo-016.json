@@ -1,0 +1,89 @@
+{
+  "blockTypes" : 5,
+  "city" : "tokyo",
+  "columns" : 8,
+  "id" : "tokyo-016",
+  "materials" : [
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 0,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 8,
+      "type" : "wall"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "beam",
+    "bomb",
+    "core",
+    "extraMoves"
+  ],
+  "rows" : 24,
+  "seed" : 1116177,
+  "starScores" : [
+    4700,
+    5600
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "blockTypes" : 4,
+  "city" : "newyork",
+  "columns" : 8,
+  "id" : "newyork-010",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 3,
+      "row" : 5,
+      "type" : "rubble"
+    },
+    {
+      "column" : 0,
+      "row" : 4,
+      "type" : "rubble"
+    },
+    {
+      "column" : 5,
+      "row" : 6,
+      "type" : "rubble"
+    },
+    {
+      "column" : 2,
+      "row" : 9,
+      "type" : "cage"
+    },
+    {
+      "column" : 7,
+      "row" : 9,
+      "type" : "cage"
+    },
+    {
+      "column" : 4,
+      "row" : 9,
+      "type" : "cage"
+    },
+    {
+      "column" : 3,
+      "row" : 12,
+      "type" : "cage"
+    },
+    {
+      "column" : 3,
+      "row" : 13,
+      "type" : "cage"
+    },
+    {
+      "column" : 4,
+      "row" : 13,
+      "type" : "cage"
+    },
+    {
+      "column" : 4,
+      "row" : 12,
+      "type" : "cage"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "core"
+  ],
+  "rows" : 27,
+  "seed" : 24110813,
+  "starScores" : [
+    12000,
+    15200
+  ]
+}

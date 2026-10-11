@@ -1,0 +1,109 @@
+{
+  "blockTypes" : 5,
+  "city" : "london",
+  "columns" : 8,
+  "id" : "london-016",
+  "materials" : [
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 40,
+  "obstacles" : [
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 6,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 7,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 6,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 7,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 4,
+      "row" : 9,
+      "turns" : 8,
+      "type" : "timer"
+    },
+    {
+      "column" : 4,
+      "row" : 11,
+      "type" : "chain"
+    },
+    {
+      "column" : 3,
+      "row" : 11,
+      "type" : "chain"
+    },
+    {
+      "column" : 3,
+      "row" : 12,
+      "type" : "chain"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 6,
+      "depth" : 10
+    }
+  ],
+  "rewards" : [
+    "beam",
+    "bomb",
+    "core",
+    "extraMoves"
+  ],
+  "rows" : 29,
+  "seed" : 23316843,
+  "starScores" : [
+    7400,
+    8600
+  ]
+}

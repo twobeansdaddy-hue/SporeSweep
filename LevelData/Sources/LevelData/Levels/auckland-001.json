@@ -1,0 +1,69 @@
+{
+  "blockTypes" : 5,
+  "city" : "auckland",
+  "columns" : 8,
+  "id" : "auckland-001",
+  "materials" : [
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 6,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "rubble"
+    },
+    {
+      "column" : 7,
+      "row" : 5,
+      "type" : "rubble"
+    },
+    {
+      "column" : 7,
+      "row" : 4,
+      "type" : "rubble"
+    },
+    {
+      "column" : 1,
+      "row" : 6,
+      "type" : "rubble"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "chain"
+    },
+    {
+      "column" : 1,
+      "row" : 8,
+      "type" : "chain"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 4,
+      "depth" : 6
+    }
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 25,
+  "seed" : 28101852,
+  "starScores" : [
+    6300,
+    7300
+  ]
+}

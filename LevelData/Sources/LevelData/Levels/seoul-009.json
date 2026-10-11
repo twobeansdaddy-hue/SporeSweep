@@ -1,0 +1,152 @@
+{
+  "id": "seoul-009",
+  "city": "seoul",
+  "columns": 8,
+  "rows": 18,
+  "blockTypes": 5,
+  "moves": 30,
+  "seed": 1009,
+  "tutorial": "벽은 어떤 방법으로도 부술 수 없어요. 물질은 바로 아래가 막혀 있으면 대각선 아래의 빈칸으로 흘러가요. 물질의 대각선 아래 블록을 지워서 비탈을 따라 굴려 보세요.",
+  "materials": [
+    {
+      "column": 2,
+      "row": 0
+    },
+    {
+      "column": 5,
+      "row": 0
+    }
+  ],
+  "obstacles": [
+    {
+      "type": "concrete",
+      "column": 2,
+      "row": 7,
+      "hp": 2
+    },
+    {
+      "type": "concrete",
+      "column": 5,
+      "row": 7,
+      "hp": 2
+    },
+    {
+      "type": "concrete",
+      "column": 1,
+      "row": 7,
+      "hp": 1
+    },
+    {
+      "type": "concrete",
+      "column": 3,
+      "row": 7,
+      "hp": 1
+    },
+    {
+      "type": "concrete",
+      "column": 4,
+      "row": 7,
+      "hp": 1
+    },
+    {
+      "type": "concrete",
+      "column": 6,
+      "row": 7,
+      "hp": 1
+    },
+    {
+      "type": "cage",
+      "column": 3,
+      "row": 3
+    },
+    {
+      "type": "cage",
+      "column": 4,
+      "row": 3
+    },
+    {
+      "type": "wall",
+      "column": 0,
+      "row": 10
+    },
+    {
+      "type": "wall",
+      "column": 0,
+      "row": 11
+    },
+    {
+      "type": "wall",
+      "column": 1,
+      "row": 11
+    },
+    {
+      "type": "wall",
+      "column": 0,
+      "row": 12
+    },
+    {
+      "type": "wall",
+      "column": 1,
+      "row": 12
+    },
+    {
+      "type": "wall",
+      "column": 2,
+      "row": 12
+    },
+    {
+      "type": "wall",
+      "column": 0,
+      "row": 13
+    },
+    {
+      "type": "wall",
+      "column": 1,
+      "row": 13
+    },
+    {
+      "type": "wall",
+      "column": 2,
+      "row": 13
+    },
+    {
+      "type": "wall",
+      "column": 3,
+      "row": 13
+    },
+    {
+      "type": "wall",
+      "column": 0,
+      "row": 14
+    },
+    {
+      "type": "wall",
+      "column": 1,
+      "row": 14
+    },
+    {
+      "type": "wall",
+      "column": 2,
+      "row": 14
+    },
+    {
+      "type": "wall",
+      "column": 0,
+      "row": 15
+    },
+    {
+      "type": "wall",
+      "column": 1,
+      "row": 15
+    },
+    {
+      "type": "wall",
+      "column": 0,
+      "row": 16
+    }
+  ],
+  "starScores": [3800, 4700],
+  "rewards": [
+    "core"
+  ]
+}

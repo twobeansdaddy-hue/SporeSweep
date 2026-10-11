@@ -1,0 +1,118 @@
+{
+  "blockTypes" : 4,
+  "city" : "auckland",
+  "columns" : 8,
+  "id" : "auckland-007",
+  "materials" : [
+    {
+      "column" : 2,
+      "height" : 1,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 2,
+      "hp" : 2,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 3,
+      "hp" : 1,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 4,
+      "hp" : 2,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 7,
+      "row" : 7,
+      "type" : "chain"
+    },
+    {
+      "column" : 7,
+      "row" : 8,
+      "type" : "chain"
+    },
+    {
+      "column" : 1,
+      "row" : 8,
+      "type" : "chain"
+    },
+    {
+      "column" : 2,
+      "row" : 7,
+      "type" : "chain"
+    },
+    {
+      "column" : 3,
+      "row" : 11,
+      "type" : "shield"
+    },
+    {
+      "column" : 4,
+      "row" : 11,
+      "type" : "shield"
+    },
+    {
+      "column" : 5,
+      "row" : 11,
+      "type" : "shield"
+    },
+    {
+      "column" : 6,
+      "row" : 11,
+      "type" : "shield"
+    },
+    {
+      "column" : 7,
+      "row" : 11,
+      "type" : "shield"
+    },
+    {
+      "column" : 3,
+      "row" : 12,
+      "type" : "shield"
+    },
+    {
+      "column" : 4,
+      "row" : 12,
+      "type" : "shield"
+    },
+    {
+      "column" : 5,
+      "row" : 12,
+      "type" : "shield"
+    },
+    {
+      "column" : 6,
+      "row" : 12,
+      "type" : "shield"
+    },
+    {
+      "column" : 7,
+      "row" : 12,
+      "type" : "shield"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 27,
+  "seed" : 28107906,
+  "starScores" : [
+    12100,
+    14000
+  ]
+}

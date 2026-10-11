@@ -1,0 +1,48 @@
+{
+  "blockTypes" : 4,
+  "city" : "auckland",
+  "columns" : 8,
+  "id" : "auckland-016",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 2,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 6,
+      "row" : 4,
+      "type" : "vent"
+    },
+    {
+      "column" : 5,
+      "row" : 8,
+      "type" : "sludge"
+    },
+    {
+      "column" : 6,
+      "row" : 8,
+      "type" : "sludge"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "beam",
+    "bomb",
+    "core",
+    "extraMoves"
+  ],
+  "rows" : 30,
+  "seed" : 28116987,
+  "starScores" : [
+    12300,
+    15200
+  ]
+}

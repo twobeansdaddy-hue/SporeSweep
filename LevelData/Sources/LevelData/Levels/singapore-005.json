@@ -1,0 +1,49 @@
+{
+  "blockTypes" : 5,
+  "city" : "singapore",
+  "columns" : 8,
+  "id" : "singapore-005",
+  "materials" : [
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "nest"
+    },
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "nest"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 3,
+      "depth" : 7
+    }
+  ],
+  "rewards" : [
+    "bomb"
+  ],
+  "rows" : 24,
+  "seed" : 13105438,
+  "starScores" : [
+    5600,
+    6700
+  ]
+}

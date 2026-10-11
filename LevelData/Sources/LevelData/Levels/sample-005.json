@@ -1,0 +1,78 @@
+{
+  "blockTypes" : 4,
+  "city" : "sample",
+  "columns" : 8,
+  "id" : "sample-005",
+  "materials" : [
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 15,
+  "obstacles" : [
+    {
+      "column" : 1,
+      "hp" : 1,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 2,
+      "hp" : 1,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 3,
+      "hp" : 1,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 4,
+      "hp" : 1,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 5,
+      "hp" : 1,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 4,
+      "hp" : 1,
+      "row" : 7,
+      "type" : "concrete"
+    },
+    {
+      "column" : 5,
+      "hp" : 1,
+      "row" : 7,
+      "type" : "concrete"
+    },
+    {
+      "column" : 6,
+      "hp" : 1,
+      "row" : 7,
+      "type" : "concrete"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "bomb"
+  ],
+  "rows" : 18,
+  "seed" : 705066,
+  "starScores" : [
+    4800,
+    8200
+  ]
+}

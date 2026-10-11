@@ -1,0 +1,86 @@
+{
+  "blockTypes" : 5,
+  "city" : "buenosaires",
+  "columns" : 8,
+  "id" : "buenosaires-007",
+  "materials" : [
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 6,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 0,
+      "row" : 4,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 5,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "row" : 5,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 11,
+      "type" : "sludge"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 28,
+  "seed" : 26907870,
+  "starScores" : [
+    4300,
+    5200
+  ]
+}

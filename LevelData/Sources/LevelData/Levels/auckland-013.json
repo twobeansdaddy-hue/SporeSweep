@@ -1,0 +1,126 @@
+{
+  "blockTypes" : 5,
+  "city" : "auckland",
+  "columns" : 8,
+  "id" : "auckland-013",
+  "materials" : [
+    {
+      "column" : 0,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 40,
+  "obstacles" : [
+    {
+      "column" : 6,
+      "kind" : "scrap",
+      "row" : 5,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 3,
+      "kind" : "glass",
+      "row" : 5,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 2,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 6,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 7,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 6,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 7,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 11,
+      "type" : "boulder"
+    },
+    {
+      "column" : 0,
+      "row" : 13,
+      "type" : "boulder"
+    },
+    {
+      "column" : 6,
+      "row" : 12,
+      "type" : "boulder"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 3,
+      "depth" : 7
+    }
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 28,
+  "seed" : 28113960,
+  "starScores" : [
+    6900,
+    8400
+  ]
+}

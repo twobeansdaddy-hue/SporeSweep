@@ -1,0 +1,53 @@
+{
+  "blockTypes" : 5,
+  "city" : "dubai",
+  "columns" : 8,
+  "id" : "dubai-001",
+  "materials" : [
+    {
+      "column" : 6,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 1,
+      "row" : 4,
+      "type" : "egg"
+    },
+    {
+      "column" : 3,
+      "row" : 5,
+      "type" : "egg"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 25,
+  "seed" : 17301528,
+  "starScores" : [
+    5100,
+    5900
+  ],
+  "tutorial" : "포자 알은 껍데기가 단단해서 옆에서 블록을 맞춰도 깨지지 않아요. 제염 빔, 중화 폭탄, 정화 코어 같은 특수 블록의 효과가 닿아야 깨져요. 망치로도 깰 수 있어요."
+}

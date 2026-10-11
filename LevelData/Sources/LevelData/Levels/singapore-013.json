@@ -1,0 +1,50 @@
+{
+  "blockTypes" : 5,
+  "city" : "singapore",
+  "columns" : 8,
+  "id" : "singapore-013",
+  "materials" : [
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 0,
+      "row" : 6,
+      "turns" : 8,
+      "type" : "timer"
+    },
+    {
+      "column" : 5,
+      "row" : 6,
+      "turns" : 8,
+      "type" : "timer"
+    },
+    {
+      "column" : 1,
+      "row" : 8,
+      "type" : "sludge"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 6,
+      "depth" : 5
+    }
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 28,
+  "seed" : 13113510,
+  "starScores" : [
+    5700,
+    7000
+  ]
+}

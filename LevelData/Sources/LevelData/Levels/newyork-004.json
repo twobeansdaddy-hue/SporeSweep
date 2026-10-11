@@ -1,0 +1,72 @@
+{
+  "blockTypes" : 5,
+  "city" : "newyork",
+  "columns" : 8,
+  "id" : "newyork-004",
+  "materials" : [
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 35,
+  "obstacles" : [
+    {
+      "column" : 2,
+      "row" : 6,
+      "type" : "boulder"
+    },
+    {
+      "column" : 0,
+      "row" : 8,
+      "type" : "cage"
+    },
+    {
+      "column" : 0,
+      "row" : 9,
+      "type" : "cage"
+    },
+    {
+      "column" : 6,
+      "row" : 8,
+      "type" : "cage"
+    },
+    {
+      "column" : 2,
+      "row" : 9,
+      "type" : "cage"
+    },
+    {
+      "column" : 0,
+      "row" : 12,
+      "type" : "sludge"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 26,
+  "seed" : 24104759,
+  "starScores" : [
+    5100,
+    6100
+  ]
+}

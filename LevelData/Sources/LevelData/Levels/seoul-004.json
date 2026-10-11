@@ -1,0 +1,49 @@
+{
+  "blockTypes" : 5,
+  "city" : "seoul",
+  "columns" : 8,
+  "id" : "seoul-004",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 15,
+  "obstacles" : [
+    {
+      "column" : 2,
+      "hp" : 1,
+      "row" : 6,
+      "type" : "concrete"
+    },
+    {
+      "column" : 3,
+      "hp" : 1,
+      "row" : 6,
+      "type" : "concrete"
+    },
+    {
+      "column" : 4,
+      "hp" : 1,
+      "row" : 6,
+      "type" : "concrete"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 14,
+  "seed" : 1104,
+  "starScores" : [
+    2000,
+    2500
+  ],
+  "tutorial" : "콘크리트는 움직이지 않고 물질의 길을 막아요. 바로 옆에서 블록을 맞추거나 특수 블록의 효과가 닿으면 부서져요."
+}

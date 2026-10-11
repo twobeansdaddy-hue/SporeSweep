@@ -1,0 +1,58 @@
+{
+  "blockTypes" : 4,
+  "city" : "buenosaires",
+  "columns" : 8,
+  "id" : "buenosaires-015",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 1,
+      "row" : 4,
+      "type" : "vent"
+    },
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "vent"
+    },
+    {
+      "column" : 2,
+      "hp" : 2,
+      "row" : 8,
+      "type" : "concrete"
+    },
+    {
+      "column" : 3,
+      "hp" : 1,
+      "row" : 8,
+      "type" : "concrete"
+    },
+    {
+      "column" : 4,
+      "hp" : 2,
+      "row" : 8,
+      "type" : "concrete"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "extraMoves"
+  ],
+  "rows" : 30,
+  "seed" : 26915942,
+  "starScores" : [
+    15600,
+    19500
+  ]
+}

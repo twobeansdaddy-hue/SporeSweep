@@ -1,0 +1,201 @@
+{
+  "id": "lab-003",
+  "city": "lab",
+  "columns": 8,
+  "rows": 18,
+  "blockTypes": 5,
+  "moves": 50,
+  "seed": 9103,
+  "tutorial": "시험판 3: 가운데 기둥. 기둥이 보드를 둘로 갈라요. 콘크리트를 부수거나 기둥 옆의 틈으로 물질을 흘려보내고, 기둥 받침의 양 끝으로 빠져나가게 하세요.",
+  "materials": [
+    {
+      "column": 1,
+      "row": 0
+    },
+    {
+      "column": 6,
+      "row": 0
+    }
+  ],
+  "obstacles": [
+    {
+      "type": "wall",
+      "column": 3,
+      "row": 5
+    },
+    {
+      "type": "wall",
+      "column": 3,
+      "row": 6
+    },
+    {
+      "type": "wall",
+      "column": 3,
+      "row": 7
+    },
+    {
+      "type": "wall",
+      "column": 3,
+      "row": 8
+    },
+    {
+      "type": "wall",
+      "column": 3,
+      "row": 9
+    },
+    {
+      "type": "wall",
+      "column": 3,
+      "row": 10
+    },
+    {
+      "type": "wall",
+      "column": 3,
+      "row": 11
+    },
+    {
+      "type": "wall",
+      "column": 3,
+      "row": 12
+    },
+    {
+      "type": "wall",
+      "column": 4,
+      "row": 5
+    },
+    {
+      "type": "wall",
+      "column": 4,
+      "row": 6
+    },
+    {
+      "type": "wall",
+      "column": 4,
+      "row": 7
+    },
+    {
+      "type": "wall",
+      "column": 4,
+      "row": 8
+    },
+    {
+      "type": "wall",
+      "column": 4,
+      "row": 9
+    },
+    {
+      "type": "wall",
+      "column": 4,
+      "row": 10
+    },
+    {
+      "type": "wall",
+      "column": 4,
+      "row": 11
+    },
+    {
+      "type": "wall",
+      "column": 4,
+      "row": 12
+    },
+    {
+      "type": "wall",
+      "column": 2,
+      "row": 12
+    },
+    {
+      "type": "wall",
+      "column": 5,
+      "row": 12
+    },
+    {
+      "type": "wall",
+      "column": 1,
+      "row": 13
+    },
+    {
+      "type": "wall",
+      "column": 2,
+      "row": 13
+    },
+    {
+      "type": "wall",
+      "column": 3,
+      "row": 13
+    },
+    {
+      "type": "wall",
+      "column": 4,
+      "row": 13
+    },
+    {
+      "type": "wall",
+      "column": 5,
+      "row": 13
+    },
+    {
+      "type": "wall",
+      "column": 6,
+      "row": 13
+    },
+    {
+      "type": "concrete",
+      "column": 0,
+      "row": 9,
+      "hp": 1
+    },
+    {
+      "type": "concrete",
+      "column": 1,
+      "row": 9,
+      "hp": 1
+    },
+    {
+      "type": "concrete",
+      "column": 6,
+      "row": 9,
+      "hp": 1
+    },
+    {
+      "type": "concrete",
+      "column": 7,
+      "row": 9,
+      "hp": 1
+    },
+    {
+      "type": "wall",
+      "column": 2,
+      "row": 14
+    },
+    {
+      "type": "wall",
+      "column": 3,
+      "row": 14
+    },
+    {
+      "type": "wall",
+      "column": 4,
+      "row": 14
+    },
+    {
+      "type": "wall",
+      "column": 5,
+      "row": 14
+    },
+    {
+      "type": "wall",
+      "column": 3,
+      "row": 15
+    },
+    {
+      "type": "wall",
+      "column": 4,
+      "row": 15
+    }
+  ],
+  "starScores": [
+    4300,
+    4900
+  ],
+  "materialsSlide": true
+}

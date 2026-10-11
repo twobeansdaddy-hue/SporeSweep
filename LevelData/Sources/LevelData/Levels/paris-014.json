@@ -1,0 +1,97 @@
+{
+  "blockTypes" : 4,
+  "city" : "paris",
+  "columns" : 8,
+  "id" : "paris-014",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 2,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 35,
+  "obstacles" : [
+    {
+      "column" : 0,
+      "row" : 4,
+      "turns" : 9,
+      "type" : "timer"
+    },
+    {
+      "column" : 7,
+      "row" : 5,
+      "turns" : 7,
+      "type" : "timer"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "shield"
+    },
+    {
+      "column" : 5,
+      "row" : 8,
+      "type" : "shield"
+    },
+    {
+      "column" : 6,
+      "row" : 8,
+      "type" : "shield"
+    },
+    {
+      "column" : 7,
+      "row" : 8,
+      "type" : "shield"
+    },
+    {
+      "column" : 4,
+      "row" : 9,
+      "type" : "shield"
+    },
+    {
+      "column" : 5,
+      "row" : 9,
+      "type" : "shield"
+    },
+    {
+      "column" : 6,
+      "row" : 9,
+      "type" : "shield"
+    },
+    {
+      "column" : 7,
+      "row" : 9,
+      "type" : "shield"
+    },
+    {
+      "column" : 2,
+      "row" : 12,
+      "type" : "cage"
+    },
+    {
+      "column" : 1,
+      "row" : 12,
+      "type" : "cage"
+    },
+    {
+      "column" : 2,
+      "row" : 11,
+      "type" : "cage"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 30,
+  "seed" : 22914813,
+  "starScores" : [
+    13100,
+    17300
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "blockTypes" : 4,
+  "city" : "sydney",
+  "columns" : 8,
+  "id" : "sydney-004",
+  "materials" : [
+    {
+      "column" : 2,
+      "height" : 2,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 1,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 0,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 1,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 5,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 8,
+      "type" : "ice"
+    },
+    {
+      "column" : 5,
+      "row" : 8,
+      "type" : "ice"
+    },
+    {
+      "column" : 4,
+      "row" : 9,
+      "type" : "ice"
+    },
+    {
+      "column" : 6,
+      "row" : 9,
+      "type" : "ice"
+    },
+    {
+      "column" : 3,
+      "row" : 12,
+      "type" : "ice"
+    },
+    {
+      "column" : 3,
+      "row" : 11,
+      "type" : "ice"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 27,
+  "seed" : 27704867,
+  "starScores" : [
+    12200,
+    15000
+  ]
+}

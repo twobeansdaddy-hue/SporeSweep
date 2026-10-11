@@ -1,0 +1,62 @@
+{
+  "blockTypes" : 5,
+  "city" : "athens",
+  "columns" : 8,
+  "id" : "athens-004",
+  "materials" : [
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 0,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 7,
+      "row" : 4,
+      "type" : "egg"
+    },
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "egg"
+    },
+    {
+      "column" : 0,
+      "row" : 8,
+      "type" : "egg"
+    },
+    {
+      "column" : 4,
+      "row" : 9,
+      "type" : "egg"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 24,
+  "seed" : 22304705,
+  "starScores" : [
+    5500,
+    6300
+  ]
+}

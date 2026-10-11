@@ -1,0 +1,52 @@
+{
+  "blockTypes" : 4,
+  "city" : "newyork",
+  "columns" : 8,
+  "id" : "newyork-008",
+  "materials" : [
+    {
+      "column" : 2,
+      "height" : 1,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 4,
+      "kind" : "wood",
+      "row" : 4,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 5,
+      "kind" : "glass",
+      "row" : 4,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 6,
+      "row" : 9,
+      "type" : "chain"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "chain"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 28,
+  "seed" : 24108795,
+  "starScores" : [
+    11400,
+    15900
+  ]
+}

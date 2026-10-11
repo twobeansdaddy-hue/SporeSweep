@@ -1,0 +1,41 @@
+{
+  "blockTypes" : 5,
+  "city" : "newdelhi",
+  "columns" : 8,
+  "id" : "newdelhi-002",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 20,
+  "obstacles" : [
+    {
+      "column" : 6,
+      "row" : 4,
+      "type" : "sludge"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 21,
+  "seed" : 3102111,
+  "starScores" : [
+    3900,
+    4800
+  ]
+}

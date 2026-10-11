@@ -1,0 +1,110 @@
+{
+  "blockTypes" : 5,
+  "city" : "rio",
+  "columns" : 8,
+  "id" : "rio-002",
+  "materials" : [
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 0,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 35,
+  "obstacles" : [
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 3,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 1,
+      "kind" : "glass",
+      "row" : 8,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 4,
+      "kind" : "brick",
+      "row" : 9,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 0,
+      "kind" : "glass",
+      "row" : 9,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 0,
+      "row" : 12,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 12,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 12,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 12,
+      "type" : "sticky"
+    },
+    {
+      "column" : 0,
+      "row" : 14,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 14,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 14,
+      "type" : "sticky"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 25,
+  "seed" : 26302807,
+  "starScores" : [
+    5400,
+    6600
+  ]
+}

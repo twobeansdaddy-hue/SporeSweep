@@ -1,0 +1,19 @@
+{
+  "id": "bangkok",
+  "name": "방콕",
+  "landmark": {
+    "id": "watarun",
+    "name": "왓 아룬",
+    "parts": [
+      { "id": "base", "name": "기단", "cost": 5 },
+      { "id": "prangLeft", "name": "왼쪽 탑", "cost": 5, "requires": ["base"] },
+      { "id": "prangRight", "name": "오른쪽 탑", "cost": 5, "requires": ["base"] },
+      { "id": "tiers", "name": "중앙 탑 아래층", "cost": 5, "requires": ["base"] },
+      { "id": "spire", "name": "중앙 탑 첨탑", "cost": 6, "requires": ["tiers"] },
+      { "id": "pollution", "name": "오염 제거", "cost": 4 },
+      { "id": "ground", "name": "잔해 정리", "cost": 3 },
+      { "id": "greenery", "name": "녹지", "cost": 3, "requires": ["ground"] },
+      { "id": "sky", "name": "맑은 하늘", "cost": 4, "requires": ["pollution"] }
+    ]
+  }
+}

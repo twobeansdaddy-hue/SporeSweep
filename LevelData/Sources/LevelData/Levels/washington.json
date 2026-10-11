@@ -1,0 +1,67 @@
+{
+  "id": "washington",
+  "name": "워싱턴",
+  "landmark": {
+    "id": "capitol",
+    "name": "국회의사당",
+    "parts": [
+      {
+        "id": "wingLeft",
+        "name": "왼쪽 날개",
+        "cost": 5
+      },
+      {
+        "id": "wingRight",
+        "name": "오른쪽 날개",
+        "cost": 5
+      },
+      {
+        "id": "portico",
+        "name": "가운데 현관",
+        "cost": 5
+      },
+      {
+        "id": "drum",
+        "name": "돔 받침",
+        "cost": 5,
+        "requires": [
+          "portico"
+        ]
+      },
+      {
+        "id": "dome",
+        "name": "돔",
+        "cost": 6,
+        "requires": [
+          "drum"
+        ]
+      },
+      {
+        "id": "pollution",
+        "name": "오염 제거",
+        "cost": 4
+      },
+      {
+        "id": "ground",
+        "name": "잔해 정리",
+        "cost": 3
+      },
+      {
+        "id": "greenery",
+        "name": "잔디 광장",
+        "cost": 3,
+        "requires": [
+          "ground"
+        ]
+      },
+      {
+        "id": "sky",
+        "name": "맑은 하늘",
+        "cost": 4,
+        "requires": [
+          "pollution"
+        ]
+      }
+    ]
+  }
+}

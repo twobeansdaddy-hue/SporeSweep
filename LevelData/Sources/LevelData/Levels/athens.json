@@ -1,0 +1,74 @@
+{
+  "id": "athens",
+  "name": "아테네",
+  "landmark": {
+    "id": "parthenon",
+    "name": "파르테논 신전",
+    "parts": [
+      {
+        "id": "steps",
+        "name": "기단",
+        "cost": 5
+      },
+      {
+        "id": "columnsLeft",
+        "name": "왼쪽 기둥",
+        "cost": 5,
+        "requires": [
+          "steps"
+        ]
+      },
+      {
+        "id": "columnsRight",
+        "name": "오른쪽 기둥",
+        "cost": 5,
+        "requires": [
+          "steps"
+        ]
+      },
+      {
+        "id": "frieze",
+        "name": "띠 장식",
+        "cost": 5,
+        "requires": [
+          "columnsLeft",
+          "columnsRight"
+        ]
+      },
+      {
+        "id": "pediment",
+        "name": "지붕",
+        "cost": 6,
+        "requires": [
+          "frieze"
+        ]
+      },
+      {
+        "id": "pollution",
+        "name": "오염 제거",
+        "cost": 4
+      },
+      {
+        "id": "ground",
+        "name": "잔해 정리",
+        "cost": 3
+      },
+      {
+        "id": "greenery",
+        "name": "올리브 숲",
+        "cost": 3,
+        "requires": [
+          "ground"
+        ]
+      },
+      {
+        "id": "sky",
+        "name": "맑은 하늘",
+        "cost": 4,
+        "requires": [
+          "pollution"
+        ]
+      }
+    ]
+  }
+}

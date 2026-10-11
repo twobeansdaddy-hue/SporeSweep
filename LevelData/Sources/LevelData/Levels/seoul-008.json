@@ -1,0 +1,23 @@
+{
+  "id": "seoul-008",
+  "city": "seoul",
+  "columns": 8,
+  "rows": 16,
+  "blockTypes": 5,
+  "moves": 20,
+  "seed": 1008,
+  "tutorial": "철망에 갇힌 블록은 움직일 수 없어요. 갇힌 블록을 매치에 넣으면 철망이 벗겨지고, 한 번 더 맞추면 사라져요.",
+  "materials": [
+    { "column": 1, "row": 0 },
+    { "column": 6, "row": 0 }
+  ],
+  "obstacles": [
+    { "type": "cage", "column": 0, "row": 5 },
+    { "type": "cage", "column": 1, "row": 5 },
+    { "type": "cage", "column": 2, "row": 5 },
+    { "type": "cage", "column": 5, "row": 5 },
+    { "type": "cage", "column": 6, "row": 5 },
+    { "type": "cage", "column": 7, "row": 5 }
+  ],
+  "starScores": [3700, 4400]
+}

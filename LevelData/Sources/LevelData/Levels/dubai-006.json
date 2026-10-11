@@ -1,0 +1,49 @@
+{
+  "blockTypes" : 5,
+  "city" : "dubai",
+  "columns" : 8,
+  "id" : "dubai-006",
+  "materials" : [
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 2,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 35,
+  "obstacles" : [
+    {
+      "column" : 7,
+      "row" : 4,
+      "type" : "nest"
+    },
+    {
+      "column" : 3,
+      "row" : 8,
+      "type" : "nest"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 4,
+      "depth" : 9
+    }
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 25,
+  "seed" : 17306573,
+  "starScores" : [
+    6000,
+    6900
+  ]
+}

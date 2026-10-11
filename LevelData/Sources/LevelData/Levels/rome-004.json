@@ -1,0 +1,51 @@
+{
+  "blockTypes" : 5,
+  "city" : "rome",
+  "columns" : 8,
+  "id" : "rome-004",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 20,
+  "obstacles" : [
+    {
+      "column" : 2,
+      "row" : 6,
+      "type" : "rubble"
+    },
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "rubble"
+    },
+    {
+      "column" : 0,
+      "row" : 6,
+      "type" : "rubble"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 25,
+  "seed" : 21104669,
+  "starScores" : [
+    4300,
+    5100
+  ]
+}

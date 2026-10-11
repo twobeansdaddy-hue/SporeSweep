@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "sanfrancisco_bg_ruined.jpg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

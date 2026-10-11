@@ -1,0 +1,122 @@
+{
+  "blockTypes" : 5,
+  "city" : "barcelona",
+  "columns" : 8,
+  "id" : "barcelona-009",
+  "materials" : [
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 0,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 0,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "kind" : "brick",
+      "row" : 7,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 1,
+      "kind" : "glass",
+      "row" : 8,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 6,
+      "kind" : "scrap",
+      "row" : 7,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 5,
+      "kind" : "glass",
+      "row" : 8,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 3,
+      "row" : 12,
+      "type" : "rubble"
+    },
+    {
+      "column" : 2,
+      "row" : 12,
+      "type" : "rubble"
+    },
+    {
+      "column" : 5,
+      "row" : 12,
+      "type" : "rubble"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 6,
+      "depth" : 5
+    }
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 29,
+  "seed" : 22709762,
+  "starScores" : [
+    5300,
+    6700
+  ]
+}

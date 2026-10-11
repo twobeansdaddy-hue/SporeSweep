@@ -1,0 +1,51 @@
+{
+  "blockTypes" : 5,
+  "city" : "buenosaires",
+  "columns" : 8,
+  "id" : "buenosaires-002",
+  "materials" : [
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 1,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "cage"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "nest"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 27,
+  "seed" : 26902825,
+  "starScores" : [
+    5000,
+    6000
+  ]
+}

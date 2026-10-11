@@ -1,0 +1,98 @@
+{
+  "blockTypes" : 5,
+  "city" : "barcelona",
+  "columns" : 8,
+  "id" : "barcelona-006",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 35,
+  "obstacles" : [
+    {
+      "column" : 6,
+      "row" : 6,
+      "type" : "rubble"
+    },
+    {
+      "column" : 5,
+      "row" : 6,
+      "type" : "rubble"
+    },
+    {
+      "column" : 7,
+      "row" : 5,
+      "type" : "rubble"
+    },
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "rubble"
+    },
+    {
+      "column" : 0,
+      "row" : 9,
+      "type" : "egg"
+    },
+    {
+      "column" : 6,
+      "row" : 9,
+      "type" : "egg"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "egg"
+    },
+    {
+      "column" : 2,
+      "hp" : 1,
+      "row" : 12,
+      "type" : "concrete"
+    },
+    {
+      "column" : 3,
+      "hp" : 1,
+      "row" : 12,
+      "type" : "concrete"
+    },
+    {
+      "column" : 4,
+      "hp" : 1,
+      "row" : 12,
+      "type" : "concrete"
+    },
+    {
+      "column" : 5,
+      "hp" : 1,
+      "row" : 12,
+      "type" : "concrete"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 7,
+      "depth" : 7
+    }
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 26,
+  "seed" : 22706735,
+  "starScores" : [
+    5800,
+    7200
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "blockTypes" : 5,
+  "city" : "amsterdam",
+  "columns" : 8,
+  "id" : "amsterdam-012",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 50,
+  "obstacles" : [
+    {
+      "column" : 4,
+      "row" : 5,
+      "turns" : 7,
+      "type" : "timer"
+    },
+    {
+      "column" : 1,
+      "row" : 4,
+      "turns" : 7,
+      "type" : "timer"
+    },
+    {
+      "column" : 3,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 11,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 11,
+      "type" : "wall"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 2,
+      "depth" : 9
+    }
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 30,
+  "seed" : 23912825,
+  "starScores" : [
+    7500,
+    8800
+  ]
+}

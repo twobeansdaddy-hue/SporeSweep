@@ -1,0 +1,131 @@
+{
+  "blockTypes" : 5,
+  "city" : "athens",
+  "columns" : 8,
+  "id" : "athens-009",
+  "materials" : [
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 20,
+  "obstacles" : [
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "rubble"
+    },
+    {
+      "column" : 5,
+      "row" : 6,
+      "type" : "rubble"
+    },
+    {
+      "column" : 4,
+      "row" : 6,
+      "type" : "rubble"
+    },
+    {
+      "column" : 0,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 11,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "row" : 11,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 11,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 11,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 12,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "row" : 12,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 12,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 13,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "row" : 13,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 14,
+      "type" : "wall"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 26,
+  "seed" : 22309750,
+  "starScores" : [
+    4400,
+    5200
+  ]
+}

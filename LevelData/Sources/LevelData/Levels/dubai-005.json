@@ -1,0 +1,88 @@
+{
+  "blockTypes" : 5,
+  "city" : "dubai",
+  "columns" : 8,
+  "id" : "dubai-005",
+  "materials" : [
+    {
+      "column" : 0,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 3,
+      "kind" : "glass",
+      "row" : 4,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 7,
+      "kind" : "wood",
+      "row" : 4,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 1,
+      "kind" : "brick",
+      "row" : 5,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 5,
+      "kind" : "scrap",
+      "row" : 4,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 3,
+      "hp" : 1,
+      "row" : 8,
+      "type" : "concrete"
+    },
+    {
+      "column" : 4,
+      "hp" : 1,
+      "row" : 8,
+      "type" : "concrete"
+    },
+    {
+      "column" : 5,
+      "hp" : 1,
+      "row" : 8,
+      "type" : "concrete"
+    },
+    {
+      "column" : 0,
+      "row" : 11,
+      "type" : "egg"
+    },
+    {
+      "column" : 6,
+      "row" : 12,
+      "type" : "egg"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "bomb"
+  ],
+  "rows" : 26,
+  "seed" : 17305564,
+  "starScores" : [
+    4100,
+    5000
+  ]
+}

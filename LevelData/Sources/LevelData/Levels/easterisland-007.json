@@ -1,0 +1,98 @@
+{
+  "blockTypes" : 5,
+  "city" : "easterisland",
+  "columns" : 8,
+  "id" : "easterisland-007",
+  "materials" : [
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "sludge"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "sludge"
+    },
+    {
+      "column" : 7,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 11,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 14,
+      "type" : "nest"
+    },
+    {
+      "column" : 3,
+      "row" : 15,
+      "type" : "nest"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 5,
+      "depth" : 5
+    }
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 28,
+  "seed" : 27107876,
+  "starScores" : [
+    5900,
+    6700
+  ]
+}

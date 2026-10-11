@@ -1,0 +1,119 @@
+{
+  "blockTypes" : 5,
+  "city" : "antarctica",
+  "columns" : 8,
+  "id" : "antarctica-010",
+  "materials" : [
+    {
+      "column" : 6,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 50,
+  "obstacles" : [
+    {
+      "column" : 0,
+      "kind" : "glass",
+      "row" : 5,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 3,
+      "kind" : "scrap",
+      "row" : 5,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 1,
+      "kind" : "brick",
+      "row" : 4,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 7,
+      "kind" : "wood",
+      "row" : 4,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 1,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 9,
+      "type" : "fog"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 7,
+      "depth" : 10
+    }
+  ],
+  "rewards" : [
+    "core"
+  ],
+  "rows" : 29,
+  "seed" : 28310939,
+  "starScores" : [
+    8500,
+    9900
+  ]
+}

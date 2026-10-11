@@ -1,0 +1,79 @@
+{
+  "blockTypes" : 5,
+  "city" : "sample",
+  "columns" : 8,
+  "id" : "sample-016",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 6,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 7,
+      "type" : "wall"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "beam",
+    "bomb",
+    "core",
+    "extraMoves"
+  ],
+  "rows" : 24,
+  "seed" : 716165,
+  "starScores" : [
+    4000,
+    5300
+  ]
+}

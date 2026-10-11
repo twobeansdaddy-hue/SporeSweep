@@ -1,0 +1,64 @@
+{
+  "blockTypes" : 5,
+  "city" : "tokyo",
+  "columns" : 8,
+  "id" : "tokyo-010",
+  "materials" : [
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "cage"
+    },
+    {
+      "column" : 7,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 2,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "cage"
+    },
+    {
+      "column" : 7,
+      "row" : 4,
+      "type" : "cage"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 2,
+      "depth" : 8
+    }
+  ],
+  "rewards" : [
+    "core"
+  ],
+  "rows" : 23,
+  "seed" : 1110123,
+  "starScores" : [
+    5500,
+    6500
+  ]
+}

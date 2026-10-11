@@ -1,0 +1,83 @@
+{
+  "blockTypes" : 5,
+  "city" : "sydney",
+  "columns" : 8,
+  "id" : "sydney-008",
+  "materials" : [
+    {
+      "column" : 6,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "ice"
+    },
+    {
+      "column" : 7,
+      "row" : 5,
+      "type" : "ice"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "ice"
+    },
+    {
+      "column" : 2,
+      "row" : 5,
+      "type" : "ice"
+    },
+    {
+      "column" : 1,
+      "row" : 8,
+      "type" : "chain"
+    },
+    {
+      "column" : 1,
+      "row" : 7,
+      "type" : "chain"
+    },
+    {
+      "column" : 5,
+      "row" : 8,
+      "type" : "chain"
+    },
+    {
+      "column" : 3,
+      "row" : 11,
+      "type" : "chain"
+    },
+    {
+      "column" : 5,
+      "row" : 11,
+      "type" : "chain"
+    },
+    {
+      "column" : 2,
+      "row" : 12,
+      "type" : "chain"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 0,
+      "depth" : 9
+    }
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 27,
+  "seed" : 27708903,
+  "starScores" : [
+    5800,
+    7100
+  ]
+}

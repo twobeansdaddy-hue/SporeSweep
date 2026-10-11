@@ -1,0 +1,115 @@
+{
+  "blockTypes" : 5,
+  "city" : "washington",
+  "columns" : 8,
+  "id" : "washington-011",
+  "materials" : [
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 6,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 40,
+  "obstacles" : [
+    {
+      "column" : 6,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 0,
+      "row" : 4,
+      "type" : "cage"
+    },
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "cage"
+    },
+    {
+      "column" : 2,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "kind" : "scrap",
+      "row" : 14,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 2,
+      "kind" : "brick",
+      "row" : 14,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 7,
+      "kind" : "brick",
+      "row" : 13,
+      "type" : "cocoon"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 30,
+  "seed" : 25711870,
+  "starScores" : [
+    7000,
+    7800
+  ]
+}

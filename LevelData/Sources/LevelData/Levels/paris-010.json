@@ -1,0 +1,102 @@
+{
+  "blockTypes" : 5,
+  "city" : "paris",
+  "columns" : 8,
+  "id" : "paris-010",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 0,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "chain"
+    },
+    {
+      "column" : 3,
+      "row" : 5,
+      "type" : "chain"
+    },
+    {
+      "column" : 2,
+      "row" : 8,
+      "type" : "shield"
+    },
+    {
+      "column" : 3,
+      "row" : 8,
+      "type" : "shield"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "shield"
+    },
+    {
+      "column" : 5,
+      "row" : 8,
+      "type" : "shield"
+    },
+    {
+      "column" : 6,
+      "row" : 8,
+      "type" : "shield"
+    },
+    {
+      "column" : 2,
+      "row" : 9,
+      "type" : "shield"
+    },
+    {
+      "column" : 3,
+      "row" : 9,
+      "type" : "shield"
+    },
+    {
+      "column" : 4,
+      "row" : 9,
+      "type" : "shield"
+    },
+    {
+      "column" : 5,
+      "row" : 9,
+      "type" : "shield"
+    },
+    {
+      "column" : 6,
+      "row" : 9,
+      "type" : "shield"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "core"
+  ],
+  "rows" : 26,
+  "seed" : 22910777,
+  "starScores" : [
+    5500,
+    6400
+  ]
+}

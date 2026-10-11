@@ -1,0 +1,147 @@
+{
+  "blockTypes" : 4,
+  "city" : "athens",
+  "columns" : 8,
+  "id" : "athens-008",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 2,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 2,
+      "kind" : "glass",
+      "row" : 5,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 3,
+      "kind" : "brick",
+      "row" : 4,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 1,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 10,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 10,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 10,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 10,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 10,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "hp" : 1,
+      "row" : 12,
+      "type" : "concrete"
+    },
+    {
+      "column" : 3,
+      "hp" : 1,
+      "row" : 12,
+      "type" : "concrete"
+    },
+    {
+      "column" : 4,
+      "hp" : 1,
+      "row" : 12,
+      "type" : "concrete"
+    },
+    {
+      "column" : 5,
+      "hp" : 1,
+      "row" : 12,
+      "type" : "concrete"
+    },
+    {
+      "column" : 6,
+      "hp" : 1,
+      "row" : 12,
+      "type" : "concrete"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 26,
+  "seed" : 22308741,
+  "starScores" : [
+    12400,
+    16300
+  ]
+}

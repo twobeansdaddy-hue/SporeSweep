@@ -1,0 +1,73 @@
+{
+  "id": "rio",
+  "name": "리우데자네이루",
+  "landmark": {
+    "id": "redeemer",
+    "name": "구세주 그리스도상",
+    "parts": [
+      {
+        "id": "rock",
+        "name": "바위와 받침대",
+        "cost": 5
+      },
+      {
+        "id": "robe",
+        "name": "옷자락",
+        "cost": 5,
+        "requires": [
+          "rock"
+        ]
+      },
+      {
+        "id": "armLeft",
+        "name": "왼팔",
+        "cost": 5,
+        "requires": [
+          "robe"
+        ]
+      },
+      {
+        "id": "armRight",
+        "name": "오른팔",
+        "cost": 5,
+        "requires": [
+          "robe"
+        ]
+      },
+      {
+        "id": "head",
+        "name": "머리",
+        "cost": 6,
+        "requires": [
+          "robe"
+        ]
+      },
+      {
+        "id": "pollution",
+        "name": "오염 제거",
+        "cost": 4
+      },
+      {
+        "id": "ground",
+        "name": "잔해 정리",
+        "cost": 3
+      },
+      {
+        "id": "greenery",
+        "name": "열대 숲",
+        "cost": 3,
+        "requires": [
+          "ground"
+        ]
+      },
+      {
+        "id": "sky",
+        "name": "맑은 하늘",
+        "cost": 4,
+        "requires": [
+          "pollution"
+        ]
+      }
+    ]
+  }
+}

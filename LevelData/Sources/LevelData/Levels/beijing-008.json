@@ -1,0 +1,96 @@
+{
+  "blockTypes" : 5,
+  "city" : "beijing",
+  "columns" : 8,
+  "id" : "beijing-008",
+  "materials" : [
+    {
+      "column" : 6,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 5,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 5,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "row" : 11,
+      "type" : "rubble"
+    },
+    {
+      "column" : 4,
+      "row" : 11,
+      "type" : "rubble"
+    },
+    {
+      "column" : 6,
+      "row" : 10,
+      "type" : "rubble"
+    },
+    {
+      "column" : 2,
+      "row" : 11,
+      "type" : "rubble"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 23,
+  "seed" : 2308141,
+  "starScores" : [
+    4100,
+    5600
+  ]
+}

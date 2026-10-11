@@ -1,0 +1,74 @@
+{
+  "id": "sanfrancisco",
+  "name": "샌프란시스코",
+  "landmark": {
+    "id": "goldengate",
+    "name": "금문교",
+    "parts": [
+      {
+        "id": "piers",
+        "name": "교각",
+        "cost": 5
+      },
+      {
+        "id": "deck",
+        "name": "다리 상판",
+        "cost": 5,
+        "requires": [
+          "piers"
+        ]
+      },
+      {
+        "id": "towerLeft",
+        "name": "왼쪽 탑",
+        "cost": 5,
+        "requires": [
+          "deck"
+        ]
+      },
+      {
+        "id": "towerRight",
+        "name": "오른쪽 탑",
+        "cost": 5,
+        "requires": [
+          "deck"
+        ]
+      },
+      {
+        "id": "cables",
+        "name": "주 케이블",
+        "cost": 6,
+        "requires": [
+          "towerLeft",
+          "towerRight"
+        ]
+      },
+      {
+        "id": "pollution",
+        "name": "오염 제거",
+        "cost": 4
+      },
+      {
+        "id": "ground",
+        "name": "잔해 정리",
+        "cost": 3
+      },
+      {
+        "id": "greenery",
+        "name": "양귀비 언덕",
+        "cost": 3,
+        "requires": [
+          "ground"
+        ]
+      },
+      {
+        "id": "sky",
+        "name": "맑은 하늘",
+        "cost": 4,
+        "requires": [
+          "pollution"
+        ]
+      }
+    ]
+  }
+}

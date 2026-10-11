@@ -1,0 +1,158 @@
+{
+  "blockTypes" : 5,
+  "city" : "rio",
+  "columns" : 8,
+  "id" : "rio-008",
+  "materials" : [
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 1,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 6,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 1,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 6,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 0,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 11,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "row" : 11,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 11,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 11,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 12,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "row" : 12,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 12,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 13,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "row" : 13,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 14,
+      "type" : "wall"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 1,
+      "depth" : 7
+    }
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 27,
+  "seed" : 26308861,
+  "starScores" : [
+    5700,
+    6500
+  ]
+}

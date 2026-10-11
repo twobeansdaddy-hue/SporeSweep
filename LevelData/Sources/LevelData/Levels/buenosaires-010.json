@@ -1,0 +1,150 @@
+{
+  "blockTypes" : 4,
+  "city" : "buenosaires",
+  "columns" : 8,
+  "id" : "buenosaires-010",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 2,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 35,
+  "obstacles" : [
+    {
+      "column" : 0,
+      "row" : 5,
+      "type" : "egg"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "egg"
+    },
+    {
+      "column" : 0,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 0,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 0,
+      "row" : 10,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 10,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 10,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 10,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 10,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 12,
+      "type" : "sticky"
+    },
+    {
+      "column" : 6,
+      "row" : 12,
+      "type" : "sticky"
+    },
+    {
+      "column" : 7,
+      "row" : 12,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 14,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 14,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 14,
+      "type" : "sticky"
+    },
+    {
+      "column" : 5,
+      "row" : 14,
+      "type" : "sticky"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "core"
+  ],
+  "rows" : 28,
+  "seed" : 26910897,
+  "starScores" : [
+    13000,
+    18100
+  ]
+}

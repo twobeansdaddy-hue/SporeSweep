@@ -1,0 +1,117 @@
+{
+  "blockTypes" : 5,
+  "city" : "amsterdam",
+  "columns" : 8,
+  "id" : "amsterdam-009",
+  "materials" : [
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 1,
+      "row" : 4,
+      "type" : "egg"
+    },
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "egg"
+    },
+    {
+      "column" : 6,
+      "row" : 8,
+      "type" : "nest"
+    },
+    {
+      "column" : 1,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 6,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 6,
+      "row" : 13,
+      "type" : "fog"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 27,
+  "seed" : 23909798,
+  "starScores" : [
+    6200,
+    7000
+  ]
+}

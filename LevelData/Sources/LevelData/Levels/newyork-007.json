@@ -1,0 +1,46 @@
+{
+  "blockTypes" : 4,
+  "city" : "newyork",
+  "columns" : 8,
+  "id" : "newyork-007",
+  "materials" : [
+    {
+      "column" : 2,
+      "height" : 2,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "nest"
+    },
+    {
+      "column" : 7,
+      "row" : 5,
+      "type" : "nest"
+    },
+    {
+      "column" : 7,
+      "row" : 10,
+      "turns" : 9,
+      "type" : "timer"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 27,
+  "seed" : 24107786,
+  "starScores" : [
+    12300,
+    15200
+  ]
+}

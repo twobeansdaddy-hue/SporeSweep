@@ -1,0 +1,85 @@
+{
+  "blockTypes" : 4,
+  "city" : "sanfrancisco",
+  "columns" : 8,
+  "id" : "sanfrancisco-009",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "rubble"
+    },
+    {
+      "column" : 6,
+      "row" : 6,
+      "type" : "rubble"
+    },
+    {
+      "column" : 2,
+      "row" : 6,
+      "type" : "rubble"
+    },
+    {
+      "column" : 1,
+      "row" : 8,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 8,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 8,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 10,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 10,
+      "type" : "sticky"
+    },
+    {
+      "column" : 5,
+      "row" : 12,
+      "type" : "chain"
+    },
+    {
+      "column" : 1,
+      "row" : 12,
+      "type" : "chain"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 26,
+  "seed" : 25109834,
+  "starScores" : [
+    11700,
+    15000
+  ]
+}

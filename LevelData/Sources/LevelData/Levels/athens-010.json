@@ -1,0 +1,50 @@
+{
+  "blockTypes" : 4,
+  "city" : "athens",
+  "columns" : 8,
+  "id" : "athens-010",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "sludge"
+    },
+    {
+      "column" : 7,
+      "row" : 7,
+      "type" : "cage"
+    },
+    {
+      "column" : 3,
+      "row" : 7,
+      "type" : "cage"
+    },
+    {
+      "column" : 6,
+      "row" : 7,
+      "type" : "cage"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "core"
+  ],
+  "rows" : 27,
+  "seed" : 22310759,
+  "starScores" : [
+    12800,
+    17000
+  ]
+}

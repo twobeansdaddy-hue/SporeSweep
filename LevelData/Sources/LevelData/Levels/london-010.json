@@ -1,0 +1,136 @@
+{
+  "blockTypes" : 5,
+  "city" : "london",
+  "columns" : 8,
+  "id" : "london-010",
+  "materials" : [
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 6,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 35,
+  "obstacles" : [
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "nest"
+    },
+    {
+      "column" : 7,
+      "row" : 5,
+      "type" : "nest"
+    },
+    {
+      "column" : 7,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 11,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 11,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 12,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 15,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 16,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 16,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 17,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 17,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 17,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 18,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 18,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 19,
+      "type" : "wall"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "core"
+  ],
+  "rows" : 28,
+  "seed" : 23310789,
+  "starScores" : [
+    5400,
+    6400
+  ]
+}

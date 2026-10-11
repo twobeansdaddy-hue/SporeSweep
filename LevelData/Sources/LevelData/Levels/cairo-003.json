@@ -1,0 +1,113 @@
+{
+  "blockTypes" : 5,
+  "city" : "cairo",
+  "columns" : 8,
+  "id" : "cairo-003",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 35,
+  "obstacles" : [
+    {
+      "column" : 0,
+      "row" : 4,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 5,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "row" : 5,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 10,
+      "type" : "wall"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 7,
+      "depth" : 9
+    }
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 24,
+  "seed" : 15103480,
+  "starScores" : [
+    5600,
+    6500
+  ]
+}

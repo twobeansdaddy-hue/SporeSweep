@@ -1,0 +1,19 @@
+{
+  "id": "tokyo",
+  "name": "도쿄",
+  "landmark": {
+    "id": "tokyotower",
+    "name": "도쿄타워",
+    "parts": [
+      { "id": "base", "name": "받침 다리", "cost": 5 },
+      { "id": "deck1", "name": "대전망대", "cost": 5, "requires": ["base"] },
+      { "id": "body", "name": "철탑 몸통", "cost": 6, "requires": ["deck1"] },
+      { "id": "deck2", "name": "특별전망대", "cost": 5, "requires": ["body"] },
+      { "id": "antenna", "name": "안테나", "cost": 5, "requires": ["deck2"] },
+      { "id": "pollution", "name": "오염 제거", "cost": 4 },
+      { "id": "ground", "name": "잔해 정리", "cost": 3 },
+      { "id": "greenery", "name": "녹지", "cost": 3, "requires": ["ground"] },
+      { "id": "sky", "name": "맑은 하늘", "cost": 4, "requires": ["pollution"] }
+    ]
+  }
+}

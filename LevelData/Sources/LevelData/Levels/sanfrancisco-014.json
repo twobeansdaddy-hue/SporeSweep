@@ -1,0 +1,50 @@
+{
+  "blockTypes" : 4,
+  "city" : "sanfrancisco",
+  "columns" : 8,
+  "id" : "sanfrancisco-014",
+  "materials" : [
+    {
+      "column" : 2,
+      "height" : 1,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 40,
+  "obstacles" : [
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "egg"
+    },
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "egg"
+    },
+    {
+      "column" : 0,
+      "row" : 4,
+      "type" : "egg"
+    },
+    {
+      "column" : 1,
+      "row" : 8,
+      "type" : "nest"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 30,
+  "seed" : 25114879,
+  "starScores" : [
+    14600,
+    17600
+  ]
+}

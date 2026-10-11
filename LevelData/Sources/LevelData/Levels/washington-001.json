@@ -1,0 +1,82 @@
+{
+  "blockTypes" : 5,
+  "city" : "washington",
+  "columns" : 8,
+  "id" : "washington-001",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 0,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 40,
+  "obstacles" : [
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "boulder"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "boulder"
+    },
+    {
+      "column" : 3,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 10,
+      "type" : "wall"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 27,
+  "seed" : 25701780,
+  "starScores" : [
+    6100,
+    7500
+  ]
+}

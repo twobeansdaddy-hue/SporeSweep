@@ -1,0 +1,82 @@
+{
+  "blockTypes" : 4,
+  "city" : "london",
+  "columns" : 8,
+  "id" : "london-007",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 2,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 3,
+      "row" : 5,
+      "turns" : 9,
+      "type" : "timer"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "turns" : 8,
+      "type" : "timer"
+    },
+    {
+      "column" : 6,
+      "row" : 8,
+      "type" : "cage"
+    },
+    {
+      "column" : 1,
+      "row" : 9,
+      "type" : "cage"
+    },
+    {
+      "column" : 2,
+      "hp" : 2,
+      "row" : 12,
+      "type" : "concrete"
+    },
+    {
+      "column" : 3,
+      "hp" : 1,
+      "row" : 12,
+      "type" : "concrete"
+    },
+    {
+      "column" : 4,
+      "hp" : 2,
+      "row" : 12,
+      "type" : "concrete"
+    },
+    {
+      "column" : 5,
+      "hp" : 1,
+      "row" : 12,
+      "type" : "concrete"
+    },
+    {
+      "column" : 6,
+      "hp" : 2,
+      "row" : 12,
+      "type" : "concrete"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 28,
+  "seed" : 23307762,
+  "starScores" : [
+    12700,
+    15600
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "blockTypes" : 5,
+  "city" : "washington",
+  "columns" : 8,
+  "id" : "washington-003",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 2,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 0,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 1,
+      "hp" : 1,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 2,
+      "hp" : 2,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 3,
+      "hp" : 1,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 4,
+      "hp" : 2,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 4,
+      "row" : 7,
+      "type" : "cage"
+    },
+    {
+      "column" : 1,
+      "row" : 11,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 11,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 11,
+      "type" : "sticky"
+    },
+    {
+      "column" : 5,
+      "row" : 11,
+      "type" : "sticky"
+    },
+    {
+      "column" : 0,
+      "row" : 13,
+      "type" : "sticky"
+    },
+    {
+      "column" : 1,
+      "row" : 13,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 13,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 13,
+      "type" : "sticky"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 26,
+  "seed" : 25703798,
+  "starScores" : [
+    5600,
+    6900
+  ]
+}

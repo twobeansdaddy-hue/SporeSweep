@@ -1,0 +1,63 @@
+{
+  "blockTypes" : 4,
+  "city" : "amsterdam",
+  "columns" : 8,
+  "id" : "amsterdam-006",
+  "materials" : [
+    {
+      "column" : 2,
+      "height" : 2,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 3,
+      "kind" : "brick",
+      "row" : 5,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 2,
+      "kind" : "glass",
+      "row" : 5,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 4,
+      "kind" : "glass",
+      "row" : 4,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 2,
+      "row" : 9,
+      "type" : "chain"
+    },
+    {
+      "column" : 2,
+      "row" : 8,
+      "type" : "chain"
+    },
+    {
+      "column" : 5,
+      "row" : 8,
+      "type" : "chain"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 28,
+  "seed" : 23906771,
+  "starScores" : [
+    12800,
+    16500
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "id": "lab-001",
+  "city": "lab",
+  "columns": 8,
+  "rows": 16,
+  "blockTypes": 4,
+  "moves": 20,
+  "seed": 9101,
+  "tutorial": "시험판 1: 비탈. 벽은 부술 수 없어요. 물질은 바로 아래가 막혀 있으면 대각선 아래의 빈칸으로 흘러가요. 물질의 대각선 아래 블록을 지워서 비탈을 따라 굴려 보세요.",
+  "materials": [
+    {
+      "column": 1,
+      "row": 0
+    }
+  ],
+  "obstacles": [
+    {
+      "type": "wall",
+      "column": 0,
+      "row": 6
+    },
+    {
+      "type": "wall",
+      "column": 0,
+      "row": 7
+    },
+    {
+      "type": "wall",
+      "column": 0,
+      "row": 8
+    },
+    {
+      "type": "wall",
+      "column": 0,
+      "row": 9
+    },
+    {
+      "type": "wall",
+      "column": 0,
+      "row": 10
+    },
+    {
+      "type": "wall",
+      "column": 1,
+      "row": 7
+    },
+    {
+      "type": "wall",
+      "column": 1,
+      "row": 8
+    },
+    {
+      "type": "wall",
+      "column": 1,
+      "row": 9
+    },
+    {
+      "type": "wall",
+      "column": 1,
+      "row": 10
+    },
+    {
+      "type": "wall",
+      "column": 2,
+      "row": 8
+    },
+    {
+      "type": "wall",
+      "column": 2,
+      "row": 9
+    },
+    {
+      "type": "wall",
+      "column": 2,
+      "row": 10
+    },
+    {
+      "type": "wall",
+      "column": 3,
+      "row": 9
+    },
+    {
+      "type": "wall",
+      "column": 3,
+      "row": 10
+    },
+    {
+      "type": "wall",
+      "column": 4,
+      "row": 10
+    },
+    {
+      "type": "wall",
+      "column": 0,
+      "row": 11
+    },
+    {
+      "type": "wall",
+      "column": 1,
+      "row": 11
+    },
+    {
+      "type": "wall",
+      "column": 2,
+      "row": 11
+    },
+    {
+      "type": "wall",
+      "column": 3,
+      "row": 11
+    },
+    {
+      "type": "wall",
+      "column": 0,
+      "row": 12
+    },
+    {
+      "type": "wall",
+      "column": 1,
+      "row": 12
+    },
+    {
+      "type": "wall",
+      "column": 2,
+      "row": 12
+    },
+    {
+      "type": "wall",
+      "column": 0,
+      "row": 13
+    },
+    {
+      "type": "wall",
+      "column": 1,
+      "row": 13
+    },
+    {
+      "type": "wall",
+      "column": 0,
+      "row": 14
+    }
+  ],
+  "starScores": [
+    4300,
+    5300
+  ],
+  "materialsSlide": true
+}

@@ -1,0 +1,82 @@
+{
+  "blockTypes" : 5,
+  "city" : "beijing",
+  "columns" : 8,
+  "id" : "beijing-016",
+  "materials" : [
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 0,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 4,
+      "hp" : 2,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 5,
+      "hp" : 1,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 6,
+      "hp" : 2,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 7,
+      "row" : 7,
+      "type" : "rubble"
+    },
+    {
+      "column" : 0,
+      "row" : 7,
+      "type" : "rubble"
+    },
+    {
+      "column" : 0,
+      "row" : 8,
+      "type" : "rubble"
+    },
+    {
+      "column" : 1,
+      "row" : 9,
+      "type" : "rubble"
+    },
+    {
+      "column" : 6,
+      "row" : 8,
+      "type" : "rubble"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "beam",
+    "bomb",
+    "core",
+    "extraMoves"
+  ],
+  "rows" : 27,
+  "seed" : 2316213,
+  "starScores" : [
+    4400,
+    5500
+  ]
+}

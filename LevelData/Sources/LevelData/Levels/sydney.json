@@ -1,0 +1,73 @@
+{
+  "id": "sydney",
+  "name": "시드니",
+  "landmark": {
+    "id": "operahouse",
+    "name": "오페라하우스",
+    "parts": [
+      {
+        "id": "podium",
+        "name": "기단",
+        "cost": 5
+      },
+      {
+        "id": "shellsLeft",
+        "name": "왼쪽 작은 지붕",
+        "cost": 5,
+        "requires": [
+          "podium"
+        ]
+      },
+      {
+        "id": "shellsMiddle",
+        "name": "가운데 지붕",
+        "cost": 5,
+        "requires": [
+          "podium"
+        ]
+      },
+      {
+        "id": "shellsBig",
+        "name": "큰 지붕",
+        "cost": 6,
+        "requires": [
+          "podium"
+        ]
+      },
+      {
+        "id": "shellsRight",
+        "name": "오른쪽 지붕",
+        "cost": 5,
+        "requires": [
+          "podium"
+        ]
+      },
+      {
+        "id": "pollution",
+        "name": "오염 제거",
+        "cost": 4
+      },
+      {
+        "id": "ground",
+        "name": "잔해 정리",
+        "cost": 3
+      },
+      {
+        "id": "greenery",
+        "name": "항구 공원",
+        "cost": 3,
+        "requires": [
+          "ground"
+        ]
+      },
+      {
+        "id": "sky",
+        "name": "맑은 하늘",
+        "cost": 4,
+        "requires": [
+          "pollution"
+        ]
+      }
+    ]
+  }
+}

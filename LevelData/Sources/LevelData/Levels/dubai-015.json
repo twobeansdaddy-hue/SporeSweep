@@ -1,0 +1,130 @@
+{
+  "blockTypes" : 4,
+  "city" : "dubai",
+  "columns" : 8,
+  "id" : "dubai-015",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 35,
+  "obstacles" : [
+    {
+      "column" : 6,
+      "row" : 5,
+      "type" : "egg"
+    },
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "egg"
+    },
+    {
+      "column" : 0,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 0,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 11,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 11,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 11,
+      "type" : "sticky"
+    },
+    {
+      "column" : 5,
+      "row" : 11,
+      "type" : "sticky"
+    },
+    {
+      "column" : 6,
+      "row" : 11,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 13,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 13,
+      "type" : "sticky"
+    },
+    {
+      "column" : 5,
+      "row" : 13,
+      "type" : "sticky"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "extraMoves"
+  ],
+  "rows" : 30,
+  "seed" : 17315654,
+  "starScores" : [
+    14100,
+    17100
+  ]
+}

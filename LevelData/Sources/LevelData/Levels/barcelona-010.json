@@ -1,0 +1,80 @@
+{
+  "blockTypes" : 4,
+  "city" : "barcelona",
+  "columns" : 8,
+  "id" : "barcelona-010",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 35,
+  "obstacles" : [
+    {
+      "column" : 0,
+      "kind" : "glass",
+      "row" : 5,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 5,
+      "kind" : "scrap",
+      "row" : 5,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 3,
+      "kind" : "brick",
+      "row" : 8,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 5,
+      "kind" : "wood",
+      "row" : 8,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 2,
+      "kind" : "wood",
+      "row" : 8,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 2,
+      "row" : 13,
+      "type" : "rubble"
+    },
+    {
+      "column" : 6,
+      "row" : 14,
+      "type" : "rubble"
+    },
+    {
+      "column" : 3,
+      "row" : 13,
+      "type" : "rubble"
+    },
+    {
+      "column" : 7,
+      "row" : 12,
+      "type" : "rubble"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "core"
+  ],
+  "rows" : 29,
+  "seed" : 22710771,
+  "starScores" : [
+    13700,
+    17600
+  ]
+}

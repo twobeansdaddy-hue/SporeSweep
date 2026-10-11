@@ -1,0 +1,107 @@
+{
+  "blockTypes" : 5,
+  "city" : "cairo",
+  "columns" : 8,
+  "id" : "cairo-008",
+  "materials" : [
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 6,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 7,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 5,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 6,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 7,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 10,
+      "type" : "rubble"
+    },
+    {
+      "column" : 5,
+      "row" : 9,
+      "type" : "rubble"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "rubble"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 26,
+  "seed" : 15108525,
+  "starScores" : [
+    6000,
+    7100
+  ]
+}

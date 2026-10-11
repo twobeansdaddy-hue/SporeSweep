@@ -1,0 +1,57 @@
+{
+  "blockTypes" : 5,
+  "city" : "newdelhi",
+  "columns" : 8,
+  "id" : "newdelhi-009",
+  "materials" : [
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 35,
+  "obstacles" : [
+    {
+      "column" : 0,
+      "kind" : "wood",
+      "row" : 4,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 7,
+      "kind" : "brick",
+      "row" : 5,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 5,
+      "kind" : "brick",
+      "row" : 4,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 1,
+      "kind" : "scrap",
+      "row" : 4,
+      "type" : "cocoon"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 6,
+      "depth" : 4
+    }
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 23,
+  "seed" : 3109174,
+  "starScores" : [
+    5700,
+    7000
+  ]
+}

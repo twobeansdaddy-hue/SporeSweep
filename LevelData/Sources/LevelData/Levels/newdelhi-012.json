@@ -1,0 +1,51 @@
+{
+  "blockTypes" : 5,
+  "city" : "newdelhi",
+  "columns" : 8,
+  "id" : "newdelhi-012",
+  "materials" : [
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 2,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 35,
+  "obstacles" : [
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "nest"
+    },
+    {
+      "column" : 3,
+      "row" : 8,
+      "type" : "nest"
+    },
+    {
+      "column" : 6,
+      "row" : 12,
+      "type" : "nest"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 26,
+  "seed" : 3112201,
+  "starScores" : [
+    6100,
+    7200
+  ]
+}

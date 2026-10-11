@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "athens_building_ruined.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

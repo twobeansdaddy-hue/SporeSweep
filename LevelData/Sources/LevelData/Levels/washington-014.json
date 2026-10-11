@@ -1,0 +1,83 @@
+{
+  "blockTypes" : 5,
+  "city" : "washington",
+  "columns" : 8,
+  "id" : "washington-014",
+  "materials" : [
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 0,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 2,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 45,
+  "obstacles" : [
+    {
+      "column" : 6,
+      "row" : 4,
+      "type" : "chain"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "chain"
+    },
+    {
+      "column" : 6,
+      "row" : 9,
+      "type" : "rubble"
+    },
+    {
+      "column" : 5,
+      "row" : 9,
+      "type" : "rubble"
+    },
+    {
+      "column" : 1,
+      "row" : 9,
+      "type" : "rubble"
+    },
+    {
+      "column" : 0,
+      "row" : 9,
+      "type" : "rubble"
+    },
+    {
+      "column" : 1,
+      "row" : 13,
+      "type" : "boulder"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 30,
+  "seed" : 25714897,
+  "starScores" : [
+    7700,
+    9600
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "blockTypes" : 5,
+  "city" : "newyork",
+  "columns" : 8,
+  "id" : "newyork-014",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 2,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 55,
+  "obstacles" : [
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "boulder"
+    },
+    {
+      "column" : 6,
+      "row" : 5,
+      "type" : "boulder"
+    },
+    {
+      "column" : 6,
+      "row" : 8,
+      "turns" : 7,
+      "type" : "timer"
+    },
+    {
+      "column" : 1,
+      "row" : 10,
+      "turns" : 8,
+      "type" : "timer"
+    },
+    {
+      "column" : 5,
+      "row" : 14,
+      "turns" : 9,
+      "type" : "timer"
+    },
+    {
+      "column" : 4,
+      "row" : 14,
+      "turns" : 8,
+      "type" : "timer"
+    },
+    {
+      "column" : 6,
+      "row" : 13,
+      "turns" : 7,
+      "type" : "timer"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 30,
+  "seed" : 24114849,
+  "starScores" : [
+    8500,
+    9400
+  ]
+}

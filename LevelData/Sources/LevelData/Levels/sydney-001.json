@@ -1,0 +1,57 @@
+{
+  "blockTypes" : 5,
+  "city" : "sydney",
+  "columns" : 8,
+  "id" : "sydney-001",
+  "materials" : [
+    {
+      "column" : 0,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 6,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "ice"
+    },
+    {
+      "column" : 6,
+      "row" : 5,
+      "type" : "ice"
+    },
+    {
+      "column" : 7,
+      "row" : 4,
+      "type" : "ice"
+    },
+    {
+      "column" : 1,
+      "row" : 4,
+      "type" : "ice"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 24,
+  "seed" : 27701840,
+  "starScores" : [
+    4700,
+    5600
+  ],
+  "tutorial" : "얼음 블록은 얼어붙어서 밀 수 없고 맞출 수도 없어요. 바로 옆에서 블록을 맞추거나 특수 블록의 효과가 닿으면 녹아서 보통 블록이 돼요."
+}

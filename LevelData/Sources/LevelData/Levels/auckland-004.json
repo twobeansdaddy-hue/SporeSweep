@@ -1,0 +1,79 @@
+{
+  "blockTypes" : 5,
+  "city" : "auckland",
+  "columns" : 8,
+  "id" : "auckland-004",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "ice"
+    },
+    {
+      "column" : 0,
+      "row" : 4,
+      "type" : "ice"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "ice"
+    },
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "ice"
+    },
+    {
+      "column" : 0,
+      "row" : 8,
+      "type" : "chain"
+    },
+    {
+      "column" : 1,
+      "row" : 8,
+      "type" : "chain"
+    },
+    {
+      "column" : 7,
+      "row" : 8,
+      "type" : "chain"
+    },
+    {
+      "column" : 1,
+      "row" : 7,
+      "type" : "chain"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 2,
+      "depth" : 8
+    }
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 26,
+  "seed" : 28104879,
+  "starScores" : [
+    5200,
+    6300
+  ]
+}

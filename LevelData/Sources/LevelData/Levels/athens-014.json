@@ -1,0 +1,134 @@
+{
+  "blockTypes" : 5,
+  "city" : "athens",
+  "columns" : 8,
+  "id" : "athens-014",
+  "materials" : [
+    {
+      "column" : 0,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 2,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "egg"
+    },
+    {
+      "column" : 7,
+      "row" : 5,
+      "type" : "egg"
+    },
+    {
+      "column" : 7,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 11,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 11,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 12,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 15,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 15,
+      "type" : "sticky"
+    },
+    {
+      "column" : 5,
+      "row" : 15,
+      "type" : "sticky"
+    },
+    {
+      "column" : 6,
+      "row" : 15,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 17,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 17,
+      "type" : "sticky"
+    },
+    {
+      "column" : 5,
+      "row" : 17,
+      "type" : "sticky"
+    },
+    {
+      "column" : 6,
+      "row" : 17,
+      "type" : "sticky"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 1,
+      "depth" : 6
+    }
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 30,
+  "seed" : 22314795,
+  "starScores" : [
+    6100,
+    7300
+  ]
+}

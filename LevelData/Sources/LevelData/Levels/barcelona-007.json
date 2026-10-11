@@ -1,0 +1,87 @@
+{
+  "blockTypes" : 5,
+  "city" : "barcelona",
+  "columns" : 8,
+  "id" : "barcelona-007",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 6,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 0,
+      "row" : 6,
+      "type" : "rubble"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "rubble"
+    },
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "rubble"
+    },
+    {
+      "column" : 1,
+      "hp" : 1,
+      "row" : 8,
+      "type" : "concrete"
+    },
+    {
+      "column" : 2,
+      "hp" : 2,
+      "row" : 8,
+      "type" : "concrete"
+    },
+    {
+      "column" : 3,
+      "hp" : 1,
+      "row" : 8,
+      "type" : "concrete"
+    },
+    {
+      "column" : 4,
+      "hp" : 2,
+      "row" : 8,
+      "type" : "concrete"
+    },
+    {
+      "column" : 5,
+      "hp" : 1,
+      "row" : 8,
+      "type" : "concrete"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 26,
+  "seed" : 22707744,
+  "starScores" : [
+    5000,
+    6200
+  ]
+}

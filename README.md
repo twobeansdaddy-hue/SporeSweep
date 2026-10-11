@@ -1,0 +1,165 @@
+# 포자 대청소 (SporeSweep)
+
+외계 포자에 덮인 세계의 랜드마크를 매치3 퍼즐로 정화하고 복원하는 iOS 게임입니다.
+8개 권역, 24개 도시, 380개 레벨이 들어 있습니다.
+
+![게임 화면](Docs/images/overview.jpg)
+
+> 열람과 학습을 위해 공유한 저장소입니다. 다시 배포하거나 공개하지 말아 주세요. 자세한 것은 [LICENSE](LICENSE)에 있습니다.
+
+## 한눈에 보기
+
+| | |
+| --- | --- |
+| 플랫폼 | iOS 17 이상, 세로 화면 |
+| 언어와 도구 | Swift 6, SwiftUI(화면), SpriteKit(보드), Xcode 27 |
+| 규칙 | 특수 블록 3종과 조합 6종, 장애물 17종, 아이템 3종 |
+| 메타 | 별을 모아 랜드마크를 부위별로 복원, 정화한 만큼 초록으로 돌아오는 지도 |
+| 수익 장치 | 생명(5개, 30분에 하나), 보상형 광고(AdMob) |
+| 측정 | Firebase Analytics |
+| 언어 | 한국어, 영어 |
+| 테스트 | 자동 테스트 511개 |
+
+게임의 규칙과 구조는 모두 [DESIGN.md](DESIGN.md)에 적혀 있습니다. 코드를 읽기 전에 1~2장을 먼저 보면 좋습니다.
+
+## 폴더
+
+```
+SporeSweep/          앱. SwiftUI 화면, 진행·생명·광고·기록을 묶는 AppModel
+GameCore/            규칙. 화면과 무관한 순수 Swift 패키지(보드, 매치, 장애물, 점수)
+GameScene/           보드를 그리는 SpriteKit 씬. 블록 그림, 효과음, 음악이 들어 있다
+LevelData/           레벨 JSON 380개와 읽는 코드, 레벨을 만들고 점검하는 도구
+Progress/            진행 저장. 별, 생명, 일일 보상
+Config/              사람마다 다른 빌드 설정(서명 팀, 광고 ID)
+Tools/               그림·소리·번역·홍보물을 만드는 스크립트
+Art/                 그림을 만들 때 쓴 지시문과 견본
+Reports/             봇으로 돌린 레벨 점검 결과
+Docs/                README에 쓰는 그림
+DESIGN.md            기획서. 규칙, 데이터 형식, 기술 구조
+```
+
+패키지는 아래로만 의존합니다.
+
+```
+SporeSweep(앱) → GameScene → GameCore
+              → LevelData → GameCore
+              → Progress
+```
+
+`GameCore`는 UIKit도 SpriteKit도 쓰지 않습니다. 규칙을 고치고 `swift test`로 바로 확인할 수 있습니다.
+
+## 빌드
+
+1. Xcode 27 이상에서 `SporeSweep.xcodeproj`를 엽니다.
+2. 처음 열면 Firebase와 Google Mobile Ads 패키지를 내려받습니다. 몇 분 걸립니다.
+3. 시뮬레이터를 고르고 실행합니다(⌘R).
+
+아무 설정 없이 시뮬레이터에서 돌아갑니다. 이 상태에서는 광고가 구글의 시험 광고로 나오고, 플레이 기록은 어디로도 보내지 않습니다.
+
+편집기에 "Cannot find … in scope" 같은 표시가 보이면 한 번 빌드(⌘B)하면 사라집니다.
+
+### 실제 기기에 설치하려면
+
+1. `Config/Local.example.xcconfig`를 `Config/Local.xcconfig`로 복사하고 자기 개발 팀 ID를 적습니다.
+2. 타깃의 번들 ID(`dev.code404.sporesweep`)를 자기 것으로 바꿉니다.
+
+`Local.xcconfig`는 저장소에 올라가지 않습니다.
+
+### 선택 설정
+
+| 하고 싶은 것 | 방법 |
+| --- | --- |
+| 플레이 기록 보내기 | 자기 Firebase 프로젝트의 `GoogleService-Info.plist`를 `SporeSweep/`에 넣는다. 디버그 빌드는 실행 인자 `-analytics 1`을 줄 때만 보낸다 |
+| 자기 광고 단위 쓰기 | `Config/Local.xcconfig`에 `GAD_APPLICATION_ID`와 `REWARDED_AD_UNIT_ID`를 적는다. 실제 광고는 App Store에서 받은 앱에서만 나온다 |
+| 광고 없이 돌리기 | 실행 인자 `-fakeAds 1` |
+
+## 테스트
+
+패키지마다 따로 돌립니다.
+
+```bash
+cd GameCore && swift test
+```
+
+```bash
+cd GameScene && swift test
+```
+
+```bash
+cd LevelData && swift test
+```
+
+```bash
+cd Progress && swift test
+```
+
+| 패키지 | 테스트 | 보는 것 |
+| --- | --- | --- |
+| GameCore | 304 | 매치, 낙하, 특수 블록, 장애물, 점수, 아이템 |
+| LevelData | 109 | 380개 레벨을 모두 읽고 규칙에 맞는지 |
+| GameScene | 64 | 씬의 배치와 연출 |
+| Progress | 34 | 저장, 생명, 일일 보상, 진행 합치기 |
+
+## 레벨 도구
+
+`LevelData` 패키지에 명령줄 도구가 세 개 있습니다.
+
+| 도구 | 하는 일 |
+| --- | --- |
+| `levelgen` | 난이도 범위와 장애물 목록을 받아 한 도시의 레벨을 만든다 |
+| `levelaudit` | 모든 레벨을 봇 두 종류로 돌려 클리어율을 잰다. `--fix`를 주면 이동 횟수를 고친다 |
+| `leveldebug` | 레벨 하나를 글자로 찍어 가며 돌려 본다 |
+
+```bash
+cd LevelData && swift run -c release levelaudit --playouts 200 --csv ../Reports/level_audit.csv
+```
+
+결과는 [Reports/LEVEL_AUDIT.md](Reports/LEVEL_AUDIT.md)에 있습니다. 레벨 JSON의 형식은 DESIGN.md 9장에 있습니다.
+
+## 개발용 실행 인자
+
+디버그 빌드에서만 동작합니다. Xcode의 Scheme → Run → Arguments에 적습니다. 전체 목록은 DESIGN.md 10장에 있습니다.
+
+| 인자 | 하는 일 |
+| --- | --- |
+| `-skipTitle 1` | 타이틀과 인트로를 건너뛴다 |
+| `-city tokyo -level 5` | 잠금과 상관없이 그 도시의 그 레벨로 들어간다 |
+| `-autoplay 1` | 봇이 스스로 판을 둔다 |
+| `-allStars 1` | 모든 레벨을 별 3개로 깬 것으로 보고 시작한다 |
+| `-lives 0`, `-tools 3` | 생명과 아이템의 수를 정하고 시작한다 |
+| `-showcase 1` | 보드에 블록 종류를 늘어놓는다 |
+| `-ending 1` | 엔딩에서 시작한다 |
+| `-AppleLanguages "(en)"` | 영어로 실행한다 |
+
+이 인자들로 시작한 실행은 진행을 저장하지 않습니다.
+
+## 그림과 소리
+
+- 그림은 모두 AI 이미지 생성으로 만들었습니다. 지시문과 과정은 [Art/PROMPTS.md](Art/PROMPTS.md)에 있습니다.
+- 효과음과 음악은 ElevenLabs로 만들었습니다.
+- `Tools/`의 스크립트 가운데 그림과 소리를 새로 만드는 것은 각자의 계정이 있어야 돌아갑니다. ElevenLabs 키는 코드에 적지 않고 macOS 키체인에서 읽습니다(`elevenlabs-api-key`).
+
+### Tools
+
+| 스크립트 | 하는 일 |
+| --- | --- |
+| `make_strings.py` | 영어 번역 파일을 만든다. 새 문장을 넣으면 여기에 번역을 넣고 돌린다 |
+| `landmark_shapes.py` | 랜드마크의 부위 영역을 정의하고 Swift 코드를 만든다 |
+| `cities_data.py`, `cities_batch.py`, `maps_batch.py`, `install_cities.py` | 도시와 지도의 그림을 한꺼번에 만들고 앱에 넣는다 |
+| `key_landmark.py`, `cut_magenta.py`, `cut_chroma.swift`, `cut_sprites.swift`, `split_landmark.py` | 생성한 그림에서 배경을 빼고 조각으로 자른다 |
+| `make_icon.py` | 앱 아이콘 |
+| `make_sounds.py`, `make_sounds_ai.py`, `make_music_ai.py` | 효과음과 음악 |
+| `make_store_shots.py`, `make_promos.py`, `promo_render.swift` | 스토어 스크린샷과 홍보 영상 |
+| `record_sim.swift`, `record_audio.swift`, `mux_av.swift` | 시뮬레이터 화면과 소리를 녹화해 합친다 |
+
+## 저장소에 없는 것
+
+- 사업 계획과 홍보 자료, 그림의 원본 작업 파일
+- 서명 팀, 실제 광고 ID, Firebase 설정 파일
+
+DESIGN.md가 `PLAN.md`나 `Marketing/`을 가리키는 곳이 있는데, 그 파일들은 이 저장소에 없습니다.
+
+## 라이선스
+
+열람과 학습용입니다. 다시 배포하거나 상업적으로 쓸 수 없습니다. [LICENSE](LICENSE)를 봐 주세요.
+글꼴 Jua는 SIL Open Font License 1.1을 따릅니다.

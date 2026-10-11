@@ -1,0 +1,152 @@
+{
+  "id": "seoul-011",
+  "city": "seoul",
+  "columns": 8,
+  "rows": 20,
+  "blockTypes": 5,
+  "moves": 30,
+  "seed": 1011,
+  "materials": [
+    {
+      "column": 1,
+      "row": 0
+    },
+    {
+      "column": 6,
+      "row": 0
+    }
+  ],
+  "pendingMaterials": [
+    {
+      "column": 3,
+      "depth": 8
+    }
+  ],
+  "obstacles": [
+    {
+      "type": "cage",
+      "column": 2,
+      "row": 4
+    },
+    {
+      "type": "cage",
+      "column": 5,
+      "row": 4
+    },
+    {
+      "type": "cage",
+      "column": 3,
+      "row": 6
+    },
+    {
+      "type": "cage",
+      "column": 4,
+      "row": 6
+    },
+    {
+      "type": "concrete",
+      "column": 0,
+      "row": 8,
+      "hp": 2
+    },
+    {
+      "type": "concrete",
+      "column": 7,
+      "row": 8,
+      "hp": 2
+    },
+    {
+      "type": "concrete",
+      "column": 1,
+      "row": 8,
+      "hp": 1
+    },
+    {
+      "type": "concrete",
+      "column": 6,
+      "row": 8,
+      "hp": 1
+    },
+    {
+      "type": "wall",
+      "column": 7,
+      "row": 11
+    },
+    {
+      "type": "wall",
+      "column": 7,
+      "row": 12
+    },
+    {
+      "type": "wall",
+      "column": 6,
+      "row": 12
+    },
+    {
+      "type": "wall",
+      "column": 7,
+      "row": 13
+    },
+    {
+      "type": "wall",
+      "column": 6,
+      "row": 13
+    },
+    {
+      "type": "wall",
+      "column": 5,
+      "row": 13
+    },
+    {
+      "type": "wall",
+      "column": 7,
+      "row": 14
+    },
+    {
+      "type": "wall",
+      "column": 6,
+      "row": 14
+    },
+    {
+      "type": "wall",
+      "column": 5,
+      "row": 14
+    },
+    {
+      "type": "wall",
+      "column": 4,
+      "row": 14
+    },
+    {
+      "type": "wall",
+      "column": 7,
+      "row": 15
+    },
+    {
+      "type": "wall",
+      "column": 6,
+      "row": 15
+    },
+    {
+      "type": "wall",
+      "column": 5,
+      "row": 15
+    },
+    {
+      "type": "wall",
+      "column": 7,
+      "row": 16
+    },
+    {
+      "type": "wall",
+      "column": 6,
+      "row": 16
+    },
+    {
+      "type": "wall",
+      "column": 7,
+      "row": 17
+    }
+  ],
+  "starScores": [4900, 5800]
+}

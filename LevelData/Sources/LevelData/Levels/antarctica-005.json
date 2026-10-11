@@ -1,0 +1,50 @@
+{
+  "blockTypes" : 4,
+  "city" : "antarctica",
+  "columns" : 8,
+  "id" : "antarctica-005",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 2,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "vent"
+    },
+    {
+      "column" : 2,
+      "row" : 9,
+      "type" : "ice"
+    },
+    {
+      "column" : 3,
+      "row" : 8,
+      "type" : "ice"
+    },
+    {
+      "column" : 1,
+      "row" : 8,
+      "type" : "ice"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "bomb"
+  ],
+  "rows" : 28,
+  "seed" : 28305894,
+  "starScores" : [
+    11800,
+    14700
+  ]
+}

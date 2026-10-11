@@ -1,0 +1,111 @@
+{
+  "blockTypes" : 5,
+  "city" : "newdelhi",
+  "columns" : 8,
+  "id" : "newdelhi-015",
+  "materials" : [
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 7,
+      "kind" : "brick",
+      "row" : 4,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 5,
+      "kind" : "brick",
+      "row" : 4,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 0,
+      "kind" : "scrap",
+      "row" : 5,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 7,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 11,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 11,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 12,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "kind" : "glass",
+      "row" : 16,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 6,
+      "kind" : "scrap",
+      "row" : 15,
+      "type" : "cocoon"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "extraMoves"
+  ],
+  "rows" : 28,
+  "seed" : 3115228,
+  "starScores" : [
+    5100,
+    6300
+  ]
+}

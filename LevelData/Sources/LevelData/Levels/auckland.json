@@ -1,0 +1,73 @@
+{
+  "id": "auckland",
+  "name": "오클랜드",
+  "landmark": {
+    "id": "skytower",
+    "name": "스카이타워",
+    "parts": [
+      {
+        "id": "base",
+        "name": "아래 건물",
+        "cost": 5
+      },
+      {
+        "id": "shaft",
+        "name": "탑 기둥",
+        "cost": 5,
+        "requires": [
+          "base"
+        ]
+      },
+      {
+        "id": "pod",
+        "name": "전망대",
+        "cost": 5,
+        "requires": [
+          "shaft"
+        ]
+      },
+      {
+        "id": "upper",
+        "name": "윗부분",
+        "cost": 5,
+        "requires": [
+          "pod"
+        ]
+      },
+      {
+        "id": "mast",
+        "name": "안테나",
+        "cost": 6,
+        "requires": [
+          "upper"
+        ]
+      },
+      {
+        "id": "pollution",
+        "name": "오염 제거",
+        "cost": 4
+      },
+      {
+        "id": "ground",
+        "name": "잔해 정리",
+        "cost": 3
+      },
+      {
+        "id": "greenery",
+        "name": "부두 공원",
+        "cost": 3,
+        "requires": [
+          "ground"
+        ]
+      },
+      {
+        "id": "sky",
+        "name": "맑은 하늘",
+        "cost": 4,
+        "requires": [
+          "pollution"
+        ]
+      }
+    ]
+  }
+}

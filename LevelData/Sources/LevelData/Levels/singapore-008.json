@@ -1,0 +1,134 @@
+{
+  "blockTypes" : 5,
+  "city" : "singapore",
+  "columns" : 8,
+  "id" : "singapore-008",
+  "materials" : [
+    {
+      "column" : 6,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 6,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 7,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 6,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 7,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 12,
+      "type" : "sludge"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 4,
+      "depth" : 9
+    }
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 25,
+  "seed" : 13108465,
+  "starScores" : [
+    5200,
+    6100
+  ]
+}

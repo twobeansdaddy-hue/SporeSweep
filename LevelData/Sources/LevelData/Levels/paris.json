@@ -1,0 +1,73 @@
+{
+  "id": "paris",
+  "name": "파리",
+  "landmark": {
+    "id": "eiffel",
+    "name": "에펠탑",
+    "parts": [
+      {
+        "id": "legs",
+        "name": "받침 다리",
+        "cost": 5
+      },
+      {
+        "id": "deck1",
+        "name": "1층 전망대",
+        "cost": 5,
+        "requires": [
+          "legs"
+        ]
+      },
+      {
+        "id": "deck2",
+        "name": "2층 전망대",
+        "cost": 5,
+        "requires": [
+          "deck1"
+        ]
+      },
+      {
+        "id": "body",
+        "name": "철탑 몸통",
+        "cost": 5,
+        "requires": [
+          "deck2"
+        ]
+      },
+      {
+        "id": "top",
+        "name": "꼭대기",
+        "cost": 6,
+        "requires": [
+          "body"
+        ]
+      },
+      {
+        "id": "pollution",
+        "name": "오염 제거",
+        "cost": 4
+      },
+      {
+        "id": "ground",
+        "name": "잔해 정리",
+        "cost": 3
+      },
+      {
+        "id": "greenery",
+        "name": "정원",
+        "cost": 3,
+        "requires": [
+          "ground"
+        ]
+      },
+      {
+        "id": "sky",
+        "name": "맑은 하늘",
+        "cost": 4,
+        "requires": [
+          "pollution"
+        ]
+      }
+    ]
+  }
+}

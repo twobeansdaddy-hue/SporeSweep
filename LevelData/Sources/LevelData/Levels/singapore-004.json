@@ -1,0 +1,88 @@
+{
+  "blockTypes" : 4,
+  "city" : "singapore",
+  "columns" : 8,
+  "id" : "singapore-004",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 20,
+  "obstacles" : [
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "kind" : "glass",
+      "row" : 7,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 7,
+      "kind" : "scrap",
+      "row" : 8,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 4,
+      "kind" : "wood",
+      "row" : 8,
+      "type" : "cocoon"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 24,
+  "seed" : 13104429,
+  "starScores" : [
+    13300,
+    16500
+  ]
+}

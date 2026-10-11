@@ -1,0 +1,137 @@
+{
+  "blockTypes" : 5,
+  "city" : "rome",
+  "columns" : 8,
+  "id" : "rome-014",
+  "materials" : [
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 40,
+  "obstacles" : [
+    {
+      "column" : 6,
+      "row" : 4,
+      "type" : "cage"
+    },
+    {
+      "column" : 7,
+      "row" : 4,
+      "type" : "cage"
+    },
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 2,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 6,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 14,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 14,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 14,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 14,
+      "type" : "fog"
+    },
+    {
+      "column" : 6,
+      "row" : 14,
+      "type" : "fog"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 28,
+  "seed" : 21114759,
+  "starScores" : [
+    6500,
+    7700
+  ]
+}

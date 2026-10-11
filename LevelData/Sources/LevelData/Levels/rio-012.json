@@ -1,0 +1,78 @@
+{
+  "blockTypes" : 5,
+  "city" : "rio",
+  "columns" : 8,
+  "id" : "rio-012",
+  "materials" : [
+    {
+      "column" : 0,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 50,
+  "obstacles" : [
+    {
+      "column" : 1,
+      "row" : 4,
+      "type" : "boulder"
+    },
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "boulder"
+    },
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "boulder"
+    },
+    {
+      "column" : 3,
+      "row" : 8,
+      "type" : "egg"
+    },
+    {
+      "column" : 5,
+      "row" : 8,
+      "type" : "egg"
+    },
+    {
+      "column" : 1,
+      "row" : 12,
+      "type" : "vent"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 28,
+  "seed" : 26312897,
+  "starScores" : [
+    8100,
+    9300
+  ]
+}

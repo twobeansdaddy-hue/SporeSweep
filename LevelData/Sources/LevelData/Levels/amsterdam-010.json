@@ -1,0 +1,93 @@
+{
+  "blockTypes" : 5,
+  "city" : "amsterdam",
+  "columns" : 8,
+  "id" : "amsterdam-010",
+  "materials" : [
+    {
+      "column" : 6,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 35,
+  "obstacles" : [
+    {
+      "column" : 2,
+      "kind" : "scrap",
+      "row" : 4,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 5,
+      "kind" : "plastic",
+      "row" : 5,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 4,
+      "kind" : "brick",
+      "row" : 5,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "chain"
+    },
+    {
+      "column" : 3,
+      "row" : 9,
+      "type" : "chain"
+    },
+    {
+      "column" : 7,
+      "row" : 8,
+      "type" : "chain"
+    },
+    {
+      "column" : 2,
+      "row" : 12,
+      "type" : "egg"
+    },
+    {
+      "column" : 0,
+      "row" : 12,
+      "type" : "egg"
+    },
+    {
+      "column" : 6,
+      "row" : 13,
+      "type" : "egg"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 5,
+      "depth" : 7
+    }
+  ],
+  "rewards" : [
+    "core"
+  ],
+  "rows" : 28,
+  "seed" : 23910807,
+  "starScores" : [
+    7000,
+    8400
+  ]
+}

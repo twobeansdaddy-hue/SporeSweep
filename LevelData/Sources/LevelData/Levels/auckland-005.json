@@ -1,0 +1,92 @@
+{
+  "blockTypes" : 5,
+  "city" : "auckland",
+  "columns" : 8,
+  "id" : "auckland-005",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 0,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "ice"
+    },
+    {
+      "column" : 0,
+      "row" : 5,
+      "type" : "ice"
+    },
+    {
+      "column" : 3,
+      "row" : 5,
+      "type" : "ice"
+    },
+    {
+      "column" : 6,
+      "row" : 5,
+      "type" : "ice"
+    },
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "ice"
+    },
+    {
+      "column" : 7,
+      "row" : 7,
+      "type" : "ice"
+    },
+    {
+      "column" : 3,
+      "row" : 8,
+      "type" : "ice"
+    },
+    {
+      "column" : 5,
+      "row" : 7,
+      "type" : "ice"
+    },
+    {
+      "column" : 4,
+      "row" : 10,
+      "type" : "nest"
+    },
+    {
+      "column" : 0,
+      "row" : 11,
+      "type" : "nest"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "bomb"
+  ],
+  "rows" : 27,
+  "seed" : 28105888,
+  "starScores" : [
+    5400,
+    6800
+  ]
+}

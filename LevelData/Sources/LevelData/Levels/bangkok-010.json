@@ -1,0 +1,69 @@
+{
+  "blockTypes" : 5,
+  "city" : "bangkok",
+  "columns" : 8,
+  "id" : "bangkok-010",
+  "materials" : [
+    {
+      "column" : 2,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 0,
+      "kind" : "brick",
+      "row" : 4,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 2,
+      "kind" : "scrap",
+      "row" : 5,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 7,
+      "kind" : "glass",
+      "row" : 5,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 0,
+      "row" : 9,
+      "turns" : 8,
+      "type" : "timer"
+    },
+    {
+      "column" : 5,
+      "row" : 9,
+      "turns" : 8,
+      "type" : "timer"
+    },
+    {
+      "column" : 7,
+      "row" : 8,
+      "turns" : 7,
+      "type" : "timer"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 4,
+      "depth" : 10
+    }
+  ],
+  "rewards" : [
+    "core"
+  ],
+  "rows" : 25,
+  "seed" : 7310309,
+  "starScores" : [
+    4300,
+    5800
+  ]
+}

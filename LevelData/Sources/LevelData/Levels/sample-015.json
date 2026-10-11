@@ -1,0 +1,93 @@
+{
+  "blockTypes" : 5,
+  "city" : "sample",
+  "columns" : 8,
+  "id" : "sample-015",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 6,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 40,
+  "obstacles" : [
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 5,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "hp" : 2,
+      "row" : 9,
+      "type" : "concrete"
+    },
+    {
+      "column" : 3,
+      "hp" : 1,
+      "row" : 9,
+      "type" : "concrete"
+    },
+    {
+      "column" : 4,
+      "hp" : 2,
+      "row" : 9,
+      "type" : "concrete"
+    },
+    {
+      "column" : 5,
+      "hp" : 1,
+      "row" : 9,
+      "type" : "concrete"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 0,
+      "depth" : 9
+    }
+  ],
+  "rewards" : [
+    "extraMoves"
+  ],
+  "rows" : 24,
+  "seed" : 715156,
+  "starScores" : [
+    6200,
+    7200
+  ]
+}

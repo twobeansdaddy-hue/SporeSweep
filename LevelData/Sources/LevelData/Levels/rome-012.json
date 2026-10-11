@@ -1,0 +1,64 @@
+{
+  "blockTypes" : 5,
+  "city" : "rome",
+  "columns" : 8,
+  "id" : "rome-012",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 35,
+  "obstacles" : [
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "nest"
+    },
+    {
+      "column" : 7,
+      "row" : 5,
+      "type" : "nest"
+    },
+    {
+      "column" : 7,
+      "kind" : "plastic",
+      "row" : 8,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 4,
+      "kind" : "glass",
+      "row" : 9,
+      "type" : "cocoon"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 28,
+  "seed" : 21112741,
+  "starScores" : [
+    6400,
+    7600
+  ]
+}

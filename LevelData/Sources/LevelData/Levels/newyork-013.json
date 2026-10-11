@@ -1,0 +1,167 @@
+{
+  "blockTypes" : 5,
+  "city" : "newyork",
+  "columns" : 8,
+  "id" : "newyork-013",
+  "materials" : [
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 6,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 0,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 1,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 0,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 1,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 5,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 8,
+      "type" : "nest"
+    },
+    {
+      "column" : 6,
+      "row" : 9,
+      "type" : "nest"
+    },
+    {
+      "column" : 0,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 12,
+      "type" : "fog"
+    },
+    {
+      "column" : 0,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 13,
+      "type" : "fog"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 27,
+  "seed" : 24113840,
+  "starScores" : [
+    6000,
+    7300
+  ]
+}

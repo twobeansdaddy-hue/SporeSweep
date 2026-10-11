@@ -1,0 +1,127 @@
+{
+  "blockTypes" : 5,
+  "city" : "newyork",
+  "columns" : 8,
+  "id" : "newyork-005",
+  "materials" : [
+    {
+      "column" : 2,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "rubble"
+    },
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "rubble"
+    },
+    {
+      "column" : 1,
+      "row" : 5,
+      "type" : "rubble"
+    },
+    {
+      "column" : 6,
+      "row" : 6,
+      "type" : "rubble"
+    },
+    {
+      "column" : 4,
+      "kind" : "brick",
+      "row" : 8,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 5,
+      "kind" : "plastic",
+      "row" : 8,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 0,
+      "kind" : "glass",
+      "row" : 9,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 1,
+      "kind" : "scrap",
+      "row" : 9,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 1,
+      "row" : 12,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 12,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 12,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 12,
+      "type" : "sticky"
+    },
+    {
+      "column" : 5,
+      "row" : 12,
+      "type" : "sticky"
+    },
+    {
+      "column" : 1,
+      "row" : 14,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 14,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 14,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 14,
+      "type" : "sticky"
+    },
+    {
+      "column" : 5,
+      "row" : 14,
+      "type" : "sticky"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 1,
+      "depth" : 10
+    }
+  ],
+  "rewards" : [
+    "bomb"
+  ],
+  "rows" : 27,
+  "seed" : 24105768,
+  "starScores" : [
+    3600,
+    4300
+  ]
+}

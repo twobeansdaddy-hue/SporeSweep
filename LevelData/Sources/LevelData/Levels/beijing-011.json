@@ -1,0 +1,47 @@
+{
+  "blockTypes" : 4,
+  "city" : "beijing",
+  "columns" : 8,
+  "id" : "beijing-011",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 20,
+  "obstacles" : [
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "sludge"
+    },
+    {
+      "column" : 6,
+      "kind" : "scrap",
+      "row" : 8,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 4,
+      "kind" : "brick",
+      "row" : 7,
+      "type" : "cocoon"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 24,
+  "seed" : 2311168,
+  "starScores" : [
+    12700,
+    15100
+  ]
+}

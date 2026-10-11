@@ -1,0 +1,93 @@
+{
+  "blockTypes" : 5,
+  "city" : "buenosaires",
+  "columns" : 8,
+  "id" : "buenosaires-016",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 0,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 40,
+  "obstacles" : [
+    {
+      "column" : 1,
+      "hp" : 1,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 2,
+      "hp" : 2,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 3,
+      "hp" : 1,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "boulder"
+    },
+    {
+      "column" : 1,
+      "row" : 8,
+      "type" : "boulder"
+    },
+    {
+      "column" : 4,
+      "row" : 7,
+      "type" : "boulder"
+    },
+    {
+      "column" : 6,
+      "kind" : "wood",
+      "row" : 12,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 0,
+      "kind" : "brick",
+      "row" : 12,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 7,
+      "kind" : "scrap",
+      "row" : 12,
+      "type" : "cocoon"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 7,
+      "depth" : 9
+    }
+  ],
+  "rewards" : [
+    "beam",
+    "bomb",
+    "core",
+    "extraMoves"
+  ],
+  "rows" : 30,
+  "seed" : 26916951,
+  "starScores" : [
+    7200,
+    8400
+  ]
+}

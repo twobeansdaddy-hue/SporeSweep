@@ -1,0 +1,38 @@
+{
+  "blockTypes" : 4,
+  "city" : "seoul",
+  "columns" : 8,
+  "id" : "seoul-002",
+  "materials" : [
+    {
+      "column" : 2,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 15,
+  "obstacles" : [
+
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 12,
+  "seed" : 1002,
+  "starScores" : [
+    6200,
+    8300
+  ],
+  "tutorial" : "물질이 여러 개면 모두 내려보내야 해요. 화면은 가장 뒤처진 물질을 따라 내려가요. 오른쪽 막대에서 보드 전체와 물질의 위치를 볼 수 있어요. 물질은 바로 아래가 막혀 있고 대각선 아래가 비면 그쪽으로 흘러가기도 해요."
+}

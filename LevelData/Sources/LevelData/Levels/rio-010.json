@@ -1,0 +1,133 @@
+{
+  "blockTypes" : 4,
+  "city" : "rio",
+  "columns" : 8,
+  "id" : "rio-010",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 0,
+      "row" : 4,
+      "type" : "cage"
+    },
+    {
+      "column" : 0,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 0,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 0,
+      "row" : 10,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 10,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 10,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 10,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 10,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "kind" : "scrap",
+      "row" : 13,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 0,
+      "kind" : "brick",
+      "row" : 13,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 2,
+      "kind" : "scrap",
+      "row" : 12,
+      "type" : "cocoon"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "core"
+  ],
+  "rows" : 27,
+  "seed" : 26310879,
+  "starScores" : [
+    12200,
+    14800
+  ]
+}

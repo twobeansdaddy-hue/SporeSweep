@@ -1,0 +1,74 @@
+{
+  "blockTypes" : 5,
+  "city" : "paris",
+  "columns" : 8,
+  "id" : "paris-001",
+  "materials" : [
+    {
+      "column" : 6,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 1,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 1,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 2,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 3,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "shield"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 1,
+      "depth" : 8
+    }
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 23,
+  "seed" : 22901696,
+  "starScores" : [
+    5600,
+    6700
+  ],
+  "tutorial" : "포자 보호막 안의 블록은 특수 블록의 효과에 지워지지 않아요. 그 블록을 직접 맞추면 보호막이 깨져요."
+}

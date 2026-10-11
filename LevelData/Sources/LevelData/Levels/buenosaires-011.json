@@ -1,0 +1,153 @@
+{
+  "blockTypes" : 5,
+  "city" : "buenosaires",
+  "columns" : 8,
+  "id" : "buenosaires-011",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 0,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 45,
+  "obstacles" : [
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 6,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 7,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 6,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 7,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 7,
+      "row" : 7,
+      "type" : "egg"
+    },
+    {
+      "column" : 3,
+      "row" : 8,
+      "type" : "egg"
+    },
+    {
+      "column" : 5,
+      "row" : 8,
+      "type" : "egg"
+    },
+    {
+      "column" : 3,
+      "row" : 11,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 11,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 12,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 12,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 13,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 13,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 14,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 14,
+      "type" : "wall"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 27,
+  "seed" : 26911906,
+  "starScores" : [
+    6800,
+    7600
+  ]
+}

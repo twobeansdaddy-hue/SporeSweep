@@ -1,0 +1,61 @@
+{
+  "id": "antarctica",
+  "name": "남극",
+  "landmark": {
+    "id": "station",
+    "name": "과학 기지",
+    "parts": [
+      {
+        "id": "module1",
+        "name": "첫째 기지",
+        "cost": 5
+      },
+      {
+        "id": "module2",
+        "name": "둘째 기지",
+        "cost": 5
+      },
+      {
+        "id": "module3",
+        "name": "셋째 기지",
+        "cost": 5
+      },
+      {
+        "id": "module4",
+        "name": "넷째 기지와 설상차",
+        "cost": 5
+      },
+      {
+        "id": "roof",
+        "name": "지붕 장비",
+        "cost": 6
+      },
+      {
+        "id": "pollution",
+        "name": "오염 제거",
+        "cost": 4
+      },
+      {
+        "id": "ground",
+        "name": "잔해 정리",
+        "cost": 3
+      },
+      {
+        "id": "greenery",
+        "name": "얼음 벌판",
+        "cost": 3,
+        "requires": [
+          "ground"
+        ]
+      },
+      {
+        "id": "sky",
+        "name": "맑은 하늘",
+        "cost": 4,
+        "requires": [
+          "pollution"
+        ]
+      }
+    ]
+  }
+}

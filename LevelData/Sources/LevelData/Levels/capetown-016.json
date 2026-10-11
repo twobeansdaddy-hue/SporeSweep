@@ -1,0 +1,85 @@
+{
+  "blockTypes" : 5,
+  "city" : "capetown",
+  "columns" : 8,
+  "id" : "capetown-016",
+  "materials" : [
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 40,
+  "obstacles" : [
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "egg"
+    },
+    {
+      "column" : 2,
+      "row" : 5,
+      "type" : "egg"
+    },
+    {
+      "column" : 0,
+      "row" : 4,
+      "type" : "egg"
+    },
+    {
+      "column" : 2,
+      "hp" : 2,
+      "row" : 8,
+      "type" : "concrete"
+    },
+    {
+      "column" : 3,
+      "hp" : 1,
+      "row" : 8,
+      "type" : "concrete"
+    },
+    {
+      "column" : 4,
+      "hp" : 2,
+      "row" : 8,
+      "type" : "concrete"
+    },
+    {
+      "column" : 1,
+      "row" : 12,
+      "type" : "egg"
+    },
+    {
+      "column" : 5,
+      "row" : 12,
+      "type" : "egg"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 0,
+      "depth" : 8
+    }
+  ],
+  "rewards" : [
+    "beam",
+    "bomb",
+    "core",
+    "extraMoves"
+  ],
+  "rows" : 30,
+  "seed" : 19316723,
+  "starScores" : [
+    8500,
+    9800
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "blockTypes" : 5,
+  "city" : "tokyo",
+  "columns" : 8,
+  "id" : "tokyo-011",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 35,
+  "obstacles" : [
+    {
+      "column" : 0,
+      "row" : 4,
+      "type" : "sludge"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 1,
+      "depth" : 6
+    }
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 22,
+  "seed" : 1111132,
+  "starScores" : [
+    6200,
+    7000
+  ]
+}

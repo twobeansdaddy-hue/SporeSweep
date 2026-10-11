@@ -1,0 +1,41 @@
+포자 대청소 (SporeSweep)
+Copyright (c) 2026 code404. All rights reserved.
+
+이 저장소의 소스 코드, 레벨 데이터, 그림, 소리, 문서(이하 "자료")는 열람과 학습을 위해 공유한 것입니다.
+
+허용하는 것
+- 자료를 읽고, 자기 기기에서 빌드하고 실행해 보는 것
+- 자료에서 배운 생각과 기법을 자기 프로젝트에 쓰는 것
+
+허용하지 않는 것(저작권자의 서면 허락이 없는 한)
+- 자료의 전부나 일부를 다시 배포하거나 공개하는 것
+- 자료의 전부나 일부를 그대로 또는 고쳐서 앱 스토어 등에 내거나 상업적으로 쓰는 것
+- 게임의 이름, 로고, 그림, 소리를 다른 제품에 쓰는 것
+
+자료는 있는 그대로 제공하며, 어떤 보증도 하지 않습니다.
+
+함께 들어 있는 다른 사람의 저작물은 각자의 라이선스를 따릅니다.
+- 글꼴 Jua: SIL Open Font License 1.1 (SporeSweep/Fonts/Jua-OFL.txt)
+- Firebase iOS SDK, Google Mobile Ads SDK: 각 SDK의 라이선스와 약관
+
+----------------------------------------------------------------------
+
+SporeSweep
+Copyright (c) 2026 code404. All rights reserved.
+
+The source code, level data, artwork, audio and documents in this repository
+(the "Materials") are shared for viewing and study only.
+
+You may read the Materials and build and run them on your own devices, and you
+may apply the ideas and techniques you learn to your own projects.
+
+Without prior written permission from the copyright holder you may not
+redistribute or publish the Materials in whole or in part, release or
+commercially use them (modified or not), or use the game's name, logo, artwork
+or audio in another product.
+
+The Materials are provided "as is", without warranty of any kind.
+
+Third-party works included here remain under their own licenses: the Jua font
+(SIL Open Font License 1.1, see SporeSweep/Fonts/Jua-OFL.txt), the Firebase iOS
+SDK and the Google Mobile Ads SDK.

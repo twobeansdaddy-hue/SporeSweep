@@ -1,0 +1,131 @@
+{
+  "blockTypes" : 5,
+  "city" : "antarctica",
+  "columns" : 8,
+  "id" : "antarctica-001",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 0,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "fog"
+    },
+    {
+      "column" : 0,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "fog"
+    },
+    {
+      "column" : 0,
+      "row" : 6,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 6,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 6,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 6,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 6,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "chain"
+    },
+    {
+      "column" : 7,
+      "row" : 9,
+      "type" : "chain"
+    },
+    {
+      "column" : 4,
+      "row" : 9,
+      "type" : "chain"
+    },
+    {
+      "column" : 6,
+      "row" : 9,
+      "type" : "chain"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 26,
+  "seed" : 28301858,
+  "starScores" : [
+    5100,
+    6200
+  ]
+}

@@ -1,0 +1,169 @@
+{
+  "blockTypes" : 5,
+  "city" : "singapore",
+  "columns" : 8,
+  "id" : "singapore-011",
+  "materials" : [
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 45,
+  "obstacles" : [
+    {
+      "column" : 0,
+      "row" : 4,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 5,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "row" : 5,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 13,
+      "type" : "fog"
+    },
+    {
+      "column" : 0,
+      "row" : 14,
+      "type" : "fog"
+    },
+    {
+      "column" : 1,
+      "row" : 14,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 14,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 14,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 14,
+      "type" : "fog"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 7,
+      "depth" : 4
+    }
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 26,
+  "seed" : 13111492,
+  "starScores" : [
+    7700,
+    8800
+  ]
+}

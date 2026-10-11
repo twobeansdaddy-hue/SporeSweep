@@ -1,0 +1,20 @@
+{
+  "id": "cairo",
+  "name": "카이로",
+  "landmark": {
+    "id": "giza",
+    "name": "피라미드와 스핑크스",
+    "parts": [
+      { "id": "pyramidLeft", "name": "왼쪽 피라미드", "cost": 4 },
+      { "id": "pyramidRight", "name": "오른쪽 피라미드", "cost": 4 },
+      { "id": "sphinx", "name": "스핑크스", "cost": 5 },
+      { "id": "base", "name": "대피라미드 아래", "cost": 5 },
+      { "id": "middle", "name": "대피라미드 가운데", "cost": 5, "requires": ["base"] },
+      { "id": "peak", "name": "대피라미드 꼭대기", "cost": 6, "requires": ["middle"] },
+      { "id": "pollution", "name": "오염 제거", "cost": 4 },
+      { "id": "ground", "name": "잔해 정리", "cost": 3 },
+      { "id": "greenery", "name": "오아시스", "cost": 3, "requires": ["ground"] },
+      { "id": "sky", "name": "맑은 하늘", "cost": 4, "requires": ["pollution"] }
+    ]
+  }
+}

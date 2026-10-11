@@ -1,0 +1,68 @@
+{
+  "blockTypes" : 5,
+  "city" : "rio",
+  "columns" : 8,
+  "id" : "rio-014",
+  "materials" : [
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 2,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 35,
+  "obstacles" : [
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "cage"
+    },
+    {
+      "column" : 6,
+      "row" : 4,
+      "type" : "cage"
+    },
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "sludge"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 28,
+  "seed" : 26314915,
+  "starScores" : [
+    6000,
+    6700
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "id": "barcelona",
+  "name": "바르셀로나",
+  "landmark": {
+    "id": "sagradafamilia",
+    "name": "사그라다 파밀리아",
+    "parts": [
+      {
+        "id": "portals",
+        "name": "정문",
+        "cost": 5
+      },
+      {
+        "id": "rose",
+        "name": "장미창",
+        "cost": 5,
+        "requires": [
+          "portals"
+        ]
+      },
+      {
+        "id": "towerLeft",
+        "name": "왼쪽 탑",
+        "cost": 5,
+        "requires": [
+          "rose"
+        ]
+      },
+      {
+        "id": "towerRight",
+        "name": "오른쪽 탑",
+        "cost": 5,
+        "requires": [
+          "rose"
+        ]
+      },
+      {
+        "id": "towersCenter",
+        "name": "가운데 두 탑",
+        "cost": 6,
+        "requires": [
+          "rose"
+        ]
+      },
+      {
+        "id": "pollution",
+        "name": "오염 제거",
+        "cost": 4
+      },
+      {
+        "id": "ground",
+        "name": "잔해 정리",
+        "cost": 3
+      },
+      {
+        "id": "greenery",
+        "name": "공원",
+        "cost": 3,
+        "requires": [
+          "ground"
+        ]
+      },
+      {
+        "id": "sky",
+        "name": "맑은 하늘",
+        "cost": 4,
+        "requires": [
+          "pollution"
+        ]
+      }
+    ]
+  }
+}

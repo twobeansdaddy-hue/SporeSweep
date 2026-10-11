@@ -1,0 +1,60 @@
+{
+  "blockTypes" : 4,
+  "city" : "tokyo",
+  "columns" : 8,
+  "id" : "tokyo-012",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 2,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 4,
+      "kind" : "wood",
+      "row" : 5,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 1,
+      "kind" : "scrap",
+      "row" : 5,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 5,
+      "kind" : "wood",
+      "row" : 8,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 1,
+      "kind" : "wood",
+      "row" : 8,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 3,
+      "kind" : "brick",
+      "row" : 9,
+      "type" : "cocoon"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 24,
+  "seed" : 1112141,
+  "starScores" : [
+    12500,
+    18100
+  ]
+}

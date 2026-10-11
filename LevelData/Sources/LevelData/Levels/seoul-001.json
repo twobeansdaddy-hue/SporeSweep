@@ -1,0 +1,32 @@
+{
+  "blockTypes" : 4,
+  "city" : "seoul",
+  "columns" : 8,
+  "id" : "seoul-001",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 15,
+  "obstacles" : [
+
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 12,
+  "seed" : 1001,
+  "starScores" : [
+    5200,
+    8400
+  ],
+  "tutorial" : "블록을 옆 칸으로 밀어 같은 모양 3개를 맞추면 사라져요. 분홍색 오염 물질 아래의 블록을 지워서, 물질을 맨 아래 격리 컨테이너까지 내려보내세요!"
+}

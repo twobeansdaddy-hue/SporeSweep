@@ -1,0 +1,180 @@
+{
+  "blockTypes" : 5,
+  "city" : "antarctica",
+  "columns" : 8,
+  "id" : "antarctica-007",
+  "materials" : [
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 2,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 0,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 50,
+  "obstacles" : [
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 1,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 6,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 6,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 6,
+      "row" : 9,
+      "type" : "fog"
+    },
+    {
+      "column" : 2,
+      "row" : 11,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 11,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 12,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 12,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 13,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 13,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 14,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 14,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 15,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 15,
+      "type" : "wall"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 4,
+      "depth" : 10
+    }
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 27,
+  "seed" : 28307912,
+  "starScores" : [
+    7400,
+    8700
+  ]
+}

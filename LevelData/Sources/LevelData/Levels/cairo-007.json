@@ -1,0 +1,55 @@
+{
+  "blockTypes" : 4,
+  "city" : "cairo",
+  "columns" : 8,
+  "id" : "cairo-007",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 20,
+  "obstacles" : [
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 7,
+      "row" : 4,
+      "type" : "cage"
+    },
+    {
+      "column" : 6,
+      "row" : 10,
+      "type" : "rubble"
+    },
+    {
+      "column" : 3,
+      "row" : 9,
+      "type" : "rubble"
+    },
+    {
+      "column" : 5,
+      "row" : 9,
+      "type" : "rubble"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 26,
+  "seed" : 15107516,
+  "starScores" : [
+    12200,
+    15000
+  ]
+}

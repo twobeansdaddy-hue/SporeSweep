@@ -1,0 +1,60 @@
+{
+  "blockTypes" : 4,
+  "city" : "washington",
+  "columns" : 8,
+  "id" : "washington-012",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 7,
+      "row" : 6,
+      "type" : "rubble"
+    },
+    {
+      "column" : 0,
+      "row" : 4,
+      "type" : "rubble"
+    },
+    {
+      "column" : 1,
+      "row" : 4,
+      "type" : "rubble"
+    },
+    {
+      "column" : 7,
+      "row" : 9,
+      "type" : "cage"
+    },
+    {
+      "column" : 5,
+      "row" : 8,
+      "type" : "cage"
+    },
+    {
+      "column" : 1,
+      "row" : 8,
+      "type" : "cage"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 29,
+  "seed" : 25712879,
+  "starScores" : [
+    13000,
+    16200
+  ]
+}

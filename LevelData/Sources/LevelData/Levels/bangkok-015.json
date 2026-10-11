@@ -1,0 +1,54 @@
+{
+  "blockTypes" : 4,
+  "city" : "bangkok",
+  "columns" : 8,
+  "id" : "bangkok-015",
+  "materials" : [
+    {
+      "column" : 2,
+      "height" : 2,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 2,
+      "row" : 4,
+      "turns" : 7,
+      "type" : "timer"
+    },
+    {
+      "column" : 1,
+      "row" : 6,
+      "turns" : 8,
+      "type" : "timer"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "turns" : 9,
+      "type" : "timer"
+    },
+    {
+      "column" : 2,
+      "row" : 8,
+      "turns" : 9,
+      "type" : "timer"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "extraMoves"
+  ],
+  "rows" : 28,
+  "seed" : 7315354,
+  "starScores" : [
+    12000,
+    15000
+  ]
+}

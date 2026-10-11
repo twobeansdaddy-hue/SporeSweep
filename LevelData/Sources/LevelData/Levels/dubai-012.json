@@ -1,0 +1,89 @@
+{
+  "blockTypes" : 4,
+  "city" : "dubai",
+  "columns" : 8,
+  "id" : "dubai-012",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 6,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 7,
+      "row" : 4,
+      "type" : "sticky"
+    },
+    {
+      "column" : 5,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 6,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 7,
+      "row" : 6,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "kind" : "wood",
+      "row" : 8,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 7,
+      "kind" : "glass",
+      "row" : 8,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 6,
+      "kind" : "brick",
+      "row" : 9,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 2,
+      "kind" : "brick",
+      "row" : 8,
+      "type" : "cocoon"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 28,
+  "seed" : 17312627,
+  "starScores" : [
+    11700,
+    15000
+  ]
+}

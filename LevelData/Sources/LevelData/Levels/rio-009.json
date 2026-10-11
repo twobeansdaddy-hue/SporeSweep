@@ -1,0 +1,95 @@
+{
+  "blockTypes" : 4,
+  "city" : "rio",
+  "columns" : 8,
+  "id" : "rio-009",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 6,
+      "row" : 4,
+      "type" : "sludge"
+    },
+    {
+      "column" : 5,
+      "row" : 7,
+      "type" : "sludge"
+    },
+    {
+      "column" : 6,
+      "row" : 7,
+      "type" : "sludge"
+    },
+    {
+      "column" : 2,
+      "row" : 10,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 10,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 10,
+      "type" : "sticky"
+    },
+    {
+      "column" : 6,
+      "row" : 10,
+      "type" : "sticky"
+    },
+    {
+      "column" : 7,
+      "row" : 10,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 12,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 12,
+      "type" : "sticky"
+    },
+    {
+      "column" : 5,
+      "row" : 12,
+      "type" : "sticky"
+    },
+    {
+      "column" : 6,
+      "row" : 12,
+      "type" : "sticky"
+    },
+    {
+      "column" : 7,
+      "row" : 12,
+      "type" : "sticky"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 26,
+  "seed" : 26309870,
+  "starScores" : [
+    12400,
+    18000
+  ]
+}

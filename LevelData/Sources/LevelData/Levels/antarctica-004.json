@@ -1,0 +1,55 @@
+{
+  "blockTypes" : 4,
+  "city" : "antarctica",
+  "columns" : 8,
+  "id" : "antarctica-004",
+  "materials" : [
+    {
+      "column" : 2,
+      "height" : 1,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "vent"
+    },
+    {
+      "column" : 4,
+      "row" : 9,
+      "type" : "chain"
+    },
+    {
+      "column" : 6,
+      "row" : 8,
+      "type" : "chain"
+    },
+    {
+      "column" : 0,
+      "row" : 9,
+      "type" : "chain"
+    },
+    {
+      "column" : 2,
+      "row" : 9,
+      "type" : "chain"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 27,
+  "seed" : 28304885,
+  "starScores" : [
+    12500,
+    16100
+  ]
+}

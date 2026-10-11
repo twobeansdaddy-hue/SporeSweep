@@ -1,0 +1,11 @@
+// 빌드 설정 가운데 사람마다 다른 값. 저장소에는 누구나 빌드할 수 있는 기본값만 둔다.
+// 자기 값은 같은 폴더에 Local.xcconfig를 만들어 적는다(Local.example.xcconfig 참고). 그 파일은 저장소에 올리지 않는다.
+
+// 서명에 쓸 개발 팀. 비워 두면 시뮬레이터에서만 빌드된다.
+DEVELOPMENT_TEAM =
+
+// AdMob 앱 ID와 보상형 광고 단위 ID. 기본값은 구글이 공개한 시험용 ID라 시험 광고만 나온다.
+GAD_APPLICATION_ID = ca-app-pub-3940256099942544~1458002511
+REWARDED_AD_UNIT_ID = ca-app-pub-3940256099942544/1712485313
+
+#include? "Local.xcconfig"

@@ -1,0 +1,93 @@
+{
+  "blockTypes" : 5,
+  "city" : "sanfrancisco",
+  "columns" : 8,
+  "id" : "sanfrancisco-005",
+  "materials" : [
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 6,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 3,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 6,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 5,
+      "row" : 7,
+      "type" : "sludge"
+    },
+    {
+      "column" : 6,
+      "row" : 7,
+      "type" : "sludge"
+    },
+    {
+      "column" : 6,
+      "row" : 10,
+      "type" : "sludge"
+    },
+    {
+      "column" : 7,
+      "row" : 10,
+      "type" : "sludge"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 1,
+      "depth" : 10
+    }
+  ],
+  "rewards" : [
+    "bomb"
+  ],
+  "rows" : 25,
+  "seed" : 25105798,
+  "starScores" : [
+    5300,
+    6100
+  ]
+}

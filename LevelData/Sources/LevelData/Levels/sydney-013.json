@@ -1,0 +1,60 @@
+{
+  "blockTypes" : 4,
+  "city" : "sydney",
+  "columns" : 8,
+  "id" : "sydney-013",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 2,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 1,
+      "row" : 4,
+      "type" : "cage"
+    },
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "cage"
+    },
+    {
+      "column" : 7,
+      "row" : 4,
+      "type" : "cage"
+    },
+    {
+      "column" : 7,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 0,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 2,
+      "row" : 8,
+      "type" : "sludge"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 29,
+  "seed" : 27713948,
+  "starScores" : [
+    12500,
+    16500
+  ]
+}

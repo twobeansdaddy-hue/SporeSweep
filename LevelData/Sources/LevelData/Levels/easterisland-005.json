@@ -1,0 +1,77 @@
+{
+  "blockTypes" : 5,
+  "city" : "easterisland",
+  "columns" : 8,
+  "id" : "easterisland-005",
+  "materials" : [
+    {
+      "column" : 6,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 0,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 40,
+  "obstacles" : [
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "chain"
+    },
+    {
+      "column" : 3,
+      "row" : 5,
+      "type" : "chain"
+    },
+    {
+      "column" : 3,
+      "row" : 8,
+      "turns" : 8,
+      "type" : "timer"
+    },
+    {
+      "column" : 7,
+      "row" : 9,
+      "turns" : 9,
+      "type" : "timer"
+    },
+    {
+      "column" : 0,
+      "row" : 10,
+      "turns" : 8,
+      "type" : "timer"
+    },
+    {
+      "column" : 0,
+      "row" : 12,
+      "type" : "egg"
+    },
+    {
+      "column" : 2,
+      "row" : 12,
+      "type" : "egg"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 3,
+      "depth" : 10
+    }
+  ],
+  "rewards" : [
+    "bomb"
+  ],
+  "rows" : 27,
+  "seed" : 27105858,
+  "starScores" : [
+    6500,
+    8000
+  ]
+}

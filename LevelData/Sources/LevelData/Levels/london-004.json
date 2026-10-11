@@ -1,0 +1,131 @@
+{
+  "blockTypes" : 5,
+  "city" : "london",
+  "columns" : 8,
+  "id" : "london-004",
+  "materials" : [
+    {
+      "column" : 6,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 35,
+  "obstacles" : [
+    {
+      "column" : 0,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 1,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 0,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 1,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 2,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 3,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 6,
+      "kind" : "glass",
+      "row" : 8,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 1,
+      "kind" : "plastic",
+      "row" : 7,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 3,
+      "kind" : "wood",
+      "row" : 7,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 5,
+      "kind" : "plastic",
+      "row" : 8,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 0,
+      "row" : 12,
+      "type" : "chain"
+    },
+    {
+      "column" : 2,
+      "row" : 12,
+      "type" : "chain"
+    },
+    {
+      "column" : 6,
+      "row" : 11,
+      "type" : "chain"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 26,
+  "seed" : 23304735,
+  "starScores" : [
+    6500,
+    8000
+  ]
+}

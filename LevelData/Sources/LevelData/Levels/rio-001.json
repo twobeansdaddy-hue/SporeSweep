@@ -1,0 +1,53 @@
+{
+  "blockTypes" : 5,
+  "city" : "rio",
+  "columns" : 8,
+  "id" : "rio-001",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 2,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 20,
+  "obstacles" : [
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "vent"
+    },
+    {
+      "column" : 7,
+      "row" : 5,
+      "type" : "vent"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 24,
+  "seed" : 26301798,
+  "starScores" : [
+    4800,
+    6200
+  ],
+  "tutorial" : "안개 굴뚝은 세 턴마다 옆 칸에 오염 안개를 뿜어요. 바로 옆에서 블록을 두 번 맞추거나 특수 블록의 효과를 두 번 닿게 하면 부서져요."
+}

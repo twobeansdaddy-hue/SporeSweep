@@ -1,0 +1,53 @@
+{
+  "blockTypes" : 4,
+  "city" : "amsterdam",
+  "columns" : 8,
+  "id" : "amsterdam-007",
+  "materials" : [
+    {
+      "column" : 2,
+      "height" : 2,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 35,
+  "obstacles" : [
+    {
+      "column" : 0,
+      "row" : 4,
+      "type" : "nest"
+    },
+    {
+      "column" : 4,
+      "row" : 10,
+      "turns" : 8,
+      "type" : "timer"
+    },
+    {
+      "column" : 7,
+      "row" : 8,
+      "turns" : 9,
+      "type" : "timer"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "turns" : 7,
+      "type" : "timer"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 27,
+  "seed" : 23907780,
+  "starScores" : [
+    12200,
+    14900
+  ]
+}

@@ -1,0 +1,181 @@
+{
+  "blockTypes" : 5,
+  "city" : "cairo",
+  "columns" : 8,
+  "id" : "cairo-016",
+  "materials" : [
+    {
+      "column" : 6,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 50,
+  "obstacles" : [
+    {
+      "column" : 7,
+      "row" : 4,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 5,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 5,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 11,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 11,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 11,
+      "type" : "sticky"
+    },
+    {
+      "column" : 5,
+      "row" : 11,
+      "type" : "sticky"
+    },
+    {
+      "column" : 6,
+      "row" : 11,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 13,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 13,
+      "type" : "sticky"
+    },
+    {
+      "column" : 5,
+      "row" : 13,
+      "type" : "sticky"
+    },
+    {
+      "column" : 6,
+      "row" : 13,
+      "type" : "sticky"
+    },
+    {
+      "column" : 7,
+      "row" : 13,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 15,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 15,
+      "type" : "sticky"
+    },
+    {
+      "column" : 5,
+      "row" : 15,
+      "type" : "sticky"
+    },
+    {
+      "column" : 6,
+      "row" : 15,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 17,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 17,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 17,
+      "type" : "sticky"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "beam",
+    "bomb",
+    "core",
+    "extraMoves"
+  ],
+  "rows" : 30,
+  "seed" : 15116597,
+  "starScores" : [
+    7300,
+    8600
+  ]
+}

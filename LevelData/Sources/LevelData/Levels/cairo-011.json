@@ -1,0 +1,90 @@
+{
+  "blockTypes" : 4,
+  "city" : "cairo",
+  "columns" : 8,
+  "id" : "cairo-011",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 2,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "nest"
+    },
+    {
+      "column" : 1,
+      "row" : 9,
+      "type" : "cage"
+    },
+    {
+      "column" : 7,
+      "row" : 8,
+      "type" : "cage"
+    },
+    {
+      "column" : 0,
+      "row" : 12,
+      "type" : "sticky"
+    },
+    {
+      "column" : 1,
+      "row" : 12,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 12,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 12,
+      "type" : "sticky"
+    },
+    {
+      "column" : 0,
+      "row" : 14,
+      "type" : "sticky"
+    },
+    {
+      "column" : 1,
+      "row" : 14,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 14,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 14,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 14,
+      "type" : "sticky"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 27,
+  "seed" : 15111552,
+  "starScores" : [
+    13700,
+    16500
+  ]
+}

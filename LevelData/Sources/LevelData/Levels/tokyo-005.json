@@ -1,0 +1,42 @@
+{
+  "blockTypes" : 4,
+  "city" : "tokyo",
+  "columns" : 8,
+  "id" : "tokyo-005",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 2,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 20,
+  "obstacles" : [
+    {
+      "column" : 0,
+      "kind" : "glass",
+      "row" : 5,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 3,
+      "kind" : "glass",
+      "row" : 4,
+      "type" : "cocoon"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "bomb"
+  ],
+  "rows" : 21,
+  "seed" : 1105078,
+  "starScores" : [
+    8800,
+    11400
+  ]
+}

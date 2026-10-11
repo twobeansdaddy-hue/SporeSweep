@@ -1,0 +1,67 @@
+{
+  "blockTypes" : 4,
+  "city" : "paris",
+  "columns" : 8,
+  "id" : "paris-009",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 0,
+      "row" : 4,
+      "type" : "sludge"
+    },
+    {
+      "column" : 1,
+      "row" : 4,
+      "type" : "sludge"
+    },
+    {
+      "column" : 2,
+      "row" : 8,
+      "type" : "chain"
+    },
+    {
+      "column" : 1,
+      "row" : 8,
+      "type" : "chain"
+    },
+    {
+      "column" : 6,
+      "row" : 8,
+      "type" : "chain"
+    },
+    {
+      "column" : 7,
+      "row" : 12,
+      "turns" : 7,
+      "type" : "timer"
+    },
+    {
+      "column" : 6,
+      "row" : 12,
+      "turns" : 7,
+      "type" : "timer"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 27,
+  "seed" : 22909768,
+  "starScores" : [
+    12500,
+    15600
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "blockTypes" : 4,
+  "city" : "dubai",
+  "columns" : 8,
+  "id" : "dubai-008",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 3,
+      "hp" : 1,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 4,
+      "hp" : 1,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 5,
+      "hp" : 1,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 2,
+      "row" : 7,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 7,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 7,
+      "type" : "sticky"
+    },
+    {
+      "column" : 6,
+      "row" : 7,
+      "type" : "sticky"
+    },
+    {
+      "column" : 1,
+      "row" : 9,
+      "type" : "sticky"
+    },
+    {
+      "column" : 2,
+      "row" : 9,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 9,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 9,
+      "type" : "sticky"
+    },
+    {
+      "column" : 5,
+      "row" : 9,
+      "type" : "sticky"
+    },
+    {
+      "column" : 6,
+      "row" : 9,
+      "type" : "sticky"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 26,
+  "seed" : 17308591,
+  "starScores" : [
+    12000,
+    15000
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "blockTypes" : 4,
+  "city" : "tokyo",
+  "columns" : 8,
+  "id" : "tokyo-002",
+  "materials" : [
+    {
+      "column" : 6,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 15,
+  "obstacles" : [
+
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 0,
+      "depth" : 10
+    }
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 18,
+  "seed" : 1102051,
+  "starScores" : [
+    7500,
+    11000
+  ]
+}

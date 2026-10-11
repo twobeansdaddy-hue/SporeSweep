@@ -1,0 +1,73 @@
+{
+  "blockTypes" : 5,
+  "city" : "sample",
+  "columns" : 8,
+  "id" : "sample-006",
+  "materials" : [
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 20,
+  "obstacles" : [
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 5,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 7,
+      "type" : "wall"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 4,
+      "depth" : 8
+    }
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 19,
+  "seed" : 706075,
+  "starScores" : [
+    3800,
+    4900
+  ]
+}

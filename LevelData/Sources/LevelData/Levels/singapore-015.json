@@ -1,0 +1,124 @@
+{
+  "blockTypes" : 5,
+  "city" : "singapore",
+  "columns" : 8,
+  "id" : "singapore-015",
+  "materials" : [
+    {
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 0,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 45,
+  "obstacles" : [
+    {
+      "column" : 3,
+      "row" : 4,
+      "turns" : 7,
+      "type" : "timer"
+    },
+    {
+      "column" : 7,
+      "row" : 5,
+      "turns" : 9,
+      "type" : "timer"
+    },
+    {
+      "column" : 7,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 11,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 11,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 12,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 15,
+      "type" : "cage"
+    },
+    {
+      "column" : 5,
+      "row" : 16,
+      "type" : "cage"
+    },
+    {
+      "column" : 7,
+      "row" : 16,
+      "type" : "cage"
+    },
+    {
+      "column" : 7,
+      "row" : 15,
+      "type" : "cage"
+    },
+    {
+      "column" : 0,
+      "row" : 15,
+      "type" : "cage"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "extraMoves"
+  ],
+  "rows" : 28,
+  "seed" : 13115528,
+  "starScores" : [
+    6100,
+    7100
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "blockTypes" : 4,
+  "city" : "athens",
+  "columns" : 8,
+  "id" : "athens-002",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 2,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "nest"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 24,
+  "seed" : 22302687,
+  "starScores" : [
+    10200,
+    13100
+  ]
+}

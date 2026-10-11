@@ -1,0 +1,57 @@
+{
+  "blockTypes" : 4,
+  "city" : "london",
+  "columns" : 8,
+  "id" : "london-009",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 2,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 2,
+      "row" : 5,
+      "turns" : 7,
+      "type" : "timer"
+    },
+    {
+      "column" : 0,
+      "row" : 4,
+      "turns" : 7,
+      "type" : "timer"
+    },
+    {
+      "column" : 0,
+      "row" : 8,
+      "type" : "nest"
+    },
+    {
+      "column" : 6,
+      "row" : 12,
+      "type" : "chain"
+    },
+    {
+      "column" : 0,
+      "row" : 13,
+      "type" : "chain"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 26,
+  "seed" : 23309780,
+  "starScores" : [
+    10600,
+    14100
+  ]
+}

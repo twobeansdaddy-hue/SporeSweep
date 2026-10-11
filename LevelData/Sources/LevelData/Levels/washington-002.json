@@ -1,0 +1,113 @@
+{
+  "blockTypes" : 5,
+  "city" : "washington",
+  "columns" : 8,
+  "id" : "washington-002",
+  "materials" : [
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 1,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 3,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "shield"
+    },
+    {
+      "column" : 1,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 2,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 3,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 4,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "shield"
+    },
+    {
+      "column" : 6,
+      "row" : 8,
+      "type" : "rubble"
+    },
+    {
+      "column" : 5,
+      "row" : 7,
+      "type" : "rubble"
+    },
+    {
+      "column" : 1,
+      "row" : 7,
+      "type" : "rubble"
+    },
+    {
+      "column" : 5,
+      "row" : 9,
+      "type" : "rubble"
+    },
+    {
+      "column" : 7,
+      "row" : 9,
+      "type" : "rubble"
+    },
+    {
+      "column" : 3,
+      "row" : 11,
+      "type" : "sludge"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 4,
+      "depth" : 5
+    }
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 26,
+  "seed" : 25702789,
+  "starScores" : [
+    4400,
+    5100
+  ]
+}

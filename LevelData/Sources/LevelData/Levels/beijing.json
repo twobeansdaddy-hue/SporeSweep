@@ -1,0 +1,19 @@
+{
+  "id": "beijing",
+  "name": "베이징",
+  "landmark": {
+    "id": "greatwall",
+    "name": "만리장성",
+    "parts": [
+      { "id": "wallLeft", "name": "왼쪽 성벽", "cost": 5 },
+      { "id": "wallRight", "name": "오른쪽 성벽", "cost": 5 },
+      { "id": "gate", "name": "망루 아래층", "cost": 5 },
+      { "id": "tower", "name": "망루 위층", "cost": 6, "requires": ["gate"] },
+      { "id": "roof", "name": "누각 지붕", "cost": 5, "requires": ["tower"] },
+      { "id": "pollution", "name": "오염 제거", "cost": 4 },
+      { "id": "ground", "name": "잔해 정리", "cost": 3 },
+      { "id": "greenery", "name": "녹지", "cost": 3, "requires": ["ground"] },
+      { "id": "sky", "name": "맑은 하늘", "cost": 4, "requires": ["pollution"] }
+    ]
+  }
+}

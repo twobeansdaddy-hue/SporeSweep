@@ -1,0 +1,97 @@
+{
+  "blockTypes" : 5,
+  "city" : "london",
+  "columns" : 8,
+  "id" : "london-006",
+  "materials" : [
+    {
+      "column" : 0,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 35,
+  "obstacles" : [
+    {
+      "column" : 6,
+      "row" : 4,
+      "type" : "nest"
+    },
+    {
+      "column" : 2,
+      "row" : 5,
+      "type" : "nest"
+    },
+    {
+      "column" : 0,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 2,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 11,
+      "type" : "wall"
+    },
+    {
+      "column" : 1,
+      "row" : 11,
+      "type" : "wall"
+    },
+    {
+      "column" : 0,
+      "row" : 12,
+      "type" : "wall"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 26,
+  "seed" : 23306753,
+  "starScores" : [
+    6300,
+    7200
+  ]
+}

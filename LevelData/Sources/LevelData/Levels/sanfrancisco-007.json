@@ -1,0 +1,51 @@
+{
+  "blockTypes" : 5,
+  "city" : "sanfrancisco",
+  "columns" : 8,
+  "id" : "sanfrancisco-007",
+  "materials" : [
+    {
+      "column" : 6,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 0,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "sludge"
+    },
+    {
+      "column" : 7,
+      "row" : 7,
+      "type" : "nest"
+    },
+    {
+      "column" : 2,
+      "row" : 8,
+      "type" : "nest"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 26,
+  "seed" : 25107816,
+  "starScores" : [
+    5000,
+    5700
+  ]
+}

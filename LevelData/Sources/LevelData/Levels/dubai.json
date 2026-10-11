@@ -1,0 +1,19 @@
+{
+  "id": "dubai",
+  "name": "두바이",
+  "landmark": {
+    "id": "burjalarab",
+    "name": "부르즈 알 아랍",
+    "parts": [
+      { "id": "island", "name": "인공섬", "cost": 5 },
+      { "id": "lower", "name": "아래층", "cost": 5, "requires": ["island"] },
+      { "id": "middle", "name": "가운데층", "cost": 5, "requires": ["lower"] },
+      { "id": "upper", "name": "위층과 헬기장", "cost": 6, "requires": ["middle"] },
+      { "id": "mast", "name": "돛대", "cost": 5, "requires": ["upper"] },
+      { "id": "pollution", "name": "오염 제거", "cost": 4 },
+      { "id": "ground", "name": "잔해 정리", "cost": 3 },
+      { "id": "greenery", "name": "해변", "cost": 3, "requires": ["ground"] },
+      { "id": "sky", "name": "맑은 하늘", "cost": 4, "requires": ["pollution"] }
+    ]
+  }
+}

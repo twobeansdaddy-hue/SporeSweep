@@ -1,0 +1,78 @@
+{
+  "blockTypes" : 4,
+  "city" : "bangkok",
+  "columns" : 8,
+  "id" : "bangkok-011",
+  "materials" : [
+    {
+      "column" : 2,
+      "height" : 2,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 40,
+  "obstacles" : [
+    {
+      "column" : 3,
+      "row" : 6,
+      "turns" : 7,
+      "type" : "timer"
+    },
+    {
+      "column" : 2,
+      "row" : 5,
+      "turns" : 9,
+      "type" : "timer"
+    },
+    {
+      "column" : 2,
+      "kind" : "wood",
+      "row" : 9,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 1,
+      "kind" : "wood",
+      "row" : 8,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 5,
+      "kind" : "brick",
+      "row" : 9,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 3,
+      "hp" : 1,
+      "row" : 12,
+      "type" : "concrete"
+    },
+    {
+      "column" : 4,
+      "hp" : 2,
+      "row" : 12,
+      "type" : "concrete"
+    },
+    {
+      "column" : 5,
+      "hp" : 1,
+      "row" : 12,
+      "type" : "concrete"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 26,
+  "seed" : 7311318,
+  "starScores" : [
+    12900,
+    15000
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "blockTypes" : 5,
+  "city" : "newyork",
+  "columns" : 8,
+  "id" : "newyork-006",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 0,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 6,
+      "row" : 4,
+      "type" : "egg"
+    },
+    {
+      "column" : 2,
+      "row" : 5,
+      "type" : "egg"
+    },
+    {
+      "column" : 1,
+      "row" : 9,
+      "type" : "egg"
+    },
+    {
+      "column" : 5,
+      "row" : 8,
+      "type" : "egg"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 26,
+  "seed" : 24106777,
+  "starScores" : [
+    4300,
+    5100
+  ]
+}

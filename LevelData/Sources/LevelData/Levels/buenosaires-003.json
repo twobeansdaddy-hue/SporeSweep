@@ -1,0 +1,82 @@
+{
+  "blockTypes" : 5,
+  "city" : "buenosaires",
+  "columns" : 8,
+  "id" : "buenosaires-003",
+  "materials" : [
+    {
+      "column" : 6,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "egg"
+    },
+    {
+      "column" : 7,
+      "row" : 4,
+      "type" : "egg"
+    },
+    {
+      "column" : 1,
+      "row" : 4,
+      "type" : "egg"
+    },
+    {
+      "column" : 5,
+      "row" : 9,
+      "type" : "chain"
+    },
+    {
+      "column" : 7,
+      "row" : 8,
+      "type" : "chain"
+    },
+    {
+      "column" : 0,
+      "row" : 9,
+      "type" : "chain"
+    },
+    {
+      "column" : 1,
+      "row" : 9,
+      "type" : "chain"
+    },
+    {
+      "column" : 3,
+      "row" : 12,
+      "type" : "sludge"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 27,
+  "seed" : 26903834,
+  "starScores" : [
+    5800,
+    6700
+  ]
+}

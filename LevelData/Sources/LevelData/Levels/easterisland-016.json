@@ -1,0 +1,105 @@
+{
+  "blockTypes" : 5,
+  "city" : "easterisland",
+  "columns" : 8,
+  "id" : "easterisland-016",
+  "materials" : [
+    {
+      "column" : 0,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 2,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 1,
+      "row" : 4,
+      "type" : "vent"
+    },
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "vent"
+    },
+    {
+      "column" : 0,
+      "row" : 8,
+      "type" : "shield"
+    },
+    {
+      "column" : 1,
+      "row" : 8,
+      "type" : "shield"
+    },
+    {
+      "column" : 2,
+      "row" : 8,
+      "type" : "shield"
+    },
+    {
+      "column" : 3,
+      "row" : 8,
+      "type" : "shield"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "shield"
+    },
+    {
+      "column" : 0,
+      "row" : 9,
+      "type" : "shield"
+    },
+    {
+      "column" : 1,
+      "row" : 9,
+      "type" : "shield"
+    },
+    {
+      "column" : 2,
+      "row" : 9,
+      "type" : "shield"
+    },
+    {
+      "column" : 3,
+      "row" : 9,
+      "type" : "shield"
+    },
+    {
+      "column" : 4,
+      "row" : 9,
+      "type" : "shield"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "beam",
+    "bomb",
+    "core",
+    "extraMoves"
+  ],
+  "rows" : 29,
+  "seed" : 27116957,
+  "starScores" : [
+    5700,
+    7000
+  ]
+}

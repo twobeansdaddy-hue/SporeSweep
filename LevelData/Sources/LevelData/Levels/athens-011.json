@@ -1,0 +1,84 @@
+{
+  "blockTypes" : 5,
+  "city" : "athens",
+  "columns" : 8,
+  "id" : "athens-011",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 7,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 45,
+  "obstacles" : [
+    {
+      "column" : 7,
+      "row" : 5,
+      "type" : "rubble"
+    },
+    {
+      "column" : 7,
+      "row" : 6,
+      "type" : "rubble"
+    },
+    {
+      "column" : 2,
+      "row" : 5,
+      "type" : "rubble"
+    },
+    {
+      "column" : 2,
+      "row" : 4,
+      "type" : "rubble"
+    },
+    {
+      "column" : 5,
+      "row" : 8,
+      "type" : "sludge"
+    },
+    {
+      "column" : 6,
+      "row" : 8,
+      "type" : "sludge"
+    },
+    {
+      "column" : 0,
+      "row" : 13,
+      "turns" : 7,
+      "type" : "timer"
+    },
+    {
+      "column" : 2,
+      "row" : 11,
+      "turns" : 9,
+      "type" : "timer"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 28,
+  "seed" : 22311768,
+  "starScores" : [
+    6900,
+    8700
+  ]
+}

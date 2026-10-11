@@ -1,0 +1,90 @@
+{
+  "blockTypes" : 4,
+  "city" : "dubai",
+  "columns" : 8,
+  "id" : "dubai-002",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 20,
+  "obstacles" : [
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "sludge"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "sludge"
+    },
+    {
+      "column" : 3,
+      "row" : 7,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 7,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 7,
+      "type" : "fog"
+    },
+    {
+      "column" : 6,
+      "row" : 7,
+      "type" : "fog"
+    },
+    {
+      "column" : 7,
+      "row" : 7,
+      "type" : "fog"
+    },
+    {
+      "column" : 3,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 4,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 5,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 6,
+      "row" : 8,
+      "type" : "fog"
+    },
+    {
+      "column" : 7,
+      "row" : 8,
+      "type" : "fog"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 23,
+  "seed" : 17302537,
+  "starScores" : [
+    11000,
+    16800
+  ]
+}

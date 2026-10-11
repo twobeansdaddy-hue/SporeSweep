@@ -1,0 +1,63 @@
+{
+  "blockTypes" : 4,
+  "city" : "rome",
+  "columns" : 8,
+  "id" : "rome-016",
+  "materials" : [
+    {
+      "column" : 2,
+      "height" : 1,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 6,
+      "kind" : "brick",
+      "row" : 4,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 1,
+      "kind" : "wood",
+      "row" : 4,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 2,
+      "kind" : "brick",
+      "row" : 4,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 3,
+      "kind" : "wood",
+      "row" : 9,
+      "type" : "cocoon"
+    },
+    {
+      "column" : 6,
+      "kind" : "wood",
+      "row" : 8,
+      "type" : "cocoon"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "beam",
+    "bomb",
+    "core",
+    "extraMoves"
+  ],
+  "rows" : 30,
+  "seed" : 21116777,
+  "starScores" : [
+    11600,
+    17100
+  ]
+}

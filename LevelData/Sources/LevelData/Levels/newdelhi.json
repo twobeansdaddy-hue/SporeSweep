@@ -1,0 +1,20 @@
+{
+  "id": "newdelhi",
+  "name": "뉴델리",
+  "landmark": {
+    "id": "indiagate",
+    "name": "인디아 게이트",
+    "parts": [
+      { "id": "wallLeft", "name": "왼쪽 난간", "cost": 4 },
+      { "id": "wallRight", "name": "오른쪽 난간", "cost": 4 },
+      { "id": "pierLeft", "name": "왼쪽 기둥", "cost": 5 },
+      { "id": "pierRight", "name": "오른쪽 기둥", "cost": 5 },
+      { "id": "arch", "name": "아치", "cost": 6, "requires": ["pierLeft", "pierRight"] },
+      { "id": "crown", "name": "꼭대기", "cost": 6, "requires": ["arch"] },
+      { "id": "pollution", "name": "오염 제거", "cost": 4 },
+      { "id": "ground", "name": "잔해 정리", "cost": 3 },
+      { "id": "greenery", "name": "녹지", "cost": 3, "requires": ["ground"] },
+      { "id": "sky", "name": "맑은 하늘", "cost": 4, "requires": ["pollution"] }
+    ]
+  }
+}

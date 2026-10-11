@@ -1,0 +1,18 @@
+{
+  "id": "capetown",
+  "name": "케이프타운",
+  "landmark": {
+    "id": "cableway",
+    "name": "테이블마운틴 케이블카",
+    "parts": [
+      { "id": "lower", "name": "아래 승강장", "cost": 6 },
+      { "id": "pylon", "name": "철탑과 줄", "cost": 6 },
+      { "id": "upper", "name": "산 위 승강장", "cost": 7, "requires": ["pylon"] },
+      { "id": "cabin", "name": "케이블카", "cost": 6, "requires": ["lower", "upper"] },
+      { "id": "pollution", "name": "오염 제거", "cost": 4 },
+      { "id": "ground", "name": "잔해 정리", "cost": 3 },
+      { "id": "greenery", "name": "꽃밭", "cost": 3, "requires": ["ground"] },
+      { "id": "sky", "name": "맑은 하늘", "cost": 4, "requires": ["pollution"] }
+    ]
+  }
+}

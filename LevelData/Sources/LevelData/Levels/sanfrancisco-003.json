@@ -1,0 +1,118 @@
+{
+  "blockTypes" : 4,
+  "city" : "sanfrancisco",
+  "columns" : 8,
+  "id" : "sanfrancisco-003",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 2,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
+    {
+      "column" : 1,
+      "hp" : 1,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 2,
+      "hp" : 1,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 3,
+      "hp" : 1,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 4,
+      "hp" : 1,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 5,
+      "hp" : 1,
+      "row" : 4,
+      "type" : "concrete"
+    },
+    {
+      "column" : 1,
+      "row" : 9,
+      "turns" : 8,
+      "type" : "timer"
+    },
+    {
+      "column" : 6,
+      "row" : 9,
+      "turns" : 7,
+      "type" : "timer"
+    },
+    {
+      "column" : 5,
+      "row" : 9,
+      "turns" : 7,
+      "type" : "timer"
+    },
+    {
+      "column" : 3,
+      "row" : 11,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 11,
+      "type" : "sticky"
+    },
+    {
+      "column" : 5,
+      "row" : 11,
+      "type" : "sticky"
+    },
+    {
+      "column" : 6,
+      "row" : 11,
+      "type" : "sticky"
+    },
+    {
+      "column" : 7,
+      "row" : 11,
+      "type" : "sticky"
+    },
+    {
+      "column" : 3,
+      "row" : 13,
+      "type" : "sticky"
+    },
+    {
+      "column" : 4,
+      "row" : 13,
+      "type" : "sticky"
+    },
+    {
+      "column" : 7,
+      "row" : 13,
+      "type" : "sticky"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 27,
+  "seed" : 25103780,
+  "starScores" : [
+    11600,
+    14300
+  ]
+}

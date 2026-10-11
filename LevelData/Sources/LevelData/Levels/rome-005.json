@@ -1,0 +1,76 @@
+{
+  "blockTypes" : 5,
+  "city" : "rome",
+  "columns" : 8,
+  "id" : "rome-005",
+  "materials" : [
+    {
+      "column" : 6,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 20,
+  "obstacles" : [
+    {
+      "column" : 0,
+      "row" : 5,
+      "type" : "chain"
+    },
+    {
+      "column" : 5,
+      "row" : 5,
+      "type" : "chain"
+    },
+    {
+      "column" : 6,
+      "row" : 8,
+      "type" : "nest"
+    },
+    {
+      "column" : 1,
+      "row" : 9,
+      "type" : "nest"
+    },
+    {
+      "column" : 0,
+      "row" : 14,
+      "type" : "rubble"
+    },
+    {
+      "column" : 3,
+      "row" : 14,
+      "type" : "rubble"
+    },
+    {
+      "column" : 4,
+      "row" : 13,
+      "type" : "rubble"
+    },
+    {
+      "column" : 5,
+      "row" : 13,
+      "type" : "rubble"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "bomb"
+  ],
+  "rows" : 25,
+  "seed" : 21105678,
+  "starScores" : [
+    3900,
+    4800
+  ]
+}

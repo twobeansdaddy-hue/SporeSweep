@@ -1,0 +1,133 @@
+{
+  "blockTypes" : 5,
+  "city" : "easterisland",
+  "columns" : 8,
+  "id" : "easterisland-002",
+  "materials" : [
+    {
+      "column" : 4,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 7,
+      "row" : 4,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 5,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 5,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 6,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 7,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 8,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 9,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 10,
+      "type" : "wall"
+    },
+    {
+      "column" : 3,
+      "row" : 13,
+      "type" : "rubble"
+    },
+    {
+      "column" : 1,
+      "row" : 15,
+      "type" : "rubble"
+    },
+    {
+      "column" : 5,
+      "row" : 15,
+      "type" : "rubble"
+    },
+    {
+      "column" : 1,
+      "row" : 13,
+      "type" : "rubble"
+    }
+  ],
+  "pendingMaterials" : [
+    {
+      "column" : 2,
+      "depth" : 10
+    }
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 26,
+  "seed" : 27102831,
+  "starScores" : [
+    4200,
+    5000
+  ]
+}

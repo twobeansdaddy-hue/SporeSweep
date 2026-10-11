@@ -1,0 +1,62 @@
+{
+  "blockTypes" : 4,
+  "city" : "barcelona",
+  "columns" : 8,
+  "id" : "barcelona-008",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 2
+    }
+  ],
+  "materialsSlide" : true,
+  "moves" : 25,
+  "obstacles" : [
+    {
+      "column" : 1,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 3,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 0,
+      "row" : 5,
+      "type" : "cage"
+    },
+    {
+      "column" : 4,
+      "row" : 4,
+      "type" : "cage"
+    },
+    {
+      "column" : 5,
+      "row" : 10,
+      "turns" : 8,
+      "type" : "timer"
+    },
+    {
+      "column" : 7,
+      "row" : 10,
+      "turns" : 9,
+      "type" : "timer"
+    }
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+
+  ],
+  "rows" : 27,
+  "seed" : 22708753,
+  "starScores" : [
+    14100,
+    16600
+  ]
+}
