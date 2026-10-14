@@ -1,6 +1,6 @@
 # 포자 대청소 (SporeSweep)
 
-외계 포자에 덮인 세계의 랜드마크를 매치3 퍼즐로 정화하고 복원하는 iOS 게임입니다.
+외계 포자에 덮인 세계의 랜드마크를 매치3 퍼즐로 정화하고 복원하는 모바일 게임입니다. iOS 판(Swift)과 안드로이드 판(Kotlin)이 있고, 규칙과 기능이 같습니다.
 8개 권역, 24개 도시, 380개 레벨이 들어 있습니다.
 
 ![게임 화면](Docs/images/overview.jpg)
@@ -11,14 +11,14 @@
 
 | | |
 | --- | --- |
-| 플랫폼 | iOS 17 이상, 세로 화면 |
-| 언어와 도구 | Swift 6, SwiftUI(화면), SpriteKit(보드), Xcode 27 |
+| 플랫폼 | iOS 17 이상, Android 8.0(API 26) 이상. 세로 화면 |
+| 언어와 도구 | iOS: Swift 6, SwiftUI(화면), SpriteKit(보드), Xcode 27<br>안드로이드: Kotlin, Jetpack Compose(화면), 직접 만든 작은 그리기 엔진(보드), Gradle |
 | 규칙 | 특수 블록 3종과 조합 6종, 장애물 17종, 아이템 3종 |
 | 메타 | 별을 모아 랜드마크를 부위별로 복원, 정화한 만큼 초록으로 돌아오는 지도 |
 | 수익 장치 | 생명(5개, 30분에 하나), 보상형 광고(AdMob) |
 | 측정 | Firebase Analytics |
 | 언어 | 한국어, 영어 |
-| 테스트 | 자동 테스트 511개 |
+| 테스트 | iOS 511개, 안드로이드 36개(그중 하나가 iOS 판과 399레벨의 규칙이 같은지 비교) |
 
 게임의 규칙과 구조는 모두 [DESIGN.md](DESIGN.md)에 적혀 있습니다. 코드를 읽기 전에 1~2장을 먼저 보면 좋습니다.
 
@@ -35,6 +35,7 @@ Tools/               그림·소리·번역·홍보물을 만드는 스크립트
 Art/                 그림을 만들 때 쓴 지시문과 견본
 Reports/             봇으로 돌린 레벨 점검 결과
 Docs/                README에 쓰는 그림
+android/             안드로이드 판. core(규칙·레벨·진행, 순수 Kotlin)와 app(화면·보드·소리·광고)
 DESIGN.md            기획서. 규칙, 데이터 형식, 기술 구조
 ```
 
@@ -48,7 +49,7 @@ SporeSweep(앱) → GameScene → GameCore
 
 `GameCore`는 UIKit도 SpriteKit도 쓰지 않습니다. 규칙을 고치고 `swift test`로 바로 확인할 수 있습니다.
 
-## 빌드
+## 빌드(iOS)
 
 1. Xcode 27 이상에서 `SporeSweep.xcodeproj`를 엽니다.
 2. 처음 열면 Firebase와 Google Mobile Ads 패키지를 내려받습니다. 몇 분 걸립니다.
@@ -72,6 +73,36 @@ SporeSweep(앱) → GameScene → GameCore
 | 플레이 기록 보내기 | 자기 Firebase 프로젝트의 `GoogleService-Info.plist`를 `SporeSweep/`에 넣는다. 디버그 빌드는 실행 인자 `-analytics 1`을 줄 때만 보낸다 |
 | 자기 광고 단위 쓰기 | `Config/Local.xcconfig`에 `GAD_APPLICATION_ID`와 `REWARDED_AD_UNIT_ID`를 적는다. 실제 광고는 App Store에서 받은 앱에서만 나온다 |
 | 광고 없이 돌리기 | 실행 인자 `-fakeAds 1` |
+
+## 안드로이드
+
+안드로이드 판은 iOS 판을 Kotlin으로 옮긴 것입니다. 규칙의 기준은 늘 iOS 판이고, 그림·소리·레벨 파일은 빌드할 때 iOS 폴더에서 가져옵니다. 옮긴 과정과 iOS와 다른 점은 [android/PORTING.md](android/PORTING.md)에 있습니다.
+
+```
+android/core/        규칙 엔진, 레벨 읽기, 진행 저장. 안드로이드에 의존하지 않는 순수 Kotlin
+android/app/         앱. Compose 화면, 보드(stage/ 그리기 엔진과 board/), 소리, 광고, 기록
+```
+
+1. JDK 17 이상과 Android SDK(명령줄 도구 또는 Android Studio)를 준비합니다. SDK 위치는 `android/local.properties`의 `sdk.dir`에 적습니다.
+2. 빌드합니다.
+
+```bash
+cd android && ./gradlew :app:assembleDebug
+```
+
+3. 기기나 에뮬레이터에 설치합니다.
+
+```bash
+cd android && ./gradlew :app:installDebug
+```
+
+아무 설정 없이 돌아갑니다. 광고는 구글의 시험 광고로 나오고, 플레이 기록은 어디로도 보내지 않습니다.
+
+| 하고 싶은 것 | 방법 |
+| --- | --- |
+| 플레이 기록 보내기 | 자기 Firebase 프로젝트의 `google-services.json`을 `android/app/`에 넣는다. 디버그 빌드는 실행 인자 `--ez analytics true`를 줄 때만 보낸다 |
+| 자기 광고 단위 쓰기 | `android/config.example.properties`를 `config.properties`로 복사해 ID를 적는다. 실제 광고는 출시 빌드에서만 나온다 |
+| 개발용 실행 인자 | iOS와 이름이 같다. `adb shell am start -n dev.code404.sporesweep/.MainActivity --es city tokyo --ei level 2 --ez autoplay true` |
 
 ## 테스트
 
@@ -99,6 +130,19 @@ cd Progress && swift test
 | LevelData | 109 | 380개 레벨을 모두 읽고 규칙에 맞는지 |
 | GameScene | 64 | 씬의 배치와 연출 |
 | Progress | 34 | 저장, 생명, 일일 보상, 진행 합치기 |
+
+안드로이드는 한 번에 돌립니다.
+
+```bash
+cd android && ./gradlew :core:test
+```
+
+| 테스트 | 보는 것 |
+| --- | --- |
+| ParityTest | iOS 판이 둔 판(399레벨, 15,302수)을 Kotlin으로 다시 두고, 수마다 이벤트·점수·보드·난수 상태가 같은지 |
+| 진행 시험 35개 | iOS 판 Progress의 시험을 옮긴 것과 세계 지도 |
+
+규칙을 바꿀 때는 Swift를 먼저 고치고 기준 기록을 다시 만든 뒤 Kotlin을 맞춥니다(PORTING.md).
 
 ## 레벨 도구
 
@@ -155,7 +199,7 @@ cd LevelData && swift run -c release levelaudit --playouts 200 --csv ../Reports/
 ## 저장소에 없는 것
 
 - 사업 계획과 홍보 자료, 그림의 원본 작업 파일
-- 서명 팀, 실제 광고 ID, Firebase 설정 파일
+- 서명 팀, 실제 광고 ID, Firebase 설정 파일(iOS의 `Config/Local.xcconfig`, `GoogleService-Info.plist`, 안드로이드의 `android/config.properties`, `google-services.json`)
 
 DESIGN.md가 `PLAN.md`나 `Marketing/`을 가리키는 곳이 있는데, 그 파일들은 이 저장소에 없습니다.
 

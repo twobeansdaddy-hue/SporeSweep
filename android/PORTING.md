@@ -24,7 +24,7 @@ iOS 판(Swift)을 Kotlin으로 옮긴다. 단계마다 **자동으로 확인하�
 | 5 | 화면: 타이틀·인트로, 도시, 지도·세계·비행, 랜드마크 복원, 결과, 설정, 엔딩, 생명, 일일 보상, 아이템 | **끝**. 화면마다 iOS와 나란히 찍어 비교했다 | 각 화면을 iOS와 나란히 놓고 비교 |
 | 6 | 소리, 음악, 진동 | **끝**. 귀로는 확인하지 못했다 | 이벤트마다 같은 소리가 난다 |
 | 7 | 광고(AdMob), 측정(Firebase), 영어 | **끝**. 실기기(Lenovo 태블릿 TB320FC, Android 15)에서 시험 광고 세 곳의 보상까지 확인했다(2026-10-14). 실제 AdMob ID는 `config.properties`에 넣었고 출시용 빌드만 실제 광고 단위를 쓴다. Firebase(sporesweep-dev)도 붙여 패드에서 `level_start`·`level_end`가 올라가는 것을 확인했다(2026-10-14) | 시험 광고가 뜨고 기록이 찍힌다 |
-| 8 | 출시 준비: 아이콘, 서명, Google Play 등록 자료 | | 내부 테스트 트랙에 올라간다 |
+| 8 | 출시 준비: 아이콘, 서명, Google Play 등록 자료 | 진행 중. Google Play 개발자 계정 등록 중(2026-10-14). 남은 것: 업로드 키 만들기(지금 출시 빌드는 디버그 키로 서명한다), 스토어 등록정보와 그림(`Marketing/store/STORE_LISTING.md`), 데이터 보안 설문, 콘텐츠 등급, 실기기에서 소리·진동 확인 | 내부 테스트 트랙에 올라간다 |
 
 ## iOS와 다른 점
 
@@ -42,7 +42,7 @@ cd android && ./gradlew :app:assembleDebug
 - **개발용 실행 인자**는 iOS 판과 이름이 같다. `adb shell am start -n dev.code404.sporesweep/.MainActivity --es city tokyo --ei level 2 --ez autoplay true`처럼 준다. 디버그 빌드에서만 읽는다.
 - **광고 ID**: `android/config.properties`에 `ADMOB_APP_ID`, `REWARDED_AD_UNIT_ID`를 적는다(저장소에 올리지 않는다). 없으면 구글 시험용 ID다. 디버그 빌드는 늘 시험 광고이고, 출시 빌드는 실제 광고다. 내부 테스트 트랙에 올릴 빌드는 `./gradlew :app:bundleRelease -PtestAds`로 만들어 시험 광고만 나오게 한다.
 - **광고 식별자**: iOS 판처럼 쓰지 않는다. 광고 SDK와 Firebase가 넣는 `AD_ID` 권한을 매니페스트에서 뺐다.
-- **Firebase**: `android/app/google-services.json`을 넣으면 붙는다(저장소에 올리지 않는다). 디버그 빌드는 실행 인자 `--ez analytics true`를 줄 때만 보낸다(켜고 끈 값이 다음 실행까지 남으므로 매번 분명히 정한다). DebugView로 보려면 `adb shell setprop debug.firebase.analytics.app dev.code404.sporesweep`.
+- **Firebase**: `android/app/google-services.json`을 넣으면 붙는다(저장소에 올리지 않는다). 화면 자동 기록은 iOS처럼 껐다. 디버그 빌드는 실행 인자 `--ez analytics true`를 줄 때만 보낸다(켜고 끈 값이 다음 실행까지 남으므로 매번 분명히 정한다). DebugView로 보려면 `adb shell setprop debug.firebase.analytics.app dev.code404.sporesweep`.
 - **랜드마크 영역**: iOS의 랜드마크 그림이나 영역을 바꾸면 `Tools/landmark_export.sh`를 다시 돌린다.
 - **광고 시험**: 개발용 빌드의 설정 화면에 "광고 시험" 칸이 있다. 생명 비우기, 아이템 비우기, 이동 2번으로 시작.
 - **실기기 연결**: 무선 디버깅으로 붙인다. 처음 한 번 `adb pair 주소:포트 코드`로 페어링하면, 그 뒤로는 같은 와이파이에서 자동으로 연결된다.
