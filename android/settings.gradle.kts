@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "SporeSweep"
 include(":core")
+include(":app")
