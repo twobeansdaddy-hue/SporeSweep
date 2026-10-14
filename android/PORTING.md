@@ -9,7 +9,7 @@ iOS 판(Swift)을 Kotlin으로 옮긴다. 단계마다 **자동으로 확인하�
 | --- | --- | --- |
 | 규칙 동치 | `cd android && ./gradlew :core:test` | Swift가 둔 판(399레벨, 15,302수)을 다시 두고, 수마다 이벤트·점수·보드·난수 상태가 글자 하나까지 같다 |
 | 기준 기록 다시 만들기 | `cd LevelData && swift run -c release paritygen ../android/core/src/test/resources/parity 40` 후 `gzip -9 -f ../android/core/src/test/resources/parity/*.txt` | 규칙을 바꿨을 때만 |
-| 진행 저장 | `./gradlew :core:test` | Swift 판의 진행 시험을 옮긴 것이 통과한다 |
+| 진행 저장 | `./gradlew :core:test` | Swift 판의 진행 시험 33개를 옮긴 것이 통과한다(파일 위치를 보는 iOS 전용 시험 1개는 뺐다) |
 | 앱 빌드 | `./gradlew :app:assembleDebug` | 경고 없이 빌드된다 |
 | 화면 비교 | 에뮬레이터와 iOS 시뮬레이터를 같은 실행 인자로 띄워 찍고 나란히 본다 | 배치와 그림이 같다 |
 
@@ -18,7 +18,7 @@ iOS 판(Swift)을 Kotlin으로 옮긴다. 단계마다 **자동으로 확인하�
 | # | 단계 | 상태 | 완료 조건 |
 | --- | --- | --- | --- |
 | 1 | 규칙 엔진(GameCore, 레벨 읽기) | **끝** | 규칙 동치 통과 |
-| 2 | 진행 저장(Progress: 별, 생명, 일일 보상) | | Swift 시험 34개를 옮겨 통과 |
+| 2 | 진행 저장(Progress: 별, 생명, 일일 보상) | **끝** | Swift 시험 34개를 옮겨 통과 |
 | 3 | 앱 뼈대: 앱 모듈, Compose, 그림·소리·레벨을 iOS 폴더에서 가져오기, 에뮬레이터에서 실행 | | 빈 화면이 아니라 타이틀이 뜬다 |
 | 4 | 보드(GameScene): 블록 그리기, 이벤트를 차례로 재생하는 애니메이션, 밀기 입력, 특수 효과 | | 한 판을 끝까지 둘 수 있고, iOS와 화면을 나란히 놓고 비교 |
 | 5 | 화면: 타이틀·인트로, 도시, 지도·세계·비행, 랜드마크 복원, 결과, 설정, 엔딩, 생명, 일일 보상, 아이템 | | 각 화면을 iOS와 나란히 놓고 비교 |
