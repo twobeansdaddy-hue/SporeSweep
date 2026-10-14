@@ -454,6 +454,40 @@ struct BoardSceneTests {
         #expect(scene.isShowingResult)
     }
 
+    @Test("끝나는 연출 도중 씬 크기가 바뀌어도 결과를 한 번 알린다")
+    func resizeDuringFinishNotifiesOnce() {
+        let state = level(moves: 1)
+        let scene = BoardScene(state: state, size: size)
+        var notified = 0
+        scene.onFinish = { _ in notified += 1 }
+        drag(scene, state.possibleMoves()[0])
+        #expect(scene.state.status == .lost)
+        // 연출을 재생하는 동안에는 아직 알리지 않았다.
+        #expect(notified == 0)
+        // 다시 그리면 연출이 버려지므로, 그때 알린다.
+        scene.size = CGSize(width: 800, height: 376)
+        #expect(notified == 1)
+        scene.size = CGSize(width: 390, height: 700)
+        #expect(notified == 1)
+        #expect(scene.deliverPendingResult() == false)
+        #expect(notified == 1)
+    }
+
+    @Test("끝나는 연출 도중 나가려 하면 결과를 바로 알린다")
+    func leavingDuringFinishDeliversResult() {
+        let state = level(moves: 1)
+        let scene = BoardScene(state: state, size: size)
+        var notified = 0
+        scene.onFinish = { _ in notified += 1 }
+        #expect(scene.deliverPendingResult() == false)
+        drag(scene, state.possibleMoves()[0])
+        #expect(scene.deliverPendingResult())
+        #expect(notified == 1)
+        #expect(scene.isShowingResult)
+        #expect(scene.deliverPendingResult() == false)
+        #expect(notified == 1)
+    }
+
     // MARK: - 힌트
 
     @Test("힌트는 가능한 이동 가운데 하나를 가리킨다")

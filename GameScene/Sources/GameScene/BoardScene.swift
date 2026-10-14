@@ -17,6 +17,8 @@ public final class BoardScene: SKScene {
     /// 판이 끝났을 때 불린다. 정해 두면 씬은 자체 결과 화면을 띄우지 않고 앱에 맡긴다.
     /// 정하지 않으면 씬이 간단한 결과 화면을 띄우고, 탭하면 같은 판을 다시 시작한다.
     public var onFinish: ((GameState) -> Void)?
+    /// 판이 끝났는데 아직 `onFinish`로 알리지 않았는지. 끝나는 연출이 버려져도 결과를 잃지 않으려고 따로 둔다.
+    public private(set) var hasPendingResult = false
     /// 쓰려고 든 아이템(6장). 정화 망치는 다음에 누른 칸에, 자리 바꾸기는 다음에 민 두 칸에 쓴다.
     /// 쓰고 나면 `nil`로 돌아간다.
     public var armedTool: Tool?
@@ -294,8 +296,8 @@ public final class BoardScene: SKScene {
         buildContainer()
         buildMinimap()
         if state.status != .playing {
-            // 화면 크기가 바뀌어 다시 그릴 때는 앱에 또 알리지 않는다.
-            showResult(notify: false)
+            // 이미 알린 결과는 또 알리지 않는다. 끝나는 연출이 버려졌으면 여기서 알린다.
+            showResult(notify: hasPendingResult)
         }
     }
 
@@ -875,6 +877,9 @@ public final class BoardScene: SKScene {
         cancelHint()
         let before = state.score
         state = result.state
+        if state.status != .playing {
+            hasPendingResult = true
+        }
         isAnimating = true
         planScore(for: result.events, from: before)
         updateHUD()
@@ -947,6 +952,9 @@ public final class BoardScene: SKScene {
         // 둘 곳이 없는 보드였으면 여기서 섞인다.
         let result = state.settle()
         state = result.state
+        if state.status != .playing {
+            hasPendingResult = true
+        }
         updateHUD()
         if result.events.isEmpty {
             scheduleHint()
@@ -960,6 +968,7 @@ public final class BoardScene: SKScene {
     /// 같은 판을 처음부터 다시 시작한다(6장 "실패 시").
     public func restart() {
         state = initialState
+        hasPendingResult = false
         rebuild()
         scheduleHint()
         #if DEBUG
@@ -1409,8 +1418,21 @@ public final class BoardScene: SKScene {
         layout.cellSize > 0 ? worldNode.position.y / layout.cellSize : 0
     }
 
+    /// 끝나는 연출을 기다리는 결과를 연출을 건너뛰고 바로 알린다. 연출 도중에 화면을 나갈 때 쓴다.
+    /// - Returns: 알렸는지. 알릴 결과가 없으면 `false`다.
+    @discardableResult
+    public func deliverPendingResult() -> Bool {
+        guard hasPendingResult else { return false }
+        // 끝난 상태로 다시 그리면 남은 연출이 버려지고, 그 끝에서 결과를 알린다.
+        rebuild()
+        return true
+    }
+
     private func showResult(notify: Bool) {
         isShowingResult = true
+        if notify {
+            hasPendingResult = false
+        }
         if let onFinish {
             if notify {
                 onFinish(state)

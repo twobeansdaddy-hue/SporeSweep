@@ -54,6 +54,9 @@ class BoardScene(initial: GameState) : Stage() {
         private set
     /** 판이 끝났을 때. */
     var onFinish: ((GameState) -> Unit)? = null
+    /** 판이 끝났는데 아직 [onFinish]로 알리지 않았는지. 끝나는 연출이 버려져도 결과를 잃지 않으려고 따로 둔다. */
+    var hasPendingResult = false
+        private set
     /** 쓰려고 든 아이템. */
     var armedTool: Tool? = null
     var onToolUsed: ((Tool) -> Unit)? = null
@@ -260,7 +263,8 @@ class BoardScene(initial: GameState) : Stage() {
         updateQueue()
         buildContainer()
         buildMinimap()
-        if (state.status != GameStatus.PLAYING) showResult(notify = false)
+        // 이미 알린 결과는 또 알리지 않는다. 끝나는 연출이 버려졌으면 여기서 알린다.
+        if (state.status != GameStatus.PLAYING) showResult(notify = hasPendingResult)
     }
 
     private fun worldOffset(top: Float) = SPoint(0f, top * layout.cellSize)
@@ -712,6 +716,7 @@ class BoardScene(initial: GameState) : Stage() {
         cancelHint()
         val before = state.score
         state = result.state
+        if (state.status != GameStatus.PLAYING) hasPendingResult = true
         isAnimating = true
         planScore(result.events, before)
         updateHUD()
@@ -763,6 +768,7 @@ class BoardScene(initial: GameState) : Stage() {
         isShowingResult = false
         val result = state.settle()
         state = result.state
+        if (state.status != GameStatus.PLAYING) hasPendingResult = true
         updateHUD()
         if (result.events.isEmpty()) {
             scheduleHint()
@@ -775,6 +781,7 @@ class BoardScene(initial: GameState) : Stage() {
 
     fun restart() {
         state = initialState.copy()
+        hasPendingResult = false
         rebuild()
         scheduleHint()
         autoPlayIfNeeded()
@@ -1107,9 +1114,23 @@ class BoardScene(initial: GameState) : Stage() {
 
     private val displayedTop get() = if (layout.cellSize > 0) worldNode.y / layout.cellSize else 0f
 
+    /**
+     * 끝나는 연출을 기다리는 결과를 연출을 건너뛰고 바로 알린다. 연출 도중에 화면을 나갈 때 쓴다.
+     * @return 알렸는지. 알릴 결과가 없으면 `false`다.
+     */
+    fun deliverPendingResult(): Boolean {
+        if (!hasPendingResult) return false
+        // 끝난 상태로 다시 그리면 남은 연출이 버려지고, 그 끝에서 결과를 알린다.
+        rebuild()
+        return true
+    }
+
     private fun showResult(notify: Boolean) {
         isShowingResult = true
-        if (notify) onFinish?.invoke(state)
+        if (notify) {
+            hasPendingResult = false
+            onFinish?.invoke(state)
+        }
     }
 
     private fun isMotion(event: GameEvent) = event is GameEvent.Fell || event is GameEvent.Slid || event is GameEvent.Refilled

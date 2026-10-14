@@ -261,6 +261,9 @@ fun GameScreen(model: AppModel, startIndex: Int, onExit: () -> Unit) {
 
     fun back() {
         Sound.play(GameSound.TAP)
+        // 승패가 정해지고 끝나는 연출을 보는 중이면 연출을 건너뛰고 결과를 띄운다.
+        // 그냥 나가면 깬 판이 기록되지 않고, 진 판의 생명도 줄지 않는다.
+        if (scene?.deliverPendingResult() == true) return
         if (hasPlayed && model.usesLives) showsQuitConfirm = true else onExit()
     }
 

@@ -45,6 +45,11 @@ struct GameView: View {
                 GameHeader(title: String(localized: "레벨 \(levelIndex + 1)")) {
                     IconButton(systemName: "chevron.left", label: "도시로 돌아가기") {
                         GameFeedback.shared.play(.tap)
+                        // 승패가 정해지고 끝나는 연출을 보는 중이면 연출을 건너뛰고 결과를 띄운다.
+                        // 그냥 나가면 깬 판이 기록되지 않고, 진 판의 생명도 줄지 않는다.
+                        if scene?.deliverPendingResult() == true {
+                            return
+                        }
                         // 하던 판을 두고 나가면 진 것으로 친다. 한 번도 두지 않았으면 그냥 나간다.
                         if hasPlayed, model.usesLives {
                             withAnimation { showsQuitConfirm = true }
