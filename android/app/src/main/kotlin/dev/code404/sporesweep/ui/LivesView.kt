@@ -120,38 +120,60 @@ fun LivesPopup(model: AppModel, onClose: () -> Unit) {
 }
 
 /**
- * 보상형 광고(iOS 판 RewardedAdView). 실제 광고는 7단계에서 붙인다.
- * 지금은 디버그 빌드에서 3초짜리 자리 표시를 보여주고 보상을 준다.
+ * 보상형 광고(iOS 판 RewardedAdView). 실제 광고는 RewardedAds가 이 화면 위에 띄운다.
+ * 이 화면은 그 뒤에 깔리는 검은 바탕이고, 광고를 불러오는 동안과 불러오지 못했을 때의 안내를 보여준다.
+ * 디버그 빌드에서는 광고를 불러오지 못하면 3초짜리 자리 표시 광고로 대신하고 보상을 준다.
  */
 @Composable
 fun RewardedAdView(id: String, reward: String, onFinish: (Boolean) -> Unit) {
+    var phase by remember { mutableStateOf("loading") }
     var remaining by remember { mutableIntStateOf(3) }
-    var failed by remember { mutableStateOf(!BuildConfig.DEBUG) }
     LaunchedEffect(Unit) {
-        if (failed) {
-            Tracker.log(Tracker.Event.AdFail(id))
+        if (dev.code404.sporesweep.RewardedAds.isEnabled && dev.code404.sporesweep.RewardedAds.waitUntilReady(6.0)) {
+            phase = "showing"
+            dev.code404.sporesweep.Music.pause()
+            dev.code404.sporesweep.RewardedAds.show { outcome ->
+                dev.code404.sporesweep.Music.resume()
+                when (outcome) {
+                    dev.code404.sporesweep.RewardedAds.Outcome.REWARDED -> { Tracker.log(Tracker.Event.AdReward(id)); onFinish(true) }
+                    dev.code404.sporesweep.RewardedAds.Outcome.SKIPPED -> { Tracker.log(Tracker.Event.AdSkip(id)); onFinish(false) }
+                    dev.code404.sporesweep.RewardedAds.Outcome.FAILED -> { Tracker.log(Tracker.Event.AdFail(id)); phase = "failed" }
+                }
+            }
             return@LaunchedEffect
         }
-        while (remaining > 0) {
-            delay(1000)
-            remaining -= 1
+        if (BuildConfig.DEBUG) {
+            phase = "placeholder"
+            while (remaining > 0) {
+                delay(1000)
+                remaining -= 1
+            }
+            Tracker.log(Tracker.Event.AdReward(id))
+            onFinish(true)
+        } else {
+            Tracker.log(Tracker.Event.AdFail(id))
+            phase = "failed"
         }
-        Tracker.log(Tracker.Event.AdReward(id))
-        onFinish(true)
     }
     Box(Modifier.fillMaxSize().background(Color.Black), contentAlignment = Alignment.Center) {
         Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(14.dp)) {
-            if (failed) {
-                Icon(Icons.Filled.WifiOff, null, tint = Color.White.copy(alpha = 0.5f), modifier = Modifier.size(44.dp))
-                GameText(tr("광고를 불러오지 못했어요"), 22f)
-                GameText(tr("잠시 뒤에 다시 해 보세요."), 15f, color = Color.White.copy(alpha = 0.7f))
-                ChunkyButton(tr("닫기"), tint = GameTint.SLATE) { Sound.play(GameSound.TAP); onFinish(false) }
-            } else if (remaining > 0) {
-                Icon(Icons.Filled.PlayCircle, null, tint = Color.White.copy(alpha = 0.5f), modifier = Modifier.size(54.dp))
-                GameText(tr("광고 자리예요"), 24f)
-                GameText(tr("아직 실제 광고는 나오지 않아요.\n%lld초 뒤에 %@을 받아요.", remaining, reward), 15f, color = Color.White.copy(alpha = 0.7f))
-            } else {
-                CircularProgressIndicator(color = Color.White)
+            when (phase) {
+                "loading" -> {
+                    CircularProgressIndicator(color = Color.White)
+                    GameText(tr("광고를 불러오는 중이에요"), 17f)
+                }
+                "placeholder" -> {
+                    Icon(Icons.Filled.PlayCircle, null, tint = Color.White.copy(alpha = 0.5f), modifier = Modifier.size(54.dp))
+                    GameText(tr("광고 자리예요"), 24f)
+                    GameText(tr("아직 실제 광고는 나오지 않아요.\n%lld초 뒤에 %@을 받아요.", remaining, reward), 15f, color = Color.White.copy(alpha = 0.7f))
+                }
+                "failed" -> {
+                    Icon(Icons.Filled.WifiOff, null, tint = Color.White.copy(alpha = 0.5f), modifier = Modifier.size(44.dp))
+                    GameText(tr("광고를 불러오지 못했어요"), 22f)
+                    GameText(tr("잠시 뒤에 다시 해 보세요."), 15f, color = Color.White.copy(alpha = 0.7f))
+                    ChunkyButton(tr("닫기"), tint = GameTint.SLATE) { Sound.play(GameSound.TAP); onFinish(false) }
+                }
+                else -> {}
             }
         }
     }

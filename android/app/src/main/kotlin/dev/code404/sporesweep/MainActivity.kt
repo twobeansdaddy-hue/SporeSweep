@@ -17,7 +17,11 @@ class MainActivity : ComponentActivity() {
         Sound.install(this)
         Music.install(this)
         val started = System.nanoTime()
-        model = AppModel(this, DebugArgs(intent.extras))
+        val args = DebugArgs(intent.extras)
+        Tracker.start(this, args)
+        RewardedAds.start(this, fake = args.bool("fakeAds"))
+        RewardedAds.activity = this
+        model = AppModel(this, args)
         android.util.Log.i("시작", "AppModel ${(System.nanoTime() - started) / 1_000_000}ms")
         setContent {
             GameBackground { RootScreen(model) }
@@ -27,6 +31,11 @@ class MainActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         Music.refresh()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (RewardedAds.activity === this) RewardedAds.activity = null
     }
 
     override fun onPause() {

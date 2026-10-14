@@ -1,10 +1,16 @@
 package dev.code404.sporesweep
 
+import android.content.Context
+import android.os.Bundle
 import android.util.Log
+import com.google.firebase.FirebaseApp
+import com.google.firebase.analytics.FirebaseAnalytics
 
 /**
  * 플레이 기록(iOS 판 Tracker.swift). 사건의 이름과 값은 iOS 판과 같다.
- * 측정 도구는 7단계에서 붙인다. 그때까지는 로그에만 적는다.
+ *
+ * Firebase 설정 파일(`app/google-services.json`)이 있어야 보낸다. 디버그 빌드에서는 보내지 않고 로그에만 적으며,
+ * 실행 인자 analytics를 주면 디버그 빌드에서도 보낸다.
  */
 object Tracker {
     sealed class Event(val name: String, val parameters: Map<String, Any> = emptyMap()) {
@@ -24,7 +30,29 @@ object Tracker {
         class Ending(first: Boolean) : Event("ending", mapOf("first" to if (first) 1 else 0))
     }
 
+    private var analytics: FirebaseAnalytics? = null
+
+    /** 앱을 시작할 때 한 번 부른다. */
+    fun start(context: Context, args: DebugArgs) {
+        if (FirebaseApp.getApps(context).isEmpty()) return
+        val sends = !BuildConfig.DEBUG || args.bool("analytics")
+        if (!sends) return
+        analytics = FirebaseAnalytics.getInstance(context).also { it.setAnalyticsCollectionEnabled(true) }
+    }
+
     fun log(event: Event) {
-        Log.i("기록", "${event.name} ${event.parameters}")
+        val firebase = analytics
+        if (firebase == null) {
+            if (BuildConfig.DEBUG) Log.i("기록", "${event.name} ${event.parameters}")
+            return
+        }
+        val bundle = Bundle()
+        for ((key, value) in event.parameters) {
+            when (value) {
+                is Int -> bundle.putLong(key, value.toLong())
+                else -> bundle.putString(key, value.toString())
+            }
+        }
+        firebase.logEvent(event.name, bundle)
     }
 }

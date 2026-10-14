@@ -1,8 +1,22 @@
 // 안드로이드 앱. 규칙과 진행은 :core에 있고, 그림·소리·레벨은 iOS 판의 폴더에서 빌드할 때 가져온다.
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.plugin.compose")
 }
+
+// Firebase 설정 파일이 있을 때만 Firebase를 붙인다. 없으면 기록을 보내지 않을 뿐 앱은 그대로 돈다.
+if (file("google-services.json").exists()) apply(plugin = "com.google.gms.google-services")
+
+// 사람마다 다른 값(AdMob ID). android/config.properties에 적는다. 그 파일은 저장소에 올리지 않는다.
+// 적지 않으면 구글이 공개한 시험용 ID를 쓴다.
+val config = Properties().apply {
+    val file = rootProject.file("config.properties")
+    if (file.exists()) file.inputStream().use { load(it) }
+}
+val testAdmobAppId = "ca-app-pub-3940256099942544~3347511713"
+val testRewardedUnit = "ca-app-pub-3940256099942544/5224354917"
 
 android {
     namespace = "dev.code404.sporesweep"
@@ -16,6 +30,11 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "0.37"
+        manifestPlaceholders["admobAppId"] = config.getProperty("ADMOB_APP_ID", testAdmobAppId)
+        buildConfigField("String", "REWARDED_AD_UNIT", "\"${config.getProperty("REWARDED_AD_UNIT_ID", testRewardedUnit)}\"")
+        buildConfigField("String", "TEST_REWARDED_AD_UNIT", "\"$testRewardedUnit\"")
+        // 출시 빌드는 실제 광고를 쓴다. 내부 테스트용으로 올릴 때는 -PtestAds를 붙여 시험 광고만 나오게 한다.
+        buildConfigField("boolean", "TEST_ADS", (project.hasProperty("testAds")).toString())
     }
 
     buildTypes {
@@ -68,4 +87,7 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation("androidx.activity:activity-compose:1.13.0")
     implementation("androidx.core:core-ktx:1.19.1")
+    implementation("com.google.android.gms:play-services-ads:25.5.0")
+    implementation(platform("com.google.firebase:firebase-bom:35.0.0"))
+    implementation("com.google.firebase:firebase-analytics")
 }

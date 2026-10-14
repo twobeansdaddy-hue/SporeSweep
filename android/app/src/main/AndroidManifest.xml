@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
     <!-- 블록이 터질 때와 판이 끝날 때의 진동. -->
     <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- iOS 판처럼 광고 식별자를 쓰지 않는다(DESIGN.md 6장). 광고 SDK와 Firebase가 넣는 권한을 뺀다. -->
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" tools:node="remove" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="false"
         android:theme="@style/Theme.SporeSweep">
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="${admobAppId}" />
+        <!-- 기록은 앱이 허락할 때만 보낸다. 디버그 빌드에서는 실행 인자 analytics를 줄 때만이다. -->
+        <meta-data
+            android:name="firebase_analytics_collection_enabled"
+            android:value="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -20,10 +20,10 @@ iOS 판(Swift)을 Kotlin으로 옮긴다. 단계마다 **자동으로 확인하�
 | 1 | 규칙 엔진(GameCore, 레벨 읽기) | **끝** | 규칙 동치 통과 |
 | 2 | 진행 저장(Progress: 별, 생명, 일일 보상) | **끝** | Swift 시험 34개를 옮겨 통과 |
 | 3 | 앱 뼈대: 앱 모듈, Compose, 그림·소리·레벨을 iOS 폴더에서 가져오기, 에뮬레이터에서 실행 | **끝** | 빈 화면이 아니라 타이틀이 뜬다 |
-| 4 | 보드(GameScene): 블록 그리기, 이벤트를 차례로 재생하는 애니메이션, 밀기 입력, 특수 효과 | 씬은 옮김. 게임 화면의 정보 줄·아이템 단추·카드가 남음 | 한 판을 끝까지 둘 수 있고, iOS와 화면을 나란히 놓고 비교 |
-| 5 | 화면: 타이틀·인트로, 도시, 지도·세계·비행, 랜드마크 복원, 결과, 설정, 엔딩, 생명, 일일 보상, 아이템 | | 각 화면을 iOS와 나란히 놓고 비교 |
-| 6 | 소리, 음악, 진동 | | 이벤트마다 같은 소리가 난다 |
-| 7 | 광고(AdMob), 측정(Firebase), 영어 | | 시험 광고가 뜨고 기록이 찍힌다 |
+| 4 | 보드(GameScene): 블록 그리기, 이벤트를 차례로 재생하는 애니메이션, 밀기 입력, 특수 효과 | **끝** | 한 판을 끝까지 둘 수 있고, iOS와 화면을 나란히 놓고 비교 |
+| 5 | 화면: 타이틀·인트로, 도시, 지도·세계·비행, 랜드마크 복원, 결과, 설정, 엔딩, 생명, 일일 보상, 아이템 | **끝**. 화면마다 iOS와 나란히 찍어 비교했다 | 각 화면을 iOS와 나란히 놓고 비교 |
+| 6 | 소리, 음악, 진동 | **끝**. 귀로는 확인하지 못했다 | 이벤트마다 같은 소리가 난다 |
+| 7 | 광고(AdMob), 측정(Firebase), 영어 | 광고·영어 **끝**(시험 광고로 보상까지 확인). Firebase는 설정 파일을 받으면 붙는다 | 시험 광고가 뜨고 기록이 찍힌다 |
 | 8 | 출시 준비: 아이콘, 서명, Google Play 등록 자료 | | 내부 테스트 트랙에 올라간다 |
 
 ## iOS와 다른 점
@@ -32,3 +32,16 @@ iOS 판(Swift)을 Kotlin으로 옮긴다. 단계마다 **자동으로 확인하�
 - **값과 참조**: Swift의 `GameState`는 값 타입이다. Kotlin에서는 공개 함수가 `copy()`로 복사본을 만들어 고친 뒤 돌려준다. 원래 상태는 바뀌지 않는다.
 - **이름**: Swift의 `Block.cocoon(kind)`, `Block.frozen(kind)`는 Kotlin에서 `Cocoon(trapped)`, `Frozen(trapped)`다. 이 둘의 종류는 매치에 쓰이지 않기 때문이다.
 - **그리기**: SpriteKit 대신 `stage/Stage.kt`의 작은 엔진을 쓴다. 노드와 동작(SKAction)의 이름과 뜻이 SpriteKit과 같고, 좌표도 y가 위쪽인 dp라서 `BoardScene.swift`를 거의 줄 단위로 옮길 수 있다.
+
+## 실행과 설정
+
+```bash
+cd android && ./gradlew :app:assembleDebug
+```
+
+- **개발용 실행 인자**는 iOS 판과 이름이 같다. `adb shell am start -n dev.code404.sporesweep/.MainActivity --es city tokyo --ei level 2 --ez autoplay true`처럼 준다. 디버그 빌드에서만 읽는다.
+- **광고 ID**: `android/config.properties`에 `ADMOB_APP_ID`, `REWARDED_AD_UNIT_ID`를 적는다(저장소에 올리지 않는다). 없으면 구글 시험용 ID다. 디버그 빌드는 늘 시험 광고이고, 출시 빌드는 실제 광고다. 내부 테스트 트랙에 올릴 빌드는 `./gradlew :app:bundleRelease -PtestAds`로 만들어 시험 광고만 나오게 한다.
+- **광고 식별자**: iOS 판처럼 쓰지 않는다. 광고 SDK와 Firebase가 넣는 `AD_ID` 권한을 매니페스트에서 뺐다.
+- **Firebase**: `android/app/google-services.json`을 넣으면 붙는다(저장소에 올리지 않는다). 디버그 빌드는 실행 인자 `--ez analytics true`를 줄 때만 보낸다.
+- **랜드마크 영역**: iOS의 랜드마크 그림이나 영역을 바꾸면 `Tools/landmark_export.sh`를 다시 돌린다.
+- **시작 시간**: 레벨 파일은 도시를 열 때 읽는다. 에뮬레이터에서 출시 빌드가 약 3초에 뜬다(디버그 빌드는 더 느리다).
