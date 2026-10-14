@@ -21,6 +21,8 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
+            // 출시용 서명은 8단계에서 정한다. 그때까지는 맥에서 시험할 수 있게 개발용 열쇠로 서명한다.
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
 
@@ -62,6 +64,8 @@ dependencies {
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.foundation:foundation")
     implementation("androidx.compose.animation:animation")
+    implementation("androidx.compose.material:material-icons-extended:1.7.8")
+    implementation("androidx.compose.material3:material3")
     implementation("androidx.activity:activity-compose:1.13.0")
     implementation("androidx.core:core-ktx:1.19.1")
 }

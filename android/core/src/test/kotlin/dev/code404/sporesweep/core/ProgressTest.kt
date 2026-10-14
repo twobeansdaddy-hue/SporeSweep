@@ -330,3 +330,33 @@ class ProgressStoreTest {
         store.reset()
     }
 }
+
+class WorldTest {
+    private fun resource(name: String) = javaClass.classLoader.getResourceAsStream(name)!!.bufferedReader().readText()
+
+    /** iOS 판 CityTests의 검증을 옮긴 것이다. 모든 도시를 읽고, 복원 계획이 레벨 수로 감당되는지 본다. */
+    @Test fun allCitiesLoad() {
+        assertEquals(LevelCatalog.cityIDs, RegionCatalog.cityIDs)
+        for (id in LevelCatalog.cityIDs) {
+            val city = City.parse(resource("$id.json"))
+            assertEquals(id, city.id)
+            assertTrue(city.landmark.parts.isNotEmpty())
+            val seen = HashSet<String>()
+            for (part in city.landmark.parts) {
+                assertTrue(part.cost >= 1)
+                assertTrue(part.requires.all { it in seen }, "${city.id}/${part.id}")
+                seen.add(part.id)
+            }
+        }
+    }
+
+    @Test fun blockers() {
+        val landmark = Landmark("t", "t", listOf(Landmark.Part("a", "a", 3), Landmark.Part("b", "b", 2, listOf("a"))))
+        assertEquals(RestoreBlocker.Requires("a"), landmark.blocker("b", 9, emptySet()))
+        assertEquals(RestoreBlocker.NotEnoughStars(1), landmark.blocker("a", 2, emptySet()))
+        assertNull(landmark.blocker("a", 3, emptySet()))
+        assertEquals(RestoreBlocker.AlreadyRestored, landmark.blocker("a", 3, setOf("a")))
+        assertEquals(4, landmark.availableStars(9, setOf("a", "b")))
+        assertTrue(landmark.isFullyRestored(setOf("a", "b")))
+    }
+}

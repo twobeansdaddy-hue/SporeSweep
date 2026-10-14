@@ -24,9 +24,15 @@ object Assets {
     }
 
     /** 이미지 세트의 이름으로 그림을 읽는다(`title_art`, `tokyo_bg_restored` 등). 없으면 `null`이다. */
+    /** 폴더의 파일 목록. 한 번만 읽는다. */
+    private val listings = HashMap<String, List<String>>()
+
+    private fun list(folder: String) = listings.getOrPut(folder) { (context.assets.list(folder) ?: emptyArray()).toList() }
+
+    private fun imageFile(name: String) = list("images").firstOrNull { it.substringBeforeLast('.') == name }
+
     fun image(name: String): ImageBitmap? = images.getOrPut(name) {
-        val files = context.assets.list("images") ?: emptyArray()
-        val file = files.firstOrNull { it.substringBeforeLast('.') == name } ?: return@getOrPut null
+        val file = imageFile(name) ?: return@getOrPut null
         context.assets.open("images/$file").use { BitmapFactory.decodeStream(it)?.asImageBitmap() }
     }
 
@@ -44,15 +50,18 @@ object Assets {
 
     /** 이미지 세트의 원본 그림. */
     fun imageBitmap(name: String): android.graphics.Bitmap? = bitmaps.getOrPut("image:$name") {
-        val files = context.assets.list("images") ?: emptyArray()
-        val file = files.firstOrNull { it.substringBeforeLast('.') == name } ?: return@getOrPut null
+        val file = imageFile(name) ?: return@getOrPut null
         context.assets.open("images/$file").use { BitmapFactory.decodeStream(it) }
     }
 
     val typeface: android.graphics.Typeface by lazy { android.graphics.Typeface.createFromAsset(context.assets, "fonts/Jua-Regular.ttf") }
 
+    /** 도시의 레벨 ID. 파일 이름이 곧 ID라서 파일을 읽지 않고 안다. */
+    fun levelIDs(city: String): List<String> =
+        list("levels").filter { it.startsWith("$city-") && it.endsWith(".json") }.sorted().map { it.removeSuffix(".json") }
+
     fun levels(city: String): List<Level> {
-        val files = (context.assets.list("levels") ?: emptyArray()).filter { it.startsWith("$city-") && it.endsWith(".json") }.sorted()
+        val files = list("levels").filter { it.startsWith("$city-") && it.endsWith(".json") }.sorted()
         return files.map { file -> Level.parse(context.assets.open("levels/$file").bufferedReader().readText()) }
     }
 

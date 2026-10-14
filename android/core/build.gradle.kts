@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 // 규칙, 레벨, 진행. 안드로이드에 기대지 않는 순수 Kotlin이라 맥에서 바로 시험한다.
 plugins {
+    `java-library`
     kotlin("jvm")
 }
 
@@ -15,7 +16,8 @@ kotlin {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.10.0")
+    // 앱도 JSON을 읽으므로 그대로 내보낸다.
+    api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.10.0")
     testImplementation(kotlin("test"))
 }
 
