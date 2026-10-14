@@ -20,6 +20,7 @@ object Assets {
     fun install(context: Context) {
         this.context = context.applicationContext
         Strings.load(context)
+        dev.code404.sporesweep.stage.LabelNode.typeface = typeface
     }
 
     /** 이미지 세트의 이름으로 그림을 읽는다(`title_art`, `tokyo_bg_restored` 등). 없으면 `null`이다. */
@@ -33,6 +34,22 @@ object Assets {
     fun sprite(name: String): ImageBitmap? = images.getOrPut("sprite:$name") {
         runCatching { context.assets.open("sprites/$name.png").use { BitmapFactory.decodeStream(it)?.asImageBitmap() } }.getOrNull()
     }
+
+    private val bitmaps = HashMap<String, android.graphics.Bitmap?>()
+
+    /** 보드에 쓰는 조각 그림의 원본(`block_brick` 등). 그리기 엔진이 쓴다. */
+    fun spriteBitmap(name: String): android.graphics.Bitmap? = bitmaps.getOrPut(name) {
+        runCatching { context.assets.open("sprites/$name.png").use { BitmapFactory.decodeStream(it) } }.getOrNull()
+    }
+
+    /** 이미지 세트의 원본 그림. */
+    fun imageBitmap(name: String): android.graphics.Bitmap? = bitmaps.getOrPut("image:$name") {
+        val files = context.assets.list("images") ?: emptyArray()
+        val file = files.firstOrNull { it.substringBeforeLast('.') == name } ?: return@getOrPut null
+        context.assets.open("images/$file").use { BitmapFactory.decodeStream(it) }
+    }
+
+    val typeface: android.graphics.Typeface by lazy { android.graphics.Typeface.createFromAsset(context.assets, "fonts/Jua-Regular.ttf") }
 
     fun levels(city: String): List<Level> {
         val files = (context.assets.list("levels") ?: emptyArray()).filter { it.startsWith("$city-") && it.endsWith(".json") }.sorted()
