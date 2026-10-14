@@ -14,3 +14,9 @@ PLAN.md
 Marketing/
 Art/incoming/
 *.zip
+
+# 안드로이드
+android/.gradle/
+android/**/build/
+android/local.properties
+android/.kotlin/

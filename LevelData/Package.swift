@@ -21,6 +21,8 @@ let package = Package(
         .executableTarget(name: "levelgen", dependencies: ["LevelTools", "LevelData"]),
         .executableTarget(name: "levelaudit", dependencies: ["LevelTools", "LevelData", "GameCore"]),
         .executableTarget(name: "leveldebug", dependencies: ["LevelTools", "LevelData", "GameCore"]),
+        // 안드로이드 판이 규칙을 똑같이 따르는지 보는 기준 기록을 만든다.
+        .executableTarget(name: "paritygen", dependencies: ["LevelData", "GameCore"]),
         .testTarget(name: "LevelDataTests", dependencies: ["LevelData", "LevelTools", "GameCore"]),
     ]
 )
