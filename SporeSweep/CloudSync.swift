@@ -13,9 +13,13 @@ final class CloudSync {
     private let store = NSUbiquitousKeyValueStore.default
     private var observer: NSObjectProtocol?
 
+    /// 이 앱에서 iCloud 저장을 쓸 수 있는지. 키-값 저장소 권한(entitlement)을 넣고 두 기기로 시험한 뒤에 켠다.
+    /// 꺼져 있으면 설정의 스위치를 숨기고 올리지도 내려받지도 않는다.
+    static let isAvailable = false
+
     /// 켜져 있는지. 설정에서 끌 수 있고, 처음에는 켜져 있다.
     var isEnabled: Bool {
-        get { UserDefaults.standard.object(forKey: Self.enabledKey) as? Bool ?? true }
+        get { Self.isAvailable && (UserDefaults.standard.object(forKey: Self.enabledKey) as? Bool ?? true) }
         set { UserDefaults.standard.set(newValue, forKey: Self.enabledKey) }
     }
 

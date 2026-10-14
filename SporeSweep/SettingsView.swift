@@ -37,12 +37,15 @@ struct SettingsView: View {
                         note("다른 앱으로 음악을 듣고 있으면 배경 음악은 나오지 않아요.")
                     }
 
-                    VStack(spacing: 6) {
-                        Toggle("iCloud에 저장", isOn: Binding(get: { model.isCloudEnabled }, set: { model.isCloudEnabled = $0 }))
-                            .toggleStyle(ChunkyToggleStyle())
-                            .padding(16)
-                            .gamePanel()
-                        note("기기를 바꿔도 진행이 이어져요. 같은 Apple 계정으로 로그인한 기기끼리 맞춰져요.")
+                    // iCloud 저장은 권한을 넣기 전까지 동작하지 않으므로 스위치를 보이지 않는다.
+                    if CloudSync.isAvailable {
+                        VStack(spacing: 6) {
+                            Toggle("iCloud에 저장", isOn: Binding(get: { model.isCloudEnabled }, set: { model.isCloudEnabled = $0 }))
+                                .toggleStyle(ChunkyToggleStyle())
+                                .padding(16)
+                                .gamePanel()
+                            note("기기를 바꿔도 진행이 이어져요. 같은 Apple 계정으로 로그인한 기기끼리 맞춰져요.")
+                        }
                     }
 
                     VStack(spacing: 6) {
