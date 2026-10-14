@@ -106,16 +106,17 @@ fun GameScreen(model: AppModel, startIndex: Int, onExit: () -> Unit) {
     model.revision
 
     val starGoal = model.levels.getOrNull(levelIndex)?.starScores ?: emptyList()
-    val isTracked = (scene?.autoPlays != true || model.args.bool("trackAutoplay")) && !model.isLabMode && levelIndex in model.levels.indices
-    val skipsContinueOffer = scene?.autoPlays == true && !model.args.bool("offerContinue")
+    // 판이 끝났을 때 부르는 함수 안에서도 그때의 씬을 보도록 값이 아니라 함수로 둔다.
+    fun isTracked() = (scene?.autoPlays != true || model.args.bool("trackAutoplay")) && !model.isLabMode && levelIndex in model.levels.indices
+    fun skipsContinueOffer() = scene?.autoPlays == true && !model.args.bool("offerContinue")
 
     fun logStart(boosters: Int) {
-        if (!isTracked) return
+        if (!isTracked()) return
         Tracker.log(Tracker.Event.LevelStart(model.levels[levelIndex].city, levelIndex + 1, boosters))
     }
 
     fun logEnd(state: GameState?, outcome: String) {
-        if (!isTracked || state == null) return
+        if (!isTracked() || state == null) return
         val level = model.levels[levelIndex]
         Tracker.log(
             Tracker.Event.LevelEnd(
@@ -143,8 +144,8 @@ fun GameScreen(model: AppModel, startIndex: Int, onExit: () -> Unit) {
     }
 
     fun finish(state: GameState, level: Level) {
-        if (state.canContinue && !usedContinue && !skipsContinueOffer) {
-            if (isTracked) Tracker.log(Tracker.Event.ContinueOffer(level.city, levelIndex + 1, state.materialsRemaining))
+        if (state.canContinue && !usedContinue && !skipsContinueOffer()) {
+            if (isTracked()) Tracker.log(Tracker.Event.ContinueOffer(level.city, levelIndex + 1, state.materialsRemaining))
             lostState = state
         } else {
             conclude(state, level)
@@ -187,7 +188,7 @@ fun GameScreen(model: AppModel, startIndex: Int, onExit: () -> Unit) {
             val speed = model.args.double("sceneSpeed")
             if (speed > 0) next.speed = speed
             next.onToolUsed = { tool ->
-                if (isTracked) Tracker.log(Tracker.Event.ToolUse(tool.name.lowercase(), level.city, levelIndex + 1))
+                if (isTracked()) Tracker.log(Tracker.Event.ToolUse(tool.name.lowercase(), level.city, levelIndex + 1))
                 model.useTool(tool)
                 armedTool = null
             }
