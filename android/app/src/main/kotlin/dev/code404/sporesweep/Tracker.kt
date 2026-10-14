@@ -36,8 +36,9 @@ object Tracker {
     fun start(context: Context, args: DebugArgs) {
         if (FirebaseApp.getApps(context).isEmpty()) return
         val sends = !BuildConfig.DEBUG || args.bool("analytics")
-        if (!sends) return
-        analytics = FirebaseAnalytics.getInstance(context).also { it.setAnalyticsCollectionEnabled(true) }
+        // 켜고 끈 값은 다음 실행까지 남으므로, 보내지 않을 때도 끈다고 분명히 적는다.
+        val firebase = FirebaseAnalytics.getInstance(context).also { it.setAnalyticsCollectionEnabled(sends) }
+        if (sends) analytics = firebase
     }
 
     fun log(event: Event) {
