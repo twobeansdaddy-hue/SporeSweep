@@ -439,6 +439,24 @@ class AppModel(context: Context, val args: DebugArgs) {
         changed()
     }
 
+    // MARK: 광고 시험 (개발용)
+
+    /** 다음 판을 이 이동 횟수로 시작한다. 이어하기 광고를 빨리 보려고 쓴다. 0이면 레벨대로다. */
+    var debugMoves by mutableIntStateOf(0)
+
+    /** 생명을 모두 비운다. 생명 광고를 보려고 쓴다. 진행에 저장된다. */
+    fun drainLives() {
+        progress.lives.set(0, Instant.now())
+        save()
+    }
+
+    /** 아이템을 모두 비운다. 아이템 광고를 보려고 쓴다. 진행에 저장된다. */
+    fun drainTools() {
+        for (tool in Tool.entries) while (progress.useBooster(key(tool))) {}
+        prefs.edit().remove(AD_TOOL_DAY).remove(AD_TOOL_COUNT).apply()
+        save()
+    }
+
     // MARK: 레벨
 
     fun isUnlocked(index: Int): Boolean {

@@ -33,6 +33,9 @@ object RewardedAds {
     var activity: Activity? = null
     private var ad: RewardedAd? = null
     private var isLoading = false
+    /** 잇달아 실패한 횟수. 실패하면 조금씩 더 기다렸다가 다시 부른다. */
+    private var failures = 0
+    private val handler = android.os.Handler(android.os.Looper.getMainLooper())
 
     fun start(context: Context, fake: Boolean) {
         this.context = context.applicationContext
@@ -51,12 +54,16 @@ object RewardedAds {
             override fun onAdLoaded(loaded: RewardedAd) {
                 ad = loaded
                 isLoading = false
+                failures = 0
                 note("불러옴")
             }
 
             override fun onAdFailedToLoad(error: LoadAdError) {
                 isLoading = false
+                failures += 1
                 note("불러오지 못함: ${error.message}")
+                // 앱을 막 켰을 때 광고의 실행 환경이 덜 준비돼 실패하는 일이 있다. 세 번까지 점점 늦춰 다시 부른다.
+                if (failures <= 3) handler.postDelayed({ load() }, failures * 3_000L)
             }
         })
     }

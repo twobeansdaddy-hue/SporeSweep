@@ -166,7 +166,7 @@ fun GameScreen(model: AppModel, startIndex: Int, onExit: () -> Unit) {
             val state = level.makeState()
             state.apply(boosters)
             val autoPlays = model.args.bool("autoplay")
-            val moves = model.args.int("moves")
+            val moves = model.args.int("moves").takeIf { it > 0 } ?: model.debugMoves
             if (moves > 0) state.movesRemaining = moves
             if (model.args.bool("showcase")) {
                 val kinds = BlockKind.entries

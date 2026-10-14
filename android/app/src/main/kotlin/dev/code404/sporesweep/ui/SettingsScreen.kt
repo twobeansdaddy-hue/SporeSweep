@@ -100,6 +100,27 @@ fun SettingsScreen(model: AppModel, onClose: () -> Unit) {
                         }
                     }
                     Column(Modifier.fillMaxWidth().gamePanel().padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        GameText("광고 시험", 15f, Modifier.fillMaxWidth(), align = TextAlign.Start)
+                        var notice by remember { mutableStateOf("") }
+                        ChunkyButton("생명 비우기", tint = GameTint.GOLD, size = 14f, fills = true) {
+                            Sound.play(GameSound.TAP)
+                            model.drainLives()
+                            notice = "생명을 비웠어요. 레벨을 누르거나 하트를 누르면 '광고 보고 생명 +1'이 나와요."
+                        }
+                        ChunkyButton("아이템 비우기", tint = GameTint.GOLD, size = 14f, fills = true) {
+                            Sound.play(GameSound.TAP)
+                            model.drainTools()
+                            notice = "아이템을 비웠어요. 판에서 아이템 단추를 누르면 광고가 나와요(하루 2번)."
+                        }
+                        ChunkyButton(if (model.debugMoves > 0) "이동 2번으로 시작: 켜짐" else "이동 2번으로 시작: 꺼짐", tint = if (model.debugMoves > 0) GameTint.PINK else GameTint.GOLD, size = 14f, fills = true) {
+                            Sound.play(GameSound.TAP)
+                            model.debugMoves = if (model.debugMoves > 0) 0 else 2
+                            notice = if (model.debugMoves > 0) "다음 판부터 이동 2번으로 시작해요. 다 쓰면 '광고 보고 이동 +5'가 나와요." else "이동 횟수를 레벨대로 되돌렸어요."
+                        }
+                        if (notice.isNotEmpty()) Note(notice)
+                        Note("시험 광고만 나와요. 생명과 아이템을 비운 것은 진행에 저장돼요. 개발용 빌드에만 있어요.")
+                    }
+                    Column(Modifier.fillMaxWidth().gamePanel().padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         GameText(tr("도시 바로 가기"), 15f, Modifier.fillMaxWidth(), align = TextAlign.Start)
                         model.cities.chunked(3).forEach { row ->
                             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
