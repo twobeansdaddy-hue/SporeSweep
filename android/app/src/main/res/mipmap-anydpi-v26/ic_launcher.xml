@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 적응형 아이콘. 그림 한 장(Tools/make_android_icon.py)을 바탕에 깔고 앞쪽은 비운다. -->
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@mipmap/ic_launcher_layer" />
+    <foreground android:drawable="@android:color/transparent" />
+</adaptive-icon>

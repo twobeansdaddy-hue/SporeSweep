@@ -1,14 +1,23 @@
-"""스토어 스크린샷을 만든다. 화면 캡처 위에 문구를 얹는다(1290×2796, 6.9인치).
+"""스토어 스크린샷을 만든다. 화면 캡처 위에 문구를 얹는다.
 
-사용법: python3 Tools/make_store_shots.py
+사용법: python3 Tools/make_store_shots.py          App Store용(1290×2796, 6.9인치) → Marketing/store/ko/
+        python3 Tools/make_store_shots.py play     Google Play용(1290×2294, 9:16) → Marketing/store/play/
+Google Play는 긴 변이 짧은 변의 두 배를 넘으면 받지 않아서, 세로를 줄이고 기기 그림을 작게 놓는다.
 """
+import os
+import sys
+
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
-W, H = 1290, 2796
+PLAY = sys.argv[1:] == ["play"]
+W, H = (1290, 2294) if PLAY else (1290, 2796)
+# 기기 그림 속 화면의 폭.
+SCREEN_WIDTH = 760 if PLAY else 1010
 FONT = "SporeSweep/Fonts/Jua-Regular.ttf"
-SHOTS = "Marketing/screenshots/"
+# Play용은 안드로이드 에뮬레이터(1080×2400)에서 찍은 화면을 쓴다.
+SHOTS = "Marketing/screenshots/android/" if PLAY else "Marketing/screenshots/"
 ART = "Marketing/art/"
-OUT = "Marketing/store/ko/"
+OUT = "Marketing/store/play/" if PLAY else "Marketing/store/ko/"
 
 
 def backdrop(top, bottom):
@@ -49,7 +58,7 @@ def caption(image, title, subtitle, brand=None):
 
 def place(image, screen, top=560):
     """화면 캡처를 둥근 테두리의 기기 모양으로 아래쪽에 놓는다."""
-    width = 1010
+    width = SCREEN_WIDTH
     screen = screen.resize((width, round(screen.height * width / screen.width)), Image.LANCZOS)
     frame = Image.new("RGBA", (screen.width + 36, screen.height + 36), (0, 0, 0, 0))
     ImageDraw.Draw(frame).rounded_rectangle((0, 0, frame.width, frame.height), radius=96, fill=(20, 20, 36, 255))
@@ -70,7 +79,8 @@ def split(ruined, restored):
     """복원된 도시 화면에서 랜드마크 그림의 왼쪽 절반만 폐허로 바꾼다. 가운데에 흰 선을 긋는다."""
     out = restored.copy()
     half = restored.width // 2
-    top, bottom = 386, 1086
+    # 화면 캡처에서 랜드마크 그림이 차지하는 세로 범위.
+    top, bottom = (300, 940) if PLAY else (386, 1086)
     out.paste(ruined.crop((0, top, half, bottom)), (0, top))
     ImageDraw.Draw(out).line([(half, top + 14), (half, bottom - 14)], fill="white", width=8)
     return out
@@ -100,6 +110,7 @@ PAGES = [
     ("06_obstacles", BLUE, "도시마다\n새로운 장애물", "고치, 둥지, 안개, 얼음까지 열일곱 가지", lambda: shot("55_play_all_pieces")),
 ]
 
+os.makedirs(OUT, exist_ok=True)
 for name, colors, title, subtitle, screen in PAGES:
     page = backdrop(*colors)
     first = name.startswith("01")
