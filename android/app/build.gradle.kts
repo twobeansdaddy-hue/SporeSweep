@@ -15,6 +15,17 @@ val config = Properties().apply {
     val file = rootProject.file("config.properties")
     if (file.exists()) file.inputStream().use { load(it) }
 }
+// 출시용 업로드 키. config.properties의 UPLOAD_KEYSTORE에 키 파일 위치를 적고, 비밀번호는 맥 키체인
+// (sporesweep-upload-key)이나 환경 변수 UPLOAD_KEY_PASSWORD에 둔다. 없으면 개발용 열쇠로 서명한다.
+val uploadKeystore = config.getProperty("UPLOAD_KEYSTORE")?.let { file(it.replaceFirst("~", System.getProperty("user.home"))) }?.takeIf { it.exists() }
+val uploadKeyPassword: String? by lazy {
+    System.getenv("UPLOAD_KEY_PASSWORD") ?: runCatching {
+        val process = ProcessBuilder("security", "find-generic-password", "-a", System.getProperty("user.name"), "-s", "sporesweep-upload-key", "-w")
+            .redirectErrorStream(false).start()
+        process.inputStream.bufferedReader().readText().trim().takeIf { process.waitFor() == 0 && it.isNotEmpty() }
+    }.getOrNull()
+}
+
 val testAdmobAppId = "ca-app-pub-3940256099942544~3347511713"
 val testRewardedUnit = "ca-app-pub-3940256099942544/5224354917"
 
@@ -37,11 +48,22 @@ android {
         buildConfigField("boolean", "TEST_ADS", (project.hasProperty("testAds")).toString())
     }
 
+    signingConfigs {
+        if (uploadKeystore != null && uploadKeyPassword != null) {
+            create("upload") {
+                storeFile = uploadKeystore
+                storePassword = uploadKeyPassword
+                keyAlias = config.getProperty("UPLOAD_KEY_ALIAS", "upload")
+                keyPassword = uploadKeyPassword
+            }
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
-            // 출시용 서명은 8단계에서 정한다. 그때까지는 맥에서 시험할 수 있게 개발용 열쇠로 서명한다.
-            signingConfig = signingConfigs.getByName("debug")
+            // 업로드 키가 없는 사람은 맥에서 시험할 수 있게 개발용 열쇠로 서명한다.
+            signingConfig = signingConfigs.findByName("upload") ?: signingConfigs.getByName("debug")
         }
     }
 
