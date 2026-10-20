@@ -66,7 +66,7 @@ cd android && ./gradlew :app:assembleDebug
 | W1 | 규칙 모듈을 멀티플랫폼으로 | **끝** | 규칙 비교 시험이 JVM과 Wasm(Node)에서 함께 통과한다 |
 | W2 | 화면 코드를 `:game`으로, 그리기 엔진을 Compose 그리기로 | **끝** | 안드로이드 봇 판이 예전과 같은 점수로 끝난다(도쿄 6단계 2,640점) |
 | W3 | 웹판(`:web`), 그림을 WebP로 | **끝**. 로컬에서 타이틀, 인트로, 도시, 보드, 세계 지도를 확인했다. 봇 판의 같은 순간이 안드로이드와 같다(1,740점, 이동 9) | 브라우저에서 한 판을 둔다 |
-| W4 | 올리기와 실기기 확인 | 올렸다(2026-10-20, Cloudflare Pages `sporesweep-play`). PC 브라우저에서 열리고 판이 돈다. Firebase DebugView에 기록이 찍힌다. 휴대전화 브라우저는 아직 | `play.code404.app`이 휴대전화와 PC 브라우저에서 열린다 |
+| W4 | 올리기와 실기기 확인 | **끝**. 올렸다(2026-10-20, Cloudflare Pages `sporesweep-play`). PC 브라우저에서 열리고 판이 돈다. 휴대전화 브라우저에서 화면을 꽉 채운다. Firebase DebugView에 기록이 찍힌다 | `play.code404.app`이 휴대전화와 PC 브라우저에서 열린다 |
 
 ```bash
 cd android && ./gradlew :web:webSite
