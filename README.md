@@ -112,7 +112,7 @@ cd android && ./gradlew :app:installDebug
 
 ## Claude Code mods판
 
-Claude Code 안에서 하는 작은 판입니다. `mods/sporesweep`에 있고, 규칙은 다른 판과 같은 엔진(Kotlin을 순수 자바스크립트로 빌드한 것)입니다. 보드는 색깔 있는 글자로 그리고, 방향키나 마우스로 둡니다.
+Claude Code 안에서 하는 작은 판입니다. `mods/sporesweep`에 있고, 규칙은 다른 판과 같은 엔진(Kotlin을 순수 자바스크립트로 빌드한 것)입니다. 보드는 이모지와 색깔 칸으로 그리고, 블록을 마우스로 끌거나 방향키로 둡니다. 창이 넓으면 옆에 블록 설명이 나옵니다.
 
 1. 엔진과 레벨 데이터를 모읍니다.
 
@@ -126,7 +126,7 @@ python3 Tools/make_mod.py
 
 2. `claude --plugin-dir mods/sporesweep`로 Claude Code를 열고 `/sporesweep`을 입력합니다.
 
-시험은 `claude plugin test mods/sporesweep`입니다(터미널과 데스크톱 화면에서 한 판 두기, 진행 저장).
+시험은 `claude plugin test mods/sporesweep`입니다(터미널과 데스크톱 화면에서 이어하기, 키보드와 끌기로 한 수 두기, 힌트, 진행 저장).
 
 ## 테스트
 
@@ -163,7 +163,7 @@ cd android && ./gradlew :core:allTests
 
 | 테스트 | 보는 것 |
 | --- | --- |
-| ParityTest | iOS 판이 둔 판(399레벨, 15,302수)을 Kotlin으로 다시 두고, 수마다 이벤트·점수·보드·난수 상태가 같은지 |
+| ParityTest | iOS 판이 둔 판(399레벨, 15,070수)을 Kotlin으로 다시 두고, 수마다 이벤트·점수·보드·난수 상태가 같은지 |
 | 진행 시험 35개 | iOS 판 Progress의 시험을 옮긴 것과 세계 지도 |
 
 규칙을 바꿀 때는 Swift를 먼저 고치고 기준 기록을 다시 만든 뒤 Kotlin을 맞춥니다(PORTING.md).

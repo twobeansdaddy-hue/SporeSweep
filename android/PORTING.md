@@ -7,7 +7,7 @@ iOS 판(Swift)을 Kotlin으로 옮긴다. 안드로이드 앱과 웹판(Kotlin/W
 
 | 고리 | 명령 | 통과 조건 |
 | --- | --- | --- |
-| 규칙 동치 | `cd android && ./gradlew :core:allTests` | Swift가 둔 판(399레벨, 15,302수)을 다시 두고, 수마다 이벤트·점수·보드·난수 상태가 글자 하나까지 같다. JVM과 웹(Wasm, Node) 양쪽에서 돈다 |
+| 규칙 동치 | `cd android && ./gradlew :core:allTests` | Swift가 둔 판(399레벨, 15,070수)을 다시 두고, 수마다 이벤트·점수·보드·난수 상태가 글자 하나까지 같다. JVM, 웹(Wasm, Node), mods용(JS, Node) 세 곳에서 돈다 |
 | 기준 기록 다시 만들기 | `cd LevelData && swift run -c release paritygen ../android/core/src/commonTest/resources/parity 40` 후 `gzip -9 -f ../android/core/src/commonTest/resources/parity/*.txt` | 규칙을 바꿨을 때만 |
 | 진행 저장 | `./gradlew :core:allTests` | Swift 판의 진행 시험 33개를 옮긴 것이 통과한다(파일 위치를 보는 iOS 전용 시험 1개는 뺐다) |
 | 앱 빌드 | `./gradlew :app:assembleDebug` | 경고 없이 빌드된다 |
@@ -52,7 +52,7 @@ cd android && ./gradlew :app:assembleDebug
 
 ## mods판
 
-Claude Code의 mods로 하는 작은 판(2026-10-20). mods는 WebAssembly와 웹페이지 기능을 쓸 수 없어서, `:core`를 Kotlin/JS(ES 모듈)로도 빌드하고 `:mod`가 판을 만들고 수를 두는 함수(`SporeGame`)만 내보낸다. `./gradlew :mod:modEngine`이 esbuild로 한 파일(약 300KB)로 묶고, `Tools/make_mod.py`가 레벨과 함께 `mods/sporesweep/hooks/`에 넣는다. 화면은 `hooks/game.tsx`(Client 영역)가 그린다. 시험은 `claude plugin test mods/sporesweep`.
+Claude Code의 mods로 하는 작은 판(2026-10-20). mods는 WebAssembly와 웹페이지 기능을 쓸 수 없어서, `:core`를 Kotlin/JS(ES 모듈)로도 빌드하고 `:mod`가 판을 만들고 수를 두는 함수(`SporeGame`)만 내보낸다. `./gradlew :mod:modEngine`이 esbuild로 한 파일(약 300KB)로 묶고, `Tools/make_mod.py`가 레벨과 함께 `mods/sporesweep/hooks/`에 넣는다. 화면은 `hooks/game.tsx`(Client 영역)가 그린다. 시험은 `claude plugin test mods/sporesweep`. 엔진이 다른 판과 같게 움직이는지는 `:core`의 JS 시험(`jsNodeTest`)이 같은 기준 기록으로 본다.
 
 ## 웹판
 

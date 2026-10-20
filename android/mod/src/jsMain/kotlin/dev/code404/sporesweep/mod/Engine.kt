@@ -41,7 +41,7 @@ class SporeGame(levelJson: String, seed: Double) {
     /**
      * 활성 구간의 칸을 위 행부터 차례로 짧은 코드로 준다. 안개가 덮은 칸은 `?`다.
      * 코드: `.` 빈칸, `0`~`5` 일반 블록, `H`/`V` 빔, `X` 폭탄, `C` 코어, `D` 드론, `M` 물질, `W` 벽,
-     * `K1`/`K2` 콘크리트, `G0` 철망에 갇힌 블록, `S` 슬러지, `O0` 고치, `R` 잔해, `N` 둥지, `T0` 시한 포자,
+     * `K1`/`K2` 콘크리트, `G0` 철망에 갇힌 블록, `S` 슬러지, `O0` 고치, `R` 잔해, `N` 둥지, `T0:3` 시한 포자(종류:남은 턴),
      * `E` 알, `L0` 쇠사슬, `U` 운석, `F` 굴뚝, `I0` 얼음.
      */
     fun cells(): Array<String> {
@@ -141,7 +141,7 @@ class SporeGame(levelJson: String, seed: Double) {
             is Block.Cocoon -> "O${block.trapped.ordinal}"
             Block.Rubble -> "R"
             is Block.Nest -> "N"
-            is Block.Timed -> "T${block.kind.ordinal}"
+            is Block.Timed -> "T${block.kind.ordinal}:${block.turns}"
             Block.Egg -> "E"
             is Block.Chained -> "L${block.kind.ordinal}"
             Block.Boulder -> "U"

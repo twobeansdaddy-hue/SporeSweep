@@ -29,8 +29,8 @@ export const register: Register = on => {
   })
 
   on('command.run', { command: 'sporesweep' }, async $ => {
-    await $.ui.open({ id: PANE, title: '포자 대청소', focus: true })
-    return { text: '포자 대청소를 열었어요. 판을 한 번 누른 뒤 방향키로 고르고 Enter로 잡아 밀어요.' }
+    await $.ui.open({ id: PANE, title: '포자 대청소', focus: true, columns: 96, rows: 40 })
+    return { text: '포자 대청소를 열었어요. 블록을 잡고 옆으로 끌어서 바꿔요.' }
   })
 
   on('ui.render', { component: 'Pane', requestId: PANE }, async ($, e) => {
