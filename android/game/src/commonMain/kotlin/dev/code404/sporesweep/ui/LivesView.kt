@@ -44,11 +44,11 @@ import kotlin.math.ceil
 /** 1초마다 바뀌는 지금 시각. 생명이 저절로 차는 것을 보여줄 때 쓴다. */
 @Composable
 fun rememberClock(): Instant {
-    var now by remember { mutableLongStateOf(System.currentTimeMillis()) }
+    var now by remember { mutableLongStateOf(kotlin.time.Clock.System.now().toEpochMilliseconds()) }
     LaunchedEffect(Unit) {
         while (true) {
             delay(1000)
-            now = System.currentTimeMillis()
+            now = kotlin.time.Clock.System.now().toEpochMilliseconds()
         }
     }
     return Instant.fromEpochMilliseconds(now)
@@ -57,7 +57,7 @@ fun rememberClock(): Instant {
 /** 남은 시간을 `분:초`로 적는다. */
 fun clock(seconds: Double): String {
     val total = maxOf(ceil(seconds).toInt(), 0)
-    return "%d:%02d".format(total / 60, total % 60)
+    return "${total / 60}:${(total % 60).toString().padStart(2, '0')}"
 }
 
 /** 생명력 표시. 하트와 개수, 가득 차지 않았으면 다음 하나까지 남은 시간(iOS 판 LivesBadge). */

@@ -41,8 +41,8 @@ kotlin {
     }
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
-        browser()
-        // 시험은 Node에서 돈다.
+        // 웹판이 쓰므로 브라우저용으로도 만든다. 시험은 기준 기록 파일을 읽어야 해서 Node에서만 돈다.
+        browser { testTask { enabled = false } }
         nodejs()
     }
 

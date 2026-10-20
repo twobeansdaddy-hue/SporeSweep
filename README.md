@@ -1,6 +1,6 @@
 # 포자 대청소 (SporeSweep)
 
-외계 포자에 덮인 세계의 랜드마크를 매치3 퍼즐로 정화하고 복원하는 모바일 게임입니다. iOS 판(Swift)과 안드로이드 판(Kotlin)이 있고, 규칙과 기능이 같습니다.
+외계 포자에 덮인 세계의 랜드마크를 매치3 퍼즐로 정화하고 복원하는 모바일 게임입니다. iOS 판(Swift)과 안드로이드·웹 판(Kotlin)이 있고, 규칙과 기능이 같습니다. 안드로이드와 웹은 코드 한 벌을 함께 씁니다.
 8개 권역, 24개 도시, 380개 레벨이 들어 있습니다.
 
 ![게임 소개 그림](Docs/images/overview.jpg)
@@ -13,7 +13,7 @@
 
 | | |
 | --- | --- |
-| 플랫폼 | iOS 17 이상, Android 8.0(API 26) 이상. 세로 화면 |
+| 플랫폼 | iOS 17 이상, Android 8.0(API 26) 이상, 웹(Kotlin/Wasm). 세로 화면 |
 | 언어와 도구 | iOS: Swift 6, SwiftUI(화면), SpriteKit(보드), Xcode 27<br>안드로이드: Kotlin, Jetpack Compose(화면), 직접 만든 작은 그리기 엔진(보드), Gradle |
 | 규칙 | 특수 블록 3종과 조합 6종, 장애물 17종(콘크리트와 강화 콘크리트를 따로 센 수), 아이템 3종 |
 | 메타 | 별을 모아 랜드마크를 부위별로 복원, 정화한 만큼 초록으로 돌아오는 지도 |
@@ -81,8 +81,10 @@ SporeSweep(앱) → GameScene → GameCore
 안드로이드 판은 iOS 판을 Kotlin으로 옮긴 것입니다. 규칙의 기준은 늘 iOS 판이고, 그림·소리·레벨 파일은 빌드할 때 iOS 폴더에서 가져옵니다. 옮긴 과정과 iOS와 다른 점은 [android/PORTING.md](android/PORTING.md)에 있습니다.
 
 ```
-android/core/        규칙 엔진, 레벨 읽기, 진행 저장. 안드로이드에 의존하지 않는 순수 Kotlin
-android/app/         앱. Compose 화면, 보드(stage/ 그리기 엔진과 board/), 소리, 광고, 기록
+android/core/        규칙 엔진, 레벨 읽기, 진행 저장. JVM과 웹(Wasm)으로 함께 빌드한다
+android/game/        화면, 보드(stage/ 그리기 엔진과 board/), 앱 상태. 안드로이드와 웹이 함께 쓴다(Compose Multiplatform)
+android/app/         안드로이드 앱. 시작 화면, 소리·저장 구현, 광고, 기록
+android/web/         웹판. 파일 받기, 소리, 브라우저 저장소
 ```
 
 1. JDK 17 이상과 Android SDK(명령줄 도구 또는 Android Studio)를 준비합니다. SDK 위치는 `android/local.properties`의 `sdk.dir`에 적습니다.
@@ -105,6 +107,7 @@ cd android && ./gradlew :app:installDebug
 | 플레이 기록 보내기 | 자기 Firebase 프로젝트의 `google-services.json`을 `android/app/`에 넣는다. 디버그 빌드는 실행 인자 `--ez analytics true`를 줄 때만 보낸다 |
 | 자기 광고 단위 쓰기 | `android/config.example.properties`를 `config.properties`로 복사해 ID를 적는다. 실제 광고는 출시 빌드에서만 나온다 |
 | 개발용 실행 인자 | iOS와 이름이 같다. `adb shell am start -n dev.code404.sporesweep/.MainActivity --es city tokyo --ei level 2 --ez autoplay true` |
+| 웹판 만들기 | `cd android && ./gradlew :web:webSite` → `android/web/build/site`. 자세한 것은 PORTING.md의 "웹판" |
 
 ## 테스트
 

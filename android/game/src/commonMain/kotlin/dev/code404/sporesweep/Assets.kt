@@ -52,7 +52,8 @@ object Assets {
     fun image(name: String): ImageBitmap? = load(name, imageFile(name)?.let { "images/$it" })
 
     /** 보드에 쓰는 조각 그림(`block_brick` 등). */
-    fun sprite(name: String): ImageBitmap? = load("sprite:$name", "sprites/$name.png".takeIf { "$name.png" in list("sprites") })
+    fun sprite(name: String): ImageBitmap? =
+        load("sprite:$name", list("sprites").firstOrNull { it.substringBeforeLast('.') == name }?.let { "sprites/$it" })
 
     /** 이름의 그림들을 미리 받아 둔다. 다 받으면 `done`. */
     fun prefetchImages(names: List<String>, done: () -> Unit = {}) {

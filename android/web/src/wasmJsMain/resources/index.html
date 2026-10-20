@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#141a33">
+<title>포자 대청소</title>
+<link rel="icon" href="icon.png">
+<style>
+  html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #141a33; overscroll-behavior: none; touch-action: none; }
+  /* 게임은 세로 화면용이다. 넓은 화면에서는 가운데에 휴대전화 크기로 띄운다. */
+  #game { position: relative; width: min(100vw, calc(100vh * 0.5625)); height: 100vh; height: 100dvh; margin: 0 auto; }
+  #loading { position: fixed; inset: 0; z-index: 10; background: #141a33; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
+             color: #e9e4ff; font: 600 17px -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; }
+  #loading img { width: 96px; height: 96px; border-radius: 22px; }
+  #loading .bar { width: 160px; height: 6px; border-radius: 3px; background: #2e3558; overflow: hidden; }
+  #loading .bar::after { content: ""; display: block; width: 40%; height: 100%; background: #ff6fb0; border-radius: 3px; animation: slide 1.1s ease-in-out infinite; }
+  @keyframes slide { from { transform: translateX(-100%); } to { transform: translateX(250%); } }
+  #unsupported { display: none; padding: 32px; text-align: center; }
+</style>
+</head>
+<body>
+<div id="game"></div>
+<div id="loading">
+  <img src="icon.png" alt="">
+  <div>포자 대청소를 불러오는 중이에요</div>
+  <div class="bar"></div>
+  <div id="unsupported">이 브라우저에서는 열 수 없어요.<br>최신 Chrome, Safari, Edge, Firefox에서 열어 주세요.</div>
+</div>
+<script>
+// 소리. 게임(Kotlin)이 부른다. 브라우저는 처음 화면을 누르기 전에는 소리를 막으므로 첫 터치 때 깨운다.
+window.sporeAudio = (() => {
+  let context = null;
+  const buffers = {};
+  const pending = [];
+  let music = null;
+  let musicUrl = null;
+  let musicVolume = 0.35;
+  function ensure() {
+    if (!context) {
+      const Ctx = window.AudioContext || window.webkitAudioContext;
+      if (!Ctx) return null;
+      context = new Ctx();
+      pending.splice(0).forEach(([name, url]) => decode(name, url));
+    }
+    if (context.state === "suspended") context.resume();
+    return context;
+  }
+  function decode(name, url) {
+    fetch(url).then(r => r.arrayBuffer()).then(data => context.decodeAudioData(data)).then(buffer => { buffers[name] = buffer; }).catch(() => {});
+  }
+  const wake = () => {
+    ensure();
+    if (music && music.paused) music.play().catch(() => {});
+  };
+  window.addEventListener("pointerdown", wake);
+  window.addEventListener("keydown", wake);
+  document.addEventListener("visibilitychange", () => {
+    if (!music) return;
+    if (document.hidden) music.pause(); else music.play().catch(() => {});
+  });
+  return {
+    loadSound(name, url) { if (context) decode(name, url); else pending.push([name, url]); },
+    playSound(name) {
+      const ctx = ensure();
+      const buffer = buffers[name];
+      if (!ctx || !buffer) return;
+      const source = ctx.createBufferSource();
+      source.buffer = buffer;
+      source.connect(ctx.destination);
+      source.start();
+    },
+    playMusic(url, volume) {
+      musicVolume = volume;
+      if (music && musicUrl === url) { music.volume = volume; if (music.paused) music.play().catch(() => {}); return; }
+      this.stopMusic();
+      music = new Audio(url);
+      music.loop = true;
+      music.volume = volume;
+      musicUrl = url;
+      music.play().catch(() => {});
+    },
+    stopMusic() {
+      if (music) { music.pause(); music.src = ""; }
+      music = null;
+      musicUrl = null;
+    },
+    vibrate(pattern) {
+      if (navigator.vibrate && pattern) navigator.vibrate(pattern.split(",").map(Number));
+    },
+  };
+})();
+
+// 게임이 다 뜨면 불러오는 화면을 치운다.
+window.sporeReady = () => { const e = document.getElementById("loading"); if (e) e.remove(); };
+
+// WebAssembly를 모르는 아주 오래된 브라우저에서는 열 수 없다고 알린다.
+if (typeof WebAssembly === "undefined") {
+  document.querySelector("#loading .bar").remove();
+  document.getElementById("unsupported").style.display = "block";
+}
+</script>
+<script src="sporesweep.js"></script>
+</body>
+</html>

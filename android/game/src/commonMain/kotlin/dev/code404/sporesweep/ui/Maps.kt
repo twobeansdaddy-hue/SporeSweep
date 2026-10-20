@@ -178,7 +178,7 @@ fun FlightLayer(from: Offset, to: Offset, progress: Float, arrived: Boolean, lin
     }
     if (!arrived) {
         val (point, angle) = flightPoint(from, to, progress)
-        val degrees = Math.toDegrees(angle.toDouble()).toFloat()
+        val degrees = (angle * 180.0 / kotlin.math.PI).toFloat()
         val flipped = cos(angle) < 0
         Icon(
             Icons.Filled.Flight, null, tint = Color.White,

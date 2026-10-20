@@ -32,6 +32,16 @@ dependencyResolutionManagement {
             }
             filter { includeModule("com.yarnpkg", "yarn") }
         }
+        exclusiveContent {
+            forRepository {
+                ivy("https://github.com/WebAssembly/binaryen/releases/download") {
+                    name = "Binaryen Distributions"
+                    patternLayout { artifact("version_[revision]/[module]-version_[revision]-[classifier].[ext]") }
+                    metadataSources { artifact() }
+                }
+            }
+            filter { includeModule("com.github.webassembly", "binaryen") }
+        }
     }
 }
 
@@ -39,3 +49,4 @@ rootProject.name = "SporeSweep"
 include(":core")
 include(":game")
 include(":app")
+include(":web")
