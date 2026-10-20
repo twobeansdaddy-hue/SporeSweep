@@ -1,152 +1,163 @@
 {
-  "id": "seoul-011",
-  "city": "seoul",
-  "columns": 8,
-  "rows": 20,
-  "blockTypes": 5,
-  "moves": 30,
-  "seed": 1011,
-  "materials": [
+  "blockTypes" : 5,
+  "city" : "seoul",
+  "columns" : 8,
+  "id" : "seoul-011",
+  "materials" : [
     {
-      "column": 1,
-      "row": 0
+      "column" : 1,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
     },
     {
-      "column": 6,
-      "row": 0
+      "column" : 6,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
     }
   ],
-  "pendingMaterials": [
+  "materialsSlide" : true,
+  "moves" : 30,
+  "obstacles" : [
     {
-      "column": 3,
-      "depth": 8
+      "column" : 2,
+      "row" : 4,
+      "type" : "cage"
+    },
+    {
+      "column" : 5,
+      "row" : 4,
+      "type" : "cage"
+    },
+    {
+      "column" : 3,
+      "row" : 6,
+      "type" : "cage"
+    },
+    {
+      "column" : 4,
+      "row" : 6,
+      "type" : "cage"
+    },
+    {
+      "column" : 0,
+      "hp" : 2,
+      "row" : 8,
+      "type" : "concrete"
+    },
+    {
+      "column" : 7,
+      "hp" : 2,
+      "row" : 8,
+      "type" : "concrete"
+    },
+    {
+      "column" : 1,
+      "hp" : 1,
+      "row" : 8,
+      "type" : "concrete"
+    },
+    {
+      "column" : 6,
+      "hp" : 1,
+      "row" : 8,
+      "type" : "concrete"
+    },
+    {
+      "column" : 7,
+      "row" : 11,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 12,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 12,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 13,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 13,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 13,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 14,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 14,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 14,
+      "type" : "wall"
+    },
+    {
+      "column" : 4,
+      "row" : 14,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 15,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 15,
+      "type" : "wall"
+    },
+    {
+      "column" : 5,
+      "row" : 15,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 16,
+      "type" : "wall"
+    },
+    {
+      "column" : 6,
+      "row" : 16,
+      "type" : "wall"
+    },
+    {
+      "column" : 7,
+      "row" : 17,
+      "type" : "wall"
     }
   ],
-  "obstacles": [
+  "pendingMaterials" : [
     {
-      "type": "cage",
-      "column": 2,
-      "row": 4
-    },
-    {
-      "type": "cage",
-      "column": 5,
-      "row": 4
-    },
-    {
-      "type": "cage",
-      "column": 3,
-      "row": 6
-    },
-    {
-      "type": "cage",
-      "column": 4,
-      "row": 6
-    },
-    {
-      "type": "concrete",
-      "column": 0,
-      "row": 8,
-      "hp": 2
-    },
-    {
-      "type": "concrete",
-      "column": 7,
-      "row": 8,
-      "hp": 2
-    },
-    {
-      "type": "concrete",
-      "column": 1,
-      "row": 8,
-      "hp": 1
-    },
-    {
-      "type": "concrete",
-      "column": 6,
-      "row": 8,
-      "hp": 1
-    },
-    {
-      "type": "wall",
-      "column": 7,
-      "row": 11
-    },
-    {
-      "type": "wall",
-      "column": 7,
-      "row": 12
-    },
-    {
-      "type": "wall",
-      "column": 6,
-      "row": 12
-    },
-    {
-      "type": "wall",
-      "column": 7,
-      "row": 13
-    },
-    {
-      "type": "wall",
-      "column": 6,
-      "row": 13
-    },
-    {
-      "type": "wall",
-      "column": 5,
-      "row": 13
-    },
-    {
-      "type": "wall",
-      "column": 7,
-      "row": 14
-    },
-    {
-      "type": "wall",
-      "column": 6,
-      "row": 14
-    },
-    {
-      "type": "wall",
-      "column": 5,
-      "row": 14
-    },
-    {
-      "type": "wall",
-      "column": 4,
-      "row": 14
-    },
-    {
-      "type": "wall",
-      "column": 7,
-      "row": 15
-    },
-    {
-      "type": "wall",
-      "column": 6,
-      "row": 15
-    },
-    {
-      "type": "wall",
-      "column": 5,
-      "row": 15
-    },
-    {
-      "type": "wall",
-      "column": 7,
-      "row": 16
-    },
-    {
-      "type": "wall",
-      "column": 6,
-      "row": 16
-    },
-    {
-      "type": "wall",
-      "column": 7,
-      "row": 17
+      "column" : 3,
+      "depth" : 8
     }
   ],
-  "starScores": [4900, 5800]
+  "rewards" : [
+
+  ],
+  "rows" : 20,
+  "seed" : 1011,
+  "starScores" : [
+    5300,
+    6400
+  ]
 }

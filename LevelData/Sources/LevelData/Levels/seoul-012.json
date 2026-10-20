@@ -1,24 +1,72 @@
 {
-  "id": "seoul-012",
-  "city": "seoul",
-  "columns": 8,
-  "rows": 20,
-  "blockTypes": 5,
-  "moves": 25,
-  "seed": 1012,
-  "tutorial": "오염 슬러지는 하나도 지우지 못한 턴마다 옆 칸으로 번져요. 옆에서 블록을 맞춰 없애세요!",
-  "materials": [
-    { "column": 2, "row": 0 },
-    { "column": 5, "row": 0 }
+  "blockTypes" : 5,
+  "city" : "seoul",
+  "columns" : 8,
+  "id" : "seoul-012",
+  "materials" : [
+    {
+      "column" : 2,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    },
+    {
+      "column" : 5,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
   ],
-  "obstacles": [
-    { "type": "sludge", "column": 0, "row": 6 },
-    { "type": "sludge", "column": 7, "row": 6 },
-    { "type": "sludge", "column": 3, "row": 9 },
-    { "type": "sludge", "column": 4, "row": 9 },
-    { "type": "concrete", "column": 3, "row": 13, "hp": 1 },
-    { "type": "concrete", "column": 4, "row": 13, "hp": 1 }
+  "materialsSlide" : true,
+  "moves" : 20,
+  "obstacles" : [
+    {
+      "column" : 0,
+      "row" : 6,
+      "type" : "sludge"
+    },
+    {
+      "column" : 7,
+      "row" : 6,
+      "type" : "sludge"
+    },
+    {
+      "column" : 3,
+      "row" : 9,
+      "type" : "sludge"
+    },
+    {
+      "column" : 4,
+      "row" : 9,
+      "type" : "sludge"
+    },
+    {
+      "column" : 3,
+      "hp" : 1,
+      "row" : 13,
+      "type" : "concrete"
+    },
+    {
+      "column" : 4,
+      "hp" : 1,
+      "row" : 13,
+      "type" : "concrete"
+    }
   ],
-  "starScores": [3600, 4600],
-  "rewards": ["beam", "bomb", "core", "extraMoves"]
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "beam",
+    "bomb",
+    "core",
+    "extraMoves"
+  ],
+  "rows" : 20,
+  "seed" : 1012,
+  "starScores" : [
+    3600,
+    4500
+  ],
+  "tutorial" : "오염 슬러지는 하나도 지우지 못한 턴마다 옆 칸으로 번져요. 옆에서 블록을 맞춰 없애세요!"
 }

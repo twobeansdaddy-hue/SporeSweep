@@ -9,7 +9,7 @@ plugins {
 
 val levels = rootDir.parentFile.resolve("LevelData/Sources/LevelData/Levels")
 
-// 웹(Wasm) 시험은 Node에서 파일을 바로 읽으므로 위치를 코드로 넘긴다.
+// 웹(Wasm)과 mods용(JS) 시험은 Node에서 파일을 바로 읽으므로 위치를 코드로 넘긴다.
 val testPaths = layout.buildDirectory.dir("generated/testPaths")
 val writeTestPaths = tasks.register("writeTestPaths") {
     val output = testPaths.map { it.file("TestPaths.kt") }
@@ -25,7 +25,7 @@ val writeTestPaths = tasks.register("writeTestPaths") {
         )
     }
 }
-tasks.matching { it.name == "compileTestKotlinWasmJs" }.configureEach { dependsOn(writeTestPaths) }
+tasks.matching { it.name == "compileTestKotlinWasmJs" || it.name == "compileTestKotlinJs" }.configureEach { dependsOn(writeTestPaths) }
 
 kotlin {
     jvm {
@@ -40,8 +40,9 @@ kotlin {
         }
     }
     // Claude Code의 mods용. mods는 WebAssembly를 쓰지 못해서 순수 자바스크립트로도 만든다(:mod).
+    // 시험도 Node에서 같은 기준 기록으로 돌려 mods판의 규칙이 같은지 본다.
     js {
-        nodejs { testTask { enabled = false } }
+        nodejs { testTask { useMocha { timeout = "600s" } } }
         useEsModules()
     }
     @OptIn(ExperimentalWasmDsl::class)
@@ -64,5 +65,6 @@ kotlin {
         // 레벨 JSON은 iOS 판과 같은 파일을 쓴다. 복사하지 않는다.
         jvmTest.get().resources.srcDirs(levels, "src/commonTest/resources")
         wasmJsTest.get().kotlin.srcDir(testPaths)
+        jsTest.get().kotlin.srcDir(testPaths)
     }
 }

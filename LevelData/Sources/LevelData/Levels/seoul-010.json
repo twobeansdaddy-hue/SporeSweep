@@ -1,21 +1,56 @@
 {
-  "id": "seoul-010",
-  "city": "seoul",
-  "columns": 8,
-  "rows": 18,
-  "blockTypes": 4,
-  "moves": 25,
-  "seed": 1010,
-  "tutorial": "2×2 물질은 두 칸 폭의 아래가 한 번에 비어야 내려가요. 콘크리트부터 부수고 길을 열어 주세요.",
-  "materials": [
-    { "column": 3, "row": 0, "width": 2, "height": 2 }
+  "blockTypes" : 4,
+  "city" : "seoul",
+  "columns" : 8,
+  "id" : "seoul-010",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 2,
+      "row" : 0,
+      "width" : 2
+    }
   ],
-  "obstacles": [
-    { "type": "concrete", "column": 2, "row": 9, "hp": 1 },
-    { "type": "concrete", "column": 3, "row": 9, "hp": 1 },
-    { "type": "concrete", "column": 4, "row": 9, "hp": 1 },
-    { "type": "concrete", "column": 5, "row": 9, "hp": 1 }
+  "materialsSlide" : true,
+  "moves" : 15,
+  "obstacles" : [
+    {
+      "column" : 2,
+      "hp" : 1,
+      "row" : 9,
+      "type" : "concrete"
+    },
+    {
+      "column" : 3,
+      "hp" : 1,
+      "row" : 9,
+      "type" : "concrete"
+    },
+    {
+      "column" : 4,
+      "hp" : 1,
+      "row" : 9,
+      "type" : "concrete"
+    },
+    {
+      "column" : 5,
+      "hp" : 1,
+      "row" : 9,
+      "type" : "concrete"
+    }
   ],
-  "starScores": [7800, 11100],
-  "rewards": ["extraMoves", "bomb"]
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "extraMoves",
+    "bomb"
+  ],
+  "rows" : 18,
+  "seed" : 1010,
+  "starScores" : [
+    9100,
+    13500
+  ],
+  "tutorial" : "2×2 물질은 두 칸 폭의 아래가 한 번에 비어야 내려가요. 콘크리트부터 부수고 길을 열어 주세요."
 }

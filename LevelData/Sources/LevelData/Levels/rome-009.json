@@ -18,7 +18,7 @@
     }
   ],
   "materialsSlide" : true,
-  "moves" : 30,
+  "moves" : 25,
   "obstacles" : [
     {
       "column" : 2,
@@ -95,7 +95,7 @@
   "rows" : 28,
   "seed" : 21109714,
   "starScores" : [
-    4800,
-    5900
+    5400,
+    6500
   ]
 }

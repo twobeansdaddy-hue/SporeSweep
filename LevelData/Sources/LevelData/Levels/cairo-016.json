@@ -30,7 +30,7 @@
     }
   ],
   "materialsSlide" : true,
-  "moves" : 50,
+  "moves" : 35,
   "obstacles" : [
     {
       "column" : 7,

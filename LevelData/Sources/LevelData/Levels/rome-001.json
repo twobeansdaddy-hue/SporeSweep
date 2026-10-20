@@ -18,7 +18,7 @@
     }
   ],
   "materialsSlide" : true,
-  "moves" : 25,
+  "moves" : 20,
   "obstacles" : [
     {
       "column" : 4,
@@ -45,7 +45,7 @@
   "rows" : 23,
   "seed" : 21101642,
   "starScores" : [
-    4100,
+    3800,
     4700
   ],
   "tutorial" : "쇠사슬에 감긴 블록은 두 겹으로 갇혀 있어요. 한 번 맞추면 쇠사슬이 풀려 철망만 남고, 한 번 더 맞추면 철망이 벗겨져요."

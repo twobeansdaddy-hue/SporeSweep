@@ -1,21 +1,46 @@
 {
-  "id": "seoul-006",
-  "city": "seoul",
-  "columns": 8,
-  "rows": 16,
-  "blockTypes": 5,
-  "moves": 20,
-  "seed": 1006,
-  "tutorial": "화면 위에서 기다리는 물질이 있어요. 열 위의 숫자만큼 그 열의 블록을 지우면 물질이 내려와요.",
-  "materials": [
-    { "column": 2, "row": 0 }
+  "blockTypes" : 5,
+  "city" : "seoul",
+  "columns" : 8,
+  "id" : "seoul-006",
+  "materials" : [
+    {
+      "column" : 2,
+      "height" : 1,
+      "row" : 0,
+      "width" : 1
+    }
   ],
-  "pendingMaterials": [
-    { "column": 5, "depth": 6 }
+  "materialsSlide" : true,
+  "moves" : 15,
+  "obstacles" : [
+    {
+      "column" : 4,
+      "hp" : 1,
+      "row" : 7,
+      "type" : "concrete"
+    },
+    {
+      "column" : 5,
+      "hp" : 1,
+      "row" : 7,
+      "type" : "concrete"
+    }
   ],
-  "obstacles": [
-    { "type": "concrete", "column": 4, "row": 7, "hp": 1 },
-    { "type": "concrete", "column": 5, "row": 7, "hp": 1 }
+  "pendingMaterials" : [
+    {
+      "column" : 5,
+      "depth" : 6
+    }
   ],
-  "starScores": [3800, 4800]
+  "rewards" : [
+
+  ],
+  "rows" : 16,
+  "seed" : 1006,
+  "starScores" : [
+    4100,
+    5200
+  ],
+  "tutorial" : "화면 위에서 기다리는 물질이 있어요. 열 위의 숫자만큼 그 열의 블록을 지우면 물질이 내려와요."
 }

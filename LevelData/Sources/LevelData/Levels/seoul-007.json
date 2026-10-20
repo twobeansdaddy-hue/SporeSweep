@@ -1,15 +1,33 @@
 {
-  "id": "seoul-007",
-  "city": "seoul",
-  "columns": 8,
-  "rows": 16,
-  "blockTypes": 4,
-  "moves": 20,
-  "seed": 1007,
-  "tutorial": "가로 2칸짜리 큰 물질은 폭 전체의 아래가 한 번에 비어야 내려가요. 물질 바로 아래에서 가로로 맞추거나 제염 빔을 써 보세요. 큰 물질은 옆으로 옮길 수 없어요.",
-  "materials": [
-    { "column": 3, "row": 0, "width": 2, "height": 1 }
+  "blockTypes" : 4,
+  "city" : "seoul",
+  "columns" : 8,
+  "id" : "seoul-007",
+  "materials" : [
+    {
+      "column" : 3,
+      "height" : 1,
+      "row" : 0,
+      "width" : 2
+    }
   ],
-  "starScores": [10500, 13600],
-  "rewards": ["bomb", "beam"]
+  "materialsSlide" : true,
+  "moves" : 15,
+  "obstacles" : [
+
+  ],
+  "pendingMaterials" : [
+
+  ],
+  "rewards" : [
+    "bomb",
+    "beam"
+  ],
+  "rows" : 16,
+  "seed" : 1007,
+  "starScores" : [
+    11200,
+    15400
+  ],
+  "tutorial" : "가로 2칸짜리 큰 물질은 폭 전체의 아래가 한 번에 비어야 내려가요. 물질 바로 아래에서 가로로 맞추거나 제염 빔을 써 보세요. 큰 물질은 옆으로 옮길 수 없어요."
 }
