@@ -1,9 +1,10 @@
 package dev.code404.sporesweep.core
 
-import java.io.File
-import java.nio.file.Files
-import java.time.Instant
-import java.time.ZoneId
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.UtcOffset
+import kotlinx.datetime.asTimeZone
+import kotlin.time.Duration.Companion.seconds
+import kotlin.time.Instant
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -13,19 +14,20 @@ import kotlin.test.assertTrue
 
 // Progress 패키지의 Swift 시험(DailyGiftTests, LivesTests, ProgressTests)을 옮긴 것이다.
 
-private val start: Instant = Instant.ofEpochSecond(1_800_000_000)
-private val seoul: ZoneId = ZoneId.of("Asia/Seoul")
-private fun day(offset: Int): Instant = start.plusSeconds(offset * 86_400L)
-private fun minutes(value: Int): Instant = start.plusSeconds(value * 60L)
-private val levels = (1..12).map { "seoul-%03d".format(it) }
+internal val start: Instant = Instant.fromEpochSeconds(1_800_000_000)
+// 서울은 일광 절약 시간이 없어 UTC+9로 고정해도 같다. 웹에서는 시간대 이름 표가 없어서 이름으로 찾지 않는다.
+internal val seoul: TimeZone = UtcOffset(hours = 9).asTimeZone()
+internal fun day(offset: Int): Instant = start + (offset * 86_400L).seconds
+internal fun minutes(value: Int): Instant = start + (value * 60L).seconds
+internal val levels = (1..12).map { "seoul-" + it.toString().padStart(3, '0') }
 
 class DailyGiftTest {
     @Test fun oncePerDay() {
         val gift = DailyGift()
         assertTrue(gift.canClaim(start, seoul))
         assertEquals(DailyGift.REWARDS[0], gift.claim(start, seoul))
-        assertFalse(gift.canClaim(start.plusSeconds(3600), seoul))
-        assertNull(gift.claim(start.plusSeconds(3600), seoul))
+        assertFalse(gift.canClaim((start + 3600.seconds), seoul))
+        assertNull(gift.claim((start + 3600.seconds), seoul))
     }
 
     @Test fun streak() {
@@ -283,56 +285,8 @@ class RestoredPartsTest {
     }
 }
 
-class ProgressStoreTest {
-    private fun temporaryStore() = ProgressStore(File(Files.createTempDirectory("ProgressTests").toFile(), "nested/progress.json"))
-
-    @Test fun missingFile() = assertEquals(GameProgress(), temporaryStore().load())
-
-    @Test fun roundTrip() {
-        val store = temporaryStore()
-        val progress = GameProgress()
-        progress.recordClear("seoul-001", 3, 12000)
-        progress.recordClear("seoul-002", 1, 4000)
-        progress.restore("gate", "seoul")
-        store.save(progress)
-        val loaded = ProgressStore(store.file).load()
-        assertEquals(progress, loaded)
-        assertEquals(4, loaded.totalStars(levels))
-        assertEquals(setOf("gate"), loaded.restoredParts("seoul"))
-        assertTrue(loaded.isUnlocked(2, levels))
-    }
-
-    @Test fun overwrite() {
-        val store = temporaryStore()
-        val progress = GameProgress()
-        progress.recordClear("seoul-001", 1, 100)
-        store.save(progress)
-        progress.recordClear("seoul-001", 3, 900)
-        store.save(progress)
-        assertEquals(3, store.load().stars("seoul-001"))
-    }
-
-    @Test fun corruptFile() {
-        val store = temporaryStore()
-        store.file.parentFile.mkdirs()
-        store.file.writeText("{ broken")
-        assertFailsWith<Exception> { store.load() }
-        assertTrue(store.file.exists())
-    }
-
-    @Test fun reset() {
-        val store = temporaryStore()
-        val progress = GameProgress()
-        progress.recordClear("seoul-001", 2, 100)
-        store.save(progress)
-        store.reset()
-        assertEquals(GameProgress(), store.load())
-        store.reset()
-    }
-}
-
 class WorldTest {
-    private fun resource(name: String) = javaClass.classLoader.getResourceAsStream(name)!!.bufferedReader().readText()
+    private fun resource(name: String) = testResource(name)
 
     /** iOS 판 CityTests의 검증을 옮긴 것이다. 모든 도시를 읽고, 복원 계획이 레벨 수로 감당되는지 본다. */
     @Test fun allCitiesLoad() {

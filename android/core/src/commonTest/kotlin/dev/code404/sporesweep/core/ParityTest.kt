@@ -1,6 +1,5 @@
 package dev.code404.sporesweep.core
 
-import java.util.zip.GZIPInputStream
 import kotlin.test.Test
 import kotlin.test.fail
 
@@ -9,9 +8,7 @@ import kotlin.test.fail
  * 기준 기록은 `swift run -c release paritygen <폴더> 40`으로 만든다(LevelData 패키지).
  */
 class ParityTest {
-    private fun resource(name: String) = javaClass.classLoader.getResourceAsStream(name) ?: error("$name 이 없다")
-
-    private fun level(id: String) = Level.parse(resource("$id.json").bufferedReader().readText())
+    private fun level(id: String) = Level.parse(testResource("$id.json"))
 
     private fun parsePosition(column: String, row: String) = Position(column.toInt(), row.toInt())
 
@@ -21,7 +18,7 @@ class ParityTest {
     private var stepsReplayed = 0
 
     private fun replay(city: String): List<Mismatch> {
-        val lines = GZIPInputStream(resource("parity/$city.txt.gz")).bufferedReader().readLines()
+        val lines = testResource("parity/$city.txt.gz").lines().filter { it.isNotEmpty() }
         val mismatches = mutableListOf<Mismatch>()
         var i = 0
         while (i < lines.size) {

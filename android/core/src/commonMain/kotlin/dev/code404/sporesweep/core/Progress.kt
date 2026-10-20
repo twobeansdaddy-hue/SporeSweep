@@ -13,13 +13,12 @@ import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.put
 import kotlinx.serialization.json.putJsonArray
 import kotlinx.serialization.json.putJsonObject
-import java.io.File
-import java.nio.file.Files
-import java.nio.file.StandardCopyOption
-import java.time.Instant
-import java.time.LocalDate
-import java.time.ZoneId
-import java.time.temporal.ChronoUnit
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.daysUntil
+import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Instant
 
 // Swift 판 Progress 패키지(GameProgress, Lives, DailyGift, ProgressStore)를 옮긴 것이다.
 // 시계를 직접 읽지 않고 늘 지금 시각과 시간대를 받아서 계산한다. 그래야 시험할 수 있다.
@@ -56,7 +55,7 @@ class Lives private constructor(
         put("adCount", adCount)
     }
 
-    private fun elapsed(now: Instant, start: Instant) = maxOf((now.toEpochMilli() - start.toEpochMilli()) / 1000.0, 0.0)
+    private fun elapsed(now: Instant, start: Instant) = maxOf((now.toEpochMilliseconds() - start.toEpochMilliseconds()) / 1000.0, 0.0)
 
     /** 지금 가진 수. */
     fun count(now: Instant): Int {
@@ -75,7 +74,7 @@ class Lives private constructor(
         val start = refillStart ?: return
         val gained = (elapsed(now, start) / REFILL_INTERVAL).toInt()
         stored = minOf(stored + gained, MAXIMUM)
-        refillStart = if (stored >= MAXIMUM) null else start.plusMillis((gained * REFILL_INTERVAL * 1000).toLong())
+        refillStart = if (stored >= MAXIMUM) null else start + (gained * REFILL_INTERVAL * 1000).toLong().milliseconds
     }
 
     /** 하나를 잃는다. 하나도 없으면 `false`다. */
@@ -87,17 +86,17 @@ class Lives private constructor(
         return true
     }
 
-    fun adGrantsLeft(now: Instant, zone: ZoneId = ZoneId.systemDefault()): Int {
+    fun adGrantsLeft(now: Instant, zone: TimeZone = TimeZone.currentSystemDefault()): Int {
         val day = adDay
-        if (day == null || day != LocalDate.ofInstant(now, zone)) return DAILY_AD_LIMIT
+        if (day == null || day != now.toLocalDateTime(zone).date) return DAILY_AD_LIMIT
         return maxOf(DAILY_AD_LIMIT - adCount, 0)
     }
 
     /** 광고를 보고 하나를 받는다. 가득 차 있거나 오늘 받을 만큼 다 받았으면 `false`다. */
-    fun addFromAd(now: Instant, zone: ZoneId = ZoneId.systemDefault()): Boolean {
+    fun addFromAd(now: Instant, zone: TimeZone = TimeZone.currentSystemDefault()): Boolean {
         settle(now)
         if (stored >= MAXIMUM || adGrantsLeft(now, zone) <= 0) return false
-        val today = LocalDate.ofInstant(now, zone)
+        val today = now.toLocalDateTime(zone).date
         if (adDay == today) {
             adCount += 1
         } else {
@@ -155,27 +154,27 @@ class DailyGift private constructor(lastDay: LocalDate?, streak: Int) {
         put("streak", streak)
     }
 
-    fun canClaim(now: Instant, zone: ZoneId = ZoneId.systemDefault()): Boolean {
+    fun canClaim(now: Instant, zone: TimeZone = TimeZone.currentSystemDefault()): Boolean {
         val last = lastDay ?: return true
         // 시계를 뒤로 돌려 마지막으로 받은 날보다 앞이 되어도 다시 받을 수 없다.
-        return LocalDate.ofInstant(now, zone) > last
+        return now.toLocalDateTime(zone).date > last
     }
 
     /** 지금 받으면 몇째 날의 선물인지(1부터). 하루라도 거르면 첫날로 돌아간다. */
-    fun nextDay(now: Instant, zone: ZoneId = ZoneId.systemDefault()): Int {
+    fun nextDay(now: Instant, zone: TimeZone = TimeZone.currentSystemDefault()): Int {
         val last = lastDay ?: return 1
         if (streak <= 0) return 1
-        val gap = ChronoUnit.DAYS.between(last, LocalDate.ofInstant(now, zone))
+        val gap = last.daysUntil(now.toLocalDateTime(zone).date)
         if (gap > 1) return 1
         return streak % CYCLE + 1
     }
 
     /** 오늘의 선물을 받는다. 오늘 이미 받았으면 `null`이다. */
-    fun claim(now: Instant, zone: ZoneId = ZoneId.systemDefault()): List<String>? {
+    fun claim(now: Instant, zone: TimeZone = TimeZone.currentSystemDefault()): List<String>? {
         if (!canClaim(now, zone)) return null
         val day = nextDay(now, zone)
         streak = day
-        lastDay = LocalDate.ofInstant(now, zone)
+        lastDay = now.toLocalDateTime(zone).date
         return REWARDS[day - 1]
     }
 
@@ -263,12 +262,12 @@ class GameProgress {
     fun toJson(): String = Json { prettyPrint = true }.encodeToString(
         JsonObject.serializer(),
         buildJsonObject {
-            putJsonObject("stars") { stars.toSortedMap().forEach { (k, v) -> put(k, v) } }
-            putJsonObject("bestScores") { bestScores.toSortedMap().forEach { (k, v) -> put(k, v) } }
+            putJsonObject("stars") { stars.entries.sortedBy { it.key }.forEach { (k, v) -> put(k, v) } }
+            putJsonObject("bestScores") { bestScores.entries.sortedBy { it.key }.forEach { (k, v) -> put(k, v) } }
             putJsonObject("restoredParts") {
-                restoredParts.toSortedMap().forEach { (k, v) -> putJsonArray(k) { v.sorted().forEach { add(JsonPrimitive(it)) } } }
+                restoredParts.entries.sortedBy { it.key }.forEach { (k, v) -> putJsonArray(k) { v.sorted().forEach { add(JsonPrimitive(it)) } } }
             }
-            putJsonObject("boosters") { boosters.toSortedMap().forEach { (k, v) -> put(k, v) } }
+            putJsonObject("boosters") { boosters.entries.sortedBy { it.key }.forEach { (k, v) -> put(k, v) } }
             put("lives", lives.toJson())
             put("daily", daily.toJson())
         },
@@ -295,23 +294,5 @@ class GameProgress {
             o["daily"]?.jsonObject?.let { progress.daily = DailyGift.fromJson(it) }
             return progress
         }
-    }
-}
-
-/** 진행 상황을 JSON 파일로 기기에 저장한다. */
-class ProgressStore(val file: File) {
-    /** 파일이 없으면 빈 진행이다. 깨진 파일은 덮어쓰지 않도록 예외를 던진다. */
-    fun load(): GameProgress = if (!file.exists()) GameProgress() else GameProgress.fromJson(file.readText())
-
-    /** 쓰는 도중에 앱이 꺼져도 이전 파일이 깨지지 않게 다른 파일에 쓴 뒤 바꿔 넣는다. */
-    fun save(progress: GameProgress) {
-        file.parentFile?.mkdirs()
-        val temporary = File(file.parentFile, file.name + ".tmp")
-        temporary.writeText(progress.toJson())
-        Files.move(temporary.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE)
-    }
-
-    fun reset() {
-        if (file.exists()) file.delete()
     }
 }

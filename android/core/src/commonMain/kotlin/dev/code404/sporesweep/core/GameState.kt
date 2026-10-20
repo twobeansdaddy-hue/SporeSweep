@@ -1,5 +1,6 @@
 package dev.code404.sporesweep.core
 
+import kotlin.math.abs
 /**
  * 한 판의 상태. Swift 판의 `GameState`를 옮긴 것이다.
  *
@@ -742,7 +743,7 @@ class GameState private constructor(
         }
         fun cross(thickness: Int): List<Position> {
             val reach = thickness / 2
-            return zone.filter { Math.abs(it.column - origin.column) <= reach || Math.abs(it.row - origin.row) <= reach }
+            return zone.filter { abs(it.column - origin.column) <= reach || abs(it.row - origin.row) <= reach }
         }
         return when (effect) {
             is SpecialEffect.Beam -> if (effect.orientation == Orientation.HORIZONTAL) zone.filter { it.row == origin.row } else zone.filter { it.column == origin.column }

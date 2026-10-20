@@ -136,7 +136,7 @@ cd Progress && swift test
 안드로이드는 한 번에 돌립니다.
 
 ```bash
-cd android && ./gradlew :core:test
+cd android && ./gradlew :core:allTests
 ```
 
 | 테스트 | 보는 것 |

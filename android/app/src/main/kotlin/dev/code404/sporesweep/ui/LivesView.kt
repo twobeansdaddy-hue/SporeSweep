@@ -37,7 +37,7 @@ import dev.code404.sporesweep.board.GameSound
 import dev.code404.sporesweep.core.Lives
 import dev.code404.sporesweep.tr
 import kotlinx.coroutines.delay
-import java.time.Instant
+import kotlin.time.Instant
 import kotlin.math.ceil
 
 /** 1초마다 바뀌는 지금 시각. 생명이 저절로 차는 것을 보여줄 때 쓴다. */
@@ -50,7 +50,7 @@ fun rememberClock(): Instant {
             now = System.currentTimeMillis()
         }
     }
-    return Instant.ofEpochMilli(now)
+    return Instant.fromEpochMilliseconds(now)
 }
 
 /** 남은 시간을 `분:초`로 적는다. */

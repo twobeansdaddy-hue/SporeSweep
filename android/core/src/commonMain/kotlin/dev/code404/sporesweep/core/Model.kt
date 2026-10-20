@@ -1,5 +1,6 @@
 package dev.code404.sporesweep.core
 
+import kotlin.math.abs
 // iOS 판의 GameCore(Swift)를 옮긴 것이다. 규칙이 한 글자라도 다르면 parity 시험이 실패한다.
 // 규칙을 고칠 때는 Swift 쪽을 먼저 고치고, paritygen으로 기준 기록을 다시 만든 뒤 여기를 맞춘다.
 
@@ -163,7 +164,7 @@ data class Position(val column: Int, val row: Int) : Comparable<Position> {
 }
 
 data class Swap(val from: Position, val to: Position) {
-    val isAdjacent get() = Math.abs(from.column - to.column) + Math.abs(from.row - to.row) == 1
+    val isAdjacent get() = abs(from.column - to.column) + abs(from.row - to.row) == 1
 }
 
 data class BlockMove(val from: Position, val to: Position)

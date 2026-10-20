@@ -7,9 +7,9 @@ iOS 판(Swift)을 Kotlin으로 옮긴다. 단계마다 **자동으로 확인하�
 
 | 고리 | 명령 | 통과 조건 |
 | --- | --- | --- |
-| 규칙 동치 | `cd android && ./gradlew :core:test` | Swift가 둔 판(399레벨, 15,302수)을 다시 두고, 수마다 이벤트·점수·보드·난수 상태가 글자 하나까지 같다 |
-| 기준 기록 다시 만들기 | `cd LevelData && swift run -c release paritygen ../android/core/src/test/resources/parity 40` 후 `gzip -9 -f ../android/core/src/test/resources/parity/*.txt` | 규칙을 바꿨을 때만 |
-| 진행 저장 | `./gradlew :core:test` | Swift 판의 진행 시험 33개를 옮긴 것이 통과한다(파일 위치를 보는 iOS 전용 시험 1개는 뺐다) |
+| 규칙 동치 | `cd android && ./gradlew :core:allTests` | Swift가 둔 판(399레벨, 15,302수)을 다시 두고, 수마다 이벤트·점수·보드·난수 상태가 글자 하나까지 같다. JVM과 웹(Wasm, Node) 양쪽에서 돈다 |
+| 기준 기록 다시 만들기 | `cd LevelData && swift run -c release paritygen ../android/core/src/commonTest/resources/parity 40` 후 `gzip -9 -f ../android/core/src/commonTest/resources/parity/*.txt` | 규칙을 바꿨을 때만 |
+| 진행 저장 | `./gradlew :core:allTests` | Swift 판의 진행 시험 33개를 옮긴 것이 통과한다(파일 위치를 보는 iOS 전용 시험 1개는 뺐다) |
 | 앱 빌드 | `./gradlew :app:assembleDebug` | 경고 없이 빌드된다 |
 | 화면 비교 | 에뮬레이터와 iOS 시뮬레이터를 같은 실행 인자로 띄워 찍고 나란히 본다 | 배치와 그림이 같다 |
 

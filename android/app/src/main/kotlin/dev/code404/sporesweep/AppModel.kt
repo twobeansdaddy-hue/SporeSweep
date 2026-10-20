@@ -23,7 +23,8 @@ import dev.code404.sporesweep.core.RegionCatalog
 import dev.code404.sporesweep.core.RestoreBlocker
 import dev.code404.sporesweep.core.Tool
 import java.io.File
-import java.time.Instant
+import kotlin.time.Clock
+import kotlin.time.Instant
 import java.time.LocalDate
 
 /**
@@ -195,7 +196,7 @@ class AppModel(context: Context, val args: DebugArgs) {
             canSave = false
         }
         if (args.has("lives")) {
-            progress.lives.set(args.int("lives"), Instant.now())
+            progress.lives.set(args.int("lives"), Clock.System.now())
             canSave = false
         }
         if (args.bool("map")) currentRegion?.let { mapScreen = MapScreen.RegionMap(it.id) }
@@ -333,39 +334,39 @@ class AppModel(context: Context, val args: DebugArgs) {
     // MARK: 생명력
 
     val usesLives get() = !isLabMode
-    fun lives(now: Instant = Instant.now()) = progress.lives.count(now)
-    fun timeUntilNextLife(now: Instant = Instant.now()) = progress.lives.timeUntilNext(now)
+    fun lives(now: Instant = Clock.System.now()) = progress.lives.count(now)
+    fun timeUntilNextLife(now: Instant = Clock.System.now()) = progress.lives.timeUntilNext(now)
     val canStartLevel get() = !usesLives || lives() > 0
 
     fun loseLife() {
-        if (!usesLives || !progress.lives.lose(Instant.now())) return
+        if (!usesLives || !progress.lives.lose(Clock.System.now())) return
         if (lives() == 0) Tracker.log(Tracker.Event.LivesOut)
         save()
     }
 
-    fun adLivesLeft(now: Instant = Instant.now()) = progress.lives.adGrantsLeft(now)
+    fun adLivesLeft(now: Instant = Clock.System.now()) = progress.lives.adGrantsLeft(now)
 
     fun grantLifeFromAd(): Boolean {
-        if (!progress.lives.addFromAd(Instant.now())) return false
+        if (!progress.lives.addFromAd(Clock.System.now())) return false
         save()
         return true
     }
 
     // MARK: 일일 보상
 
-    val canClaimDailyGift get() = !isLabMode && progress.daily.canClaim(Instant.now())
+    val canClaimDailyGift get() = !isLabMode && progress.daily.canClaim(Clock.System.now())
 
-    val dailyGiftDay get() = if (progress.daily.canClaim(Instant.now())) progress.daily.nextDay(Instant.now()) else maxOf(progress.daily.streak, 1)
+    val dailyGiftDay get() = if (progress.daily.canClaim(Clock.System.now())) progress.daily.nextDay(Clock.System.now()) else maxOf(progress.daily.streak, 1)
 
     fun claimDailyGift(): List<String>? {
-        val items = progress.daily.claim(Instant.now()) ?: return null
+        val items = progress.daily.claim(Clock.System.now()) ?: return null
         Tracker.log(Tracker.Event.DailyGift(progress.daily.streak))
         for (item in items) {
             val parts = item.split(":")
             when (parts[0]) {
                 "booster" -> progress.addBooster(parts[1])
                 "tool" -> progress.addBooster("tool_" + parts[1])
-                else -> progress.lives.set(Lives.MAXIMUM, Instant.now())
+                else -> progress.lives.set(Lives.MAXIMUM, Clock.System.now())
             }
         }
         save()
@@ -446,7 +447,7 @@ class AppModel(context: Context, val args: DebugArgs) {
 
     /** 생명을 모두 비운다. 생명 광고를 보려고 쓴다. 진행에 저장된다. */
     fun drainLives() {
-        progress.lives.set(0, Instant.now())
+        progress.lives.set(0, Clock.System.now())
         save()
     }
 
