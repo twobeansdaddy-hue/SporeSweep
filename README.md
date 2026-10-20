@@ -114,6 +114,26 @@ cd android && ./gradlew :app:installDebug
 
 Claude Code 안에서 하는 작은 판입니다. `mods/sporesweep`에 있고, 규칙은 다른 판과 같은 엔진(Kotlin을 순수 자바스크립트로 빌드한 것)입니다. 보드는 이모지와 색깔 칸으로 그리고, 블록을 마우스로 끌거나 방향키로 둡니다. 창이 넓으면 옆에 블록 설명이 나옵니다.
 
+### 설치해서 하기
+
+배포용 저장소 [sporesweep-mod](https://github.com/twobeansdaddy-hue/sporesweep-mod)에서 설치합니다. Claude Code 터미널에서 입력하고, `Add marketplace?`에는 `y`, 범위는 그대로 Enter를 누릅니다.
+
+```
+/plugin install sporesweep --marketplace twobeansdaddy-hue/sporesweep-mod
+```
+
+셸에서 설치하려면:
+
+```bash
+claude plugin install sporesweep --marketplace twobeansdaddy-hue/sporesweep-mod
+```
+
+Claude 데스크톱 앱의 Code 탭에서는 `/plugin`이 동작하지 않습니다. 입력창 옆의 **+** → **Plugins** → **Add marketplace**에 `twobeansdaddy-hue/sporesweep-mod`를 넣고, **Add plugin**으로 `sporesweep`을 추가합니다.
+
+설치한 뒤 `/sporesweep`을 입력하고 **🎮 이어하기**를 누릅니다. 블록을 마우스로 잡고 옆 칸으로 끌면 바뀝니다(키보드: 방향키로 고르고 Enter로 잡은 뒤 방향키로 밀기, H 힌트, R 다시, M 메뉴).
+
+### 개발하기
+
 1. 엔진과 레벨 데이터를 모읍니다.
 
 ```bash
@@ -127,6 +147,8 @@ python3 Tools/make_mod.py
 2. `claude --plugin-dir mods/sporesweep`로 Claude Code를 열고 `/sporesweep`을 입력합니다.
 
 시험은 `claude plugin test mods/sporesweep`입니다(터미널과 데스크톱 화면에서 이어하기, 키보드와 끌기로 한 수 두기, 힌트, 진행 저장).
+
+3. 고친 것을 배포용 저장소에 옮깁니다. `sporesweep-mod`를 받아 둔 폴더에 `mods/sporesweep`를 복사하고(`.claude-plugin/marketplace.json`, `README.md`, `.gitignore`는 그쪽 것을 둡니다) 커밋해 올립니다. 이 개발 폴더를 `--plugin-dir`로 여는 컴퓨터에는 배포판을 설치하지 않습니다. 같은 mods가 두 번 들어갑니다.
 
 ## 테스트
 
