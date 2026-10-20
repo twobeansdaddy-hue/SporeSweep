@@ -1,0 +1,8 @@
+{
+  "name": "sporesweep",
+  "version": "0.1.0",
+  "description": "포자 대청소: Claude Code 안에서 하는 매치3 퍼즐. /sporesweep으로 연다.",
+  "author": {
+    "name": "code404"
+  }
+}

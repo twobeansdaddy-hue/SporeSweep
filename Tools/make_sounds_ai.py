@@ -31,6 +31,7 @@ SOUNDS = {
     "clear3": ("A single short bubbly pop with a bright marimba note and a little sparkle, medium pitch.", 0.5, 0.45, 0.70),
     "create": ("A quick rising magical shimmer, a power-up item appearing, sci-fi energy charging up.", 0.8, 0.80, 0.75),
     "special": ("A sci-fi energy beam cannon firing followed by a short punchy explosion.", 1.0, 0.95, 0.90),
+    "drone": ("A tiny cute cleaning drone zipping away with a quick rising propeller whir, then a light bubbly pop as it hits.", 0.9, 0.80, 0.80),
     "crack": ("A short stone block cracking and crumbling into small rubble.", 0.6, 0.45, 0.80),
     "collect": ("A quick suction whoosh pulling something into a metal container, then a clean confirmation chime.", 1.2, 1.20, 0.80),
     "win": ("A short cheerful victory jingle, bright bells and marimba rising to a happy final chord.", 1.9, 1.90, 0.85),

@@ -849,7 +849,11 @@ class BoardScene(initial: GameState) : Stage() {
                 feedback.play(GameSound.clear(event.chain))
                 feedback.haptic(if (event.chain >= 3) GameHaptic.MEDIUM else GameHaptic.LIGHT)
             }
-            is GameEvent.SpecialsActivated -> { feedback.play(GameSound.SPECIAL); feedback.haptic(GameHaptic.HEAVY) }
+            is GameEvent.SpecialsActivated -> {
+                feedback.play(GameSound.SPECIAL)
+                if (event.activations.any { droneTargets(it.effect).isNotEmpty() }) feedback.play(GameSound.DRONE)
+                feedback.haptic(GameHaptic.HEAVY)
+            }
             is GameEvent.SpecialsCreated -> feedback.play(GameSound.CREATE)
             is GameEvent.ObstaclesDamaged -> { feedback.play(GameSound.CRACK); feedback.haptic(GameHaptic.MEDIUM) }
             is GameEvent.MaterialsCollected -> { feedback.play(GameSound.COLLECT); feedback.haptic(GameHaptic.SUCCESS) }

@@ -1060,8 +1060,11 @@ public final class BoardScene: SKScene {
         case .matchesCleared(_, let chain):
             feedback.play(.clear(chain: chain))
             feedback.haptic(chain >= 3 ? .medium : .light)
-        case .specialsActivated:
+        case .specialsActivated(let activations):
             feedback.play(.special)
+            if activations.contains(where: { Self.isDrone($0.effect) }) {
+                feedback.play(.drone)
+            }
             feedback.haptic(.heavy)
         case .specialsCreated:
             feedback.play(.create)
@@ -1672,6 +1675,14 @@ public final class BoardScene: SKScene {
             }
         }
         return (delays.values.max() ?? 0) + Timing.pop
+    }
+
+    /// 청소 드론이 날아가는 효과인지.
+    private static func isDrone(_ effect: SpecialEffect) -> Bool {
+        switch effect {
+        case .drone, .droneSwarm, .droneBeam, .droneBomb: true
+        default: false
+        }
     }
 
     /// 청소 드론이 날아가 맞히는 칸.

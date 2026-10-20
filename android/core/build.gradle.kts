@@ -39,6 +39,11 @@ kotlin {
             }
         }
     }
+    // Claude Code의 mods용. mods는 WebAssembly를 쓰지 못해서 순수 자바스크립트로도 만든다(:mod).
+    js {
+        nodejs { testTask { enabled = false } }
+        useEsModules()
+    }
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         // 웹판이 쓰므로 브라우저용으로도 만든다. 시험은 기준 기록 파일을 읽어야 해서 Node에서만 돈다.

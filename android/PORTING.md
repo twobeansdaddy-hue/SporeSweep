@@ -50,6 +50,10 @@ cd android && ./gradlew :app:assembleDebug
 - **실기기 연결**: 무선 디버깅으로 붙인다. 처음 한 번 `adb pair 주소:포트 코드`로 페어링하면, 그 뒤로는 같은 와이파이에서 자동으로 연결된다.
 - **시작 시간**: 레벨 파일은 도시를 열 때 읽는다. 에뮬레이터에서 출시 빌드가 약 3초에 뜬다(디버그 빌드는 더 느리다).
 
+## mods판
+
+Claude Code의 mods로 하는 작은 판(2026-10-20). mods는 WebAssembly와 웹페이지 기능을 쓸 수 없어서, `:core`를 Kotlin/JS(ES 모듈)로도 빌드하고 `:mod`가 판을 만들고 수를 두는 함수(`SporeGame`)만 내보낸다. `./gradlew :mod:modEngine`이 esbuild로 한 파일(약 300KB)로 묶고, `Tools/make_mod.py`가 레벨과 함께 `mods/sporesweep/hooks/`에 넣는다. 화면은 `hooks/game.tsx`(Client 영역)가 그린다. 시험은 `claude plugin test mods/sporesweep`.
+
 ## 웹판
 
 동호회 사람들이 출시 전에 해 볼 수 있게 웹으로도 낸다(2026-10-20). 주소는 `play.code404.app`이고, 주소를 아는 사람은 누구나 들어온다.

@@ -9,6 +9,8 @@ public enum GameSound: String, CaseIterable, Sendable {
     case swap, reject
     case clear1, clear2, clear3, clear4, clear5
     case special, create, crack, collect, win, lose
+    /// 청소 드론이 날아갈 때.
+    case drone
     /// 도시 화면에서 랜드마크 부위를 복원할 때.
     case restore
     case tap

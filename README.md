@@ -110,6 +110,24 @@ cd android && ./gradlew :app:installDebug
 | 웹판 만들기 | `cd android && ./gradlew :web:webSite` → `android/web/build/site`. 정적 파일이라 아무 웹 서버에나 올리면 된다. 자세한 것은 PORTING.md의 "웹판" |
 | 웹판의 플레이 기록 | `android/web/firebase-config.example.js`를 `firebase-config.js`로 복사해 자기 Firebase 웹 앱의 값을 적는다 |
 
+## Claude Code mods판
+
+Claude Code 안에서 하는 작은 판입니다. `mods/sporesweep`에 있고, 규칙은 다른 판과 같은 엔진(Kotlin을 순수 자바스크립트로 빌드한 것)입니다. 보드는 색깔 있는 글자로 그리고, 방향키나 마우스로 둡니다.
+
+1. 엔진과 레벨 데이터를 모읍니다.
+
+```bash
+cd android && ./gradlew :mod:modEngine
+```
+
+```bash
+python3 Tools/make_mod.py
+```
+
+2. `claude --plugin-dir mods/sporesweep`로 Claude Code를 열고 `/sporesweep`을 입력합니다.
+
+시험은 `claude plugin test mods/sporesweep`입니다(터미널과 데스크톱 화면에서 한 판 두기, 진행 저장).
+
 ## 테스트
 
 패키지마다 따로 돌립니다.

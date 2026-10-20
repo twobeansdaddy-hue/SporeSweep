@@ -5,7 +5,7 @@ enum class GameSound(val file: String) {
     SWAP("swap"), REJECT("reject"),
     CLEAR1("clear1"), CLEAR2("clear2"), CLEAR3("clear3"), CLEAR4("clear4"), CLEAR5("clear5"),
     SPECIAL("special"), CREATE("create"), CRACK("crack"), COLLECT("collect"), WIN("win"), LOSE("lose"),
-    RESTORE("restore"), TAP("tap"),
+    RESTORE("restore"), TAP("tap"), DRONE("drone"),
     INTRO_EARTH("introEarth"), INTRO_INVASION("introInvasion"), INTRO_RUIN("introRuin"), INTRO_HERO("introHero"), INTRO_ARRIVAL("introArrival");
 
     companion object {
