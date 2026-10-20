@@ -1,0 +1,141 @@
+# 인수인계 문서
+
+다른 사람이나 다른 Claude 계정이 이 프로젝트를 이어받을 때 처음 읽는 문서다. 이 문서와 [DESIGN.md](DESIGN.md)(기획서), [README.md](README.md)(빌드와 시험), [android/PORTING.md](android/PORTING.md)(안드로이드·웹·mods 진행표)를 읽으면 바로 일을 시작할 수 있게 쓴다.
+
+**원칙: 모든 작업은 진행하면서 이 문서를 고친다.** 작업을 마칠 때가 아니라, 무언가 정하거나 바꾸거나 막힐 때마다 적는다. 중간에 계정이 바뀌어도 이어서 할 수 있어야 하기 때문이다. 고칠 곳은 셋이다.
+
+- 맨 아래 **작업 기록**에 날짜와 한 일을 한 줄씩 더한다(새것이 위).
+- **지금 상태와 다음 할 일**을 지금에 맞게 고친다.
+- 새로 생긴 계정, 비밀값의 위치, 주의할 점이 있으면 그 절에 적는다.
+
+마지막으로 고친 날: 2026-10-21
+
+## 1. 프로젝트 한눈에
+
+- **포자 대청소(SporeSweep).** 외계 오염 물질을 보드 아래 격리 컨테이너까지 내려보내 도시를 정화하는 매치3 모바일 게임이다. 24개 도시, 380개 레벨이 있다.
+- **iOS 판이 기준이다.** Swift 6, SpriteKit. 규칙은 Swift 패키지 `GameCore`에 있다.
+- **안드로이드·웹·mods 판은 Kotlin으로 옮긴 것이다.** 규칙이 iOS와 수마다 똑같은지 기준 기록으로 시험한다(아래 4절).
+- **웹판** `https://play.code404.app`은 출시 전에 동호회 사람들이 해 보라고 연 것이다. 광고 대신 바로 보상을 준다.
+- **mods판**은 Claude Code 안에서 하는 작은 판이다. 배포는 별도 공개 저장소 `twobeansdaddy-hue/sporesweep-mod`에서 한다.
+- 출시는 한국 먼저다. Google Play는 개발자 계정이 있고 비공개 테스트를 앞두고 있다. Apple은 개발자 계정 인증을 기다린다.
+
+## 2. 일하는 방식 (계정 주인이 정한 것)
+
+- **대답은 한국어 해요체로 한다.** 문서는 기존 문서처럼 "~다"체로 쓴다.
+- **기획서(DESIGN.md)와 다르게 하려면 먼저 묻는다.** 정한 것을 바꾸면 DESIGN.md와 관련 문서(README, PORTING, PLAN)에 함께 적는다. 기획서는 판(v0.40 같은)을 올리고 맨 앞에 그 판에서 바뀐 것을 한 단락으로 적는다.
+- **자동 확인을 먼저 만든다.** 무엇이 통과면 끝인지 시험이나 명령으로 정한 뒤, 구현 → 확인 → 고치기를 되풀이한다.
+- **빌드하고, 시험하고, 기기에서 본다.** iOS 시뮬레이터, 안드로이드 에뮬레이터, 브라우저에서 실제로 돌려 본다. 보지 못했으면 보지 못했다고 말한다.
+- **커밋과 GitHub에 올리기는 계정 주인이 말할 때만 한다.** 커밋 메시지는 한국어로, 무엇을 왜 바꿨는지 쓴다.
+- **돈이 드는 생성은 먼저 묻는다.** ElevenLabs(효과음·음악)는 크레딧을 쓴다. 그림은 Codex(계정 주인의 ChatGPT 계정)로 만든다.
+- **분홍색은 오염 물질과 목표에만 쓴다.** 그림을 새로 만들 때 지킨다.
+
+## 3. 저장소 구조
+
+| 곳 | 무엇 |
+| --- | --- |
+| `GameCore/` | 규칙(매치, 낙하, 특수 블록, 장애물, 점수). 다른 판이 모두 이것을 따른다 |
+| `GameScene/` | SpriteKit 씬, 그림(`Sprites/`), 소리(`Sounds/`) |
+| `LevelData/` | 레벨 JSON 380개(`Sources/LevelData/Levels/`), 레벨 도구 `levelgen`·`levelaudit`·`paritygen`·`leveldebug` |
+| `Progress/` | 저장, 생명, 일일 보상, 진행 합치기 |
+| `SporeSweep/` | iOS 앱(화면, 광고, Firebase) |
+| `android/core` | 규칙·레벨·진행의 Kotlin판. JVM, 웹(Wasm), JS로 빌드한다 |
+| `android/game` | 그리기 엔진과 화면. 안드로이드와 웹이 함께 쓴다(Compose Multiplatform) |
+| `android/app` | 안드로이드 앱(AdMob, Firebase) |
+| `android/web` | 웹판 |
+| `android/mod` | mods판의 규칙 엔진(Kotlin/JS를 esbuild로 한 파일로 묶는다) |
+| `mods/sporesweep/` | mods판의 개발용 원본(화면 `hooks/game.tsx`, 훅 `hooks/register.tsx`, 시험) |
+| `Tools/` | 그림·소리·스토어 자료·웹 자료·mods 데이터를 만드는 스크립트 |
+| `Reports/` | 레벨 점검 보고서(`LEVEL_AUDIT.md`, `level_audit.csv`) |
+| `Art/` | 그림과 소리의 원본 |
+
+## 4. 자주 쓰는 명령
+
+자세한 것은 README.md와 PORTING.md에 있다.
+
+| 하는 일 | 명령 |
+| --- | --- |
+| iOS 규칙 시험 | `cd GameCore && swift test` (GameScene, LevelData, Progress도 같다) |
+| iOS 빌드 | `xcodebuild -project SporeSweep.xcodeproj -scheme SporeSweep -destination 'generic/platform=iOS Simulator' build` |
+| Kotlin 시험 전부 | `cd android && ./gradlew :core:allTests` (JVM, Wasm, JS 세 곳) |
+| 안드로이드 설치 | `cd android && ./gradlew :app:installDebug` |
+| 안드로이드 출시 묶음(AAB) | `cd android && ./gradlew :app:bundleRelease` (업로드 키가 있어야 한다, 6절) |
+| 웹판 만들기 | `cd android && ./gradlew :web:webSite` → `android/web/build/site`를 zip으로 묶는다 |
+| mods판 데이터 | `cd android && ./gradlew :mod:modEngine` 후 `python3 Tools/make_mod.py` |
+| mods판 시험 | `claude plugin validate mods/sporesweep`, `claude plugin test mods/sporesweep` |
+| 레벨 점검 | `cd LevelData && swift run -c release levelaudit --csv ../Reports/level_audit.csv` (`--recalibrate`는 이동 횟수를 다시 잰다. 약 1시간) |
+
+**규칙을 바꿀 때의 순서.** Swift(`GameCore`)를 먼저 고치고 시험한다 → 판이 쉬워지거나 어려워지면 `levelaudit --recalibrate`로 레벨을 다시 잰다 → 기준 기록을 다시 만든다(`cd LevelData && swift run -c release paritygen ../android/core/src/commonTest/resources/parity 40` 후 `gzip -9 -f ../android/core/src/commonTest/resources/parity/*.txt`) → Kotlin(`android/core`)을 맞춰 `:core:allTests`가 통과하게 한다 → 화면(iOS `GameScene`, Kotlin `android/game`)과 mods판(`mods/sporesweep/hooks/game.tsx`)을 고친다 → mods 데이터를 다시 만든다.
+
+## 5. 저장소 밖에 있는 것
+
+다른 컴퓨터에서 이어받으면 아래는 저장소에 없다. 계정 주인에게 받아야 한다. 값은 이 문서에 적지 않는다(저장소가 공개다).
+
+| 무엇 | 있는 곳(계정 주인의 맥) | 없으면 |
+| --- | --- | --- |
+| 출시·사업 계획서 `PLAN.md`, 스토어 자료 `Marketing/` | 저장소 폴더 안. `.gitignore`로 뺐다 | 출시 준비 일정과 스토어 문구를 모른다 |
+| iOS 광고 ID, 개발 팀 | `Config/Local.xcconfig` (예시: `Local.example.xcconfig`) | 시험 광고로 돈다 |
+| iOS Firebase | `SporeSweep/GoogleService-Info.plist` | 기록을 보내지 않는다 |
+| 안드로이드 광고 ID | `android/config.properties` (예시: `config.example.properties`) | 시험 광고로 돈다 |
+| 안드로이드 Firebase | `android/app/google-services.json` | 기록을 보내지 않는다 |
+| 웹 Firebase | `android/web/firebase-config.js` (예시: `firebase-config.example.js`) | 웹판이 기록을 보내지 않는다 |
+| 안드로이드 업로드 키 | `~/Developer/keys/` (저장소 밖). 비밀번호는 macOS 키체인 `sporesweep-upload-key` | 출시 묶음에 서명할 수 없다. 잃으면 Play Console에서 키 재설정을 해야 한다 |
+| ElevenLabs API 키 | macOS 키체인 `elevenlabs-api-key`. 스크립트 안에서만 꺼내 쓴다. 화면에 찍거나 파일에 적지 않는다 | 소리를 새로 만들 수 없다 |
+| 회사 사이트 `code404.app` | `~/Developer/code404-site/` (git 아님). 개인정보 처리방침과 `app-ads.txt` | 사이트를 고칠 수 없다 |
+
+## 6. 계정과 서비스
+
+| 서비스 | 쓰는 곳 | 메모 |
+| --- | --- | --- |
+| GitHub `twobeansdaddy-hue/SporeSweep` | 이 저장소(공개) | 공개는 유지한다(계정 주인이 정했다) |
+| GitHub `twobeansdaddy-hue/sporesweep-mod` | mods판 배포용(공개) | `mods/sporesweep`를 복사해 올린다. `marketplace.json`, `README.md`, `.gitignore`는 그쪽 것을 둔다 |
+| Cloudflare Pages `sporesweep-play` | `play.code404.app` | 웹판 zip을 새 배포로 올린다. 계정 주인이 대시보드에서 한다 |
+| Cloudflare Pages `code404-site` | `code404.app` | 회사 사이트 |
+| Firebase `sporesweep-dev` | iOS·안드로이드·웹의 플레이 기록 | 개발용 프로젝트다. 출시 전에 출시용을 따로 만든다 |
+| AdMob | 보상형 광고(iOS, 안드로이드 따로) | 실제 광고는 스토어에서 받은 앱에서만 나온다. 개발 중에 자기 광고를 누르면 안 된다 |
+| Google Play Console | 패키지 `dev.code404.sporesweep`, versionCode 2 | 개인 계정이라 프로덕션 전에 테스터 12명 × 14일 비공개 테스트가 필요하다 |
+| Apple Developer | 아직 인증을 기다린다 | |
+| ElevenLabs | 효과음과 음악 | 크레딧을 쓴다. 먼저 묻는다 |
+| Codex(ChatGPT) | 그림 | 계정 주인의 계정 |
+
+## 7. 지금 상태와 다음 할 일
+
+**지금(2026-10-21).** 기획서 v0.40. 2×2 매치와 청소 드론, 판마다 무작위 시작 보드가 들어갔고, 380레벨을 다시 쟀다. iOS·안드로이드·웹·mods 모두 빌드되고 시험이 통과한다. 웹판은 최신으로 올라가 있다. mods판은 배포용 저장소에 올렸다.
+
+| 시험 | 수 |
+| --- | --- |
+| GameCore | 322 |
+| GameScene | 66 |
+| LevelData | 109 |
+| Progress | 34 |
+| Kotlin `:core:allTests` | JVM 36, Wasm 31, JS 31 (기준 기록 399레벨, 15,070수) |
+| mods판 | 8 (터미널 4, 데스크톱 4) |
+
+**다음 할 일.**
+
+1. 동호회 사람들의 웹판·mods판 반응을 듣고 난이도와 화면을 고친다. Firebase의 `level_start`(시드 포함), `level_end`로 포기 지점을 본다.
+2. mods판을 실제로 설치해 보고 확인한다. 계정 주인의 맥에서는 개발용으로 불러오므로 다른 사람의 컴퓨터에서 본다.
+3. Google Play 비공개 테스트: 테스터 12명을 모아 14일. 새 묶음을 올리려면 versionCode를 3으로 올린다.
+4. Apple 개발자 계정이 열리면 TestFlight.
+5. 출시용 Firebase 프로젝트를 만들어 설정 파일 셋을 바꾼다. 출시 뒤 AdMob에 스토어 주소를 연결한다.
+
+## 8. 알아 둘 점
+
+- **기록이 안 보이면 광고 차단부터 본다.** 계정 주인의 맥(AdGuard, DNS 필터)과 아이폰(Unicorn Pro)이 Firebase·AdMob을 막는다. 코드를 보기 전에 DNS를 확인한다.
+- **mods판은 창의 줄 수가 바뀌면 누른 칸이 어긋난다.** 화면의 줄은 줄바꿈하지 않게 했다(`wrap="truncate-end"`). 줄을 더하면 `HEADER_ROWS`와 단추의 줄 번호를 함께 맞춘다. 이모지가 든 줄이 더 높게 그려지는 환경에서는 아래로 갈수록 어긋날 수 있다(아직 보지 못했다).
+- **mods판 화면은 Claude 데스크톱 앱에서 Claude가 직접 볼 수 없다**(화면 제어 대상에 없다). 계정 주인에게 화면을 받아 본다.
+- mods판 시험 파일(`tests/sporesweep.test.tsx`)은 `tsc`에서 `props` 형식 경고가 난다. 시험은 돈다.
+- `android/core/build/test-results/wasmJsBrowserTest`는 예전 결과다. 브라우저 시험은 꺼 두었다(파일을 읽을 수 없다).
+- `xcodebuild`가 "Supported platforms ... is empty" 경고를 내지만 앱은 빌드된다.
+- 레벨 설명(튜토리얼)이 있는 판은 늘 같은 보드로 시작한다. 나머지는 판마다 시드를 새로 뽑는다(DEBUG에서는 `-seed`로 고정).
+
+## 9. 작업 기록
+
+새것이 위다.
+
+- **2026-10-21** 인수인계 문서(이 문서)와 `CLAUDE.md`를 만들었다. 앞으로 모든 작업은 이 문서를 고치며 한다.
+- **2026-10-20** README에 mods판 설치 방법을 넣었다. mods판 배포용 공개 저장소 `sporesweep-mod`를 만들었다.
+- **2026-10-20** mods판 화면을 고쳤다: 이모지 블록, 끌어서 바꾸기, 범례, 이어하기, 잠긴 도시 숨기기, 6초 뒤 힌트 깜박임. 범례가 보드 쪽 글을 줄바꿈시켜 두 칸 아래가 골라지던 것을 고쳤다.
+- **2026-10-20** 380레벨을 무작위 시작 보드로 다시 쟀다. 276개가 5~20수 줄었다. 기준 기록을 다시 만들고 mods용 JS 엔진도 시험에 넣었다. 웹판을 다시 올렸다.
+- **2026-10-20** 2×2 매치와 청소 드론, 판마다 무작위 시작(v0.40). 드론 그림(Codex)과 효과음(ElevenLabs). 첫 mods판.
+- **2026-10-20** 웹판(Kotlin/Wasm)을 만들어 `play.code404.app`에 올렸다. Firebase 웹 기록.
+- **2026-10-14~16** 안드로이드판: Firebase, AdMob, 업로드 키 서명, Play용 그림. `code404.app`에 개인정보 처리방침.
