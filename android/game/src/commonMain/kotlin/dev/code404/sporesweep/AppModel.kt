@@ -75,8 +75,19 @@ class AppModel(val args: DebugArgs) {
     private var cityLevels: List<Level> = emptyList()
     var isLabMode = false
         private set
+    /**
+     * 진행. 읽을 때 `revision`도 읽어서, 진행을 보여주는 화면은 어디에 있든 진행이 바뀌면 다시 그려진다.
+     * 화면 맨 위에서만 `revision`을 읽으면 안쪽 화면은 받은 값이 그대로라며 다시 그리기를 건너뛴다.
+     */
     var progress: GameProgress
-        private set
+        get() {
+            revision
+            return storedProgress
+        }
+        private set(value) {
+            storedProgress = value
+        }
+    private lateinit var storedProgress: GameProgress
     var problem: String? = null
         private set
     var wantsIntro by mutableStateOf(false)

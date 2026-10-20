@@ -215,7 +215,8 @@ class GameProgress {
         return true
     }
 
-    fun restoredParts(cityID: String): Set<String> = restoredParts[cityID] ?: emptySet()
+    /** 복원한 부위. Swift 판처럼 복사본을 준다. 안을 바꾸는 묶음을 그대로 주면 화면이 바뀐 줄 모른다. */
+    fun restoredParts(cityID: String): Set<String> = restoredParts[cityID]?.toSet() ?: emptySet()
 
     fun restore(partID: String, cityID: String) = restoredParts.getOrPut(cityID) { HashSet() }.add(partID)
 
