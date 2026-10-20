@@ -76,9 +76,9 @@ SporeSweep(앱) → GameScene → GameCore
 | 자기 광고 단위 쓰기 | `Config/Local.xcconfig`에 `GAD_APPLICATION_ID`와 `REWARDED_AD_UNIT_ID`를 적는다. 디버그 빌드와 TestFlight 빌드는 시험 광고를 쓴다. 출시 빌드가 어디서 받은 앱인지 알아내지 못하면 실제 광고 단위를 쓴다(출시한 앱에 시험 광고가 나가지 않게). 그러니 출시 빌드를 직접 기기에 설치해 시험할 때는 광고를 누르지 않는다 |
 | 광고 없이 돌리기 | 실행 인자 `-fakeAds 1` |
 
-## 안드로이드
+## 안드로이드와 웹
 
-안드로이드 판은 iOS 판을 Kotlin으로 옮긴 것입니다. 규칙의 기준은 늘 iOS 판이고, 그림·소리·레벨 파일은 빌드할 때 iOS 폴더에서 가져옵니다. 옮긴 과정과 iOS와 다른 점은 [android/PORTING.md](android/PORTING.md)에 있습니다.
+안드로이드 판은 iOS 판을 Kotlin으로 옮긴 것입니다. 웹판은 같은 Kotlin 코드를 브라우저(Kotlin/Wasm)에서 돌립니다. 규칙의 기준은 늘 iOS 판이고, 그림·소리·레벨 파일은 빌드할 때 iOS 폴더에서 가져옵니다. 옮긴 과정과 iOS와 다른 점은 [android/PORTING.md](android/PORTING.md)에 있습니다.
 
 ```
 android/core/        규칙 엔진, 레벨 읽기, 진행 저장. JVM과 웹(Wasm)으로 함께 빌드한다
@@ -107,7 +107,8 @@ cd android && ./gradlew :app:installDebug
 | 플레이 기록 보내기 | 자기 Firebase 프로젝트의 `google-services.json`을 `android/app/`에 넣는다. 디버그 빌드는 실행 인자 `--ez analytics true`를 줄 때만 보낸다 |
 | 자기 광고 단위 쓰기 | `android/config.example.properties`를 `config.properties`로 복사해 ID를 적는다. 실제 광고는 출시 빌드에서만 나온다 |
 | 개발용 실행 인자 | iOS와 이름이 같다. `adb shell am start -n dev.code404.sporesweep/.MainActivity --es city tokyo --ei level 2 --ez autoplay true` |
-| 웹판 만들기 | `cd android && ./gradlew :web:webSite` → `android/web/build/site`. 자세한 것은 PORTING.md의 "웹판" |
+| 웹판 만들기 | `cd android && ./gradlew :web:webSite` → `android/web/build/site`. 정적 파일이라 아무 웹 서버에나 올리면 된다. 자세한 것은 PORTING.md의 "웹판" |
+| 웹판의 플레이 기록 | `android/web/firebase-config.example.js`를 `firebase-config.js`로 복사해 자기 Firebase 웹 앱의 값을 적는다 |
 
 ## 테스트
 
@@ -204,7 +205,7 @@ cd LevelData && swift run -c release levelaudit --playouts 200 --csv ../Reports/
 ## 저장소에 없는 것
 
 - 사업 계획과 홍보 자료, 그림의 원본 작업 파일
-- 서명 팀, 실제 광고 ID, Firebase 설정 파일(iOS의 `Config/Local.xcconfig`, `GoogleService-Info.plist`, 안드로이드의 `android/config.properties`, `google-services.json`)
+- 서명 팀, 실제 광고 ID, Firebase 설정 파일(iOS의 `Config/Local.xcconfig`, `GoogleService-Info.plist`, 안드로이드의 `android/config.properties`, `google-services.json`, 웹의 `android/web/firebase-config.js`), 출시용 업로드 키
 
 DESIGN.md가 `PLAN.md`나 `Marketing/`을 가리키는 곳이 있는데, 그 파일들은 이 저장소에 없습니다.
 
