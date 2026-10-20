@@ -46,5 +46,7 @@ tasks.register<Sync>("webSite") {
     dependsOn("wasmJsBrowserDistribution", webAssets)
     from(layout.buildDirectory.dir("dist/wasmJs/productionExecutable"))
     from(layout.buildDirectory.dir("webAssets"))
+    // Firebase 설정이 있으면 함께 올린다(저장소에는 없다).
+    from(file("firebase-config.js"))
     into(layout.buildDirectory.dir("site"))
 }

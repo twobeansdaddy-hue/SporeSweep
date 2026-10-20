@@ -22,3 +22,4 @@ android/local.properties
 android/.kotlin/
 android/config.properties
 android/app/google-services.json
+android/web/firebase-config.js

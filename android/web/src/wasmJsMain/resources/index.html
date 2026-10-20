@@ -100,6 +100,29 @@ if (typeof WebAssembly === "undefined") {
   document.getElementById("unsupported").style.display = "block";
 }
 </script>
+<!-- 플레이 기록(Firebase Analytics). 설정 파일이 없으면 보내지 않는다. 게임은 window.sporeLog로 사건을 넘긴다. -->
+<script>
+  window.sporeQueue = [];
+  window.sporeLog = (name, params) => window.sporeQueue.push([name, params]);
+</script>
+<script src="firebase-config.js" onerror="void 0"></script>
+<script type="module">
+  const config = window.sporeFirebaseConfig;
+  if (config && config.measurementId) {
+    try {
+      const { initializeApp } = await import("https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js");
+      const { getAnalytics, logEvent } = await import("https://www.gstatic.com/firebasejs/12.19.0/firebase-analytics.js");
+      const analytics = getAnalytics(initializeApp(config));
+      // 주소에 debug=1이 있으면 Firebase의 DebugView에 바로 보이게 한다.
+      const debug = new URLSearchParams(location.search).get("debug") === "1";
+      const send = (name, params) => logEvent(analytics, name, debug ? { ...params, debug_mode: true } : params);
+      window.sporeQueue.splice(0).forEach(([name, params]) => send(name, params));
+      window.sporeLog = send;
+    } catch (e) {
+      // 광고 차단기 등으로 막히면 기록 없이 계속한다.
+    }
+  }
+</script>
 <script src="sporesweep.js"></script>
 </body>
 </html>
