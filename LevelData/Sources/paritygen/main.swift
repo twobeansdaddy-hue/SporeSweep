@@ -24,6 +24,7 @@ func text(_ block: Block?) -> String {
     case .beam(let o): return "B\(text(o))"
     case .bomb: return "X"
     case .core: return "C"
+    case .drone: return "D"
     case .material: return "M"
     case .concrete(let hp): return "K\(hp)"
     case .caged(let k): return "G\(k.rawValue)"
@@ -52,6 +53,11 @@ func text(_ effect: SpecialEffect) -> String {
     case .coreBeam(let k): return "coreBeam\(k.rawValue)"
     case .coreBomb(let k): return "coreBomb\(k.rawValue)"
     case .clearBoard: return "clear"
+    case .drone(let p): return "drone" + (p.map(text) ?? "-")
+    case .droneSwarm(let ps): return "swarm" + text(ps)
+    case .droneBeam(let o, let p): return "droneBeam" + text(o) + (p.map(text) ?? "-")
+    case .droneBomb(let p): return "droneBomb" + (p.map(text) ?? "-")
+    case .coreDrone(let k): return "coreDrone\(k.rawValue)"
     }
 }
 
@@ -60,6 +66,7 @@ func text(_ shape: MatchShape) -> String {
     case .line(let o, let length): return "line\(text(o))\(length)"
     case .lShape: return "L"
     case .tShape: return "T"
+    case .square: return "Q"
     }
 }
 
@@ -84,7 +91,7 @@ func text(_ event: GameEvent) -> String {
     case .swapRejected(let s, let r): return "rejected(\(text(s.from))-\(text(s.to)),\(text(r)))"
     case .matchesCleared(let matches, let chain):
         let body = matches.map {
-            "\(text($0.kind))/\(text($0.shape))/\($0.longestLine)/\($0.crossing.map(text) ?? "-")/\(text($0.positions))"
+            "\(text($0.kind))/\(text($0.shape))/\($0.longestLine)/\($0.crossing.map(text) ?? "-")/\(text($0.positions))" + ($0.hasSquare ? "/q" : "")
         }
         return "matches(\(chain);" + body.joined(separator: ";") + ")"
     case .specialsActivated(let list):

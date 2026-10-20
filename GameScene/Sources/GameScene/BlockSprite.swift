@@ -71,6 +71,7 @@ enum BlockSprite {
         case .beam(.vertical): "block_beam_v"
         case .bomb: "block_bomb"
         case .core: "block_core"
+        case .drone: "block_drone"
         case .material: materialName
         case .concrete(let hp): "obstacle_concrete_\(hp)"
         case .caged(let kind): name(for: kind) + "_caged"
@@ -194,6 +195,10 @@ enum BlockSprite {
             // 정화 코어는 흰 별로 그린다.
             node = SKShapeNode(path: star(points: 8, outer: radius * 1.1, inner: radius * 0.6))
             node.fillColor = .white
+        } else if block == .drone {
+            // 그림이 없을 때의 청소 드론. 청록색 원판 위에 흰 날개 넷을 둔다.
+            node = SKShapeNode(circleOfRadius: radius)
+            node.fillColor = SKColor(red: 0.12, green: 0.62, blue: 0.66, alpha: 1)
         } else {
             // 제염 빔과 중화 폭탄은 어두운 강철색 원판 위에 흰 표식을 둔다.
             node = SKShapeNode(circleOfRadius: radius)
@@ -230,6 +235,22 @@ enum BlockSprite {
                 CGPath(ellipseIn: CGRect(x: -dot, y: -dot, width: dot * 2, height: dot * 2), transform: nil),
                 cellSize: cellSize
             ))
+        case .drone:
+            // 네 갈래 날개. 대각선으로 놓아 빔의 막대와 헷갈리지 않게 한다.
+            let blade = CGMutablePath()
+            let long = radius * 0.78
+            let wide = radius * 0.2
+            for index in 0..<4 {
+                let angle = CGFloat(index) * .pi / 2 + .pi / 4
+                var transform = CGAffineTransform(rotationAngle: angle)
+                blade.addPath(CGPath(
+                    roundedRect: CGRect(x: wide * 0.6, y: -wide / 2, width: long, height: wide),
+                    cornerWidth: wide / 2, cornerHeight: wide / 2, transform: &transform
+                ))
+            }
+            let hub = radius * 0.22
+            blade.addEllipse(in: CGRect(x: -hub, y: -hub, width: hub * 2, height: hub * 2))
+            node.addChild(marker(blade, cellSize: cellSize))
         case .core, nil:
             break
         }

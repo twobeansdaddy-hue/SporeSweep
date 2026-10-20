@@ -462,6 +462,13 @@ class GameState private constructor(
                 mostCommonKind(emptySet())?.let { SpecialEffect.CoreBomb(it) } ?: SpecialEffect.Core(null)
             first == Block.Core && second is Block.Normal -> SpecialEffect.Core(second.kind)
             first is Block.Normal && second == Block.Core -> SpecialEffect.Core(first.kind)
+            (first == Block.Core && second == Block.Drone) || (first == Block.Drone && second == Block.Core) ->
+                mostCommonKind(emptySet())?.let { SpecialEffect.CoreDrone(it) } ?: SpecialEffect.Core(null)
+            first == Block.Drone && second == Block.Drone -> SpecialEffect.DroneSwarm(emptyList())
+            first == Block.Drone && second is Block.Beam -> SpecialEffect.DroneBeam(second.orientation, null)
+            first is Block.Beam && second == Block.Drone -> SpecialEffect.DroneBeam(first.orientation, null)
+            (first == Block.Drone && second == Block.Bomb) || (first == Block.Bomb && second == Block.Drone) -> SpecialEffect.DroneBomb(null)
+            (first == Block.Drone && second is Block.Normal) || (first is Block.Normal && second == Block.Drone) -> SpecialEffect.Drone(null)
             first is Block.Beam && second is Block.Beam -> SpecialEffect.CrossBeam
             (first is Block.Beam && second == Block.Bomb) || (first == Block.Bomb && second is Block.Beam) -> SpecialEffect.WideCrossBeam
             first == Block.Bomb && second == Block.Bomb -> SpecialEffect.BigBomb
@@ -491,17 +498,22 @@ class GameState private constructor(
                 hits = HashSet(zone.filter { board[it]?.takesHits == true && it !in shields })
                 events.add(GameEvent.SpecialsActivated(listOf(SpecialActivation(swap.to, effect, all))))
             }
-            is SpecialEffect.CoreBeam, is SpecialEffect.CoreBomb -> {
-                val kind = if (effect is SpecialEffect.CoreBeam) effect.kind else (effect as SpecialEffect.CoreBomb).kind
+            is SpecialEffect.CoreBeam, is SpecialEffect.CoreBomb, is SpecialEffect.CoreDrone -> {
+                val kind = when (effect) {
+                    is SpecialEffect.CoreBeam -> effect.kind
+                    is SpecialEffect.CoreBomb -> effect.kind
+                    else -> (effect as SpecialEffect.CoreDrone).kind
+                }
                 removed = hashSetOf(corePosition)
                 events.add(GameEvent.SpecialsActivated(listOf(SpecialActivation(corePosition, effect, listOf(corePosition)))))
                 val spawns = mutableListOf<SpecialSpawn>()
                 for (position in zone) {
                     if (board[position] != Block.Normal(kind)) continue
-                    val block: Block = if (effect is SpecialEffect.CoreBeam) {
-                        Block.Beam(if ((position.column + position.row) % 2 == 0) Orientation.HORIZONTAL else Orientation.VERTICAL)
-                    } else {
-                        Block.Bomb
+                    val block: Block = when (effect) {
+                        is SpecialEffect.CoreBeam ->
+                            Block.Beam(if ((position.column + position.row) % 2 == 0) Orientation.HORIZONTAL else Orientation.VERTICAL)
+                        is SpecialEffect.CoreDrone -> Block.Drone
+                        else -> Block.Bomb
                     }
                     board[position] = block
                     spawns.add(SpecialSpawn(position, block))
@@ -520,7 +532,7 @@ class GameState private constructor(
             else -> {
                 val origin = when (effect) {
                     is SpecialEffect.Core -> corePosition
-                    is SpecialEffect.Beam, SpecialEffect.Bomb -> specialPosition
+                    is SpecialEffect.Beam, SpecialEffect.Bomb, is SpecialEffect.Drone -> specialPosition
                     else -> swap.to
                 }
                 val activations = resolve(listOf(origin to effect), removed, triggered, hits, emptySet())
@@ -550,6 +562,16 @@ class GameState private constructor(
             var effect = queue[index].second
             index += 1
             if (effect is SpecialEffect.Core && effect.kind == null) effect = SpecialEffect.Core(mostCommonKind(removed))
+            // 청소 드론의 목표는 발동하는 순간에 정한다. 앞서 지워지기로 한 칸과 이미 고른 목표는 피한다.
+            val taken = removed + hits + protected + crossOf(origin)
+            effect = when {
+                effect is SpecialEffect.Drone && effect.target == null -> SpecialEffect.Drone(droneTargets(1, taken).firstOrNull())
+                effect is SpecialEffect.DroneSwarm && effect.targets.isEmpty() -> SpecialEffect.DroneSwarm(droneTargets(3, taken))
+                effect is SpecialEffect.DroneBeam && effect.target == null ->
+                    SpecialEffect.DroneBeam(effect.orientation, droneTargets(1, taken).firstOrNull())
+                effect is SpecialEffect.DroneBomb && effect.target == null -> SpecialEffect.DroneBomb(droneTargets(1, taken).firstOrNull())
+                else -> effect
+            }
             val cleared = mutableListOf<Position>()
             for (target in targets(effect, origin)) {
                 if (target in protected) continue
@@ -741,6 +763,8 @@ class GameState private constructor(
         fun around(reach: Int) = zone.filter {
             it.column in (origin.column - reach)..(origin.column + reach) && it.row in (origin.row - reach)..(origin.row + reach)
         }
+        /** 제자리와 상하좌우(청소 드론). */
+        fun plus() = zone.filter { abs(it.column - origin.column) + abs(it.row - origin.row) <= 1 }
         fun cross(thickness: Int): List<Position> {
             val reach = thickness / 2
             return zone.filter { abs(it.column - origin.column) <= reach || abs(it.row - origin.row) <= reach }
@@ -752,9 +776,60 @@ class GameState private constructor(
             SpecialEffect.CrossBeam -> cross(1)
             SpecialEffect.WideCrossBeam -> cross(3)
             SpecialEffect.BigBomb -> around(2)
-            is SpecialEffect.CoreBeam, is SpecialEffect.CoreBomb -> listOf(origin)
+            is SpecialEffect.CoreBeam, is SpecialEffect.CoreBomb, is SpecialEffect.CoreDrone -> listOf(origin)
             SpecialEffect.ClearBoard -> zone
+            is SpecialEffect.Drone -> plus() + listOfNotNull(effect.target)
+            is SpecialEffect.DroneSwarm -> plus() + effect.targets
+            is SpecialEffect.DroneBeam -> {
+                val target = effect.target ?: return plus()
+                plus() + zone.filter { if (effect.orientation == Orientation.HORIZONTAL) it.row == target.row else it.column == target.column }
+            }
+            is SpecialEffect.DroneBomb -> {
+                val target = effect.target ?: return plus()
+                plus() + zone.filter { abs(it.column - target.column) <= 1 && abs(it.row - target.row) <= 1 }
+            }
         }
+    }
+
+    /** 제자리와 상하좌우 칸(청소 드론이 지우는 곳). 활성 구간 안으로 한정한다. */
+    private fun crossOf(origin: Position): Set<Position> =
+        listOf(0 to 0, 0 to -1, 0 to 1, -1 to 0, 1 to 0)
+            .map { Position(origin.column + it.first, origin.row + it.second) }
+            .filter { board.contains(it) && it.row in activeRange }
+            .toSet()
+
+    /**
+     * 청소 드론이 날아가 맞힐 칸을 `count`개까지 고른다(4장). 난수를 쓰지 않는다.
+     * 물질 바로 아래 칸, 피해를 입는 장애물, 가장 많이 남은 종류의 블록 순으로 보고,
+     * 같은 순위 안에서는 아래 행부터, 같은 행이면 왼쪽부터 고른다.
+     */
+    private fun droneTargets(count: Int, taken: Set<Position>): List<Position> {
+        val excluded = HashSet(taken)
+        val picked = mutableListOf<Position>()
+        val zone = board.positions(activeRange)
+        fun isTarget(position: Position): Boolean {
+            if (position.row !in activeRange || !board.contains(position) || position in excluded || position in shields) return false
+            val block = board[position] ?: return false
+            return !block.isIndestructible
+        }
+        val lowestFirst = compareByDescending<Position> { it.row }.thenBy { it.column }
+        while (picked.size < count) {
+            val belowMaterials = zone
+                .filter { board[it] == Block.Material }
+                .map { Position(it.column, it.row + 1) }
+                .filter { board[it] != Block.Material && isTarget(it) }
+                .sortedWith(lowestFirst)
+            val obstacles = zone.filter { board[it]?.takesHits == true && isTarget(it) }.sortedWith(lowestFirst)
+            var next = belowMaterials.firstOrNull() ?: obstacles.firstOrNull()
+            if (next == null) {
+                val kind = mostCommonKind(excluded)
+                if (kind != null) next = zone.filter { board.kind(it) == kind && isTarget(it) }.sortedWith(lowestFirst).firstOrNull()
+            }
+            val target = next ?: break
+            picked.add(target)
+            excluded.add(target)
+        }
+        return picked
     }
 
     /** 가장 많이 남은 종류. 수가 같으면 순서가 앞선 쪽이다. */

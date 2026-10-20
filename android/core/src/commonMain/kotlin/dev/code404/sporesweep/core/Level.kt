@@ -139,11 +139,18 @@ data class Level(
     /** 클리어한 판의 점수로 별 수를 정한다(6장). */
     fun stars(score: Int) = 1 + starScores.count { score >= it }
 
-    /** 이 레벨의 시작 상태를 만든다. 같은 레벨은 항상 같은 보드로 시작한다. */
-    fun makeState(): GameState {
+    /** 판마다 시작 보드가 같은지(9장). 레벨 설명이 있는 판은 설명과 첫 화면이 어긋나지 않게 늘 `seed`로 시작한다. */
+    val hasFixedStart get() = tutorial != null
+
+    /** `index`번째 판의 시작 시드(Swift 판 `boardSeed`). 시작이 고정된 판이거나 `index`가 0이면 레벨의 `seed`다. */
+    fun boardSeed(index: Int): ULong =
+        if (hasFixedStart || index == 0) seed else seed * 6_364_136_223_846_793_005uL + index.toULong() * 1_442_695_040_888_963_407uL
+
+    /** 이 레벨의 시작 상태를 만든다. `seed`를 주지 않으면 레벨의 `seed`로 만든다. */
+    fun makeState(seed: ULong? = null): GameState {
         validate()
         return GameState.fromSeed(
-            seed = seed,
+            seed = seed ?: this.seed,
             columns = columns,
             rows = rows,
             blockTypes = blockTypes,

@@ -98,18 +98,22 @@ class Board private constructor(val columns: Int, val rows: Int, private val cel
 
     /** 보드에 성립한 매치를 모두 찾는다. 한 칸을 공유하는 가로줄과 세로줄은 하나로 합친다. */
     fun findMatches(range: RowRange? = null): List<Match> {
-        val runs = findRuns(rowRange(range))
-        if (runs.isEmpty()) return emptyList()
+        val r = rowRange(range)
+        val runs = findRuns(r)
+        val squares = findSquares(r)
+        if (runs.isEmpty() && squares.isEmpty()) return emptyList()
 
-        val group = IntArray(runs.size) { it }
+        // 칸을 공유하는 줄과 정사각형끼리 묶는다. 정사각형은 줄 뒤에 번호를 붙인다.
+        val pieces: List<List<Position>> = runs.map { it.positions } + squares
+        val group = IntArray(pieces.size) { it }
         fun root(index: Int): Int {
             var i = index
             while (group[i] != i) i = group[i]
             return i
         }
         val firstRunAt = HashMap<Position, Int>()
-        runs.forEachIndexed { index, run ->
-            for (position in run.positions) {
+        pieces.forEachIndexed { index, piece ->
+            for (position in piece) {
                 val other = firstRunAt[position]
                 if (other != null) {
                     val a = root(index)
@@ -121,19 +125,22 @@ class Board private constructor(val columns: Int, val rows: Int, private val cel
             }
         }
 
-        val runsByGroup = LinkedHashMap<Int, MutableList<Run>>()
-        runs.forEachIndexed { index, run -> runsByGroup.getOrPut(root(index)) { mutableListOf() }.add(run) }
+        val piecesByGroup = LinkedHashMap<Int, MutableList<Int>>()
+        pieces.indices.forEach { index -> piecesByGroup.getOrPut(root(index)) { mutableListOf() }.add(index) }
 
-        return runsByGroup.values
-            .map { groupRuns ->
-                val positions = groupRuns.flatMap { it.positions }.toSet()
-                val (shape, crossing) = shape(groupRuns)
+        return piecesByGroup.values
+            .map { members ->
+                val groupRuns = members.filter { it < runs.size }.map { runs[it] }
+                val hasSquare = members.any { it >= runs.size }
+                val positions = members.flatMap { pieces[it] }.toSet()
+                val (shape, crossing) = if (groupRuns.isEmpty()) MatchShape.Square to null else shape(groupRuns)
                 Match.of(
-                    kind = kind(groupRuns[0].positions[0])!!,
+                    kind = kind(pieces[members[0]][0])!!,
                     shape = shape,
                     positions = positions.toList(),
-                    longestLine = groupRuns.maxOf { it.positions.size },
+                    longestLine = groupRuns.maxOfOrNull { it.positions.size } ?: 2,
                     crossing = crossing,
+                    hasSquare = hasSquare,
                 )
             }
             .sortedBy { it.positions[0] }
@@ -154,7 +161,36 @@ class Board private constructor(val columns: Int, val rows: Int, private val cel
             return n
         }
         val minimum = GameConstants.MINIMUM_MATCH_LENGTH
-        return count(-1, 0) + 1 + count(1, 0) >= minimum || count(0, -1) + 1 + count(0, 1) >= minimum
+        return count(-1, 0) + 1 + count(1, 0) >= minimum || count(0, -1) + 1 + count(0, 1) >= minimum ||
+            isInSquare(at, kind, r)
+    }
+
+    /** 이 칸이 같은 종류 2×2 정사각형의 한 칸인지. */
+    private fun isInSquare(position: Position, kind: BlockKind, range: RowRange): Boolean {
+        for ((dc, dr) in listOf(-1 to -1, 0 to -1, -1 to 0, 0 to 0)) {
+            val cells = squareCells(Position(position.column + dc, position.row + dr), range) ?: continue
+            if (cells.all { kind(it) == kind }) return true
+        }
+        return false
+    }
+
+    /** 왼쪽 위가 `corner`인 2×2의 네 칸. 보드나 행 범위를 벗어나면 `null`이다. */
+    private fun squareCells(corner: Position, range: RowRange): List<Position>? {
+        val cells = listOf(0 to 0, 1 to 0, 0 to 1, 1 to 1).map { Position(corner.column + it.first, corner.row + it.second) }
+        return if (cells.all { contains(it) && it.row in range }) cells else null
+    }
+
+    /** 같은 종류 블록 네 개로 된 2×2 정사각형을 모두 찾는다. */
+    private fun findSquares(range: RowRange): List<List<Position>> {
+        val squares = ArrayList<List<Position>>()
+        for (row in range) {
+            for (column in 0 until columns) {
+                val cells = squareCells(Position(column, row), range) ?: continue
+                val kind = kind(cells[0]) ?: continue
+                if (cells.all { kind(it) == kind }) squares.add(cells)
+            }
+        }
+        return squares
     }
 
     private fun findRuns(range: RowRange): List<Run> {
@@ -189,6 +225,11 @@ class Board private constructor(val columns: Int, val rows: Int, private val cel
                 firstCrossing = firstCrossing ?: crossing
                 if (!isEnd(crossing, horizontal) || !isEnd(crossing, vertical)) shape = MatchShape.TShape
             }
+        }
+        // 평행한 두 줄이 정사각형으로 이어지면 만나는 칸이 없다. 가장 긴 줄로 본다.
+        if (firstCrossing == null) {
+            val longest = runs.maxBy { it.positions.size }
+            return MatchShape.Line(longest.orientation, longest.positions.size) to null
         }
         return shape to firstCrossing
     }
@@ -232,6 +273,10 @@ class Board private constructor(val columns: Int, val rows: Int, private val cel
         val (column, row) = at
         if (column >= 2 && kind == kind(Position(column - 1, row)) && kind == kind(Position(column - 2, row))) return true
         if (row - 2 >= range.lower && kind == kind(Position(column, row - 1)) && kind == kind(Position(column, row - 2))) return true
+        // 왼쪽, 위, 왼쪽 위가 모두 같은 종류면 2×2 정사각형이 된다.
+        if (column >= 1 && row - 1 >= range.lower && kind == kind(Position(column - 1, row)) &&
+            kind == kind(Position(column, row - 1)) && kind == kind(Position(column - 1, row - 1))
+        ) return true
         return false
     }
 }

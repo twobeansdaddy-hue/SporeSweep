@@ -627,6 +627,16 @@ public struct GameState: Hashable, Sendable, Codable {
             return mostCommonKind(excluding: []).map(SpecialEffect.coreBomb) ?? .core(nil)
         case (.core, .normal(let kind)), (.normal(let kind), .core):
             return .core(kind)
+        case (.core, .drone), (.drone, .core):
+            return mostCommonKind(excluding: []).map(SpecialEffect.coreDrone) ?? .core(nil)
+        case (.drone, .drone):
+            return .droneSwarm([])
+        case (.drone, .beam(let orientation)), (.beam(let orientation), .drone):
+            return .droneBeam(orientation, nil)
+        case (.drone, .bomb), (.bomb, .drone):
+            return .droneBomb(nil)
+        case (.drone, .normal), (.normal, .drone):
+            return .drone(nil)
         case (.beam, .beam):
             return .crossBeam
         case (.beam, .bomb), (.bomb, .beam):
@@ -665,7 +675,7 @@ public struct GameState: Hashable, Sendable, Codable {
             hits = Set(zone.filter { board[$0]?.takesHits == true && !shields.contains($0) })
             events.append(.specialsActivated([SpecialActivation(origin: swap.to, effect: effect, cleared: all)]))
 
-        case .coreBeam(let kind), .coreBomb(let kind):
+        case .coreBeam(let kind), .coreBomb(let kind), .coreDrone(let kind):
             removed = [corePosition]
             events.append(.specialsActivated([
                 SpecialActivation(origin: corePosition, effect: effect, cleared: [corePosition])
@@ -674,10 +684,13 @@ public struct GameState: Hashable, Sendable, Codable {
             var spawns: [SpecialSpawn] = []
             for position in zone where board[position] == .normal(kind) {
                 let block: Block
-                if case .coreBeam = effect {
+                switch effect {
+                case .coreBeam:
                     // 방향은 칸의 위치로 정한다. 난수를 쓰지 않아 결과를 예측할 수 있다.
                     block = .beam((position.column + position.row).isMultiple(of: 2) ? .horizontal : .vertical)
-                } else {
+                case .coreDrone:
+                    block = .drone
+                default:
                     block = .bomb
                 }
                 board[position] = block
@@ -705,7 +718,7 @@ public struct GameState: Hashable, Sendable, Codable {
             switch effect {
             case .core:
                 origin = corePosition
-            case .beam, .bomb:
+            case .beam, .bomb, .drone:
                 origin = specialPosition
             default:
                 origin = swap.to
@@ -744,6 +757,20 @@ public struct GameState: Hashable, Sendable, Codable {
             if case .core(nil) = effect {
                 // 다른 효과에 맞아 발동한 정화 코어는 보드에 가장 많이 남은 종류를 제거한다.
                 effect = .core(mostCommonKind(excluding: removed))
+            }
+            // 청소 드론의 목표는 발동하는 순간에 정한다. 앞서 지워지기로 한 칸과 이미 고른 목표는 피한다.
+            let taken = removed.union(hits).union(protected).union(cross(of: origin))
+            switch effect {
+            case .drone(nil):
+                effect = .drone(droneTargets(1, excluding: taken).first)
+            case .droneSwarm(let picked) where picked.isEmpty:
+                effect = .droneSwarm(droneTargets(3, excluding: taken))
+            case .droneBeam(let orientation, nil):
+                effect = .droneBeam(orientation, droneTargets(1, excluding: taken).first)
+            case .droneBomb(nil):
+                effect = .droneBomb(droneTargets(1, excluding: taken).first)
+            default:
+                break
             }
             var cleared: [Position] = []
             for target in targets(of: effect, at: origin) where !protected.contains(target) {
@@ -987,6 +1014,12 @@ public struct GameState: Hashable, Sendable, Codable {
                 abs($0.column - origin.column) <= reach || abs($0.row - origin.row) <= reach
             }
         }
+        /// 제자리와 상하좌우 `reach`칸(청소 드론).
+        func cross(reach: Int) -> [Position] {
+            zone.filter {
+                abs($0.column - origin.column) + abs($0.row - origin.row) <= reach
+            }
+        }
         func around(_ reach: Int) -> [Position] {
             area(
                 columns: (origin.column - reach)...(origin.column + reach),
@@ -1008,11 +1041,63 @@ public struct GameState: Hashable, Sendable, Codable {
             return cross(thickness: 3)
         case .bigBomb:
             return around(2)
-        case .coreBeam, .coreBomb:
+        case .coreBeam, .coreBomb, .coreDrone:
             return [origin]
         case .clearBoard:
             return zone
+        case .drone(let target):
+            return cross(reach: 1) + (target.map { [$0] } ?? [])
+        case .droneSwarm(let targets):
+            return cross(reach: 1) + targets
+        case .droneBeam(let orientation, let target):
+            guard let target else { return cross(reach: 1) }
+            let line = zone.filter { orientation == .horizontal ? $0.row == target.row : $0.column == target.column }
+            return cross(reach: 1) + line
+        case .droneBomb(let target):
+            guard let target else { return cross(reach: 1) }
+            let blast = zone.filter { abs($0.column - target.column) <= 1 && abs($0.row - target.row) <= 1 }
+            return cross(reach: 1) + blast
         }
+    }
+
+    /// 제자리와 상하좌우 칸(청소 드론이 지우는 곳). 활성 구간 안으로 한정한다.
+    private func cross(of origin: Position) -> Set<Position> {
+        Set([(0, 0), (0, -1), (0, 1), (-1, 0), (1, 0)]
+            .map { Position(column: origin.column + $0.0, row: origin.row + $0.1) }
+            .filter { board.contains($0) && activeRange.contains($0.row) })
+    }
+
+    /// 청소 드론이 날아가 맞힐 칸을 `count`개까지 고른다(4장). 난수를 쓰지 않는다.
+    ///
+    /// 물질 바로 아래 칸, 피해를 입는 장애물, 가장 많이 남은 종류의 블록 순으로 보고,
+    /// 같은 순위 안에서는 아래 행부터, 같은 행이면 왼쪽부터 고른다.
+    private func droneTargets(_ count: Int, excluding taken: Set<Position>) -> [Position] {
+        var excluded = taken
+        var picked: [Position] = []
+        let zone = board.positions(in: activeRange)
+        func isTarget(_ position: Position) -> Bool {
+            guard activeRange.contains(position.row), board.contains(position), !excluded.contains(position),
+                  !shields.contains(position), let block = board[position], !block.isIndestructible
+            else { return false }
+            return true
+        }
+        let lowestFirst: (Position, Position) -> Bool = { ($0.row, -$0.column) > ($1.row, -$1.column) }
+        while picked.count < count {
+            let belowMaterials = zone
+                .filter { board[$0] == .material }
+                .map { Position(column: $0.column, row: $0.row + 1) }
+                .filter { board[$0] != .material && isTarget($0) }
+                .sorted(by: lowestFirst)
+            let obstacles = zone.filter { board[$0]?.takesHits == true && isTarget($0) }.sorted(by: lowestFirst)
+            var next = belowMaterials.first ?? obstacles.first
+            if next == nil, let kind = mostCommonKind(excluding: excluded) {
+                next = zone.filter { board.kind(at: $0) == kind && isTarget($0) }.sorted(by: lowestFirst).first
+            }
+            guard let target = next else { break }
+            picked.append(target)
+            excluded.insert(target)
+        }
+        return picked
     }
 
     /// 가장 많이 남은 종류. 수가 같으면 `BlockKind` 순서가 앞선 쪽이다.
@@ -1248,6 +1333,7 @@ extension Block {
         case .beam(let orientation): .beam(orientation)
         case .bomb: .bomb
         case .core: .core(nil)
+        case .drone: .drone(nil)
         }
     }
 
@@ -1263,7 +1349,7 @@ extension Block {
 }
 
 extension Board {
-    /// 위에서 아래로, 왼쪽에서 오른쪽으로 채울 때 이 칸에 `kind`를 놓으면 3개 줄이 되는지.
+    /// 위에서 아래로, 왼쪽에서 오른쪽으로 채울 때 이 칸에 `kind`를 놓으면 3개 줄이나 2×2가 되는지.
     fileprivate func completesRun(_ kind: BlockKind, at position: Position, in range: Range<Int>) -> Bool {
         let (column, row) = (position.column, position.row)
         if column >= 2, kind == self.kind(at: Position(column: column - 1, row: row)),
@@ -1272,6 +1358,13 @@ extension Board {
         }
         if row - 2 >= range.lowerBound, kind == self.kind(at: Position(column: column, row: row - 1)),
            kind == self.kind(at: Position(column: column, row: row - 2)) {
+            return true
+        }
+        // 왼쪽, 위, 왼쪽 위가 모두 같은 종류면 2×2 정사각형이 된다.
+        if column >= 1, row - 1 >= range.lowerBound,
+           kind == self.kind(at: Position(column: column - 1, row: row)),
+           kind == self.kind(at: Position(column: column, row: row - 1)),
+           kind == self.kind(at: Position(column: column - 1, row: row - 1)) {
             return true
         }
         return false

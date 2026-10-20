@@ -68,6 +68,7 @@ sealed interface Special {
     data class Beam(val orientation: Orientation) : Special
     data object Bomb : Special
     data object Core : Special
+    data object Drone : Special
 }
 
 /** 보드 한 칸에 놓이는 블록. 각 경우의 뜻은 Swift 판 `Block`의 주석에 있다. */
@@ -76,6 +77,7 @@ sealed interface Block {
     data class Beam(val orientation: Orientation) : Block
     data object Bomb : Block
     data object Core : Block
+    data object Drone : Block
     data object Material : Block
     data class Concrete(val hp: Int) : Block
     data class Caged(override val kind: BlockKind) : Block
@@ -101,6 +103,7 @@ sealed interface Block {
             is Beam -> Special.Beam(orientation)
             Bomb -> Special.Bomb
             Core -> Special.Core
+            Drone -> Special.Drone
             else -> null
         }
 
@@ -121,7 +124,7 @@ sealed interface Block {
 
     val canSlide: Boolean
         get() = when (this) {
-            is Normal, is Beam, Bomb, Core, is Timed -> true
+            is Normal, is Beam, Bomb, Core, Drone, is Timed -> true
             else -> false
         }
 
@@ -138,6 +141,7 @@ sealed interface Block {
             is Beam -> SpecialEffect.Beam(orientation)
             Bomb -> SpecialEffect.Bomb
             Core -> SpecialEffect.Core(null)
+            Drone -> SpecialEffect.Drone(null)
             else -> null
         }
 
@@ -153,6 +157,7 @@ sealed interface Block {
             is Special.Beam -> Beam(special.orientation)
             Special.Bomb -> Bomb
             Special.Core -> Core
+            Special.Drone -> Drone
         }
     }
 }

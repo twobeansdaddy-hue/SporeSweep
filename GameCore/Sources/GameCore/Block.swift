@@ -18,6 +18,8 @@ public enum Special: Hashable, Sendable, Codable {
     case bomb
     /// 정화 코어. 스왑한 블록과 같은 종류를 모두 제거한다.
     case core
+    /// 청소 드론. 제자리와 상하좌우를 지우고 날아가 목표 한 칸을 맞힌다.
+    case drone
 }
 
 extension BlockKind {
@@ -41,13 +43,14 @@ extension BlockKind {
 
 /// 보드 한 칸에 놓이는 블록.
 ///
-/// 특수 블록(제염 빔, 중화 폭탄, 정화 코어)과 오염 물질은 종류가 없어 매치에 들지 않는다.
+/// 특수 블록(제염 빔, 중화 폭탄, 정화 코어, 청소 드론)과 오염 물질은 종류가 없어 매치에 들지 않는다.
 /// 특수 블록은 옆 칸의 블록과 스왑하면 옮겨 간 자리에서 발동한다(4장).
 public enum Block: Hashable, Sendable, Codable {
     case normal(BlockKind)
     case beam(Orientation)
     case bomb
     case core
+    case drone
     /// 외계 오염 물질(5장). 매치되지 않고 어떤 효과로도 사라지지 않으며 중력만 받는다.
     case material
     /// 콘크리트(7장). 움직이지 않고 떨어지지 않는다. 옆에서 매치하거나 특수 효과가 닿으면 `hp`가 1 준다.
@@ -89,7 +92,7 @@ public enum Block: Hashable, Sendable, Codable {
     public var kind: BlockKind? {
         switch self {
         case .normal(let kind), .caged(let kind), .timed(let kind, _), .chained(let kind): kind
-        case .beam, .bomb, .core, .material, .concrete, .sludge, .wall, .cocoon, .rubble, .nest, .egg, .boulder, .vent, .frozen: nil
+        case .beam, .bomb, .core, .drone, .material, .concrete, .sludge, .wall, .cocoon, .rubble, .nest, .egg, .boulder, .vent, .frozen: nil
         }
     }
 
@@ -99,6 +102,7 @@ public enum Block: Hashable, Sendable, Codable {
         case .beam(let orientation): .beam(orientation)
         case .bomb: .bomb
         case .core: .core
+        case .drone: .drone
         }
     }
 
@@ -125,7 +129,7 @@ public enum Block: Hashable, Sendable, Codable {
     /// 흘러내림으로 옆 열에 미끄러져 들어갈 수 있는 블록인지.
     public var canSlide: Bool {
         switch self {
-        case .normal, .beam, .bomb, .core, .timed: true
+        case .normal, .beam, .bomb, .core, .drone, .timed: true
         case .material, .concrete, .caged, .sludge, .wall, .cocoon, .rubble, .nest, .egg, .chained, .boulder, .vent, .frozen: false
         }
     }
@@ -153,6 +157,7 @@ public enum Block: Hashable, Sendable, Codable {
         case .beam(let orientation): self = .beam(orientation)
         case .bomb: self = .bomb
         case .core: self = .core
+        case .drone: self = .drone
         }
     }
 }

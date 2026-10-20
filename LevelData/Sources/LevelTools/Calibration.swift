@@ -24,12 +24,15 @@ public struct Calibration: Hashable, Sendable {
     ///
     /// 이동 횟수는 봇이 열 판 가운데 일곱 판을 클리어하는 값이고, 별 2개는 클리어한 판의 절반이 넘는 점수,
     /// 별 3개는 상위 20%가 넘는 점수다. 점수는 100점 단위로 내린다.
-    public static func measure(_ level: Level, playouts: Int = 200, greed: Double = 0.5) -> Calibration? {
-        guard var state = try? level.makeState() else { return nil }
-        state.movesRemaining = cap
-        let start = state
+    /// 판마다 시작 보드가 다르므로(9장) 판마다 다른 시작 보드로 잰다. `boardSeedOffset`으로 쓸 보드를 바꾼다.
+    public static func measure(
+        _ level: Level, playouts: Int = 200, greed: Double = 0.5, boardSeedOffset: Int = 0
+    ) -> Calibration? {
+        guard (try? level.makeState()) != nil else { return nil }
         let results = Mutex([(turns: Int, blocks: Int)]())
         DispatchQueue.concurrentPerform(iterations: playouts) { seed in
+            guard var start = try? level.makeState(seed: level.boardSeed(boardSeedOffset + seed)) else { return }
+            start.movesRemaining = cap
             let end = Solver.casual(start, policySeed: UInt64(seed), greed: greed)
             guard end.state.status == .won else { return }
             let bonus = (end.state.movesRemaining ?? 0) * GameConstants.scorePerRemainingMove

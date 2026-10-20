@@ -161,7 +161,7 @@ object WebPlatform {
         Platform.adsArePlaceholders = true
         Platform.analytics = { name, parameters ->
             val json = parameters.entries.joinToString(",", "{", "}") { (key, value) ->
-                "\"$key\":" + if (value is Int) value.toString() else JsonPrimitive(value.toString()).toString()
+                "\"$key\":" + if (value is Int || value is Long) value.toString() else JsonPrimitive(value.toString()).toString()
             }
             jsLog(name, json)
         }

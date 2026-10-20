@@ -23,6 +23,8 @@ struct GameView: View {
     @State private var usedContinue = false
     /// 판을 시작할 때의 이동 횟수. 한 번이라도 뒀는지 알아보는 데 쓴다.
     @State private var initialMoves: Int?
+    /// 이 판을 시작한 시드(9장). 플레이 기록에 남긴다.
+    @State private var boardSeed: UInt64 = 0
     @State private var showsAd = false
     @State private var showsLives = false
     @State private var showsQuitConfirm = false
@@ -303,7 +305,16 @@ struct GameView: View {
         }
         let level = model.levels[levelIndex]
         do {
-            var state = try level.makeState()
+            // 판마다 시작 보드가 다르다. 레벨 설명이 있는 판만 늘 같은 보드로 시작한다(9장).
+            var seed = level.hasFixedStart ? level.seed : UInt64.random(in: 1...UInt64(Int32.max))
+            #if DEBUG
+            // 실행 인자 `-seed 숫자`로 같은 판을 다시 본다.
+            if let forced = UserDefaults.standard.string(forKey: "seed").flatMap(UInt64.init), forced > 0 {
+                seed = forced
+            }
+            #endif
+            boardSeed = seed
+            var state = try level.makeState(seed: seed)
             state.apply(boosters)
             var autoPlays = false
             #if DEBUG
@@ -317,7 +328,7 @@ struct GameView: View {
                 let kinds = BlockKind.allCases
                 let rows: [[Block]] = [
                     [.timed(.brick, turns: 7), .nest(hp: 2), .timed(.glass, turns: 2), .rubble, .cocoon(.brick), .cocoon(.glass), .sludge, .concrete(hp: 1)],
-                    [.beam(.horizontal), .beam(.vertical), .bomb, .core] + kinds.prefix(3).map(Block.caged) + [.concrete(hp: 2)],
+                    [.beam(.horizontal), .beam(.vertical), .bomb, .core, .drone] + kinds.prefix(2).map(Block.caged) + [.concrete(hp: 2)],
                     [.chained(.brick), .chained(.glass), .frozen(.scrap), .frozen(.wood), .boulder, .vent(hp: 2), .vent(hp: 1), .egg],
                 ]
                 // 넷째 줄의 일반 블록 둘에는 보호막을 씌운다.
@@ -398,7 +409,7 @@ struct GameView: View {
 
     private func logStart(boosters: Int) {
         guard isTracked else { return }
-        Tracker.log(.levelStart(city: model.levels[levelIndex].city, level: levelIndex + 1, boosters: boosters))
+        Tracker.log(.levelStart(city: model.levels[levelIndex].city, level: levelIndex + 1, boosters: boosters, seed: Int(boardSeed)))
     }
 
     private func logEnd(_ state: GameState?, result: String) {

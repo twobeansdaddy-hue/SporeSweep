@@ -5,6 +5,8 @@ sealed interface MatchShape {
     data class Line(val orientation: Orientation, val length: Int) : MatchShape
     data object LShape : MatchShape
     data object TShape : MatchShape
+    /** 줄 없이 2×2 정사각형만으로 된 매치. */
+    data object Square : MatchShape
 }
 
 /** 한 번에 제거되는 같은 종류 블록의 묶음. `positions`는 정렬돼 있다. */
@@ -14,25 +16,37 @@ data class Match(
     val positions: List<Position>,
     val longestLine: Int,
     val crossing: Position?,
+    /** 2×2 정사각형을 품었는지. 줄이 만드는 특수 블록이 없으면 청소 드론을 남긴다(4장). */
+    val hasSquare: Boolean = shape == MatchShape.Square,
 ) {
     /** 이 매치가 만드는 특수 블록(4장). */
     val createdSpecial: Special?
         get() {
             if (longestLine >= 5) return Special.Core
-            return when (shape) {
-                MatchShape.LShape, MatchShape.TShape -> Special.Bomb
-                is MatchShape.Line -> if (shape.length == 4) Special.Beam(shape.orientation) else null
+            return when {
+                shape == MatchShape.LShape || shape == MatchShape.TShape -> Special.Bomb
+                shape is MatchShape.Line && shape.length == 4 -> Special.Beam(shape.orientation)
+                hasSquare -> Special.Drone
+                else -> null
             }
         }
 
     val center get() = crossing ?: positions[(positions.size - 1) / 2]
 
     companion object {
-        fun of(kind: BlockKind, shape: MatchShape, positions: List<Position>, longestLine: Int? = null, crossing: Position? = null) =
+        fun of(
+            kind: BlockKind, shape: MatchShape, positions: List<Position>, longestLine: Int? = null, crossing: Position? = null,
+            hasSquare: Boolean? = null,
+        ) =
             Match(
                 kind, shape, positions.sorted(),
-                longestLine ?: if (shape is MatchShape.Line) shape.length else GameConstants.MINIMUM_MATCH_LENGTH,
+                longestLine ?: when (shape) {
+                    is MatchShape.Line -> shape.length
+                    MatchShape.Square -> 2
+                    else -> GameConstants.MINIMUM_MATCH_LENGTH
+                },
                 crossing,
+                hasSquare ?: (shape == MatchShape.Square),
             )
     }
 }
@@ -49,6 +63,16 @@ sealed interface SpecialEffect {
     data class CoreBeam(val kind: BlockKind) : SpecialEffect
     data class CoreBomb(val kind: BlockKind) : SpecialEffect
     data object ClearBoard : SpecialEffect
+    /** 청소 드론: 제자리와 상하좌우, 그리고 날아가 맞히는 목표 칸. 발동할 때 목표를 정한다(4장). */
+    data class Drone(val target: Position?) : SpecialEffect
+    /** 청소 드론 + 청소 드론: 서로 다른 목표 셋. */
+    data class DroneSwarm(val targets: List<Position>) : SpecialEffect
+    /** 청소 드론 + 제염 빔: 목표 칸을 지나는 그 방향의 줄. */
+    data class DroneBeam(val orientation: Orientation, val target: Position?) : SpecialEffect
+    /** 청소 드론 + 중화 폭탄: 목표 칸 둘레 3×3. */
+    data class DroneBomb(val target: Position?) : SpecialEffect
+    /** 정화 코어 + 청소 드론: 해당 종류를 모두 청소 드론으로 바꿔 발동. */
+    data class CoreDrone(val kind: BlockKind) : SpecialEffect
 }
 
 data class SpecialActivation(val origin: Position, val effect: SpecialEffect, val cleared: List<Position>)

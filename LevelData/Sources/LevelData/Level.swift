@@ -301,12 +301,24 @@ extension Level {
         1 + starScores.count { score >= $0 }
     }
 
-    /// 이 레벨의 시작 상태를 만든다. 같은 레벨은 항상 같은 보드로 시작한다.
-    ///
-    public func makeState() throws(LevelError) -> GameState {
+    /// 판마다 시작 보드가 같은지(9장). 레벨 설명이 있는 판은 설명과 첫 화면이 어긋나지 않게 늘 `seed`로 시작한다.
+    public var hasFixedStart: Bool {
+        tutorial != nil
+    }
+
+    /// `index`번째 판의 시작 시드. 난이도를 잴 때 서로 다른 시작 보드를 쓰려고 둔다.
+    /// 시작이 고정된 판이거나 `index`가 0이면 레벨의 `seed`다.
+    public func boardSeed(_ index: Int) -> UInt64 {
+        guard !hasFixedStart, index != 0 else { return seed }
+        return seed &* 6_364_136_223_846_793_005 &+ UInt64(index) &* 1_442_695_040_888_963_407
+    }
+
+    /// 이 레벨의 시작 상태를 만든다. `seed`를 주지 않으면 레벨의 `seed`로 만든다.
+    /// 같은 시드는 항상 같은 보드를 만들고, 물질과 장애물의 자리는 시드와 상관없이 같다.
+    public func makeState(seed override: UInt64? = nil) throws(LevelError) -> GameState {
         try validate()
         return GameState(
-            seed: seed,
+            seed: override ?? seed,
             columns: columns,
             rows: rows,
             blockTypes: blockTypes,

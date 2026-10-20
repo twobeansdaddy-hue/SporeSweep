@@ -15,6 +15,7 @@ object ParityFormat {
         is Block.Beam -> "B${o(b.orientation)}"
         Block.Bomb -> "X"
         Block.Core -> "C"
+        Block.Drone -> "D"
         Block.Material -> "M"
         is Block.Concrete -> "K${b.hp}"
         is Block.Caged -> "G${b.kind.ordinal}"
@@ -41,12 +42,18 @@ object ParityFormat {
         is SpecialEffect.CoreBeam -> "coreBeam${e.kind.ordinal}"
         is SpecialEffect.CoreBomb -> "coreBomb${e.kind.ordinal}"
         SpecialEffect.ClearBoard -> "clear"
+        is SpecialEffect.Drone -> "drone" + (e.target?.let(::p) ?: "-")
+        is SpecialEffect.DroneSwarm -> "swarm" + ps(e.targets)
+        is SpecialEffect.DroneBeam -> "droneBeam" + o(e.orientation) + (e.target?.let(::p) ?: "-")
+        is SpecialEffect.DroneBomb -> "droneBomb" + (e.target?.let(::p) ?: "-")
+        is SpecialEffect.CoreDrone -> "coreDrone${e.kind.ordinal}"
     }
 
     fun shape(s: MatchShape) = when (s) {
         is MatchShape.Line -> "line${o(s.orientation)}${s.length}"
         MatchShape.LShape -> "L"
         MatchShape.TShape -> "T"
+        MatchShape.Square -> "Q"
     }
 
     fun moves(list: List<BlockMove>) = "[" + list.joinToString(",") { p(it.from) + ">" + p(it.to) } + "]"
@@ -64,7 +71,7 @@ object ParityFormat {
         is GameEvent.Swapped -> "swapped(${p(e.swap.from)}-${p(e.swap.to)})"
         is GameEvent.SwapRejected -> "rejected(${p(e.swap.from)}-${p(e.swap.to)},${rejection(e.rejection)})"
         is GameEvent.MatchesCleared -> "matches(${e.chain};" + e.matches.joinToString(";") {
-            "${k(it.kind)}/${shape(it.shape)}/${it.longestLine}/${it.crossing?.let(::p) ?: "-"}/${ps(it.positions)}"
+            "${k(it.kind)}/${shape(it.shape)}/${it.longestLine}/${it.crossing?.let(::p) ?: "-"}/${ps(it.positions)}" + if (it.hasSquare) "/q" else ""
         } + ")"
         is GameEvent.SpecialsActivated -> "specials(" + e.activations.joinToString(";") { "${p(it.origin)}/${effect(it.effect)}/${ps(it.cleared)}" } + ")"
         is GameEvent.SpecialsCreated -> "created(" + e.spawns.joinToString(",") { "${p(it.position)}=${block(it.block)}" } + ")"

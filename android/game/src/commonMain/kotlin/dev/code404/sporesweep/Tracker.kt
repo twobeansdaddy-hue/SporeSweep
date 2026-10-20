@@ -7,7 +7,8 @@ package dev.code404.sporesweep
 object Tracker {
     sealed class Event(val name: String, val parameters: Map<String, Any> = emptyMap()) {
         data object IntroDone : Event("intro_done")
-        class LevelStart(city: String, level: Int, boosters: Int) : Event("level_start", mapOf("city" to city, "level" to level, "boosters" to boosters))
+        class LevelStart(city: String, level: Int, boosters: Int, seed: Long) :
+            Event("level_start", mapOf("city" to city, "level" to level, "boosters" to boosters, "seed" to seed))
         class LevelEnd(city: String, level: Int, result: String, stars: Int, score: Int, movesLeft: Int, materialsLeft: Int, continued: Boolean) :
             Event("level_end", mapOf("city" to city, "level" to level, "result" to result, "stars" to stars, "score" to score, "moves_left" to movesLeft, "materials_left" to materialsLeft, "continued" to if (continued) 1 else 0))
         class ContinueOffer(city: String, level: Int, materialsLeft: Int) : Event("continue_offer", mapOf("city" to city, "level" to level, "materials_left" to materialsLeft))

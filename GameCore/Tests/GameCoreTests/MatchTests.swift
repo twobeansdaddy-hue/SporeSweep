@@ -93,13 +93,13 @@ struct MatchTests {
         ])
     }
 
-    @Test("나란히 붙은 두 줄은 칸을 공유하지 않으므로 따로 센다")
+    @Test("나란히 붙은 두 줄은 2×2로 이어져 한 덩어리가 되고 청소 드론을 만든다")
     func parallelLines() {
         let board = Board.deadlocked.setting(.soil, at: [(0, 0), (1, 0), (2, 0), (0, 1), (1, 1), (2, 1)])
-        #expect(board.findMatches().map(\.shape) == [
-            .line(.horizontal, length: 3),
-            .line(.horizontal, length: 3),
-        ])
+        let matches = board.findMatches()
+        #expect(matches.map(\.shape) == [.line(.horizontal, length: 3)])
+        #expect(matches[0].positions.count == 6)
+        #expect(matches[0].createdSpecial == .drone)
     }
 
     @Test("종류가 다른 줄은 교차해도 합쳐지지 않는다")

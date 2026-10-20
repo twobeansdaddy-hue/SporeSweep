@@ -24,6 +24,7 @@ object FirebaseTracker {
             for ((key, value) in parameters) {
                 when (value) {
                     is Int -> bundle.putLong(key, value.toLong())
+                    is Long -> bundle.putLong(key, value)
                     else -> bundle.putString(key, value.toString())
                 }
             }

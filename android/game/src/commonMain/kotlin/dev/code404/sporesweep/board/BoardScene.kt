@@ -16,6 +16,7 @@ import dev.code404.sporesweep.core.SwapRejection
 import dev.code404.sporesweep.core.Tool
 import dev.code404.sporesweep.core.TurnResult
 import dev.code404.sporesweep.stage.Action
+import dev.code404.sporesweep.stage.Tween
 import dev.code404.sporesweep.stage.CropNode
 import dev.code404.sporesweep.stage.HAlign
 import dev.code404.sporesweep.stage.LabelNode
@@ -121,6 +122,8 @@ class BoardScene(initial: GameState) : Stage() {
         const val beamFade = 0.28
         const val bombStep = 0.07
         const val coreStep = 0.035
+        /** 청소 드론이 목표까지 날아가는 시간. */
+        const val droneFlight = 0.42
         const val create = 0.15
         const val slide = 0.14
         const val scrollPerRow = 0.16
@@ -1242,6 +1245,14 @@ class BoardScene(initial: GameState) : Stage() {
                         burned.add(cell)
                         distance(cell, origin) * T.bombStep
                     }
+                    is SpecialEffect.Drone, is SpecialEffect.DroneSwarm, is SpecialEffect.DroneBeam, is SpecialEffect.DroneBomb ->
+                        // 드론은 제자리와 상하좌우를 먼저 터뜨리고, 날아가 닿은 뒤에 목표 쪽을 터뜨린다.
+                        if (distance(cell, origin) <= 1) {
+                            distance(cell, origin) * T.bombStep
+                        } else {
+                            val landing = droneTargets(activation.effect).minByOrNull { distance(cell, it) }
+                            T.droneFlight + (landing?.let { distance(cell, it) } ?: 0) * T.bombStep
+                        }
                     else -> order * minOf(T.coreStep, 0.5 / maxOf(ordered.size, 1))
                 }
                 reach = maxOf(reach, offset)
@@ -1263,13 +1274,80 @@ class BoardScene(initial: GameState) : Stage() {
         shakeBoard(minOf(cleared.size.toFloat(), 24f))
         for (blast in blasts) {
             when (blast.activation.effect) {
-                SpecialEffect.BigBomb, SpecialEffect.WideCrossBeam, is SpecialEffect.CoreBeam, is SpecialEffect.CoreBomb -> flashBoard(0.16f, blast.start)
+                SpecialEffect.BigBomb, SpecialEffect.WideCrossBeam, is SpecialEffect.CoreBeam, is SpecialEffect.CoreBomb,
+                is SpecialEffect.CoreDrone -> flashBoard(0.16f, blast.start)
                 SpecialEffect.ClearBoard -> flashBoard(0.3f, blast.start)
                 SpecialEffect.CrossBeam, is SpecialEffect.Core -> flashBoard(0.07f, blast.start)
                 else -> {}
             }
         }
         return (delays.values.maxOrNull() ?: 0.0) + T.pop
+    }
+
+    /** 청소 드론이 날아가 맞히는 칸. */
+    private fun droneTargets(effect: SpecialEffect): List<Position> = when (effect) {
+        is SpecialEffect.Drone -> listOfNotNull(effect.target)
+        is SpecialEffect.DroneBeam -> listOfNotNull(effect.target)
+        is SpecialEffect.DroneBomb -> listOfNotNull(effect.target)
+        is SpecialEffect.DroneSwarm -> effect.targets
+        else -> emptyList()
+    }
+
+    /** 청소 드론이 `from`에서 `to`로 날아간다. 살짝 위로 휘며 날고, 날개처럼 돈다(iOS 판 flyDrone). */
+    private fun flyDrone(from: Position, to: Position, start: Double) {
+        val cell = layout.cellSize
+        val node = BlockSprite.makeNode(Block.Drone, cell)
+        val a = layout.center(from)
+        val b = layout.center(to)
+        node.position = a
+        node.z = 8f
+        node.alpha = 0f
+        worldNode.addChild(node)
+        val lift = cell * 1.6f
+        val control = SPoint((a.x + b.x) / 2, maxOf(a.y, b.y) + lift)
+        fun along(target: Node) = Tween(T.droneFlight) { n ->
+            { t ->
+                val u = 1 - t
+                n.x = u * u * a.x + 2 * u * t * control.x + t * t * b.x
+                n.y = u * u * a.y + 2 * u * t * control.y + t * t * b.y
+            }
+        }.apply { timing = Timing.EASE_IN_OUT }
+        node.run(
+            Action.sequence(
+                Action.wait(start),
+                Action.fadeIn(0.04),
+                Action.group(
+                    along(node),
+                    Action.rotateBy((PI * 4).toFloat(), T.droneFlight),
+                    Action.sequence(Action.scaleTo(1.25f, T.droneFlight / 2), Action.scaleTo(0.9f, T.droneFlight / 2)),
+                ),
+                Action.fadeOut(0.06),
+                Action.removeFromParent(),
+            ),
+        )
+        // 지나간 자리에 옅은 빛을 남긴다.
+        val trail = light(EffectTexture.glow, SColor(0.55f, 0.95f, 1f), cell * 0.6f, cell * 0.6f, a)
+        trail.run(
+            Action.sequence(
+                Action.wait(start),
+                Action.group(along(trail), Action.sequence(Action.fadeAlpha(0.6f, 0.05), Action.wait(T.droneFlight - 0.1), Action.fadeOut(0.05))),
+                Action.removeFromParent(),
+            ),
+        )
+    }
+
+    /** 드론이 목표에 닿은 자리의 번쩍임. */
+    private fun addLanding(at: Position, start: Double) {
+        val cell = layout.cellSize
+        val flash = light(EffectTexture.sparkle, SColor.white, cell * 1.8f, cell * 1.8f, layout.center(at))
+        flash.run(
+            Action.sequence(
+                Action.wait(start),
+                Action.fadeAlpha(1f, 0.03),
+                Action.group(Action.scaleTo(1.6f, 0.25), Action.fadeOut(0.25)),
+                Action.removeFromParent(),
+            ),
+        )
     }
 
     private fun showPraise(chain: Int) {
@@ -1637,9 +1715,22 @@ class BoardScene(initial: GameState) : Stage() {
             }
             SpecialEffect.Bomb -> explosion(1.9f)
             SpecialEffect.BigBomb -> explosion(3.1f)
-            is SpecialEffect.Core, is SpecialEffect.CoreBeam, is SpecialEffect.CoreBomb -> {
+            is SpecialEffect.Core, is SpecialEffect.CoreBeam, is SpecialEffect.CoreBomb, is SpecialEffect.CoreDrone -> {
                 shockwave(1.4f, cool)
                 rays()
+            }
+            is SpecialEffect.Drone, is SpecialEffect.DroneSwarm, is SpecialEffect.DroneBeam, is SpecialEffect.DroneBomb -> {
+                // 제자리에서 작게 터지고, 드론이 목표로 날아가 닿은 자리에서 다시 터진다.
+                shockwave(1.1f, cool)
+                for (target in droneTargets(effect)) {
+                    flyDrone(activation.origin, target, start)
+                    val landing = start + T.droneFlight
+                    when (effect) {
+                        is SpecialEffect.DroneBeam -> addBlast(SpecialActivation(target, SpecialEffect.Beam(effect.orientation), emptyList()), landing, 0.25, tints)
+                        is SpecialEffect.DroneBomb -> addBlast(SpecialActivation(target, SpecialEffect.Bomb, emptyList()), landing, 0.25, tints)
+                        else -> addLanding(target, landing)
+                    }
+                }
             }
             SpecialEffect.ClearBoard -> {
                 shockwave(9f, cool)

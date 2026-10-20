@@ -12,7 +12,7 @@ enum Tracker {
         /// 인트로를 끝까지 봤거나 건너뛰었다.
         case introDone
         /// 판을 시작했다.
-        case levelStart(city: String, level: Int, boosters: Int)
+        case levelStart(city: String, level: Int, boosters: Int, seed: Int)
         /// 판이 끝났다. `result`는 won, lost, quit 가운데 하나다.
         case levelEnd(city: String, level: Int, result: String, stars: Int, score: Int, movesLeft: Int, materialsLeft: Int, continued: Bool)
         /// 이동을 다 써서 이어 할지 물었다.
@@ -58,8 +58,8 @@ enum Tracker {
             switch self {
             case .introDone, .livesOut:
                 [:]
-            case let .levelStart(city, level, boosters):
-                ["city": city, "level": level, "boosters": boosters]
+            case let .levelStart(city, level, boosters, seed):
+                ["city": city, "level": level, "boosters": boosters, "seed": seed]
             case let .levelEnd(city, level, result, stars, score, movesLeft, materialsLeft, continued):
                 [
                     "city": city, "level": level, "result": result, "stars": stars, "score": score,

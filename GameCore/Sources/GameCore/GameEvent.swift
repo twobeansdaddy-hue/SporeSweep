@@ -50,6 +50,17 @@ public enum SpecialEffect: Hashable, Sendable, Codable {
     case coreBomb(BlockKind)
     /// 정화 코어 + 정화 코어: 블록 전체.
     case clearBoard
+    /// 청소 드론: 제자리와 상하좌우, 그리고 날아가 맞히는 목표 칸. 발동하기 전에는 목표가 `nil`이고,
+    /// 발동할 때 정한다(4장). 고를 칸이 없으면 끝까지 `nil`이다.
+    case drone(Position?)
+    /// 청소 드론 + 청소 드론: 제자리와 상하좌우, 그리고 서로 다른 목표 셋.
+    case droneSwarm([Position])
+    /// 청소 드론 + 제염 빔: 제자리와 상하좌우, 그리고 목표 칸을 지나는 그 방향의 줄.
+    case droneBeam(Orientation, Position?)
+    /// 청소 드론 + 중화 폭탄: 제자리와 상하좌우, 그리고 목표 칸 둘레 3×3.
+    case droneBomb(Position?)
+    /// 정화 코어 + 청소 드론: 해당 종류를 모두 청소 드론으로 바꿔 발동.
+    case coreDrone(BlockKind)
 }
 
 /// 특수 효과 한 번의 발동 기록.

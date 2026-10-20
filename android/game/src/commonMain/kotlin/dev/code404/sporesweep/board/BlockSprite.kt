@@ -11,6 +11,9 @@ import dev.code404.sporesweep.stage.SColor
 import dev.code404.sporesweep.stage.SRect
 import dev.code404.sporesweep.stage.ShapeNode
 import dev.code404.sporesweep.stage.SpriteNode
+import kotlin.math.PI
+import kotlin.math.cos
+import kotlin.math.sin
 
 /**
  * 블록의 모습(iOS 판 BlockSprite). 모든 블록과 장애물의 그림이 있어서, 그림이 없을 때의 도형은
@@ -40,6 +43,7 @@ object BlockSprite {
         is Block.Beam -> if (block.orientation == Orientation.HORIZONTAL) "block_beam_h" else "block_beam_v"
         Block.Bomb -> "block_bomb"
         Block.Core -> "block_core"
+        Block.Drone -> "block_drone"
         Block.Material -> MATERIAL_NAME
         is Block.Concrete -> "obstacle_concrete_${block.hp}"
         is Block.Caged -> name(block.kind) + "_caged"
@@ -78,8 +82,40 @@ object BlockSprite {
             decorate(base, block, cellSize)
             return base
         }
+        if (block == Block.Drone) return makeDrone(cellSize)
         // 여기까지 오는 것은 그림이 빠진 경우뿐이다. 칸 색 네모로 그린다.
         return SpriteNode(SColor(0.5f), cellSize * 0.8f, cellSize * 0.8f).also { it.name = name(block) }
+    }
+
+    /** 그림이 없을 때의 청소 드론(iOS 판과 같다). 청록색 원판 위에 대각선으로 놓인 흰 날개 넷. */
+    private fun makeDrone(cellSize: Float): Node {
+        val radius = cellSize * 0.4f
+        val disc = ShapeNode.circle(radius)
+        disc.name = name(Block.Drone)
+        disc.fillColor = SColor(0.12f, 0.62f, 0.66f)
+        disc.strokeColor = SColor(0f, 0f, 0f, 0.35f)
+        disc.lineWidth = maxOf(cellSize * 0.04f, 1f)
+        val long = radius * 0.78f
+        val wide = radius * 0.2f
+        for (index in 0 until 4) {
+            val angle = index * PI.toFloat() / 2 + PI.toFloat() / 4
+            val c = cos(angle)
+            val s = sin(angle)
+            fun rotate(x: Float, y: Float) = dev.code404.sporesweep.stage.SPoint(x * c - y * s, x * s + y * c)
+            val x0 = wide * 0.6f
+            val corners = listOf(rotate(x0, -wide / 2), rotate(x0 + long, -wide / 2), rotate(x0 + long, wide / 2), rotate(x0, wide / 2))
+            val blade = ShapeNode(dev.code404.sporesweep.stage.Paths.polyline(corners, close = true))
+            blade.fillColor = SColor.white
+            blade.strokeColor = SColor.clear
+            blade.z = 0.1f
+            disc.addChild(blade)
+        }
+        val hub = ShapeNode.circle(radius * 0.22f)
+        hub.fillColor = SColor.white
+        hub.strokeColor = SColor.clear
+        hub.z = 0.1f
+        disc.addChild(hub)
+        return disc
     }
 
     private fun decorate(node: Node, block: Block, cellSize: Float) {

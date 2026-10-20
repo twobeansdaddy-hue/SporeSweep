@@ -104,6 +104,8 @@ public final class BoardScene: SKScene {
         static let bombStep: TimeInterval = 0.07
         /// 코어가 블록을 하나씩 터뜨리는 간격.
         static let coreStep: TimeInterval = 0.035
+        /// 청소 드론이 목표까지 날아가는 시간.
+        static let droneFlight: TimeInterval = 0.42
         static let create: TimeInterval = 0.15
         static let slide: TimeInterval = 0.14
         static let scrollPerRow: TimeInterval = 0.16
@@ -1616,9 +1618,18 @@ public final class BoardScene: SKScene {
                 case .bomb, .bigBomb:
                     offset = Double(Self.distance(cell, origin)) * Timing.bombStep
                     burned.insert(cell)
-                case .core, .coreBeam, .coreBomb, .clearBoard:
+                case .core, .coreBeam, .coreBomb, .coreDrone, .clearBoard:
                     // 코어는 가까운 블록부터 하나씩 터뜨린다. 대상이 많으면 간격을 줄인다.
                     offset = Double(order) * min(Timing.coreStep, 0.5 / Double(max(ordered.count, 1)))
+                case .drone, .droneSwarm, .droneBeam, .droneBomb:
+                    // 드론은 제자리와 상하좌우를 먼저 터뜨리고, 날아가 닿은 뒤에 목표 쪽을 터뜨린다.
+                    if Self.distance(cell, origin) <= 1 {
+                        offset = Double(Self.distance(cell, origin)) * Timing.bombStep
+                    } else {
+                        let landing = Self.droneTargets(of: activation.effect)
+                            .min { Self.distance(cell, $0) < Self.distance(cell, $1) }
+                        offset = Timing.droneFlight + Double(landing.map { Self.distance(cell, $0) } ?? 0) * Timing.bombStep
+                    }
                 }
                 reach = max(reach, offset)
                 delays[cell] = min(delays[cell] ?? .infinity, start + offset)
@@ -1650,17 +1661,26 @@ public final class BoardScene: SKScene {
         // 큰 효과는 보드 전체가 번쩍인다.
         for blast in blasts {
             switch blast.activation.effect {
-            case .bigBomb, .wideCrossBeam, .coreBeam, .coreBomb:
+            case .bigBomb, .wideCrossBeam, .coreBeam, .coreBomb, .coreDrone:
                 flashBoard(alpha: 0.16, delay: blast.start)
             case .clearBoard:
                 flashBoard(alpha: 0.3, delay: blast.start)
             case .crossBeam, .core:
                 flashBoard(alpha: 0.07, delay: blast.start)
-            case .beam, .bomb:
+            case .beam, .bomb, .drone, .droneSwarm, .droneBeam, .droneBomb:
                 break
             }
         }
         return (delays.values.max() ?? 0) + Timing.pop
+    }
+
+    /// 청소 드론이 날아가 맞히는 칸.
+    private static func droneTargets(of effect: SpecialEffect) -> [Position] {
+        switch effect {
+        case .drone(let target), .droneBeam(_, let target), .droneBomb(let target): target.map { [$0] } ?? []
+        case .droneSwarm(let targets): targets
+        default: []
+        }
     }
 
     /// 연쇄가 길게 이어지면 보드 가운데에 칭찬을 띄운다. 연쇄가 길수록 말이 커진다.
@@ -2171,13 +2191,82 @@ public final class BoardScene: SKScene {
             explosion(reachCells: 1.9)
         case .bigBomb:
             explosion(reachCells: 3.1)
-        case .core, .coreBeam, .coreBomb:
+        case .core, .coreBeam, .coreBomb, .coreDrone:
             shockwave(reachCells: 1.4, color: cool)
             rays()
+        case .drone, .droneSwarm, .droneBeam, .droneBomb:
+            // 제자리에서 작게 터지고, 드론이 목표로 날아가 닿은 자리에서 다시 터진다.
+            shockwave(reachCells: 1.1, color: cool)
+            for target in Self.droneTargets(of: activation.effect) {
+                flyDrone(from: activation.origin, to: target, start: start)
+                let landing = start + Timing.droneFlight
+                let payload: SpecialEffect = switch activation.effect {
+                case .droneBeam(let orientation, _): .beam(orientation)
+                case .droneBomb: .bomb
+                default: .bomb
+                }
+                if case .drone = activation.effect {
+                    // 혼자 날아간 드론은 목표 한 칸만 맞히므로 작은 충격만 남긴다.
+                    let hit = SpecialActivation(origin: target, effect: .drone(nil), cleared: [])
+                    addLanding(hit, start: landing)
+                } else if case .droneSwarm = activation.effect {
+                    addLanding(SpecialActivation(origin: target, effect: .drone(nil), cleared: []), start: landing)
+                } else {
+                    addBlast(for: SpecialActivation(origin: target, effect: payload, cleared: []), start: landing, reach: 0.25, tints: tints)
+                }
+            }
         case .clearBoard:
             shockwave(reachCells: 9, color: cool)
             shockwave(reachCells: 5, color: warm)
         }
+    }
+
+    /// 청소 드론이 `from`에서 `to`로 날아간다. 살짝 위로 휘며 날고, 날개처럼 돈다.
+    private func flyDrone(from: Position, to: Position, start: TimeInterval) {
+        let cell = layout.cellSize
+        let node = BlockSprite.makeNode(block: .drone, cellSize: cell)
+        node.position = layout.center(of: from)
+        node.zPosition = 8
+        node.alpha = 0
+        worldNode.addChild(node)
+        let a = layout.center(of: from)
+        let b = layout.center(of: to)
+        let lift = cell * 1.6
+        let path = CGMutablePath()
+        path.move(to: a)
+        path.addQuadCurve(to: b, control: CGPoint(x: (a.x + b.x) / 2, y: max(a.y, b.y) + lift))
+        let flight = SKAction.follow(path, asOffset: false, orientToPath: false, duration: Timing.droneFlight)
+        flight.timingMode = .easeInEaseOut
+        node.run(.sequence([
+            .wait(forDuration: start),
+            .fadeIn(withDuration: 0.04),
+            .group([flight, .rotate(byAngle: .pi * 4, duration: Timing.droneFlight), .sequence([
+                .scale(to: 1.25, duration: Timing.droneFlight / 2), .scale(to: 0.9, duration: Timing.droneFlight / 2),
+            ])]),
+            .fadeOut(withDuration: 0.06),
+            .removeFromParent(),
+        ]))
+        // 지나간 자리에 옅은 빛을 남긴다.
+        let trail = light(EffectTexture.glow, color: SKColor(red: 0.55, green: 0.95, blue: 1, alpha: 1), size: CGSize(width: cell * 0.6, height: cell * 0.6), at: a)
+        trail.alpha = 0
+        trail.run(.sequence([
+            .wait(forDuration: start),
+            .group([.follow(path, asOffset: false, orientToPath: false, duration: Timing.droneFlight), .sequence([.fadeAlpha(to: 0.6, duration: 0.05), .wait(forDuration: Timing.droneFlight - 0.1), .fadeOut(withDuration: 0.05)])]),
+            .removeFromParent(),
+        ]))
+    }
+
+    /// 드론이 목표에 닿은 자리의 번쩍임.
+    private func addLanding(_ hit: SpecialActivation, start: TimeInterval) {
+        let cell = layout.cellSize
+        let flash = light(EffectTexture.sparkle, color: .white, size: CGSize(width: cell * 1.8, height: cell * 1.8), at: layout.center(of: hit.origin))
+        flash.alpha = 0
+        flash.run(.sequence([
+            .wait(forDuration: start),
+            .fadeAlpha(to: 1, duration: 0.03),
+            .group([.scale(to: 1.6, duration: 0.25), .fadeOut(withDuration: 0.25)]),
+            .removeFromParent(),
+        ]))
     }
 
     /// 터지는 칸마다 그 순간에 블록 색의 빛 알갱이를 사방으로 날린다. 날아가다 아래로 떨어진다.

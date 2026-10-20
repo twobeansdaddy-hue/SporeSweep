@@ -101,6 +101,8 @@ fun GameScreen(model: AppModel, startIndex: Int, onExit: () -> Unit) {
     var lostState by remember { mutableStateOf<GameState?>(null) }
     var usedContinue by remember { mutableStateOf(false) }
     var initialMoves by remember { mutableStateOf<Int?>(null) }
+    /** 이 판을 시작한 시드(9장). 플레이 기록에 남긴다. */
+    var boardSeed by remember { mutableStateOf(0uL) }
     var showsAd by remember { mutableStateOf(false) }
     var showsLives by remember { mutableStateOf(false) }
     var showsQuitConfirm by remember { mutableStateOf(false) }
@@ -116,7 +118,7 @@ fun GameScreen(model: AppModel, startIndex: Int, onExit: () -> Unit) {
 
     fun logStart(boosters: Int) {
         if (!isTracked()) return
-        Tracker.log(Tracker.Event.LevelStart(model.levels[levelIndex].city, levelIndex + 1, boosters))
+        Tracker.log(Tracker.Event.LevelStart(model.levels[levelIndex].city, levelIndex + 1, boosters, boardSeed.toLong()))
     }
 
     fun logEnd(state: GameState?, outcome: String) {
@@ -167,7 +169,12 @@ fun GameScreen(model: AppModel, startIndex: Int, onExit: () -> Unit) {
             return
         }
         try {
-            val state = level.makeState()
+            // 판마다 시작 보드가 다르다. 레벨 설명이 있는 판만 늘 같은 보드로 시작한다(9장).
+            // 개발용 실행 인자 seed로 같은 판을 다시 본다.
+            val forced = model.args.string("seed")?.toULongOrNull()?.takeIf { it > 0uL }
+            val seed = forced ?: if (level.hasFixedStart) level.seed else kotlin.random.Random.nextLong(1, Int.MAX_VALUE.toLong()).toULong()
+            boardSeed = seed
+            val state = level.makeState(seed)
             state.apply(boosters)
             val autoPlays = model.args.bool("autoplay")
             val moves = model.args.int("moves").takeIf { it > 0 } ?: model.debugMoves
@@ -176,7 +183,7 @@ fun GameScreen(model: AppModel, startIndex: Int, onExit: () -> Unit) {
                 val kinds = BlockKind.entries
                 val rows = listOf(
                     listOf(Block.Timed(BlockKind.BRICK, 7), Block.Nest(2), Block.Timed(BlockKind.GLASS, 2), Block.Rubble, Block.Cocoon(BlockKind.BRICK), Block.Cocoon(BlockKind.GLASS), Block.Sludge, Block.Concrete(1)),
-                    listOf(Block.Beam(Orientation.HORIZONTAL), Block.Beam(Orientation.VERTICAL), Block.Bomb, Block.Core) + kinds.take(3).map { Block.Caged(it) } + listOf(Block.Concrete(2)),
+                    listOf(Block.Beam(Orientation.HORIZONTAL), Block.Beam(Orientation.VERTICAL), Block.Bomb, Block.Core, Block.Drone) + kinds.take(2).map { Block.Caged(it) } + listOf(Block.Concrete(2)),
                     listOf(Block.Chained(BlockKind.BRICK), Block.Chained(BlockKind.GLASS), Block.Frozen(BlockKind.SCRAP), Block.Frozen(BlockKind.WOOD), Block.Boulder, Block.Vent(2), Block.Vent(1), Block.Egg),
                 )
                 state.shields = hashSetOf(Position(0, 5), Position(1, 5))

@@ -5,16 +5,19 @@ import LevelTools
 
 // 모든 도시의 레벨을 봇으로 돌려 보고 이상한 레벨을 찾는다(9장).
 //
-// 사용법: swift run -c release levelaudit [--playouts 200] [--fix] [--csv 파일] [--levels 폴더]
+// 사용법: swift run -c release levelaudit [--playouts 200] [--fix | --recalibrate] [--csv 파일] [--levels 폴더]
 //   레벨을 만들 때와 다른 시드로 돌린다. 만들 때 잰 값이 우연이었는지 가려내기 위해서다.
+//   판마다 시작 보드가 다르므로(9장) 판마다 다른 시작 보드로 돈다. 잴 때와 다른 보드다.
 //   --fix를 주면 걸린 레벨의 이동 횟수와 별 점수를 다시 재어 파일을 고친다.
+//   --recalibrate를 주면 걸렸는지와 상관없이 모든 레벨을 다시 잰다. 규칙을 바꾼 뒤에 쓴다.
 
 let arguments = CommandLine.arguments
 func value(_ name: String) -> String? {
     arguments.firstIndex(of: name).flatMap { arguments.indices.contains($0 + 1) ? arguments[$0 + 1] : nil }
 }
 let playouts = value("--playouts").flatMap(Int.init) ?? 200
-let fixes = arguments.contains("--fix")
+let recalibrates = arguments.contains("--recalibrate")
+let fixes = arguments.contains("--fix") || recalibrates
 let folder = value("--levels") ?? "Sources/LevelData/Levels"
 /// 만들 때 쓴 시드(0부터)와 겹치지 않는 시드.
 let seedBase: UInt64 = 50_000
@@ -45,16 +48,20 @@ final class Box<Value>: @unchecked Sendable {
 
 func audit(_ level: Level) -> Row? {
     guard let start = try? level.makeState() else { return nil }
+    /// 판마다 다른 시작 보드. 잴 때 쓰는 보드(0부터)와 겹치지 않게 뒤쪽 번호를 쓴다.
+    func board(_ index: Int) -> GameState {
+        (try? level.makeState(seed: level.boardSeed(Int(seedBase) + index))) ?? start
+    }
     let outcomes = Box([(won: Bool, stars: Int, turns: Int, stuck: Bool)]())
     let weakWins = Box(0)
     DispatchQueue.concurrentPerform(iterations: playouts) { index in
-        let end = Solver.casual(start, policySeed: seedBase + UInt64(index), greed: 0.5)
+        let end = Solver.casual(board(index), policySeed: seedBase + UInt64(index), greed: 0.5)
         let won = end.state.status == .won
         // 이동 횟수가 남았는데 졌으면 둘 곳이 없어서 진 것이다.
         let stuck = !won && (end.state.movesRemaining ?? 0) > 0
         outcomes.with { $0.append((won, won ? level.stars(forScore: end.state.score) : 0, end.turns, stuck)) }
         // 거의 아무렇게나 두는 봇. 이 봇도 잘 깨면 생각할 것이 없는 판이다.
-        if Solver.casual(start, policySeed: seedBase + UInt64(index), greed: 0.15).state.status == .won {
+        if Solver.casual(board(index), policySeed: seedBase + UInt64(index), greed: 0.15).state.status == .won {
             weakWins.with { $0 += 1 }
         }
     }
@@ -99,7 +106,7 @@ for city in LevelCatalog.cityIDs {
             print("읽지 못함: \(file)")
             continue
         }
-        let needsFix = row.flags.contains { ["어려움", "쉬움", "별3 드묾", "별3 흔함", "별1뿐"].contains($0) }
+        let needsFix = recalibrates || row.flags.contains { ["어려움", "쉬움", "별3 드묾", "별3 흔함", "별1뿐"].contains($0) }
         if fixes, needsFix, let measured = Calibration.measure(level, playouts: 400) {
             // 만들 때의 판과 점검할 때의 판을 합친 400판으로 다시 잰다.
             level.moves = measured.moves
