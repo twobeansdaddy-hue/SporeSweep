@@ -66,7 +66,7 @@ cd android && ./gradlew :app:assembleDebug
 | W1 | 규칙 모듈을 멀티플랫폼으로 | **끝** | 규칙 비교 시험이 JVM과 Wasm(Node)에서 함께 통과한다 |
 | W2 | 화면 코드를 `:game`으로, 그리기 엔진을 Compose 그리기로 | **끝** | 안드로이드 봇 판이 예전과 같은 점수로 끝난다(도쿄 6단계 2,640점) |
 | W3 | 웹판(`:web`), 그림을 WebP로 | **끝**. 로컬에서 타이틀, 인트로, 도시, 보드, 세계 지도를 확인했다. 봇 판의 같은 순간이 안드로이드와 같다(1,740점, 이동 9) | 브라우저에서 한 판을 둔다 |
-| W4 | 올리기와 실기기 확인 | | `play.code404.app`이 휴대전화와 PC 브라우저에서 열린다 |
+| W4 | 올리기와 실기기 확인 | 올렸다(2026-10-20, Cloudflare Pages `sporesweep-play`). PC 브라우저에서 열리고 판이 돈다. Firebase DebugView에 기록이 찍힌다. 휴대전화 브라우저는 아직 | `play.code404.app`이 휴대전화와 PC 브라우저에서 열린다 |
 
 ```bash
 cd android && ./gradlew :web:webSite
@@ -77,5 +77,6 @@ cd android && ./gradlew :web:webSite
 - 광고 자리는 자리 표시 화면을 3초 보여주고 보상을 준다(`Platform.adsArePlaceholders`).
 - 진행과 설정은 브라우저 저장소(localStorage)에 둔다. 브라우저 데이터를 지우면 진행도 사라진다.
 - 개발용 실행 인자는 주소로 준다. `?debug=1&city=tokyo&level=6&autoplay=true`처럼 `debug=1`이 있을 때만 읽는다.
-- 플레이 기록은 `window.sporeLog`가 있을 때 보낸다. Firebase에 웹 앱을 등록해 설정을 index.html에 넣어야 한다(아직 안 했다).
+- 플레이 기록은 Firebase Analytics로 보낸다. 설정은 저장소에 올리지 않는 `web/firebase-config.js`(sporesweep-dev의 웹 앱)에 있고, `webSite`가 함께 모은다. 주소에 `debug=1`이 있으면 DebugView에 보인다. 광고 차단기(맥의 AdGuard 차단형 DNS 등)가 있으면 기록이 나가지 않는다.
+- 다시 올릴 때: `./gradlew :web:webSite` 후 `web/build/site`를 묶어 Cloudflare의 `sporesweep-play` 프로젝트에 새 배포로 올린다.
 
