@@ -1,6 +1,6 @@
 package dev.code404.sporesweep.ui
 
-import androidx.activity.compose.BackHandler
+import dev.code404.sporesweep.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
@@ -68,7 +68,6 @@ import dev.code404.sporesweep.core.Position
 import dev.code404.sporesweep.core.Tool
 import dev.code404.sporesweep.stage.StageView
 import dev.code404.sporesweep.tr
-import java.text.NumberFormat
 
 /** 결과 화면에 보여줄 내용. */
 data class GameResult(
@@ -82,7 +81,12 @@ data class GameResult(
     val rewards: List<Booster>,
 )
 
-fun formatted(value: Int): String = NumberFormat.getIntegerInstance().format(value)
+/** 세 자리마다 쉼표를 넣는다(`12,345`). */
+fun formatted(value: Int): String {
+    val digits = kotlin.math.abs(value).toString()
+    val grouped = digits.reversed().chunked(3).joinToString(",").reversed()
+    return if (value < 0) "-$grouped" else grouped
+}
 
 /** 게임 화면. 레벨 하나를 플레이하고, 끝나면 결과를 보여준다(iOS 판 GameView). */
 @Composable

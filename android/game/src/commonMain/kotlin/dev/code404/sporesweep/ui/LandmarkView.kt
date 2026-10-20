@@ -1,12 +1,5 @@
 package dev.code404.sporesweep.ui
 
-import android.graphics.Bitmap
-import android.graphics.ColorMatrix
-import android.graphics.ColorMatrixColorFilter
-import android.graphics.Matrix
-import android.graphics.Paint
-import android.graphics.Path
-import android.graphics.RectF
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
@@ -33,9 +26,18 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.asImageBitmap
-import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
-import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.ColorMatrix
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.Matrix
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.PathOperation
+import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.drawscope.clipPath
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import dev.code404.sporesweep.Assets
@@ -97,7 +99,7 @@ class LandmarkArt(val prefix: String, val horizon: Float, val parts: List<Part>,
                     0 -> path.moveTo(v[1], v[2])
                     1 -> path.lineTo(v[1], v[2])
                     2 -> path.cubicTo(v[1], v[2], v[3], v[4], v[5], v[6])
-                    3 -> path.quadTo(v[1], v[2], v[3], v[4])
+                    3 -> path.quadraticTo(v[1], v[2], v[3], v[4])
                     4 -> path.close()
                 }
             }
@@ -106,28 +108,34 @@ class LandmarkArt(val prefix: String, val horizon: Float, val parts: List<Part>,
     }
 }
 
-private val filterSkyPolluted: ColorMatrixColorFilter by lazy {
-    val m = ColorMatrix().apply { setSaturation(0.15f) }
-    m.postConcat(ColorMatrix(floatArrayOf(1f, 0f, 0f, 0f, 30f, 0f, 1f, 0f, 0f, 30f, 0f, 0f, 1f, 0f, 30f, 0f, 0f, 0f, 1f, 0f)))
-    ColorMatrixColorFilter(m)
+/** 채도를 `saturation`로 바꾸고 색마다 `scale`배 한 뒤 `offset`(0..255)을 더하는 거르개(안드로이드 ColorMatrix.setSaturation과 같은 계수). */
+private fun saturationFilter(saturation: Float, scale: FloatArray = floatArrayOf(1f, 1f, 1f), offset: Float = 0f): ColorFilter {
+    val inverse = 1 - saturation
+    val r = 0.213f * inverse
+    val g = 0.715f * inverse
+    val b = 0.072f * inverse
+    val rows = arrayOf(floatArrayOf(r + saturation, g, b), floatArrayOf(r, g + saturation, b), floatArrayOf(r, g, b + saturation))
+    val values = FloatArray(20)
+    for (i in 0 until 3) {
+        for (j in 0 until 3) values[i * 5 + j] = rows[i][j] * scale[i]
+        values[i * 5 + 4] = offset
+    }
+    values[18] = 1f
+    return ColorFilter.colorMatrix(ColorMatrix(values))
 }
 
-private val filterSoil: ColorMatrixColorFilter by lazy {
-    val m = ColorMatrix().apply { setSaturation(0f) }
-    m.postConcat(ColorMatrix().apply { setScale(0.95f, 0.76f, 0.56f, 1f) })
-    ColorMatrixColorFilter(m)
-}
+private val filterSkyPolluted: ColorFilter by lazy { saturationFilter(0.15f, offset = 30f) }
+
+private val filterSoil: ColorFilter by lazy { saturationFilter(0f, floatArrayOf(0.95f, 0.76f, 0.56f)) }
 
 /** 도시의 랜드마크. 복원한 부위만 온전한 모습으로 그린다(iOS 판 LandmarkView). */
 @Composable
 fun LandmarkView(restored: Set<String>, art: LandmarkArt, modifier: Modifier = Modifier) {
-    val images = remember(art.prefix) {
-        listOf("bg_restored", "bg_ruined", "building_restored", "building_ruined", "trees_restored", "trees_ruined")
-            .associateWith { Assets.imageBitmap("${art.prefix}_$it") }
-    }
+    val images = listOf("bg_restored", "bg_ruined", "building_restored", "building_ruined", "trees_restored", "trees_ruined")
+        .associateWith { Assets.image("${art.prefix}_$it") }
     BoxWithConstraints(modifier) {
         Canvas(Modifier.fillMaxSize()) {
-            drawIntoCanvas { canvas -> drawLandmark(canvas.nativeCanvas, size.width, size.height, art, restored, images) }
+            drawLandmark(art, restored, images)
         }
         art.spores.forEachIndexed { index, spore ->
             SporeView(spore, index, spore.part in restored, maxWidth.value, maxHeight.value)
@@ -136,22 +144,26 @@ fun LandmarkView(restored: Set<String>, art: LandmarkArt, modifier: Modifier = M
     }
 }
 
-private fun drawLandmark(canvas: android.graphics.Canvas, width: Float, height: Float, art: LandmarkArt, restored: Set<String>, images: Map<String, Bitmap?>) {
+private fun DrawScope.drawLandmark(art: LandmarkArt, restored: Set<String>, images: Map<String, ImageBitmap?>) {
     fun has(id: String) = id in restored
-    val full = RectF(0f, 0f, width, height)
-    val scale = Matrix().apply { setScale(width, height) }
-    val paint = Paint(Paint.FILTER_BITMAP_FLAG or Paint.ANTI_ALIAS_FLAG)
-    fun paint(name: String, clip: Path, hole: Path? = null, filter: ColorMatrixColorFilter? = null) {
+    val width = size.width
+    val height = size.height
+    val scale = Matrix().apply { scale(width, height) }
+    fun paint(name: String, clip: Path, hole: Path? = null, filter: ColorFilter? = null) {
         val bitmap = images[name] ?: return
-        val region = Path(clip).apply { transform(scale) }
-        if (hole != null) region.op(Path(hole).apply { transform(scale) }, Path.Op.DIFFERENCE)
-        canvas.save()
-        canvas.clipPath(region)
-        paint.colorFilter = filter
-        canvas.drawBitmap(bitmap, null, full, paint)
-        canvas.restore()
+        var region = Path().apply { addPath(clip) }.also { it.transform(scale) }
+        if (hole != null) {
+            val cut = Path().apply { addPath(hole) }.also { it.transform(scale) }
+            region = Path().apply { op(region, cut, PathOperation.Difference) }
+        }
+        clipPath(region) {
+            drawImage(
+                bitmap, IntOffset.Zero, IntSize(bitmap.width, bitmap.height),
+                IntOffset.Zero, IntSize(width.toInt(), height.toInt()), colorFilter = filter,
+            )
+        }
     }
-    fun band(top: Float, bottom: Float) = Path().apply { addRect(0f, top, 1f, bottom, Path.Direction.CW) }
+    fun band(top: Float, bottom: Float) = Path().apply { addRect(Rect(0f, top, 1f, bottom)) }
 
     val sky = band(0f, art.horizon)
     when {
@@ -184,7 +196,7 @@ private fun SporeView(spore: LandmarkArt.Spore, index: Int, popped: Boolean, wid
     val p = progress.value
     if (p >= 1f) return
     val side = spore.radius * 2.4f * width
-    val image = remember(spore.shape) { Assets.image("landmark_spore_${spore.shape}") }
+    val image = Assets.image("landmark_spore_${spore.shape}")
     Box(Modifier.offset((spore.x * width - side / 2).dp, (spore.y * height - side / 2).dp).size(side.dp)) {
         if (image != null) {
             Image(
@@ -232,5 +244,3 @@ private fun Sparkles(width: Float, height: Float) {
     }
 }
 
-/** 앱의 그림 하나를 원본 비트맵에서 바로 쓴다. */
-fun Bitmap.asImage() = asImageBitmap()

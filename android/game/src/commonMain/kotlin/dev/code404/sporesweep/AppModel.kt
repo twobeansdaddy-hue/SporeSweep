@@ -1,8 +1,5 @@
 package dev.code404.sporesweep
 
-import android.content.Context
-import android.content.SharedPreferences
-import android.os.Bundle
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -17,37 +14,21 @@ import dev.code404.sporesweep.core.Landmark
 import dev.code404.sporesweep.core.Level
 import dev.code404.sporesweep.core.LevelCatalog
 import dev.code404.sporesweep.core.Lives
-import dev.code404.sporesweep.core.ProgressStore
 import dev.code404.sporesweep.core.Region
 import dev.code404.sporesweep.core.RegionCatalog
 import dev.code404.sporesweep.core.RestoreBlocker
 import dev.code404.sporesweep.core.Tool
-import java.io.File
 import kotlin.time.Clock
 import kotlin.time.Instant
-import java.time.LocalDate
-
-/**
- * 개발용 실행 인자. iOS 판의 실행 인자와 이름이 같다. 디버그 빌드에서만 읽는다.
- *
- * `adb shell am start -n dev.code404.sporesweep/.MainActivity --es city tokyo --ei level 2 --ez autoplay true`
- */
-class DebugArgs(private val extras: Bundle?) {
-    private val on = BuildConfig.DEBUG && extras != null
-
-    fun has(key: String) = on && extras!!.containsKey(key)
-    fun bool(key: String) = on && (extras!!.get(key)?.toString()?.let { it == "true" || it == "1" } ?: false)
-    fun int(key: String) = if (on) extras!!.get(key)?.toString()?.toIntOrNull() ?: 0 else 0
-    fun double(key: String) = if (on) extras!!.get(key)?.toString()?.toDoubleOrNull() ?: 0.0 else 0.0
-    fun string(key: String): String? = if (on) extras!!.get(key)?.toString() else null
-}
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 
 /**
  * 앱 전체가 함께 보는 상태. iOS 판 AppModel.swift를 옮긴 것이다.
  *
  * 진행이 바뀔 때마다 `revision`이 올라서, 그것을 읽는 화면이 다시 그려진다.
  */
-class AppModel(context: Context, val args: DebugArgs) {
+class AppModel(val args: DebugArgs) {
     /** 바뀔 때마다 1씩 오른다. 화면은 이 값을 읽어 다시 그려진다. */
     var revision by mutableIntStateOf(0)
         private set
@@ -56,8 +37,8 @@ class AppModel(context: Context, val args: DebugArgs) {
         revision += 1
     }
 
-    private val prefs: SharedPreferences = context.getSharedPreferences("spore", Context.MODE_PRIVATE)
-    private val store = ProgressStore(File(context.filesDir, "progress.json"))
+    private val prefs: Prefs = Platform.prefs
+    private val store = Platform.progress
 
     var city: City? = null
         private set
@@ -392,14 +373,14 @@ class AppModel(context: Context, val args: DebugArgs) {
     val adToolsLeft: Int
         get() {
             val day = prefs.getString(AD_TOOL_DAY, null)
-            if (day != LocalDate.now().toString()) return DAILY_AD_TOOLS
+            if (day != today()) return DAILY_AD_TOOLS
             return maxOf(DAILY_AD_TOOLS - prefs.getInt(AD_TOOL_COUNT, 0), 0)
         }
 
     fun grantToolFromAd(tool: Tool): Boolean {
         val left = adToolsLeft
         if (left <= 0) return false
-        prefs.edit().putString(AD_TOOL_DAY, LocalDate.now().toString()).putInt(AD_TOOL_COUNT, DAILY_AD_TOOLS - left + 1).apply()
+        prefs.edit().putString(AD_TOOL_DAY, today()).putInt(AD_TOOL_COUNT, DAILY_AD_TOOLS - left + 1).apply()
         progress.addBooster(key(tool))
         save()
         return true
@@ -502,3 +483,6 @@ class AppModel(context: Context, val args: DebugArgs) {
         }
     }
 }
+
+/** 이 기기의 오늘 날짜(`2026-10-20`). */
+private fun today() = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date.toString()

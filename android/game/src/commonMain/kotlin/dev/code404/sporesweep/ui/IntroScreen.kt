@@ -1,6 +1,6 @@
 package dev.code404.sporesweep.ui
 
-import androidx.activity.compose.BackHandler
+import dev.code404.sporesweep.BackHandler
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -143,7 +143,7 @@ private fun SporeRain() {
         floatArrayOf(0.82f, 40f, 0.10f, 0.45f, 0f), floatArrayOf(0.93f, 20f, 0.15f, 0.90f, 4f), floatArrayOf(0.15f, 16f, 0.21f, 0.70f, 0f),
         floatArrayOf(0.64f, 14f, 0.23f, 0.20f, 0f), floatArrayOf(0.40f, 26f, 0.14f, 0.95f, 3f), floatArrayOf(0.88f, 16f, 0.20f, 0.60f, 0f),
     )
-    val images = remember { (0..4).associateWith { Assets.image("landmark_spore_$it") } }
+    val images = (0..4).associateWith { Assets.image("landmark_spore_$it") }
     val clock = rememberInfiniteTransition(label = "rain")
     val time by clock.animateFloat(0f, 1000f, infiniteRepeatable(tween(1_000_000, easing = LinearEasing)), label = "time")
     Canvas(Modifier.fillMaxSize()) {

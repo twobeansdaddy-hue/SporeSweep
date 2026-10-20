@@ -1,5 +1,7 @@
 package dev.code404.sporesweep.ui
 
+import dev.code404.sporesweep.Platform
+import dev.code404.sporesweep.AdService
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -29,7 +31,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import dev.code404.sporesweep.AppModel
-import dev.code404.sporesweep.BuildConfig
 import dev.code404.sporesweep.Sound
 import dev.code404.sporesweep.Tracker
 import dev.code404.sporesweep.board.GameHaptic
@@ -129,20 +130,21 @@ fun RewardedAdView(id: String, reward: String, onFinish: (Boolean) -> Unit) {
     var phase by remember { mutableStateOf("loading") }
     var remaining by remember { mutableIntStateOf(3) }
     LaunchedEffect(Unit) {
-        if (dev.code404.sporesweep.RewardedAds.isEnabled && dev.code404.sporesweep.RewardedAds.waitUntilReady(6.0)) {
+        if (Platform.ads.isEnabled && Platform.ads.waitUntilReady(6.0)) {
             phase = "showing"
             dev.code404.sporesweep.Music.pause()
-            dev.code404.sporesweep.RewardedAds.show { outcome ->
+            Platform.ads.show { outcome ->
                 dev.code404.sporesweep.Music.resume()
                 when (outcome) {
-                    dev.code404.sporesweep.RewardedAds.Outcome.REWARDED -> { Tracker.log(Tracker.Event.AdReward(id)); onFinish(true) }
-                    dev.code404.sporesweep.RewardedAds.Outcome.SKIPPED -> { Tracker.log(Tracker.Event.AdSkip(id)); onFinish(false) }
-                    dev.code404.sporesweep.RewardedAds.Outcome.FAILED -> { Tracker.log(Tracker.Event.AdFail(id)); phase = "failed" }
+                    AdService.Outcome.REWARDED -> { Tracker.log(Tracker.Event.AdReward(id)); onFinish(true) }
+                    AdService.Outcome.SKIPPED -> { Tracker.log(Tracker.Event.AdSkip(id)); onFinish(false) }
+                    AdService.Outcome.FAILED -> { Tracker.log(Tracker.Event.AdFail(id)); phase = "failed" }
                 }
             }
             return@LaunchedEffect
         }
-        if (BuildConfig.DEBUG) {
+        // 개발 빌드와 광고가 없는 웹판은 자리 표시 화면을 보여주고 보상을 준다.
+        if (Platform.isDebug || Platform.adsArePlaceholders) {
             phase = "placeholder"
             while (remaining > 0) {
                 delay(1000)

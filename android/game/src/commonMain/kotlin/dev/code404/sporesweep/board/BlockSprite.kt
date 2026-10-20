@@ -1,6 +1,6 @@
 package dev.code404.sporesweep.board
 
-import android.graphics.Bitmap
+import androidx.compose.ui.graphics.ImageBitmap
 import dev.code404.sporesweep.Assets
 import dev.code404.sporesweep.core.Block
 import dev.code404.sporesweep.core.BlockKind
@@ -19,7 +19,7 @@ import dev.code404.sporesweep.stage.SpriteNode
 object BlockSprite {
     fun name(kind: BlockKind) = "block_" + kind.id
 
-    fun texture(name: String): Bitmap? = Assets.spriteBitmap(name)
+    fun texture(name: String): ImageBitmap? = Assets.sprite(name)
 
     private fun spriteNode(name: String, cellSize: Float): SpriteNode? {
         val texture = texture(name) ?: return null

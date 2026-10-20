@@ -1,5 +1,6 @@
 package dev.code404.sporesweep.ui
 
+import dev.code404.sporesweep.Platform
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.fadeIn
@@ -37,7 +38,6 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dev.code404.sporesweep.AppModel
-import dev.code404.sporesweep.BuildConfig
 import dev.code404.sporesweep.Music
 import dev.code404.sporesweep.Sound
 import dev.code404.sporesweep.board.GameHaptic
@@ -86,7 +86,7 @@ fun SettingsScreen(model: AppModel, onClose: () -> Unit) {
                         model.wantsEnding = true
                     }
                 }
-                if (BuildConfig.DEBUG) {
+                if (Platform.isDebug) {
                     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                         ChunkyButton(if (model.isLabMode) tr("서울로 돌아가기") else tr("시험판 레벨 해 보기"), tint = GameTint.GOLD, fills = true) {
                             Sound.play(GameSound.TAP)

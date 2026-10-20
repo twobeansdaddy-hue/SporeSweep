@@ -19,11 +19,10 @@ import kotlinx.coroutines.delay
  * 디버그 빌드와 `-PtestAds`로 만든 빌드는 구글의 시험용 광고 단위를 쓴다. 개발하거나 시험하면서
  * 실제 광고를 보거나 누르면 무효 트래픽으로 계정이 정지될 수 있기 때문이다.
  */
-object RewardedAds {
-    enum class Outcome { REWARDED, SKIPPED, FAILED }
+object RewardedAds : AdService {
 
     /** 실제 광고를 쓰는지. 디버그 빌드에서 실행 인자 fakeAds를 주면 자리 표시 광고만 쓴다. */
-    var isEnabled = true
+    override var isEnabled = true
         private set
 
     private val unitID get() = if (BuildConfig.DEBUG || BuildConfig.TEST_ADS) BuildConfig.TEST_REWARDED_AD_UNIT else BuildConfig.REWARDED_AD_UNIT
@@ -69,7 +68,7 @@ object RewardedAds {
     }
 
     /** 준비될 때까지 잠깐 기다린다. 준비됐으면 참. */
-    suspend fun waitUntilReady(seconds: Double): Boolean {
+    override suspend fun waitUntilReady(seconds: Double): Boolean {
         load()
         val end = System.currentTimeMillis() + (seconds * 1000).toLong()
         while (ad == null && isLoading && System.currentTimeMillis() < end) delay(200)
@@ -77,11 +76,11 @@ object RewardedAds {
     }
 
     /** 불러 둔 광고를 띄운다. 끝나면 결과를 알린다. */
-    fun show(onFinish: (Outcome) -> Unit) {
+    override fun show(onFinish: (AdService.Outcome) -> Unit) {
         val current = ad
         val host = activity
         if (current == null || host == null) {
-            onFinish(Outcome.FAILED)
+            onFinish(AdService.Outcome.FAILED)
             return
         }
         ad = null
@@ -89,13 +88,13 @@ object RewardedAds {
         current.fullScreenContentCallback = object : FullScreenContentCallback() {
             override fun onAdDismissedFullScreenContent() {
                 note(if (earned) "닫음, 보상 있음" else "닫음, 보상 없음")
-                onFinish(if (earned) Outcome.REWARDED else Outcome.SKIPPED)
+                onFinish(if (earned) AdService.Outcome.REWARDED else AdService.Outcome.SKIPPED)
                 load()
             }
 
             override fun onAdFailedToShowFullScreenContent(error: AdError) {
                 note("띄우지 못함: ${error.message}")
-                onFinish(Outcome.FAILED)
+                onFinish(AdService.Outcome.FAILED)
                 load()
             }
         }

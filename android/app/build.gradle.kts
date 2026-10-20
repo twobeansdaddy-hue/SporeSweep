@@ -100,15 +100,8 @@ val syncSporeAssets = tasks.register<Sync>("syncSporeAssets") {
 tasks.named("preBuild") { dependsOn(syncSporeAssets) }
 
 dependencies {
-    implementation(project(":core"))
-    implementation(platform("androidx.compose:compose-bom:2026.09.00"))
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.foundation:foundation")
-    implementation("androidx.compose.animation:animation")
-    implementation("androidx.compose.material:material-icons-extended:1.7.8")
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.activity:activity-compose:1.13.0")
-    implementation("androidx.core:core-ktx:1.19.1")
+    // 게임 화면과 규칙은 웹판과 함께 쓰는 :game에 있다.
+    implementation(project(":game"))
     implementation("com.google.android.gms:play-services-ads:25.5.0")
     implementation(platform("com.google.firebase:firebase-bom:35.0.0"))
     implementation("com.google.firebase:firebase-analytics")

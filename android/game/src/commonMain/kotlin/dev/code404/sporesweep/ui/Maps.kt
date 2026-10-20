@@ -1,6 +1,6 @@
 package dev.code404.sporesweep.ui
 
-import androidx.activity.compose.BackHandler
+import dev.code404.sporesweep.BackHandler
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearOutSlowInEasing
@@ -93,8 +93,8 @@ data class Patch(val id: String, val center: Region.Spot, val radius: Double, va
 /** 정화한 만큼만 초록으로 돌아오는 지도(iOS 판 PurifiedMap). 깨끗한 그림을 정화한 자리에만 번지게 덧그린다. */
 @Composable
 fun PurifiedMap(image: String, patches: List<Patch>, isAllClean: Boolean, modifier: Modifier = Modifier) {
-    val polluted = remember(image) { Assets.image(image + "_polluted") }
-    val clean = remember(image) { Assets.image(image) }
+    val polluted = Assets.image(image + "_polluted")
+    val clean = Assets.image(image)
     Canvas(modifier.graphicsLayer(compositingStrategy = CompositingStrategy.Offscreen)) {
         polluted?.let { drawFill(it) }
         if (clean == null) return@Canvas

@@ -1313,7 +1313,7 @@ class BoardScene(initial: GameState) : Stage() {
         return SColor(1f, 0.9f, 0.5f)
     }
 
-    private fun light(texture: android.graphics.Bitmap, color: SColor, width: Float, height: Float, at: SPoint, z: Float = 3f): SpriteNode {
+    private fun light(texture: androidx.compose.ui.graphics.ImageBitmap, color: SColor, width: Float, height: Float, at: SPoint, z: Float = 3f): SpriteNode {
         val node = SpriteNode(texture, width, height)
         node.color = color
         node.colorBlendFactor = 1f

@@ -122,7 +122,7 @@ fun CardOverlay(dim: Float = 0.65f, maxWidth: Dp = 320.dp, radius: Dp = 24.dp, o
 /** 보드의 조각 그림(`block_bomb`, `tool_hammer` 등). */
 @Composable
 fun SpriteImage(name: String, size: Dp, modifier: Modifier = Modifier) {
-    val bitmap = remember(name) { Assets.sprite(name) }
+    val bitmap = Assets.sprite(name)
     if (bitmap == null) {
         Spacer(modifier.size(size))
         return

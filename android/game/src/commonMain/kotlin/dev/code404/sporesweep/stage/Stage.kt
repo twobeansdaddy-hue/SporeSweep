@@ -1,22 +1,40 @@
 package dev.code404.sporesweep.stage
 
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.ColorMatrix
-import android.graphics.ColorMatrixColorFilter
-import android.graphics.Matrix
-import android.graphics.Paint
-import android.graphics.Path
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffXfermode
-import android.graphics.Rect
-import android.graphics.RectF
-import android.graphics.Typeface
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.geometry.RoundRect
+import androidx.compose.ui.graphics.BlendMode
+import androidx.compose.ui.graphics.Canvas
+import androidx.compose.ui.graphics.ClipOp
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.ColorMatrix
+import androidx.compose.ui.graphics.FilterQuality
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.Matrix
+import androidx.compose.ui.graphics.Paint
+import androidx.compose.ui.graphics.PaintingStyle
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.StrokeJoin
+import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.text.TextMeasurer
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.drawText
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.sp
 import kotlin.math.PI
 import kotlin.math.cos
+import kotlin.math.max
+import kotlin.math.min
 import kotlin.math.sin
 
 // SpriteKit을 흉내 낸 작은 그리기 엔진. iOS 판의 BoardScene을 줄 단위로 옮기기 위해 만들었다.
+// Compose의 그리기 도구만 써서 안드로이드와 웹에서 같이 돈다.
 //
 // - 좌표는 SpriteKit처럼 y가 위쪽이다. 단위는 dp다(iOS의 point와 같은 크기).
 // - 노드는 위치, 크기 배율, 회전, 투명도, z를 갖고, 자식의 값은 부모에 쌓인다.
@@ -29,11 +47,8 @@ data class SColor(val r: Float, val g: Float, val b: Float, val a: Float = 1f) {
 
     fun withAlpha(alpha: Float) = copy(a = alpha)
 
-    val argb: Int
-        get() = android.graphics.Color.argb(
-            (a * 255).toInt().coerceIn(0, 255), (r * 255).toInt().coerceIn(0, 255),
-            (g * 255).toInt().coerceIn(0, 255), (b * 255).toInt().coerceIn(0, 255),
-        )
+    val color: Color
+        get() = Color(r.coerceIn(0f, 1f), g.coerceIn(0f, 1f), b.coerceIn(0f, 1f), a.coerceIn(0f, 1f))
 
     companion object {
         val white = SColor(1f, 1f, 1f)
@@ -71,6 +86,9 @@ enum class Timing { LINEAR, EASE_IN, EASE_OUT, EASE_IN_OUT;
         EASE_IN_OUT -> t * t * (3 - 2 * t)
     }
 }
+
+/** 노드가 그릴 곳. 좌표는 이미 노드 자신의 것으로 옮겨 두었다. */
+class StageCanvas internal constructor(val canvas: Canvas, val scope: DrawScope)
 
 // MARK: - 노드
 
@@ -134,7 +152,7 @@ open class Node {
     fun removeAllActions() = running.clear()
 
     /** 이 노드의 내용(자식 빼고)을 그린다. 좌표는 노드 자신의 것이다. */
-    open fun draw(canvas: Canvas, alpha: Float) {}
+    open fun draw(target: StageCanvas, alpha: Float) {}
 
     /** 내용의 폭. SpriteKit의 `frame.width`에 해당한다(배율을 곱한다). */
     open val contentWidth: Float get() = 0f
@@ -143,7 +161,7 @@ open class Node {
 internal class Running(val instance: ActionInstance, val key: String?, val completion: (() -> Unit)?)
 
 /** 그림 한 장 또는 색칠한 네모. 가운데가 위치다. */
-class SpriteNode(var image: Bitmap?, var width: Float, var height: Float) : Node() {
+class SpriteNode(var image: ImageBitmap?, var width: Float, var height: Float) : Node() {
     constructor(color: SColor, width: Float, height: Float) : this(null, width, height) {
         this.color = color
         colorBlendFactor = 1f
@@ -155,37 +173,42 @@ class SpriteNode(var image: Bitmap?, var width: Float, var height: Float) : Node
     /** 더하기로 그린다(SpriteKit의 `.add`). */
     var additive = false
 
-    private val paint = Paint(Paint.FILTER_BITMAP_FLAG or Paint.ANTI_ALIAS_FLAG)
-    private val dst = RectF()
+    private val paint = Paint().apply {
+        isAntiAlias = true
+        filterQuality = FilterQuality.Medium
+    }
 
-    override fun draw(canvas: Canvas, alpha: Float) {
-        dst.set(-width / 2, -height / 2, width / 2, height / 2)
-        paint.xfermode = if (additive) addMode else null
+    override fun draw(target: StageCanvas, alpha: Float) {
+        val canvas = target.canvas
+        paint.blendMode = if (additive) BlendMode.Plus else BlendMode.SrcOver
         val bitmap = image
         if (bitmap == null) {
             paint.colorFilter = null
-            paint.color = color.withAlpha(color.a * alpha).argb
-            canvas.drawRect(dst, paint)
+            paint.alpha = 1f
+            paint.color = color.withAlpha(color.a * alpha).color
+            canvas.drawRect(-width / 2, -height / 2, width / 2, height / 2, paint)
             return
         }
-        paint.alpha = (alpha * 255).toInt().coerceIn(0, 255)
+        paint.color = Color.Black
+        paint.alpha = alpha.coerceIn(0f, 1f)
         paint.colorFilter = if (colorBlendFactor > 0f) tint(color, colorBlendFactor) else null
         canvas.save()
-        // 그림은 y가 아래쪽이므로 뒤집어 그린다.
-        canvas.scale(1f, -1f)
-        canvas.drawBitmap(bitmap, null, dst, paint)
+        // 그림은 y가 아래쪽이므로 뒤집는다. 그림의 화소를 그대로 놓고 배율로 크기를 맞춘다.
+        // 화소 단위로 놓아야 정수로 반올림되는 자리가 작아진다.
+        canvas.scale(width / bitmap.width, -height / bitmap.height)
+        canvas.translate(-bitmap.width / 2f, -bitmap.height / 2f)
+        canvas.drawImageRect(bitmap, IntOffset.Zero, IntSize(bitmap.width, bitmap.height), IntOffset.Zero, IntSize(bitmap.width, bitmap.height), paint)
         canvas.restore()
     }
 
     override val contentWidth get() = width * xScale
 
     companion object {
-        private val addMode = PorterDuffXfermode(PorterDuff.Mode.ADD)
-        private val tints = HashMap<Pair<SColor, Float>, ColorMatrixColorFilter>()
+        private val tints = HashMap<Pair<SColor, Float>, ColorFilter>()
 
         fun tint(color: SColor, factor: Float) = tints.getOrPut(color to factor) {
             val keep = 1 - factor
-            ColorMatrixColorFilter(
+            ColorFilter.colorMatrix(
                 ColorMatrix(
                     floatArrayOf(
                         keep, 0f, 0f, 0f, color.r * 255 * factor,
@@ -205,35 +228,36 @@ enum class HAlign { LEFT, CENTER, RIGHT }
 class LabelNode(var text: String = "", var fontSize: Float = 17f, var fontColor: SColor = SColor(0.95f)) : Node() {
     var align = HAlign.CENTER
 
-    private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private fun layout() = measurer?.measure(
+        text,
+        TextStyle(fontFamily = fontFamily, fontSize = fontSize.sp),
+        softWrap = false,
+        // 무대의 좌표가 이미 dp라서 글자 크기를 그대로 쓴다.
+        density = Density(1f, 1f),
+    )
 
-    override fun draw(canvas: Canvas, alpha: Float) {
+    override fun draw(target: StageCanvas, alpha: Float) {
         if (text.isEmpty()) return
-        paint.typeface = typeface
-        paint.textSize = fontSize
-        paint.color = fontColor.withAlpha(fontColor.a * alpha).argb
-        paint.textAlign = when (align) {
-            HAlign.LEFT -> Paint.Align.LEFT
-            HAlign.CENTER -> Paint.Align.CENTER
-            HAlign.RIGHT -> Paint.Align.RIGHT
+        val result = layout() ?: return
+        val left = when (align) {
+            HAlign.LEFT -> 0f
+            HAlign.CENTER -> -result.size.width / 2f
+            HAlign.RIGHT -> -result.size.width.toFloat()
         }
-        val metrics = paint.fontMetrics
-        canvas.save()
-        canvas.scale(1f, -1f)
-        canvas.drawText(text, 0f, -(metrics.ascent + metrics.descent) / 2, paint)
-        canvas.restore()
+        target.canvas.save()
+        target.canvas.scale(1f, -1f)
+        target.scope.drawText(result, fontColor.withAlpha(fontColor.a * alpha).color, Offset(left, -result.size.height / 2f))
+        target.canvas.restore()
     }
 
     override val contentWidth: Float
-        get() {
-            paint.typeface = typeface
-            paint.textSize = fontSize
-            return paint.measureText(text) * xScale
-        }
+        get() = (layout()?.size?.width?.toFloat() ?: (text.length * fontSize * 0.6f)) * xScale
 
     companion object {
         /** 게임 글꼴. 앱이 시작할 때 정한다. */
-        var typeface: Typeface = Typeface.DEFAULT_BOLD
+        var fontFamily: FontFamily = FontFamily.Default
+        /** 글자를 재고 놓는 도구. 무대를 띄우는 화면이 정한다. */
+        var measurer: TextMeasurer? = null
     }
 }
 
@@ -245,31 +269,28 @@ class ShapeNode(var path: Path = Path()) : Node() {
     var roundCaps = false
     var additive = false
 
-    private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val bounds = RectF()
+    private val paint = Paint().apply { isAntiAlias = true }
 
-    override fun draw(canvas: Canvas, alpha: Float) {
-        paint.xfermode = if (additive) PorterDuffXfermode(PorterDuff.Mode.ADD) else null
+    override fun draw(target: StageCanvas, alpha: Float) {
+        val canvas = target.canvas
+        paint.blendMode = if (additive) BlendMode.Plus else BlendMode.SrcOver
         if (fillColor.a > 0f) {
-            paint.style = Paint.Style.FILL
-            paint.color = fillColor.withAlpha(fillColor.a * alpha).argb
+            paint.style = PaintingStyle.Fill
+            paint.color = fillColor.withAlpha(fillColor.a * alpha).color
             canvas.drawPath(path, paint)
         }
         if (strokeColor.a > 0f && lineWidth > 0f) {
-            paint.style = Paint.Style.STROKE
+            paint.style = PaintingStyle.Stroke
             paint.strokeWidth = lineWidth
-            paint.strokeCap = if (roundCaps) Paint.Cap.ROUND else Paint.Cap.BUTT
-            paint.strokeJoin = if (roundCaps) Paint.Join.ROUND else Paint.Join.MITER
-            paint.color = strokeColor.withAlpha(strokeColor.a * alpha).argb
+            paint.strokeCap = if (roundCaps) StrokeCap.Round else StrokeCap.Butt
+            paint.strokeJoin = if (roundCaps) StrokeJoin.Round else StrokeJoin.Miter
+            paint.color = strokeColor.withAlpha(strokeColor.a * alpha).color
             canvas.drawPath(path, paint)
         }
     }
 
     override val contentWidth: Float
-        get() {
-            path.computeBounds(bounds, true)
-            return bounds.width() * xScale
-        }
+        get() = path.getBounds().width * xScale
 
     companion object {
         fun rect(rect: SRect, cornerRadius: Float = 0f) = ShapeNode(Paths.rect(rect, cornerRadius))
@@ -280,16 +301,14 @@ class ShapeNode(var path: Path = Path()) : Node() {
 
 /** 경로를 만드는 도구. */
 object Paths {
-    fun rect(rect: SRect, cornerRadius: Float = 0f) = Path().apply {
-        addRoundRect(RectF(rect.minX, rect.minY, rect.maxX, rect.maxY), cornerRadius, cornerRadius, Path.Direction.CW)
-    }
+    fun rect(rect: SRect, cornerRadius: Float = 0f) = roundedRect(rect, cornerRadius, cornerRadius)
 
     fun roundedRect(rect: SRect, cornerWidth: Float, cornerHeight: Float) = Path().apply {
-        addRoundRect(RectF(rect.minX, rect.minY, rect.maxX, rect.maxY), cornerWidth, cornerHeight, Path.Direction.CW)
+        addRoundRect(RoundRect(rect.minX, rect.minY, rect.maxX, rect.maxY, CornerRadius(cornerWidth, cornerHeight)))
     }
 
     fun ellipse(width: Float, height: Float) = Path().apply {
-        addOval(RectF(-width / 2, -height / 2, width / 2, height / 2), Path.Direction.CW)
+        addOval(Rect(-width / 2, -height / 2, width / 2, height / 2))
     }
 
     fun polyline(points: List<SPoint>, close: Boolean = false) = Path().apply {
@@ -512,6 +531,41 @@ class RepeatForever(private val action: Action) : Action() {
 
 // MARK: - 무대
 
+/** 2차원 변환. 점 (x, y)를 (a·x + c·y + tx, b·x + d·y + ty)로 옮긴다. */
+internal class Affine(val a: Float, val b: Float, val c: Float, val d: Float, val tx: Float, val ty: Float) {
+    /** 이 변환 안에서 먼저 옮긴다(안드로이드 Matrix의 preTranslate). */
+    fun translated(x: Float, y: Float) = Affine(a, b, c, d, a * x + c * y + tx, b * x + d * y + ty)
+
+    fun rotated(radians: Float): Affine {
+        val cs = cos(radians)
+        val sn = sin(radians)
+        return Affine(a * cs + c * sn, b * cs + d * sn, -a * sn + c * cs, -b * sn + d * cs, tx, ty)
+    }
+
+    fun scaled(sx: Float, sy: Float) = Affine(a * sx, b * sx, c * sy, d * sy, tx, ty)
+
+    fun map(x: Float, y: Float) = Offset(a * x + c * y + tx, b * x + d * y + ty)
+
+    /** 네모를 옮긴 뒤 그것을 감싸는 네모. */
+    fun mapRect(left: Float, top: Float, right: Float, bottom: Float): Rect {
+        val corners = listOf(map(left, top), map(right, top), map(left, bottom), map(right, bottom))
+        return Rect(corners.minOf { it.x }, corners.minOf { it.y }, corners.maxOf { it.x }, corners.maxOf { it.y })
+    }
+
+    fun toMatrix() = Matrix().apply {
+        values[Matrix.ScaleX] = a
+        values[Matrix.SkewY] = b
+        values[Matrix.SkewX] = c
+        values[Matrix.ScaleY] = d
+        values[Matrix.TranslateX] = tx
+        values[Matrix.TranslateY] = ty
+    }
+
+    companion object {
+        val identity = Affine(1f, 0f, 0f, 1f, 0f, 0f)
+    }
+}
+
 /**
  * 노드 나무 하나와 그것을 돌리는 시계. 화면은 매 프레임 `update`와 `draw`를 부른다.
  * 크기의 단위는 dp다.
@@ -567,44 +621,39 @@ open class Stage {
         return false
     }
 
-    private class Item(val node: Node, val matrix: Matrix, val alpha: Float, val z: Float, val order: Int, val clips: List<RectF>)
+    private class Item(val node: Node, val matrix: Affine, val alpha: Float, val z: Float, val order: Int, val clips: List<Rect>)
 
     /** 화면에 그린다. `density`는 dp당 화소 수다. */
-    fun draw(canvas: Canvas, density: Float) {
+    fun draw(scope: DrawScope, density: Float) {
         val items = ArrayList<Item>()
         var order = 0
-        fun visit(node: Node, parent: Matrix, alpha: Float, z: Float, clips: List<RectF>) {
+        fun visit(node: Node, parent: Affine, alpha: Float, z: Float, clips: List<Rect>) {
             if (node.isHidden || alpha <= 0.001f && node.children.isEmpty()) return
-            val m = Matrix(parent)
-            m.preTranslate(node.x, node.y)
-            if (node.rotation != 0f) m.preRotate(Math.toDegrees(node.rotation.toDouble()).toFloat())
-            if (node.xScale != 1f || node.yScale != 1f) m.preScale(node.xScale, node.yScale)
+            var m = parent.translated(node.x, node.y)
+            if (node.rotation != 0f) m = m.rotated(node.rotation)
+            if (node.xScale != 1f || node.yScale != 1f) m = m.scaled(node.xScale, node.yScale)
             val a = alpha * node.alpha
             val gz = z + node.z
             items.add(Item(node, m, a, gz, order++, clips))
             var childClips = clips
             if (node is CropNode) {
-                node.mask?.let { mask ->
-                    val r = RectF(mask.minX, mask.minY, mask.maxX, mask.maxY)
-                    m.mapRect(r)
-                    childClips = clips + r
-                }
+                node.mask?.let { mask -> childClips = clips + m.mapRect(mask.minX, mask.minY, mask.maxX, mask.maxY) }
             }
             for (child in node.children.toList()) visit(child, m, a, gz, childClips)
         }
         // y가 위쪽인 dp 좌표를 화면의 화소 좌표로 바꾼다.
-        val base = Matrix()
-        base.setScale(density, -density)
-        base.postTranslate(0f, height * density)
-        visit(root, Matrix(), 1f, 0f, emptyList())
+        val base = Affine(density, 0f, 0f, -density, 0f, height * density).toMatrix()
+        visit(root, Affine.identity, 1f, 0f, emptyList())
         items.sortWith(compareBy<Item> { it.z }.thenBy { it.order })
+        val canvas = scope.drawContext.canvas
+        val target = StageCanvas(canvas, scope)
         for (item in items) {
             if (item.alpha <= 0.001f) continue
             canvas.save()
             canvas.concat(base)
-            for (clip in item.clips) canvas.clipRect(clip)
-            canvas.concat(item.matrix)
-            item.node.draw(canvas, item.alpha)
+            for (clip in item.clips) canvas.clipRect(clip.left, clip.top, clip.right, clip.bottom, ClipOp.Intersect)
+            canvas.concat(item.matrix.toMatrix())
+            item.node.draw(target, item.alpha)
             canvas.restore()
         }
     }
@@ -621,11 +670,12 @@ open class Stage {
 /** 화면 밖에서 그린 그림. */
 object Bitmaps {
     /** 코드로 그림을 그린다. */
-    fun draw(width: Int, height: Int, block: (Canvas) -> Unit): Bitmap {
-        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+    fun draw(width: Int, height: Int, block: (Canvas) -> Unit): ImageBitmap {
+        val bitmap = ImageBitmap(width, height)
         block(Canvas(bitmap))
         return bitmap
     }
-
-    val unit = Rect()
 }
+
+@Suppress("unused")
+private fun clamp(value: Float, low: Float, high: Float) = max(low, min(high, value))

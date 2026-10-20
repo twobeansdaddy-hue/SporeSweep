@@ -134,6 +134,6 @@ fun GameBackground(content: @Composable BoxScope.() -> Unit) {
 /** 앱에 든 그림을 채워서 그린다. 그림이 없으면 아무것도 그리지 않는다. */
 @Composable
 fun AssetImage(name: String, modifier: Modifier = Modifier, scale: ContentScale = ContentScale.Crop) {
-    val bitmap = remember(name) { Assets.image(name) } ?: return
+    val bitmap = Assets.image(name) ?: return
     Image(bitmap, contentDescription = null, modifier = modifier, contentScale = scale)
 }

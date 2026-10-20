@@ -13,15 +13,17 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        Assets.install(this)
-        Sound.install(this)
-        Music.install(this)
+        AndroidPlatform.install(this, BuildConfig.DEBUG)
+        Assets.install()
+        Sound.install()
         val started = System.nanoTime()
-        val args = DebugArgs(intent.extras)
-        Tracker.start(this, args)
+        val extras = intent.extras
+        val args = DebugArgs(extras?.keySet()?.associateWith { extras.get(it).toString() } ?: emptyMap())
+        FirebaseTracker.start(this, args)
         RewardedAds.start(this, fake = args.bool("fakeAds"))
         RewardedAds.activity = this
-        model = AppModel(this, args)
+        Platform.ads = RewardedAds
+        model = AppModel(args)
         android.util.Log.i("시작", "AppModel ${(System.nanoTime() - started) / 1_000_000}ms")
         setContent {
             GameBackground { RootScreen(model) }

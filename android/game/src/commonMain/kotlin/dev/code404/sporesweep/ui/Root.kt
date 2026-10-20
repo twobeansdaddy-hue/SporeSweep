@@ -1,6 +1,6 @@
 package dev.code404.sporesweep.ui
 
-import androidx.activity.compose.BackHandler
+import dev.code404.sporesweep.BackHandler
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
