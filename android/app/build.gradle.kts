@@ -39,8 +39,8 @@ android {
         applicationId = "dev.code404.sporesweep"
         minSdk = 26
         targetSdk = 36
-        versionCode = 2
-        versionName = "0.1"
+        versionCode = 3
+        versionName = "0.2"
         manifestPlaceholders["admobAppId"] = config.getProperty("ADMOB_APP_ID", testAdmobAppId)
         buildConfigField("String", "REWARDED_AD_UNIT", "\"${config.getProperty("REWARDED_AD_UNIT_ID", testRewardedUnit)}\"")
         buildConfigField("String", "TEST_REWARDED_AD_UNIT", "\"$testRewardedUnit\"")
