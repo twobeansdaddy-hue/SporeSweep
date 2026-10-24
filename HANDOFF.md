@@ -90,7 +90,8 @@
 | GitHub `twobeansdaddy-hue/sporesweep-mod` | mods판 배포용(공개) | `mods/sporesweep`를 복사해 올린다. `marketplace.json`, `README.md`, `.gitignore`는 그쪽 것을 둔다 |
 | Cloudflare Pages `sporesweep-play` | `play.code404.app` | 웹판 zip을 새 배포로 올린다. 계정 주인이 대시보드에서 한다 |
 | Cloudflare Pages `code404-site` | `code404.app` | 회사 사이트 |
-| Firebase `sporesweep-dev` | iOS·안드로이드·웹의 플레이 기록 | 개발용 프로젝트다. 출시 전에 출시용을 따로 만든다 |
+| Firebase `sporesweep-7943b` | 출시용. iOS·안드로이드의 플레이 기록 | 2026-10-24에 만들었다. 번들 `app.code404.sporesweep` |
+| Firebase `sporesweep-dev` | 개발용. 웹판의 플레이 기록 | 예전 ID(`dev.code404.sporesweep`)로 등록한 앱 파일은 `~/Developer/sporesweep-firebase-dev/`에 있다 |
 | AdMob | 보상형 광고(iOS, 안드로이드 따로) | 실제 광고는 스토어에서 받은 앱에서만 나온다. 개발 중에 자기 광고를 누르면 안 된다 |
 | Google Play Console | 앱 ID를 `app.code404.sporesweep`로 바꿨다(2026-10-24). 예전 `dev.code404.sporesweep`로 만든 Play 앱은 쓰지 않고 새 앱을 만든다 | 개인 계정이라 프로덕션 전에 테스터 12명 × 14일 비공개 테스트가 필요하다 |
 | Apple Developer | 2026-10-24 등록됨 | Xcode에는 아직 개인 팀(무료)만 있다. 유료 팀의 Apple ID를 Xcode 계정에 넣어야 출시 빌드를 올릴 수 있다 |
@@ -133,6 +134,7 @@
 
 새것이 위다.
 
+- **2026-10-24** 출시용 Firebase 프로젝트 `sporesweep-7943b`의 iOS 파일을 넣었다(`SporeSweep/GoogleService-Info.plist`, 번들 `app.code404.sporesweep`). 앱에 들어간 것은 확인했지만, 이 맥의 DNS가 `app-analytics-services.com`을 막아 기록 도착은 확인하지 못했다. 안드로이드 파일은 아직이다.
 - **2026-10-24** 번들 ID와 안드로이드 앱 ID를 회사 도메인에 맞춰 `app.code404.sporesweep`로 바꿨다(코드의 패키지 이름은 그대로). 예전 ID로 등록한 개발용 Firebase 파일은 저장소 밖으로 옮겼다. 출시용 Firebase와 App Store Connect, Play Console의 새 앱은 새 ID로 만든다.
 - **2026-10-24** Apple 개발자 계정이 열려 iOS 출시를 시작했다. 출시 범위를 한국과 해외(중국 본토 제외)로 넓히고, 위험이 높은 랜드마크 7곳의 이름을 일반 이름으로 바꿨다(기획서 v0.41, PLAN.md, RIGHTS_CHECK.md, 스토어 문구). iOS 앱 버전을 1.0으로 올렸다. 출시용 Firebase 프로젝트를 새로 만들기로 했다.
 - **2026-10-22** 안드로이드 출시 시작. versionCode 3(versionName 0.2)으로 올리고 비공개 테스트용 번들(시험 광고)을 만들었다. 개인 계정이라 프로덕션 전에 비공개 테스트 12명×14일이 필요하다.
