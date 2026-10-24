@@ -122,6 +122,7 @@
 
 ## 8. 알아 둘 점
 
+- **Xcode 화면에서 올리면 프로젝트 파일에 팀 ID(`DEVELOPMENT_TEAM`)를 적어 넣는다.** 팀 ID는 `Config/Local.xcconfig`에서만 넣는다. 커밋 전에 `git diff SporeSweep.xcodeproj`로 보고 그 줄을 지운다(2026-10-24에 한 번 섞여 올라갔다가 지웠다. 예전 커밋에는 남아 있다). "암호화 안 씀"은 이제 빌드 설정 `INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO`에 있다.
 - **기록이 안 보이면 광고 차단부터 본다.** 계정 주인의 맥(AdGuard, DNS 필터)과 아이폰(Unicorn Pro)이 Firebase·AdMob을 막는다. 코드를 보기 전에 DNS를 확인한다.
 - **mods판은 창의 줄 수가 바뀌면 누른 칸이 어긋난다.** 화면의 줄은 줄바꿈하지 않게 했다(`wrap="truncate-end"`). 줄을 더하면 `HEADER_ROWS`와 단추의 줄 번호를 함께 맞춘다. 이모지가 든 줄이 더 높게 그려지는 환경에서는 아래로 갈수록 어긋날 수 있다(아직 보지 못했다).
 - **mods판 화면은 Claude 데스크톱 앱에서 Claude가 직접 볼 수 없다**(화면 제어 대상에 없다). 계정 주인에게 화면을 받아 본다.

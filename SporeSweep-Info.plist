@@ -11,8 +11,6 @@
 	<false/>
 	<key>GADApplicationIdentifier</key>
 	<string>$(GAD_APPLICATION_ID)</string>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
 	<key>RewardedAdUnitID</key>
 	<string>$(REWARDED_AD_UNIT_ID)</string>
 	<key>SKAdNetworkItems</key>
