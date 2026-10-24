@@ -38,21 +38,37 @@ final class RewardedAds: NSObject, FullScreenContentDelegate {
     /// 디버그 빌드와 TestFlight 빌드는 시험용 단위를 쓴다. 개발하거나 시험하면서 실제 광고를 보거나 누르면
     /// 무효 트래픽으로 계정이 정지될 수 있기 때문이다.
     private static func chooseUnitID() async -> String? {
+        await isStoreBuild() ? realUnitID : testUnitID
+    }
+
+    /// App Store에서 받은 앱인지. 디버그 빌드와 TestFlight 빌드는 거짓이다.
+    ///
+    /// `AppTransaction`으로 먼저 보고, 그것이 답하지 못하면 영수증 파일의 이름으로 본다.
+    /// TestFlight 빌드의 영수증은 `sandboxReceipt`다. 둘 다 모르면 스토어 판으로 본다.
+    /// 출시한 앱에 시험 광고가 나가는 쪽이 더 나쁘기 때문이다.
+    static func isStoreBuild() async -> Bool {
         #if DEBUG
-        return testUnitID
+        return false
         #else
-        guard let result = try? await AppTransaction.shared else {
-            // 어디서 받은 앱인지 알 수 없으면 실제 단위를 쓴다. 출시한 앱에 시험 광고가 나가는 쪽이 더 나쁘다.
-            return realUnitID
+        if let cached = storeBuild { return cached }
+        let answer: Bool
+        if let result = try? await AppTransaction.shared {
+            switch result {
+            case let .verified(value): answer = value.environment == .production
+            case let .unverified(value, _): answer = value.environment == .production
+            }
+        } else {
+            answer = Bundle.main.appStoreReceiptURL?.lastPathComponent != "sandboxReceipt"
         }
-        let transaction: AppTransaction
-        switch result {
-        case let .verified(value): transaction = value
-        case let .unverified(value, _): transaction = value
-        }
-        return transaction.environment == .production ? realUnitID : testUnitID
+        storeBuild = answer
+        return answer
         #endif
     }
+
+    private static var storeBuild: Bool?
+
+    /// 광고를 부르지 못한 까닭. 스토어 판이 아닐 때(TestFlight) 실패 화면에 작게 보여 준다.
+    private(set) var diagnosis: String?
 
     private var unitID: String?
     /// 광고 단위를 아직 고르는 중인지.
@@ -84,8 +100,11 @@ final class RewardedAds: NSObject, FullScreenContentDelegate {
         Task {
             do {
                 ad = try await RewardedAd.load(with: unitID, request: Request())
+                diagnosis = nil
                 note("불러옴")
             } catch {
+                let kind = unitID == Self.testUnitID ? "시험 단위" : "실제 단위"
+                diagnosis = "\(kind) · \((error as NSError).code) \(error.localizedDescription)"
                 note("불러오지 못함: \(error.localizedDescription)")
             }
             ad?.fullScreenContentDelegate = self

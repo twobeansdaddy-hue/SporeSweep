@@ -134,6 +134,8 @@
 
 새것이 위다.
 
+- **2026-10-24** TestFlight 1.0 (1)을 아이폰에서 확인했다. 광고만 "광고를 불러오지 못했어요"가 떴다. 같은 아이폰에서 개발용 빌드는 시험 광고를 잘 불러온다. 앱이 TestFlight인지 알아내지 못해 실제 광고 단위(출시 전이라 광고가 없다)를 쓴 것으로 본다. TestFlight 확인에 영수증 이름(`sandboxReceipt`)을 더하고, 스토어 판이 아니면 실패 화면에 쓴 단위와 오류를 작게 보여 주게 했다. 빌드 번호를 2로 올렸다. 오늘의 선물 창은 받은 뒤 "내일 또 만나요!"를 한 번 더 누르는 지금 방식을 유지하기로 했다.
+- **2026-10-24** Apple 멤버십이 열렸다(팀 ID는 그대로, Individual). 계정 주인이 번들 ID `app.code404.sporesweep`를 등록하고 App Store Connect에 앱(포자 대청소, SKU `sporesweep`)을 만들어 Xcode 화면에서 1.0 (1)을 TestFlight에 올렸다. 명령줄 `xcodebuild archive -allowProvisioningUpdates`는 "No Accounts"로 실패했다(Xcode 계정을 쓰지 못한다). 다음 올리기도 Xcode 화면에서 하거나, App Store Connect API 키를 만들어 명령줄로 한다.
 - **2026-10-24** 출시용 Firebase 프로젝트 `sporesweep-7943b`의 iOS 파일을 넣었다(`SporeSweep/GoogleService-Info.plist`, 번들 `app.code404.sporesweep`). 앱에 들어간 것은 확인했지만, 이 맥의 DNS가 `app-analytics-services.com`을 막아 기록 도착은 확인하지 못했다. 안드로이드 파일은 아직이다.
 - **2026-10-24** 번들 ID와 안드로이드 앱 ID를 회사 도메인에 맞춰 `app.code404.sporesweep`로 바꿨다(코드의 패키지 이름은 그대로). 예전 ID로 등록한 개발용 Firebase 파일은 저장소 밖으로 옮겼다. 출시용 Firebase와 App Store Connect, Play Console의 새 앱은 새 ID로 만든다.
 - **2026-10-24** Apple 개발자 계정이 열려 iOS 출시를 시작했다. 출시 범위를 한국과 해외(중국 본토 제외)로 넓히고, 위험이 높은 랜드마크 7곳의 이름을 일반 이름으로 바꿨다(기획서 v0.41, PLAN.md, RIGHTS_CHECK.md, 스토어 문구). iOS 앱 버전을 1.0으로 올렸다. 출시용 Firebase 프로젝트를 새로 만들기로 했다.

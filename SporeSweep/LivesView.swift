@@ -139,6 +139,8 @@ struct RewardedAdView: View {
     @State private var phase = Phase.loading
     @State private var hasStarted = false
     @State private var remaining = RewardedAdView.length
+    /// 광고를 부르지 못한 까닭. 스토어 판이 아닐 때만 채운다.
+    @State private var diagnosis: String?
 
     var body: some View {
         ZStack {
@@ -171,6 +173,14 @@ struct RewardedAdView: View {
                     Text("잠시 뒤에 다시 해 보세요.")
                         .font(.game(15))
                         .foregroundStyle(.white.opacity(0.7))
+                    if let diagnosis {
+                        // TestFlight에서만 보인다. 광고가 왜 안 나오는지 알아보려고 둔다.
+                        Text(diagnosis)
+                            .font(.system(size: 11))
+                            .foregroundStyle(.white.opacity(0.5))
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 24)
+                    }
                     Button("닫기") {
                         GameFeedback.shared.play(.tap)
                         onFinish(false)
@@ -224,6 +234,9 @@ struct RewardedAdView: View {
         onFinish(true)
         #else
         Tracker.log(.adFail(reward: id))
+        if await !RewardedAds.isStoreBuild() {
+            diagnosis = RewardedAds.shared.diagnosis ?? "\(Int(Self.patience))초 안에 준비되지 않음"
+        }
         phase = .failed
         #endif
     }
