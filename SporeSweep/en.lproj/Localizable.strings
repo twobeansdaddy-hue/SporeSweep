@@ -49,7 +49,7 @@
 "광고를 불러오지 못했어요" = "Couldn't load the ad";
 "굉장해요!" = "Awesome!";
 "교각" = "Piers";
-"구세주 그리스도상" = "Christ the Redeemer";
+"언덕 위 거상" = "Hilltop Statue";
 "국회의사당" = "US Capitol";
 "그만두기" = "Cancel";
 "그만하기" = "Give up";
@@ -96,7 +96,7 @@
 "도시 바로 가기" = "Jump to city";
 "도시로 돌아가기" = "Back to city";
 "도쿄" = "Tokyo";
-"도쿄타워" = "Tokyo Tower";
+"붉은 전파탑" = "Red Radio Tower";
 "돔" = "Dome";
 "돔 받침" = "Drum";
 "동아시아" = "East Asia";
@@ -116,7 +116,7 @@
 "레벨을 찾지 못했어요." = "Level not found.";
 "로마" = "Rome";
 "리우데자네이루" = "Rio de Janeiro";
-"마리나 베이 샌즈" = "Marina Bay Sands";
+"하늘 정원 호텔" = "Sky Garden Hotel";
 "만리장성" = "Great Wall";
 "맑은 하늘" = "Clear sky";
 "망루 아래층" = "Watchtower base";
@@ -160,13 +160,13 @@
 "복원하러 가기, 지금 복원할 수 있는 부위가 있어요" = "Go restore, a part is ready to restore";
 "복원한 랜드마크" = "Landmarks restored";
 "부두 공원" = "Wharf park";
-"부르즈 알 아랍" = "Burj Al Arab";
+"돛 모양 호텔" = "Sail Hotel";
 "부술 칸을 눌러 주세요" = "Tap a tile to smash";
 "부에노스아이레스" = "Buenos Aires";
 "북미" = "North America";
 "블록을 옆 칸으로 밀어 같은 모양 3개를 맞추면 사라져요. 분홍색 오염 물질 아래의 블록을 지워서, 물질을 맨 아래 격리 컨테이너까지 내려보내세요!" = "Swipe a block to its neighbor to match 3 of the same shape. Clear the blocks under the pink goo and drop it all the way into the containment tank at the bottom!";
 "빅벤" = "Big Ben";
-"사그라다 파밀리아" = "Sagrada Família";
+"첨탑 대성당" = "Spired Basilica";
 "사용" = "On";
 "산 위 승강장" = "Upper station";
 "새 규칙을 시험하는 레벨 3개와 레벨 생성기로 만든 견본 16개예요. 기록은 남지 않아요." = "3 test levels and 16 generator samples. Nothing is saved.";
@@ -192,7 +192,7 @@
 "소나무 숲" = "Pine grove";
 "쇠사슬에 감긴 블록은 두 겹으로 갇혀 있어요. 한 번 맞추면 쇠사슬이 풀려 철망만 남고, 한 번 더 맞추면 철망이 벗겨져요." = "A chained block is locked twice. Match it once to break the chain and leave a cage, then match again to break the cage.";
 "숭례문" = "Sungnyemun Gate";
-"스카이타워" = "Sky Tower";
+"항구 전망탑" = "Harbor Lookout Tower";
 "스카이파크" = "SkyPark";
 "스핑크스" = "Sphinx";
 "시계" = "Clock";
@@ -251,7 +251,7 @@
 "오염 안개가 낀 칸은 블록이 보이지 않아요. 밀 수는 있어요. 바로 옆에서 블록을 맞추거나 특수 블록의 효과가 닿으면 안개가 걷혀요." = "Fog hides the blocks under it. You can still swipe them. Match next to the fog or hit it with a special block to clear it.";
 "오염 제거" = "Clear the goo";
 "오클랜드" = "Auckland";
-"오페라하우스" = "Opera House";
+"조개 지붕 공연장" = "Shell-Roof Concert Hall";
 "올리브 숲" = "Olive grove";
 "옷자락" = "Robe";
 "왓 아룬" = "Wat Arun";

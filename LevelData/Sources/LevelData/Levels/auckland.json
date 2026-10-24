@@ -3,7 +3,7 @@
   "name": "오클랜드",
   "landmark": {
     "id": "skytower",
-    "name": "스카이타워",
+    "name": "항구 전망탑",
     "parts": [
       {
         "id": "base",

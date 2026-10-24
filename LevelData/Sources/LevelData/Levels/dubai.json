@@ -3,7 +3,7 @@
   "name": "두바이",
   "landmark": {
     "id": "burjalarab",
-    "name": "부르즈 알 아랍",
+    "name": "돛 모양 호텔",
     "parts": [
       { "id": "island", "name": "인공섬", "cost": 5 },
       { "id": "lower", "name": "아래층", "cost": 5, "requires": ["island"] },

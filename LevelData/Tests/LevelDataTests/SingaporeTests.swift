@@ -30,11 +30,11 @@ struct SingaporeTests {
         #expect(state.fog.allSatisfy { state.board[$0] != nil })
     }
 
-    @Test("마리나 베이 샌즈는 아홉 부위이고, 별 48개 가운데 40개면 다 복원한다")
+    @Test("하늘 정원 호텔는 아홉 부위이고, 별 48개 가운데 40개면 다 복원한다")
     func landmark() throws {
         let city = try LevelCatalog.city("singapore")
         #expect(city.name == "싱가포르")
-        #expect(city.landmark.name == "마리나 베이 샌즈")
+        #expect(city.landmark.name == "하늘 정원 호텔")
         #expect(city.landmark.parts.count == 9)
         #expect(city.landmark.totalCost == 40)
         let requires = Dictionary(uniqueKeysWithValues: city.landmark.parts.map { ($0.id, $0.requires) })

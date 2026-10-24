@@ -32,7 +32,7 @@ struct DubaiTests {
         }
     }
 
-    @Test("부르즈 알 아랍은 아홉 부위이고, 별 48개 가운데 40개면 다 복원한다")
+    @Test("돛 모양 호텔은 아홉 부위이고, 별 48개 가운데 40개면 다 복원한다")
     func landmark() throws {
         let city = try LevelCatalog.city("dubai")
         #expect(city.name == "두바이")

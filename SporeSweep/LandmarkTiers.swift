@@ -17,7 +17,7 @@ extension LandmarkArt {
             ShapedPart(id: "frieze", shapes: [.rect(0, 0.255, 1, 0.37)], minus: [], spore: (0.5, 0.312)),
             ShapedPart(id: "pediment", shapes: [.rect(0, 0, 1, 0.255)], minus: [], spore: (0.5, 0.18)),
         ]),
-        "barcelona": .shaped(prefix: "barcelona", name: "사그라다 파밀리아", parts: [
+        "barcelona": .shaped(prefix: "barcelona", name: "첨탑 대성당", parts: [
             ShapedPart(id: "portals", shapes: [.rect(0, 0.75, 1, 0.97)], minus: [], spore: (0.5, 0.825)),
             ShapedPart(id: "rose", shapes: [.rect(0, 0.52, 1, 0.75)], minus: [], spore: (0.5, 0.635)),
             ShapedPart(id: "towerLeft", shapes: [.rect(0, 0, 0.405, 0.52)], minus: [], spore: (0.37, 0.36)),
@@ -66,7 +66,7 @@ extension LandmarkArt {
             ShapedPart(id: "drum", shapes: [.rect(0, 0.385, 1, 0.505)], minus: [], spore: (0.5, 0.45)),
             ShapedPart(id: "dome", shapes: [.rect(0, 0, 1, 0.385)], minus: [], spore: (0.5, 0.26)),
         ]),
-        "rio": .shaped(prefix: "rio", name: "구세주 그리스도상", parts: [
+        "rio": .shaped(prefix: "rio", name: "언덕 위 거상", parts: [
             ShapedPart(id: "rock", shapes: [.rect(0, 0.855, 1, 0.97)], minus: [], spore: (0.5, 0.877)),
             ShapedPart(id: "robe", shapes: [.rect(0, 0.52, 1, 0.855), .rect(0.425, 0.185, 0.575, 0.52)], minus: [], spore: (0.5, 0.55)),
             ShapedPart(id: "armLeft", shapes: [.rect(0, 0, 0.425, 0.52)], minus: [], spore: (0.32, 0.23)),
@@ -87,14 +87,14 @@ extension LandmarkArt {
             ShapedPart(id: "moai4", shapes: [.rect(0.595, 0, 0.78, 0.97)], minus: [], spore: (0.69, 0.55)),
             ShapedPart(id: "moai5", shapes: [.rect(0.78, 0, 1, 0.97)], minus: [], spore: (0.87, 0.58)),
         ]),
-        "sydney": .shaped(prefix: "sydney", name: "오페라하우스", parts: [
+        "sydney": .shaped(prefix: "sydney", name: "조개 지붕 공연장", parts: [
             ShapedPart(id: "podium", shapes: [.rect(0, 0.655, 1, 0.97)], minus: [], spore: (0.5, 0.72)),
             ShapedPart(id: "shellsLeft", shapes: [.rect(0, 0, 0.245, 0.655)], minus: [], spore: (0.16, 0.54)),
             ShapedPart(id: "shellsMiddle", shapes: [.rect(0.245, 0, 0.5, 0.655)], minus: [], spore: (0.36, 0.42)),
             ShapedPart(id: "shellsBig", shapes: [.rect(0.5, 0, 0.805, 0.655)], minus: [], spore: (0.66, 0.35)),
             ShapedPart(id: "shellsRight", shapes: [.rect(0.805, 0, 1, 0.655)], minus: [], spore: (0.88, 0.5)),
         ]),
-        "auckland": .shaped(prefix: "auckland", name: "스카이타워", parts: [
+        "auckland": .shaped(prefix: "auckland", name: "항구 전망탑", parts: [
             ShapedPart(id: "base", shapes: [.rect(0, 0.74, 1, 0.97)], minus: [], spore: (0.44, 0.83)),
             ShapedPart(id: "shaft", shapes: [.rect(0, 0.43, 1, 0.74)], minus: [], spore: (0.5, 0.585)),
             ShapedPart(id: "pod", shapes: [.rect(0, 0.25, 1, 0.43)], minus: [], spore: (0.5, 0.33)),

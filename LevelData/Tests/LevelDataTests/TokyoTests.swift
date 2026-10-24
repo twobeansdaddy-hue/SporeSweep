@@ -55,11 +55,11 @@ struct TokyoTests {
         #expect(try level.makeState().board[3, 6] == .cocoon(.glass))
     }
 
-    @Test("도쿄타워는 아홉 부위이고, 별 48개 가운데 40개면 다 복원한다")
+    @Test("붉은 전파탑는 아홉 부위이고, 별 48개 가운데 40개면 다 복원한다")
     func landmark() throws {
         let city = try LevelCatalog.city("tokyo")
         #expect(city.name == "도쿄")
-        #expect(city.landmark.name == "도쿄타워")
+        #expect(city.landmark.name == "붉은 전파탑")
         #expect(city.landmark.parts.count == 9)
         #expect(city.landmark.totalCost == 40)
         // 탑은 아래에서 위로만 올릴 수 있다.

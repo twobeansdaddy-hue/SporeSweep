@@ -3,7 +3,7 @@
   "name": "도쿄",
   "landmark": {
     "id": "tokyotower",
-    "name": "도쿄타워",
+    "name": "붉은 전파탑",
     "parts": [
       { "id": "base", "name": "받침 다리", "cost": 5 },
       { "id": "deck1", "name": "대전망대", "cost": 5, "requires": ["base"] },

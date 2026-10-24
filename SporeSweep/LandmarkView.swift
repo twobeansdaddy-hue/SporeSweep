@@ -479,11 +479,11 @@ extension LandmarkArt {
         ]
     )
 
-    /// 싱가포르의 마리나 베이 샌즈. 저층부 위에 타워 세 동을 세우고, 그 위에 스카이파크를 얹는다.
+    /// 싱가포르의 하늘 정원 호텔. 저층부 위에 타워 세 동을 세우고, 그 위에 스카이파크를 얹는다.
     /// 배경은 멀리 싱가포르의 빌딩 숲과 대관람차, 바다와 물가의 산책로다.
     static let marinaBaySands = LandmarkArt(
         prefix: "singapore",
-        name: "마리나 베이 샌즈",
+        name: "하늘 정원 호텔",
         horizon: 0.65,
         parts: [
             // 스카이파크를 먼저 그리고 타워를 그 위에 그린다. 폐허에서는 부서진 스카이파크 조각이 타워 높이까지
@@ -570,11 +570,11 @@ extension LandmarkArt {
         ]
     )
 
-    /// 두바이의 부르즈 알 아랍. 인공섬 위에 돛 모양의 탑을 아래에서 위로 네 토막으로 올린다.
+    /// 두바이의 돛 모양 호텔. 인공섬 위에 돛 모양의 탑을 아래에서 위로 네 토막으로 올린다.
     /// 배경은 멀리 두바이의 빌딩 숲, 바다, 모래 해변과 나무 산책로다.
     static let burjAlArab = LandmarkArt(
         prefix: "dubai",
-        name: "부르즈 알 아랍",
+        name: "돛 모양 호텔",
         horizon: 0.655,
         parts: [
             Part(id: "island", region: band(0, 0.76, 1, 0.95)),
@@ -644,11 +644,11 @@ extension LandmarkArt {
         ]
     )
 
-    /// 도쿄의 도쿄타워. 탑이라 아래에서 위로 다섯 토막으로 나눈다.
+    /// 도쿄의 붉은 전파탑. 탑이라 아래에서 위로 다섯 토막으로 나눈다.
     /// 배경은 멀리 후지산과 도쿄의 빌딩 숲, 벚꽃이 핀 공원의 길이다.
     static let tokyoTower = LandmarkArt(
         prefix: "tokyo",
-        name: "도쿄타워",
+        name: "붉은 전파탑",
         horizon: 0.66,
         parts: [
             Part(id: "base", region: band(0, 0.65, 1, 0.97)),

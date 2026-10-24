@@ -3,7 +3,7 @@
   "name": "싱가포르",
   "landmark": {
     "id": "marinabaysands",
-    "name": "마리나 베이 샌즈",
+    "name": "하늘 정원 호텔",
     "parts": [
       { "id": "podium", "name": "저층부", "cost": 4 },
       { "id": "towerLeft", "name": "왼쪽 타워", "cost": 5, "requires": ["podium"] },

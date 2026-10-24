@@ -8,7 +8,7 @@
 - **지금 상태와 다음 할 일**을 지금에 맞게 고친다.
 - 새로 생긴 계정, 비밀값의 위치, 주의할 점이 있으면 그 절에 적는다.
 
-마지막으로 고친 날: 2026-10-22
+마지막으로 고친 날: 2026-10-24
 
 ## 1. 프로젝트 한눈에
 
@@ -17,7 +17,7 @@
 - **안드로이드·웹·mods 판은 Kotlin으로 옮긴 것이다.** 규칙이 iOS와 수마다 똑같은지 기준 기록으로 시험한다(아래 4절).
 - **웹판** `https://play.code404.app`은 출시 전에 동호회 사람들이 해 보라고 연 것이다. 광고 대신 바로 보상을 준다.
 - **mods판**은 Claude Code 안에서 하는 작은 판이다. 배포는 별도 공개 저장소 `twobeansdaddy-hue/sporesweep-mod`에서 한다.
-- 출시는 한국 먼저다. Google Play는 개발자 계정이 있고 비공개 테스트를 앞두고 있다. Apple은 개발자 계정 인증을 기다린다.
+- **출시는 한국과 해외(중국 본토 제외)에 함께 한다(2026-10-24에 바꿨다).** 권리 문제가 알려진 랜드마크 7곳은 이름만 일반 이름으로 바꿨다(DESIGN.md v0.41). Google Play는 비공개 테스트(12명×14일)를 거쳐야 한다. Apple 개발자 계정은 2026-10-24에 열렸다.
 
 ## 2. 일하는 방식 (계정 주인이 정한 것)
 
@@ -93,7 +93,7 @@
 | Firebase `sporesweep-dev` | iOS·안드로이드·웹의 플레이 기록 | 개발용 프로젝트다. 출시 전에 출시용을 따로 만든다 |
 | AdMob | 보상형 광고(iOS, 안드로이드 따로) | 실제 광고는 스토어에서 받은 앱에서만 나온다. 개발 중에 자기 광고를 누르면 안 된다 |
 | Google Play Console | 패키지 `dev.code404.sporesweep`, versionCode 3(0.2) 번들을 만들었다 | 개인 계정이라 프로덕션 전에 테스터 12명 × 14일 비공개 테스트가 필요하다 |
-| Apple Developer | 아직 인증을 기다린다 | |
+| Apple Developer | 2026-10-24 등록됨 | Xcode에는 아직 개인 팀(무료)만 있다. 유료 팀의 Apple ID를 Xcode 계정에 넣어야 출시 빌드를 올릴 수 있다 |
 | ElevenLabs | 효과음과 음악 | 크레딧을 쓴다. 먼저 묻는다 |
 | Codex(ChatGPT) | 그림 | 계정 주인의 계정 |
 
@@ -115,8 +115,9 @@
 1. 동호회 사람들의 웹판·mods판 반응을 듣고 난이도와 화면을 고친다. Firebase의 `level_start`(시드 포함), `level_end`로 포기 지점을 본다.
 2. mods판을 실제로 설치해 보고 확인한다. 계정 주인의 맥에서는 개발용으로 불러오므로 다른 사람의 컴퓨터에서 본다.
 3. **안드로이드 출시 진행 중(2026-10-22).** versionCode 3(0.2, 드론과 새 레벨) 비공개 테스트용 번들을 만들었다(`android/app/build/outputs/bundle/release/app-release.aab`, `-PtestAds`, 업로드 키 서명 확인). 계정 주인이 Play Console의 비공개 테스트 트랙에 올리고 테스터 12명 이상을 14일 동안 둔다. 그 뒤 "프로덕션 액세스 신청" → 승인되면 `-PtestAds` 없이 versionCode 4로 만들어 프로덕션에 낸다.
-4. Apple 개발자 계정이 열리면 TestFlight.
-5. 출시용 Firebase 프로젝트를 만들어 설정 파일 셋을 바꾼다. 출시 뒤 AdMob에 스토어 주소를 연결한다.
+4. **iOS 출시 진행 중(2026-10-24).** 앱 버전을 1.0(빌드 1)으로 올렸다. 개인정보 매니페스트와 암호화 신고(`ITSAppUsesNonExemptEncryption` false)는 있다. 막힌 것: (가) Xcode → Settings → Accounts에 유료 팀의 Apple ID를 넣고 `Config/Local.xcconfig`의 `DEVELOPMENT_TEAM`을 그 팀 ID로 바꾼다, (나) App Store Connect에서 앱을 만든다(번들 ID `dev.code404.sporesweep`), (다) 출시용 Firebase 파일. 셋이 되면 `xcodebuild archive` → App Store Connect에 올려 TestFlight에서 확인하고 심사에 낸다. 스토어 문구는 `Marketing/store/STORE_LISTING.md`(한국어, English).
+5. **출시용 Firebase 프로젝트**(2026-10-24에 만들기로 정했다): 계정 주인이 콘솔에서 만들고 iOS(`dev.code404.sporesweep`)와 안드로이드(같은 패키지)를 등록해 `GoogleService-Info.plist`, `google-services.json`을 받는다. 웹판은 개발용(`sporesweep-dev`)을 그대로 쓴다. 출시 뒤 AdMob에 스토어 주소를 연결한다.
+6. Google Play의 국가를 모든 국가로 넓힌다(프로덕션 때).
 
 ## 8. 알아 둘 점
 
@@ -132,6 +133,7 @@
 
 새것이 위다.
 
+- **2026-10-24** Apple 개발자 계정이 열려 iOS 출시를 시작했다. 출시 범위를 한국과 해외(중국 본토 제외)로 넓히고, 위험이 높은 랜드마크 7곳의 이름을 일반 이름으로 바꿨다(기획서 v0.41, PLAN.md, RIGHTS_CHECK.md, 스토어 문구). iOS 앱 버전을 1.0으로 올렸다. 출시용 Firebase 프로젝트를 새로 만들기로 했다.
 - **2026-10-22** 안드로이드 출시 시작. versionCode 3(versionName 0.2)으로 올리고 비공개 테스트용 번들(시험 광고)을 만들었다. 개인 계정이라 프로덕션 전에 비공개 테스트 12명×14일이 필요하다.
 - **2026-10-21** 인수인계 문서(이 문서)와 `CLAUDE.md`를 만들었다. 앞으로 모든 작업은 이 문서를 고치며 한다.
 - **2026-10-20** README에 mods판 설치 방법을 넣었다. mods판 배포용 공개 저장소 `sporesweep-mod`를 만들었다.
