@@ -36,7 +36,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "dev.code404.sporesweep"
+        applicationId = "app.code404.sporesweep"
         minSdk = 26
         targetSdk = 36
         versionCode = 3

@@ -64,7 +64,7 @@ SporeSweep(앱) → GameScene → GameCore
 ### 실제 기기에 설치하려면
 
 1. `Config/Local.example.xcconfig`를 `Config/Local.xcconfig`로 복사하고 자기 개발 팀 ID를 적습니다.
-2. 타깃의 번들 ID(`dev.code404.sporesweep`)를 자기 것으로 바꿉니다.
+2. 타깃의 번들 ID(`app.code404.sporesweep`)를 자기 것으로 바꿉니다.
 
 `Local.xcconfig`는 저장소에 올라가지 않습니다.
 
@@ -106,7 +106,7 @@ cd android && ./gradlew :app:installDebug
 | --- | --- |
 | 플레이 기록 보내기 | 자기 Firebase 프로젝트의 `google-services.json`을 `android/app/`에 넣는다. 디버그 빌드는 실행 인자 `--ez analytics true`를 줄 때만 보낸다 |
 | 자기 광고 단위 쓰기 | `android/config.example.properties`를 `config.properties`로 복사해 ID를 적는다. 실제 광고는 출시 빌드에서만 나온다 |
-| 개발용 실행 인자 | iOS와 이름이 같다. `adb shell am start -n dev.code404.sporesweep/.MainActivity --es city tokyo --ei level 2 --ez autoplay true` |
+| 개발용 실행 인자 | iOS와 이름이 같다. `adb shell am start -n app.code404.sporesweep/dev.code404.sporesweep.MainActivity --es city tokyo --ei level 2 --ez autoplay true` |
 | 웹판 만들기 | `cd android && ./gradlew :web:webSite` → `android/web/build/site`. 정적 파일이라 아무 웹 서버에나 올리면 된다. 자세한 것은 PORTING.md의 "웹판" |
 | 웹판의 플레이 기록 | `android/web/firebase-config.example.js`를 `firebase-config.js`로 복사해 자기 Firebase 웹 앱의 값을 적는다 |
 

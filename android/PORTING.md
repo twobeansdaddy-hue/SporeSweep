@@ -39,7 +39,8 @@ iOS 판(Swift)을 Kotlin으로 옮긴다. 안드로이드 앱과 웹판(Kotlin/W
 cd android && ./gradlew :app:assembleDebug
 ```
 
-- **개발용 실행 인자**는 iOS 판과 이름이 같다. `adb shell am start -n dev.code404.sporesweep/.MainActivity --es city tokyo --ei level 2 --ez autoplay true`처럼 준다. 디버그 빌드에서만 읽는다.
+- **앱 ID**: `app.code404.sporesweep`(2026-10-24에 `dev.code404.sporesweep`에서 바꿨다). 코드의 패키지와 `namespace`는 `dev.code404.sporesweep`로 그대로라, 화면을 직접 열 때는 클래스 이름을 끝까지 쓴다.
+- **개발용 실행 인자**는 iOS 판과 이름이 같다. `adb shell am start -n app.code404.sporesweep/dev.code404.sporesweep.MainActivity --es city tokyo --ei level 2 --ez autoplay true`처럼 준다. 디버그 빌드에서만 읽는다.
 - **광고 ID**: `android/config.properties`에 `ADMOB_APP_ID`, `REWARDED_AD_UNIT_ID`를 적는다(저장소에 올리지 않는다). 없으면 구글 시험용 ID다. 디버그 빌드는 늘 시험 광고이고, 출시 빌드는 실제 광고다. 내부 테스트 트랙에 올릴 빌드는 `./gradlew :app:bundleRelease -PtestAds`로 만들어 시험 광고만 나오게 한다.
 - **업로드 키**: `~/Developer/keys/sporesweep-upload.jks`(저장소 밖, 별칭 `upload`). 비밀번호는 맥 키체인의 `sporesweep-upload-key`에 있고 빌드할 때만 읽는다. `config.properties`의 `UPLOAD_KEYSTORE`에 위치를 적으면 출시 빌드가 이 키로 서명되고, 없으면 개발용 열쇠로 서명된다. 앱 서명 키는 Google Play가 맡는다(Play 앱 서명). 업로드 키를 잃어버려도 Play Console에서 바꿀 수 있지만, 키 파일과 비밀번호는 따로 백업해 둔다.
 - **올릴 번들**: 비공개 테스트용은 `./gradlew :app:bundleRelease -PtestAds`(시험 광고), 정식 출시용은 `-PtestAds` 없이. 올릴 때마다 `versionCode`를 하나씩 올린다.
