@@ -1,7 +1,7 @@
 """인스타그램 릴스·유튜브 쇼츠용 세로 영상 두 편을 만든다(1080×1920). 2026-10-26.
 
 - R1 복원 편: 폐허가 된 랜드마크가 차례로 살아난다. 권리 문제가 알려진 7곳은 쓰지 않는다.
-- R2 예고편(제작기): "AI랑 혼자 게임을 만들었어요" → 기획서, 그림, 봇 시험, 동호회 요청으로 넣은 드론, 세 가지 판 → 끝 화면.
+- R2 예고편(제작기): "AI랑 혼자 게임을 만들었어요" → 기획서, 그림, 봇 시험, 테스터 한마디로 넣은 드론, 세 가지 판 → 끝 화면.
 
 끝 화면에는 회사 로고(code404, `~/Developer/code404-brand`)를 넣는다.
 자막·카드 그림은 여기서 그리고, 편집 내용을 JSON으로 적어 `promo_render`에 넘긴다(Tools/make_promos.py와 같은 방식).
@@ -17,7 +17,8 @@ import sys
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 W, H = 1080, 1920
-FONT = "SporeSweep/Fonts/Jua-Regular.ttf"
+# 자막 글꼴: 회사 CI와 같은 Pretendard ExtraBold(SIL OFL).
+FONT = os.path.expanduser("~/Developer/code404-brand/fonts/otf/Pretendard-ExtraBold.otf")
 OUT = "Marketing/promo/"
 A = OUT + "assets/reels/"
 os.makedirs(A, exist_ok=True)
@@ -120,7 +121,7 @@ def design_card():
         y += 54
     draw.rectangle((0, 1680, W, H), fill=(18, 16, 44, 255))
     draw.text((W // 2, 300), "기획서부터", font=font(110), fill="white", anchor="mm")
-    draw.text((W // 2, 430), "v0.1부터 v0.41까지, 41번 고쳐 썼어요", font=font(62), fill=YELLOW, anchor="mm")
+    draw.text((W // 2, 430), "v0.1 → v0.41, 41번 고쳐 썼어요", font=font(62), fill=YELLOW, anchor="mm")
     path = A + "design.jpg"
     back.convert("RGB").save(path, quality=92)
     return {"image": path, "frame": [0, 0, W, H]}
@@ -156,7 +157,7 @@ def platforms_card():
     back = gradient((40, 20, 90), (124, 58, 237)).convert("RGBA")
     draw = ImageDraw.Draw(back)
     draw.text((W // 2, 420), "한 번 만들어서", font=font(100), fill="white", anchor="mm")
-    for i, (name, sub) in enumerate([("iPhone", "App Store 심사 중"), ("Android", "비공개 테스트"), ("웹", "동호회 테스트 중")]):
+    for i, (name, sub) in enumerate([("iPhone", "App Store 심사 중"), ("Android", "비공개 테스트"), ("웹", "베타 테스트 중")]):
         y = 700 + i * 300
         draw.rounded_rectangle((140, y, 940, y + 230), radius=60, fill=(255, 255, 255, 235))
         draw.text((W // 2, y + 85), name, font=font(96), fill=INK, anchor="mm")
@@ -235,8 +236,8 @@ def teaser():
         layer(design_card(), 3.2, 2.3, fadeIn=0.15),
         layer(landmark_grid(), 5.5, 2.5, fadeIn=0.15),
         layer(caption("t2", "봇이 76,000판을 두며\n난이도를 맞췄어요", 96), 8.2, 2.3, y=170, pop=True, fadeOut=0.15),
-        layer(caption("t3", "동호회 요청:\n\"2x2 매치도 넣어 주세요!\"", 96, color=YELLOW), 10.6, 1.6, y=170, pop=True, fadeOut=0.12),
-        layer(caption("t4", "하루 만에 청소 드론 추가!", 96), 12.2, 1.9, y=170, pop=True, fadeOut=0.12),
+        layer(caption("t3", "테스터 한마디:\n\"2×2도 되면 좋겠다\"", 96, color=YELLOW), 10.6, 1.6, y=170, pop=True, fadeOut=0.12),
+        layer(caption("t4", "다음 날, 청소 드론 등장!", 96), 12.2, 1.9, y=170, pop=True, fadeOut=0.12),
         layer(platforms_card(), 14.1, 2.0, fadeIn=0.15),
         layer(end_card("end_r2", "직접 해 보세요"), 16.1, 2.9, fadeIn=0.3),
     ]
