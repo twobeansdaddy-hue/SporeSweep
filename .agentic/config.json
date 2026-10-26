@@ -1,0 +1,66 @@
+{
+  "baseBranch": "main",
+  "decide": {
+    "providers": [
+      "cloudflare",
+      "off"
+    ],
+    "models": {
+      "cloudflare": "clef-flash",
+      "jev": "jev-latest",
+      "local": "laya-multilingual"
+    },
+    "minConfidence": 0.35,
+    "noulMargin": 0.15,
+    "timeoutMs": 15000,
+    "log": true
+  },
+  "codex": {
+    "timeoutMs": 900000,
+    "sandbox": "read-only"
+  },
+  "agy": {
+    "timeoutMs": 600000,
+    "printTimeout": "10m",
+    "model": ""
+  },
+  "council": {
+    "enabled": true,
+    "crossCritique": true,
+    "timeoutMs": 600000
+  },
+  "stages": {
+    "review": {
+      "codex": {
+        "model": "",
+        "effort": ""
+      }
+    },
+    "council": {
+      "codex": {
+        "model": "",
+        "effort": ""
+      },
+      "agy": {
+        "model": "",
+        "effort": ""
+      }
+    },
+    "research": {
+      "agy": {
+        "model": "",
+        "effort": ""
+      }
+    },
+    "subagents": {
+      "reviewer": {
+        "model": "inherit",
+        "effort": ""
+      },
+      "researcher": {
+        "model": "inherit",
+        "effort": ""
+      }
+    }
+  }
+}

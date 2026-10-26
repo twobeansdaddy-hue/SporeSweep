@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node tools/agentic/decide.mjs:*)",
+      "Bash(node tools/agentic/agy-research.mjs:*)",
+      "Bash(node tools/agentic/codex-review.mjs:*)",
+      "Bash(node tools/agentic/council.mjs:*)",
+      "Bash(node tools/agentic/doctor.mjs:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git switch -c:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(mkdir -p .agentic/tmp)"
+    ],
+    "ask": [
+      "Bash(git push:*)",
+      "Bash(git merge:*)",
+      "Bash(git rebase:*)",
+      "Bash(npx rea-agents:*)",
+      "mcp__rea"
+    ],
+    "deny": [
+      "Bash(rm -rf:*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git reset --hard:*)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(~/.config/agentic-kit/**)"
+    ]
+  }
+}

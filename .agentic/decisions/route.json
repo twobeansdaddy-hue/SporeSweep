@@ -1,0 +1,64 @@
+{
+  "description": "요청을 어떻게 처리할지 1차 판정",
+  "questions": {
+    "kind": {
+      "type": "choice",
+      "instructions": "What kind of software task is this request?",
+      "criteria": {
+        "feature": "Add a new feature or behavior",
+        "bugfix": "Fix incorrect behavior or an error",
+        "refactor": "Restructure code without changing behavior",
+        "docs": "Documentation, comments, or configuration text only",
+        "research": "Investigate or compare options; no code change requested yet"
+      }
+    },
+    "size": {
+      "type": "score",
+      "instructions": "How large is the expected code change?",
+      "criteria": [
+        "Trivial: one small edit",
+        "Small: one or two files",
+        "Medium: several files in one area",
+        "Large: many files or multiple areas"
+      ]
+    },
+    "research_needed": {
+      "type": "noul",
+      "instructions": "Does this task need external research (unfamiliar library, API, current versions or pricing, or comparing options) before implementation?"
+    },
+    "ambiguous": {
+      "type": "noul",
+      "instructions": "Is the request too ambiguous to implement correctly without asking the user a clarifying question?"
+    },
+    "design_contested": {
+      "type": "noul",
+      "instructions": "Are there several reasonable design approaches with real trade-offs, so that getting independent opinions before implementing would likely change the plan?"
+    }
+  },
+  "verdict": {
+    "research_needed": {
+      "from": "research_needed",
+      "noulAtLeast": 0.6
+    },
+    "ambiguous": {
+      "from": "ambiguous",
+      "noulAtLeast": 0.6
+    },
+    "large": {
+      "from": "size",
+      "scoreAtLeast": 2.5
+    },
+    "council": {
+      "any": [
+        {
+          "from": "size",
+          "scoreAtLeast": 2.5
+        },
+        {
+          "from": "design_contested",
+          "noulAtLeast": 0.6
+        }
+      ]
+    }
+  }
+}

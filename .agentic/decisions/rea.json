@@ -1,0 +1,24 @@
+{
+  "description": "REA(역분석)를 써야 할 근거가 있는지 판정",
+  "questions": {
+    "target_type": {
+      "type": "choice",
+      "instructions": "What kind of product must be analyzed to answer the question?",
+      "criteria": {
+        "website": "A website or web app that can be observed in a browser",
+        "mobile_app": "An Android or iOS app package",
+        "desktop_app": "A desktop app such as Electron or .NET",
+        "native_binary": "A native binary or firmware",
+        "none": "No existing product needs to be analyzed"
+      }
+    },
+    "needs_internal": {
+      "type": "noul",
+      "instructions": "Can the question only be answered by inspecting the product's internal code or logic, because observing its screens, UI behavior, network requests, or public documentation would not be enough?"
+    }
+  },
+  "verdict": {
+    "needs_internal": { "from": "needs_internal", "noulAtLeast": 0.7 },
+    "observable_only": { "from": "target_type", "choiceIn": ["website", "none"] }
+  }
+}

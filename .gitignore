@@ -23,3 +23,11 @@ android/.kotlin/
 android/config.properties
 android/app/google-services.json
 android/web/firebase-config.js
+# agentic-kit
+.env
+.agentic/logs/
+.agentic/reviews/
+.agentic/research/
+.agentic/tmp/
+node_modules/
+.agentic/council/

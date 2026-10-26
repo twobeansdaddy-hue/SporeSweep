@@ -1,0 +1,18 @@
+{
+  "description": "리뷰 지적 사항 1건 분류",
+  "questions": {
+    "severity": {
+      "type": "choice",
+      "instructions": "Classify this code review comment.",
+      "criteria": {
+        "must_fix": "A real bug, security issue, data loss risk, or broken requirement that must be fixed before merging",
+        "should_fix": "A valid improvement such as a missing test, unhandled edge case, or unclear code",
+        "nit": "Style, naming, or personal preference with no functional impact",
+        "invalid": "Incorrect, based on a misunderstanding, or outside the scope of the change"
+      }
+    }
+  },
+  "verdict": {
+    "must_fix": { "from": "severity", "choiceIn": ["must_fix"] }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "version": "0.2.1",
+  "commit": "7426f9b",
+  "installedAt": "2026-10-26T05:44:31.848Z",
+  "files": {
+    ".agentic/decisions/done-gate.json": "4b46e7366df5e4d1a6d2f59236528503019fdaf929ca39e1645d06cf9e721475",
+    ".agentic/decisions/rea.json": "4b3a332c93a793a119eefa74720aacd70af6b34f00fc72b52bd961a736b87303",
+    ".agentic/decisions/review-triage.json": "942bb069fbfbffab0a68129379d57feada98f9053dc161e1cb29132673653e23",
+    ".agentic/decisions/risk.json": "a50ccc8294bc8bc03fe632fdd639c362f96ca5376d4f1a1e347aeb6c3b11c5ea",
+    ".agentic/decisions/route.json": "95d69f202b5ddbe00c9130bbaba41e924620ea90205046e812d12cd9d8aea7df",
+    ".agentic/PIPELINE.md": "25a5e4781a652fd945baf8fcca62bacdfb4a54157a703683f27ddee64166d796",
+    ".claude/agents/researcher.md": "a38a849822537d8a8e2a03b2239b76cfa9899c4e39d43938ef9993a5e2927ffa",
+    ".claude/agents/reviewer.md": "9b53d38d843d2856fbd09cd44e9d649b3091ae9c50d159af8a1633b1d03e3109",
+    ".claude/commands/task.md": "c91a3963eeefcb4d9c30f4686abf5e94d6e134f304cce16f1677d515afaf9f57",
+    "AGENTS.md#agentic-kit": "d44a6e6d4f6ba4faead3d6964f438c3b908241bbd7da089ef5da93147dfe863e",
+    "tools/agentic/agy-guard.mjs": "12267c7972f756edc1e8ea761b83f10c3b03561e34b949af13d8665d527c8201",
+    "tools/agentic/agy-research.mjs": "ef001f9d6bb98a887a8c6068e95d43741624b099530f10d4f1e5e2ab0c5462ac",
+    "tools/agentic/codex-review.mjs": "bd9106f63d25ef836c52af075e296742e279327ed41b4340eb51234f16651ae2",
+    "tools/agentic/council.mjs": "26b8d642dd25d0478c5a5ecf91bb181946f9e45d552c1b1128ecdc3d0247ac68",
+    "tools/agentic/decide.mjs": "f1e79faf3527410954ff64d6ab48d5406a97d0dff23e3425a270593c55832b85",
+    "tools/agentic/doctor.mjs": "ae47a3c3948dd9e7e7e56df5871a6de766a239c9142d38088ba45dc68803ac9d",
+    "tools/agentic/lib.mjs": "05ec5f78f3fab2d3ee7b56a974afa55fc44eaa2fc5a7aca4677dc668ee7e6506"
+  }
+}

@@ -1,3 +1,6 @@
+@AGENTS.md
+@.agentic/PIPELINE.md
+
 # CLAUDE.md
 
 이 프로젝트에서 일하는 Claude가 처음 읽는 파일이다. 자세한 것은 [HANDOFF.md](HANDOFF.md)에 있다.

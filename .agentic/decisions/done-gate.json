@@ -1,0 +1,19 @@
+{
+  "description": "완료 주장이 근거로 뒷받침되는지 판정",
+  "questions": {
+    "claim_supported": {
+      "type": "noul",
+      "instructions": "Given the original request, the test results, and the remaining issues, does the evidence support the claim that the request is fully completed?"
+    },
+    "tests_ran": {
+      "type": "noul",
+      "instructions": "Does the evidence show that relevant tests were actually executed and passed?"
+    }
+  },
+  "verdict": {
+    "claim_supported": { "all": [
+      { "from": "claim_supported", "noulAtLeast": 0.6 },
+      { "from": "tests_ran", "noulAtLeast": 0.6 }
+    ] }
+  }
+}

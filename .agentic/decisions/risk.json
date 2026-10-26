@@ -1,0 +1,20 @@
+{
+  "description": "변경의 위험도 판정 — 높으면 사람 승인",
+  "questions": {
+    "risk": {
+      "type": "score",
+      "instructions": "How risky is it to merge this code change without a human looking at it?",
+      "criteria": ["None: text, docs, or tests only", "Low: isolated UI or logic change", "Medium: shared code, APIs, or dependencies", "High: authentication, payments, data deletion, schema migration, or infrastructure", "Critical: security-sensitive change affecting production data or credentials"]
+    },
+    "sensitive": {
+      "type": "noul",
+      "instructions": "Does the change touch authentication, authorization, payments, personal data, data deletion, database migrations, secrets, CI/CD, or deployment configuration?"
+    }
+  },
+  "verdict": {
+    "needs_approval": { "any": [
+      { "from": "risk", "scoreAtLeast": 2.5 },
+      { "from": "sensitive", "noulAtLeast": 0.6 }
+    ] }
+  }
+}
