@@ -39,7 +39,7 @@ android {
         applicationId = "app.code404.sporesweep"
         minSdk = 26
         targetSdk = 36
-        versionCode = 3
+        versionCode = 4
         versionName = "0.2"
         manifestPlaceholders["admobAppId"] = config.getProperty("ADMOB_APP_ID", testAdmobAppId)
         buildConfigField("String", "REWARDED_AD_UNIT", "\"${config.getProperty("REWARDED_AD_UNIT_ID", testRewardedUnit)}\"")
@@ -61,7 +61,10 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            // 코드와 쓰지 않는 리소스를 줄인다. 앱 용량의 큰 몫이 라이브러리 코드다.
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             // 업로드 키가 없는 사람은 맥에서 시험할 수 있게 개발용 열쇠로 서명한다.
             signingConfig = signingConfigs.findByName("upload") ?: signingConfigs.getByName("debug")
         }
@@ -77,7 +80,7 @@ android {
         buildConfig = true
     }
 
-    sourceSets["main"].assets.directories.add(layout.buildDirectory.dir("generated/sporeAssets").get().asFile.path)
+    sourceSets["main"].assets.directories.add(layout.buildDirectory.dir("generated/androidAssets").get().asFile.path)
 }
 
 // iOS 판의 그림, 소리, 레벨, 글꼴, 번역을 앱의 assets로 모은다. 저장소에는 한 벌만 둔다.
@@ -97,7 +100,16 @@ val syncSporeAssets = tasks.register<Sync>("syncSporeAssets") {
     from(ios.resolve("SporeSweep/Fonts")) { include("*.ttf"); into("fonts") }
     from(ios.resolve("SporeSweep/en.lproj/Localizable.strings")) { into("strings"); rename { "en.strings" } }
 }
-tasks.named("preBuild") { dependsOn(syncSporeAssets) }
+// 그림을 WebP로 줄여 앱에 넣는다. 웹판도 sporeAssets를 쓰므로 원본은 그대로 둔다.
+val androidSporeAssets = tasks.register<Exec>("androidSporeAssets") {
+    dependsOn(syncSporeAssets)
+    val source = layout.buildDirectory.dir("generated/sporeAssets").get().asFile
+    val output = layout.buildDirectory.dir("generated/androidAssets").get().asFile
+    inputs.dir(source)
+    outputs.dir(output)
+    commandLine("python3", ios.resolve("Tools/make_android_assets.py").path, source.path, output.path)
+}
+tasks.named("preBuild") { dependsOn(androidSporeAssets) }
 
 dependencies {
     // 게임 화면과 규칙은 웹판과 함께 쓰는 :game에 있다.

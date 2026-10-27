@@ -103,7 +103,9 @@ private class AndroidAudio(private val context: Context) : AudioBackend {
         ids[name]?.let { pool.play(it, 1f, 1f, 1, 0, 1f) }
     }
 
-    override val isSilenced get() = manager.ringerMode != AudioManager.RINGER_MODE_NORMAL
+    // 안드로이드에는 iOS의 무음 스위치가 없다. 진동 모드로 지내는 사람이 많아 벨소리 모드는 보지 않고,
+    // 소리 크기는 미디어 볼륨이 정한다.
+    override val isSilenced = false
 
     override val isOtherAudioPlaying get() = manager.isMusicActive && player?.isPlaying != true
 
