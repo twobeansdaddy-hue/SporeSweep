@@ -12,13 +12,15 @@ from cities_data import CITIES
 
 A = "SporeSweep/Assets.xcassets"
 I = "Art/incoming"
-CONTENTS = '{\n  "images" : [\n    {\n      "filename" : "%s",\n      "idiom" : "universal"\n    }\n  ],\n  "info" : {\n    "author" : "xcode",\n    "version" : 1\n  }\n}\n'
+CONTENTS = '{\n  "images" : [\n    {\n      "filename" : "%s",\n      "idiom" : "universal"\n    }\n  ],\n  "info" : {\n    "author" : "xcode",\n    "version" : 1\n  }%s\n}\n'
+# PNG는 손실 압축(HEVC)으로 앱에 넣는다. 앱 용량의 대부분이 그림이다.
+LOSSY = ',\n  "properties" : {\n    "compression-type" : "lossy"\n  }'
 
 
 def imageset(name, filename):
     os.makedirs(f"{A}/{name}.imageset", exist_ok=True)
     with open(f"{A}/{name}.imageset/Contents.json", "w") as file:
-        file.write(CONTENTS % filename)
+        file.write(CONTENTS % (filename, LOSSY if filename.lower().endswith(".png") else ""))
     return f"{A}/{name}.imageset/{filename}"
 
 
