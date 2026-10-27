@@ -8,7 +8,7 @@
 - **지금 상태와 다음 할 일**을 지금에 맞게 고친다.
 - 새로 생긴 계정, 비밀값의 위치, 주의할 점이 있으면 그 절에 적는다.
 
-마지막으로 고친 날: 2026-10-26
+마지막으로 고친 날: 2026-10-27
 
 ## 1. 프로젝트 한눈에
 
@@ -136,6 +136,8 @@
 
 새것이 위다.
 
+- **2026-10-27** code404.app 홈을 회사 소개 사이트로 새로 만들어 올렸다(`~/Developer/code404-site`의 `index.html`·`home.css`, 한국어·영어). 첫 화면 "찾을 수 없던 것을 만듭니다", 하는 일·일하는 방식, 만든 것(포자 대청소·캣타워, 곧 출시), 연락. 기존 `/sporesweep/`, 개인정보 처리방침, `app-ads.txt` 주소는 그대로다. 웹판은 광고 없이 보상을 주는 문제가 있어 사이트에서 "웹에서 해 보기" 링크를 뺐다(계정 주인 결정). 두 웹판(`play.code404.app`, `cattower.code404.app`)은 주소를 아는 사람만 들어오게 그대로 둔다. 캣타워의 처리방침은 `cattower.code404.app/privacy/`에 있어 웹판을 지우면 안 된다.
+- **2026-10-27** 릴스 R1 복원 편을 인스타그램 `code404.app` 계정에 올렸다(Claude in Chrome, 표지는 복원된 숭례문, 설명 글은 `Marketing/promo/README.md`의 초안). 크롬 파일 올리기는 10MB까지라 `R1_restore_upload.mp4`(3.8Mbps로 다시 압축, 7.7MB)를 올렸다. 유튜브 쇼츠는 업로드 전에 YouTube가 본인 인증을 요구해 멈췄다(계정 주인이 해야 한다). R2 예고편은 며칠 뒤 올린다. 인스타 프로필 사진을 CI 심볼(네모 판, `code404_symbol_square_1024.png`)로 넣었다.
 - **2026-10-26** code404.app에 새 CI를 넣었다(로고, 파비콘, 아이폰 홈 아이콘, 공유 그림, 사이트 색을 남색·보라로). Claude in Chrome으로 Cloudflare Pages(`code404-site`, 프로덕션)에 직접 올렸고 code404.app에 반영된 것을 확인했다. 올린 묶음은 `~/Developer/code404-site.zip`(작업 폴더 안 사본 `Marketing/code404-site.zip`). 파일 올리기 도구는 작업 폴더 안의 파일만 올릴 수 있다. 릴스 초안 두 편(`Marketing/promo/R1_restore.mp4`, `R2_teaser.mp4`)을 `Tools/make_reels.py`로 만들었다. 자막 글꼴은 Pretendard ExtraBold이고, 동호회 이야기는 빼고 "테스터 한마디"로 풀었다(계정 주인 요청). 소리는 크기만 확인했고 들어 보지 못했다.
 - **2026-10-26** 회사 code404(개인사업자 등록 중)의 CI를 만들어 비공개 저장소 `code404-brand`(`~/Developer/code404-brand`)에 올렸다. KIPRIS에서 code404·코드404는 국내 0건(일본에 "404"가 든 다른 상표 20건). 글자만으로는 식별력 거절 가능성이 있어 출원은 로고 결합상표로 권했다. 홍보 릴스는 인스타그램과 유튜브 쇼츠에 낸다(제작기 + 플레이 장면, 아직 만들지 않음). iOS 심사는 정보 요청에 답장한 뒤 기다리는 중.
 - **2026-10-25** Apple이 "Guideline 2.1 - Information Needed"(처음 내는 개발자 계정이라 앱 설명과 실기기 녹화를 달라는 요청, 거절 아님)를 보냈다. 답장 글(영어)은 `Marketing/store/APP_REVIEW_REPLY.md`, 녹화는 `Marketing/store/app_review_recording.mov`(TestFlight 1.0 (2), 아이폰 15 Pro Max). 녹화는 아이폰 미러링을 Claude가 조작하고, 그 창만 ScreenCaptureKit으로 찍었다(`screencapture -R`로 영역을 찍으면 겹친 다른 창이 찍힌다). 같은 내용을 버전의 "앱 심사 정보 → 메모"에 넣었다(2,669자, 사용자의 크롬에서 Claude in Chrome으로). 계정 주인이 답장(글과 영상)을 보냈다. 이제 심사 결과를 기다린다. 광고 조사 때 아이폰에 개발용 빌드를 직접 깔아 TestFlight 판을 덮어썼던 것을 TestFlight로 다시 깔았다.
