@@ -120,6 +120,7 @@
 4. **iOS 1.0 심사 대기 중(2026-10-25 제출).** 결과 메일을 기다린다. 거절되면 사유를 보고 고쳐 다시 낸다. 승인되면 자동 공개 → AdMob에 App Store 주소를 연결한다. (아래는 지난 기록) **iOS 출시 진행 중(2026-10-24).** 앱 버전을 1.0(빌드 1)으로 올렸다. 개인정보 매니페스트와 암호화 신고(`ITSAppUsesNonExemptEncryption` false)는 있다. 막힌 것: (가) Xcode → Settings → Accounts에 유료 팀의 Apple ID를 넣고 `Config/Local.xcconfig`의 `DEVELOPMENT_TEAM`을 그 팀 ID로 바꾼다, (나) App Store Connect에서 앱을 만든다(번들 ID `app.code404.sporesweep`), (다) 출시용 Firebase 파일. 셋이 되면 `xcodebuild archive` → App Store Connect에 올려 TestFlight에서 확인하고 심사에 낸다. 스토어 문구는 `Marketing/store/STORE_LISTING.md`(한국어, English).
 5. **출시용 Firebase 프로젝트**(2026-10-24에 만들기로 정했다): 계정 주인이 콘솔에서 만들고 iOS(`app.code404.sporesweep`)와 안드로이드(같은 ID)를 등록해 `GoogleService-Info.plist`, `google-services.json`을 받는다. 웹판은 개발용(`sporesweep-dev`)을 그대로 쓴다. 출시 뒤 AdMob에 스토어 주소를 연결한다.
 6. Google Play의 국가를 모든 국가로 넓힌다(프로덕션 때).
+7. **홍보 계정.** 유튜브 `@code404app`은 브랜드 계정으로 옮겼다(끝). 인스타 `code404.app`은 게시물 1개·팔로워 0이라 새로 만들지 않고, 계정 센터 연락처에 hello@code404.app을 더했다(끝, 개인 Gmail은 복구용으로 남김, 페이스북은 연결하지 않음). R2는 며칠 뒤 두 곳에 올린다.
 
 ## 8. 알아 둘 점
 
@@ -136,6 +137,10 @@
 
 새것이 위다.
 
+- **2026-10-27** code404.app의 연락처를 개인 Gmail에서 `hello@code404.app`으로 바꿔 다시 올렸다(홈, `/sporesweep/`, 개인정보 처리방침 두 곳). Cloudflare가 사이트의 메일 주소를 가려서 보내므로 `curl`로는 주소가 안 보이고 `data-cfemail`로 확인했다. 계정 정리 방침(계정 주인과 정함): 바깥에 보이는 연락처만 hello@로 바꾸고, 로그인 계정(Apple·Play 개발자, Firebase, GA, AdMob, Cloudflare)은 개인 Gmail 그대로 둔다. 회사 명의로 옮기는 것은 사업자등록 뒤에 정한다. Play 새 앱의 개발자 이메일은 hello@로 넣는다. 유튜브는 브랜드 계정 code404를 만들어 @code404app 채널(R1 쇼츠, 프로필, 링크 포함)을 그쪽으로 이전했다. 개인 구글 계정(조민하)에는 이제 채널이 없다. 예전 개인 라이브 영상 2개도 함께 옮겨져 계정 주인이 지웠다. 회사 채널로 작업할 때는 유튜브에서 계정 전환으로 code404를 고른다.
+- **2026-10-27** 회사 메일 `hello@code404.app`을 만들었다(Cloudflare 이메일 라우팅, 받으면 계정 주인의 Gmail로 넘긴다. MX 3개·SPF TXT 확인). 유튜브와 인스타가 모두 개인 계정이라, 회사 계정을 따로 두기로 했다(계정 주인 결정): 유튜브는 개인 구글 계정 아래 브랜드 채널 code404를 새로 만들고, 인스타는 hello@code404.app으로 새 계정을 만들어 code404.app 아이디를 옮긴다. 만들기는 계정 주인이, 꾸미기·R1 다시 올리기·개인 계정 되돌리기는 Claude가 한다. DNS·메일 전달 설정은 자동 모드가 막아 계정 주인이 눌렀다.
+- **2026-10-27** 릴스 R1을 유튜브 쇼츠로 올렸다(`@code404app`, https://youtube.com/shorts/ipAkTTz3wnA, 공개, 아동용 아님은 계정 주인이 정했다). 계정 주인 요청으로 이 계정의 채널 구독 11개를 모두 취소했다. 예전 개인 영상 2개(2년 전 실시간 스트림)는 계정 주인이 지운다(Claude는 영구 삭제를 하지 않는다).
+- **2026-10-27** 유튜브 채널(계정 주인의 twobeansdaddy 구글 계정, 채널 ID `UCrLuA3VsMllx26mpTqcwZIg`)을 code404 채널로 바꿨다: 사진은 CI 심볼, 이름 `code404`, 핸들 `@code404app`(`youtube.com/@code404app`), 설명 "찾을 수 없던 것을 만듭니다. AI와 함께 작은 게임과 앱을 만드는 1인 스튜디오.", 링크 code404.app·인스타그램. 이름과 핸들은 14일에 두 번까지만 바꿀 수 있다. 공개 채널 화면에는 옛 이름이 잠시 남아 있었다(반영 지연). 다음은 R1을 이 채널 쇼츠로 올리기.
 - **2026-10-27** code404.app 홈을 회사 소개 사이트로 새로 만들어 올렸다(`~/Developer/code404-site`의 `index.html`·`home.css`, 한국어·영어). 첫 화면 "찾을 수 없던 것을 만듭니다", 하는 일·일하는 방식, 만든 것(포자 대청소·캣타워, 곧 출시), 연락. 기존 `/sporesweep/`, 개인정보 처리방침, `app-ads.txt` 주소는 그대로다. 웹판은 광고 없이 보상을 주는 문제가 있어 사이트에서 "웹에서 해 보기" 링크를 뺐다(계정 주인 결정). 두 웹판(`play.code404.app`, `cattower.code404.app`)은 주소를 아는 사람만 들어오게 그대로 둔다. 캣타워의 처리방침은 `cattower.code404.app/privacy/`에 있어 웹판을 지우면 안 된다.
 - **2026-10-27** 릴스 R1 복원 편을 인스타그램 `code404.app` 계정에 올렸다(Claude in Chrome, 표지는 복원된 숭례문, 설명 글은 `Marketing/promo/README.md`의 초안). 크롬 파일 올리기는 10MB까지라 `R1_restore_upload.mp4`(3.8Mbps로 다시 압축, 7.7MB)를 올렸다. 유튜브 쇼츠는 업로드 전에 YouTube가 본인 인증을 요구해 멈췄다(계정 주인이 해야 한다). R2 예고편은 며칠 뒤 올린다. 인스타 프로필 사진을 CI 심볼(네모 판, `code404_symbol_square_1024.png`)로 넣었다.
 - **2026-10-26** code404.app에 새 CI를 넣었다(로고, 파비콘, 아이폰 홈 아이콘, 공유 그림, 사이트 색을 남색·보라로). Claude in Chrome으로 Cloudflare Pages(`code404-site`, 프로덕션)에 직접 올렸고 code404.app에 반영된 것을 확인했다. 올린 묶음은 `~/Developer/code404-site.zip`(작업 폴더 안 사본 `Marketing/code404-site.zip`). 파일 올리기 도구는 작업 폴더 안의 파일만 올릴 수 있다. 릴스 초안 두 편(`Marketing/promo/R1_restore.mp4`, `R2_teaser.mp4`)을 `Tools/make_reels.py`로 만들었다. 자막 글꼴은 Pretendard ExtraBold이고, 동호회 이야기는 빼고 "테스터 한마디"로 풀었다(계정 주인 요청). 소리는 크기만 확인했고 들어 보지 못했다.
