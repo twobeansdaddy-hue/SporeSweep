@@ -42,17 +42,40 @@ public struct GameProgress: Hashable, Sendable, Codable {
     /// 다른 기기의 진행과 합친다(iCloud). 어느 쪽에서 한 것도 잃지 않게 한다.
     ///
     /// 별과 점수는 레벨마다 높은 쪽을, 복원한 부위는 양쪽을 합친 것을 남긴다.
-    /// 부스터와 아이템은 쓰면 줄어드는 것이라 합칠 수 없으므로, 레벨을 더 많이 깬 쪽의 것을 따른다(같으면 이 기기).
+    /// 부스터와 아이템은 쓰면 줄어드는 것이라 합칠 수 없으므로, 레벨을 더 많이 깬 쪽의 것을 따른다
+    /// (같으면 부스터가 더 많은 쪽, `keepsBoosters`).
     /// 생명력과 일일 보상은 기기마다 따로 둔다.
     public func merging(_ other: GameProgress) -> GameProgress {
         var merged = self
         merged.stars.merge(other.stars) { max($0, $1) }
         merged.bestScores.merge(other.bestScores) { max($0, $1) }
         merged.restoredParts.merge(other.restoredParts) { $0.union($1) }
-        if other.stars.count > stars.count {
+        if Self.keepsBoosters(of: other, over: self) {
             merged.boosters = other.boosters
         }
         return merged
+    }
+
+    /// 합칠 때 `candidate`의 부스터를 `current`의 것 대신 남기는지.
+    /// 레벨을 더 많이 깬 쪽, 같으면 부스터가 더 많은 쪽, 그래도 같으면 정해진 순서로 고른다.
+    /// 어느 쪽에서 합쳐도 같은 쪽을 고르므로 두 기기가 서로 다시 올리기를 되풀이하지 않는다.
+    static func keepsBoosters(of candidate: GameProgress, over current: GameProgress) -> Bool {
+        if candidate.stars.count != current.stars.count {
+            return candidate.stars.count > current.stars.count
+        }
+        let candidateTotal = candidate.boosters.values.reduce(0, +)
+        let currentTotal = current.boosters.values.reduce(0, +)
+        if candidateTotal != currentTotal {
+            return candidateTotal > currentTotal
+        }
+        let order = { (boosters: [String: Int]) in boosters.sorted { $0.key < $1.key }.map { "\($0.key)=\($0.value)" }.joined(separator: ",") }
+        return order(candidate.boosters) > order(current.boosters)
+    }
+
+    /// 기기마다 따로 두는 것(생명력, 일일 보상)을 빼고 같은지. iCloud에 올릴 것이 있는지 볼 때 쓴다.
+    public func sharesProgress(with other: GameProgress) -> Bool {
+        stars == other.stars && bestScores == other.bestScores
+            && restoredParts == other.restoredParts && boosters == other.boosters
     }
 
     /// 가진 부스터의 수.

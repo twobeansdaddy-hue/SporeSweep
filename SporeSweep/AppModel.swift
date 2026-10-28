@@ -254,9 +254,13 @@ final class AppModel {
             setLabMode(true)
         }
         #endif
-        grantStarterTools()
-        // 다른 기기에서 한 것을 합치고, 앞으로 바뀌는 것도 받는다.
+        // iCloud의 진행(다른 기기, 또는 지우기 전 이 기기)을 먼저 합치고 시작 아이템을 준다.
+        // 다시 설치한 기기가 빈 진행으로 iCloud를 덮어쓰지 않게 언제부터 올릴지도 여기서 정한다.
+        if canSave {
+            cloud.start(local: progress)
+        }
         mergeCloud(cloud.pull())
+        grantStarterTools()
         cloud.observe { [weak self] remote in
             self?.mergeCloud(remote)
         }
@@ -504,7 +508,8 @@ final class AppModel {
         let merged = progress.merging(remote)
         guard merged != progress else { return }
         progress = merged
-        try? store.save(progress)
+        // 합친 것을 iCloud에도 올려 이 기기에만 있던 기록을 남긴다.
+        save()
     }
 
     // MARK: - 아이템
@@ -534,6 +539,11 @@ final class AppModel {
     private func grantStarterTools() {
         // 저장하지 않는 실행(개발용 인자)에서는 주지 않는다. 줬다는 표시만 남고 아이템은 사라지기 때문이다.
         guard canSave, !UserDefaults.standard.bool(forKey: Self.starterToolsKey) else { return }
+        // iCloud에서 진행이나 아이템을 되찾은 사람(다시 설치)은 이미 받았던 사람이다.
+        guard progress.isEmpty, progress.boosters.isEmpty else {
+            UserDefaults.standard.set(true, forKey: Self.starterToolsKey)
+            return
+        }
         for tool in Tool.allCases {
             progress.addBooster(Self.key(tool))
         }
@@ -602,6 +612,7 @@ final class AppModel {
     func resetProgress() {
         do {
             try store.reset()
+            cloud.clear()
             progress = GameProgress()
             canSave = true
             problem = nil

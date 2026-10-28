@@ -1,6 +1,6 @@
 import Foundation
 
-/// 진행 상황을 JSON 파일로 기기에 저장한다(10장). iCloud 동기화는 하지 않는다.
+/// 진행 상황을 JSON 파일로 기기에 저장한다(10장). iCloud 동기화는 앱의 `CloudSync`가 한다.
 public struct ProgressStore: Sendable {
     public let url: URL
 
