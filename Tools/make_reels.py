@@ -157,8 +157,9 @@ def platforms_card():
     back = gradient((40, 20, 90), (124, 58, 237)).convert("RGBA")
     draw = ImageDraw.Draw(back)
     draw.text((W // 2, 420), "한 번 만들어서", font=font(100), fill="white", anchor="mm")
-    for i, (name, sub) in enumerate([("iPhone", "App Store 심사 중"), ("Android", "비공개 테스트"), ("웹", "베타 테스트 중")]):
-        y = 700 + i * 300
+    # 웹판은 광고 없이 보상을 주는 문제가 있어 내세우지 않는다(2026-10-28 계정 주인 결정).
+    for i, (name, sub) in enumerate([("iPhone", "App Store 출시"), ("Android", "비공개 테스트")]):
+        y = 800 + i * 330
         draw.rounded_rectangle((140, y, 940, y + 230), radius=60, fill=(255, 255, 255, 235))
         draw.text((W // 2, y + 85), name, font=font(96), fill=INK, anchor="mm")
         draw.text((W // 2, y + 170), sub, font=font(50), fill=VIOLET, anchor="mm")
@@ -168,7 +169,8 @@ def platforms_card():
 
 
 def end_card(name, headline):
-    """끝 화면: 앱 아이콘, 이름, 한 줄 소개, 곧 만나요, 그리고 맨 아래 code404 로고."""
+    """끝 화면: 앱 아이콘, 이름, 한 줄 소개, App Store에서 지금 받기, 그리고 맨 아래 code404 로고.
+    안드로이드는 아직 비공개 테스트라 받는 곳으로 App Store만 적는다."""
     image = gradient((255, 92, 168), (110, 55, 200)).convert("RGBA")
     draw = ImageDraw.Draw(image)
     icon = Image.open("Art/incoming/app_icon.png").convert("RGBA").resize((360, 360), Image.LANCZOS)
@@ -183,8 +185,8 @@ def end_card(name, headline):
     draw.text((W // 2 + 5, 967), "포자 대청소", font=font(168), fill=(70, 15, 80), anchor="mm")
     draw.text((W // 2, 960), "포자 대청소", font=font(168), fill="white", anchor="mm")
     draw.text((W // 2, 1105), "세계 랜드마크 복원 매치3 퍼즐", font=font(60), fill=YELLOW, anchor="mm")
-    draw.rounded_rectangle((300, 1250, 780, 1385), radius=68, fill=(50, 15, 75))
-    draw.text((W // 2, 1318), "곧 만나요!", font=font(74), fill="white", anchor="mm")
+    draw.rounded_rectangle((170, 1250, 910, 1385), radius=68, fill=(50, 15, 75))
+    draw.text((W // 2, 1318), "App Store에서 지금 받기", font=font(64), fill="white", anchor="mm")
     logo = Image.open(LOGO_WHITE).convert("RGBA")
     logo_w = 520
     logo = logo.resize((logo_w, round(logo.height * logo_w / logo.width)), Image.LANCZOS)
