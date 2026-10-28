@@ -7,6 +7,7 @@ import androidx.compose.runtime.setValue
 import dev.code404.sporesweep.core.Booster
 import dev.code404.sporesweep.core.City
 import dev.code404.sporesweep.core.DailyGift
+import dev.code404.sporesweep.core.CloudSync
 import dev.code404.sporesweep.core.GameProgress
 import dev.code404.sporesweep.core.GameState
 import dev.code404.sporesweep.core.GameStatus
@@ -39,6 +40,13 @@ class AppModel(val args: DebugArgs) {
 
     private val prefs: Prefs = Platform.prefs
     private val store = Platform.progress
+    private val cloud = CloudSync(
+        Platform.cloud,
+        isEnabled = { Platform.cloud.isAvailable && prefs.getBoolean(CLOUD_ENABLED, true) },
+        // 클라우드를 지우지 못한 채 앱이 꺼져도 다음에 다시 지운다.
+        pendingClear = { prefs.getBoolean(CLOUD_CLEAR_PENDING, false) },
+        setPendingClear = { prefs.edit().putBoolean(CLOUD_CLEAR_PENDING, it).apply() },
+    )
 
     var city: City? = null
         private set
@@ -107,6 +115,8 @@ class AppModel(val args: DebugArgs) {
         private const val SEEN_TUTORIALS = "seenTutorials"
         private const val SEEN_ENDING = "seenEnding"
         private const val STARTER_TOOLS = "grantedStarterTools"
+        private const val CLOUD_ENABLED = "cloudEnabled"
+        private const val CLOUD_CLEAR_PENDING = "cloudClearPending"
         private const val AD_TOOL_DAY = "adToolDay"
         private const val AD_TOOL_COUNT = "adToolCount"
         const val SEEN_INTRO = "seenIntro"
@@ -203,6 +213,9 @@ class AppModel(val args: DebugArgs) {
         }
         if (args.bool("ending")) wantsEnding = true
         if (args.bool("lab")) setLabMode(true)
+        // 클라우드(Play 게임즈 저장된 게임)의 진행을 받아 합친다. 받는 것은 늦게 끝나므로 시작 아이템을 먼저 줄 수 있는데,
+        // 다시 설치한 기기는 클라우드를 보기 전에 올리지 않고, 합칠 때 레벨을 더 깬 쪽의 아이템이 남는다.
+        if (canSave) cloud.start(progress) { mergeCloud(it) }
         grantStarterTools()
         if (args.bool("dailyGift")) {
             progress.daily = DailyGift()
@@ -376,7 +389,13 @@ class AppModel(val args: DebugArgs) {
 
     private fun grantStarterTools() {
         if (!canSave || prefs.getBoolean(STARTER_TOOLS, false)) return
-        for (tool in Tool.entries) progress.addBooster(key(tool))
+        // 클라우드에서 진행이나 아이템을 되찾은 사람(다시 설치)은 이미 받았던 사람이다.
+        if (!progress.isEmpty || progress.hasBoosters) {
+            prefs.edit().putBoolean(STARTER_TOOLS, true).apply()
+            return
+        }
+        // 클라우드의 진행보다 먼저 줄 수 있으므로 바꾼 것으로 치지 않는다(GameProgress.addBooster).
+        for (tool in Tool.entries) progress.addBooster(key(tool), changesStamp = false)
         prefs.edit().putBoolean(STARTER_TOOLS, true).apply()
         save()
     }
@@ -423,6 +442,7 @@ class AppModel(val args: DebugArgs) {
 
     fun resetProgress() {
         store.reset()
+        cloud.clear()
         progress = GameProgress()
         canSave = true
         problem = null
@@ -489,9 +509,36 @@ class AppModel(val args: DebugArgs) {
         if (!canSave) return
         try {
             store.save(progress)
+            cloud.push(progress)
         } catch (e: Exception) {
             problem = tr("진행을 저장하지 못했어요.")
         }
+    }
+
+    // MARK: 클라우드 저장
+
+    /** 이 기기에서 클라우드 저장을 쓸 수 있는지. 아니면 설정에 스위치가 없다. */
+    val isCloudAvailable get() = cloud.isAvailable
+
+    /** 진행을 클라우드에 저장하는지. */
+    var isCloudEnabled: Boolean
+        get() = cloud.isAvailable && prefs.getBoolean(CLOUD_ENABLED, true)
+        set(value) {
+            prefs.edit().putBoolean(CLOUD_ENABLED, value).apply()
+            cloud.enabledChanged(progress)
+        }
+
+    /** 앱으로 돌아왔을 때 다른 기기에서 한 것을 받는다. */
+    fun refreshCloud() = cloud.refresh()
+
+    /** 클라우드의 진행을 이 기기의 진행에 합친다. */
+    private fun mergeCloud(remote: GameProgress) {
+        if (!canSave) return
+        val merged = progress.merging(remote)
+        if (merged.sharesProgress(progress)) return
+        progress = merged
+        // 합친 것을 클라우드에도 올려 이 기기에만 있던 기록을 남긴다.
+        save()
     }
 }
 

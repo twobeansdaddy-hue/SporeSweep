@@ -59,8 +59,12 @@ final class CloudSync {
     }
 
     private func flush() {
-        guard isEnabled, let latest, let gate,
-              let upload = gate.upload(latest, cloud: pull()),
+        guard isEnabled, let latest, let gate else { return }
+        // iCloud에 무언가 있는데 읽지 못하면 비어 있는 것으로 보지 않는다. 덮어써서 잃지 않게 올리지 않는다.
+        store.synchronize()
+        let cloud = pull()
+        if cloud == nil, store.data(forKey: Self.key) != nil { return }
+        guard let upload = gate.upload(latest, cloud: cloud),
               let data = try? JSONEncoder().encode(upload) else { return }
         store.set(data, forKey: Self.key)
     }

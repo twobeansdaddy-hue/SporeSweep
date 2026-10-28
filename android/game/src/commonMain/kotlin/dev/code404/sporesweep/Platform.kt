@@ -3,7 +3,9 @@ package dev.code404.sporesweep
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.text.font.FontFamily
+import dev.code404.sporesweep.core.CloudBackend
 import dev.code404.sporesweep.core.GameProgress
+import dev.code404.sporesweep.core.NoCloud
 
 // 안드로이드 앱과 웹판이 다른 것. 게임 코드는 이 인터페이스만 보고, 플랫폼마다 시작할 때 Platform.install로 넣는다.
 
@@ -86,6 +88,7 @@ object Platform {
     lateinit var assets: AssetSource
     lateinit var audio: AudioBackend
     var ads: AdService = NoAds
+    var cloud: CloudBackend = NoCloud
     /** 플레이 기록을 보내는 곳. 없으면 개발 빌드에서 로그에만 적는다. */
     var analytics: ((String, Map<String, Any>) -> Unit)? = null
     /** 개발 빌드인지. 개발용 실행 인자와 화면을 켠다. */

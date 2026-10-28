@@ -108,4 +108,34 @@ struct CloudGateTests {
         #expect(gate.upload(fresh, cloud: cloud) == nil)
         #expect(fresh.merging(cloud).boosterCount("bomb") == 2)
     }
+
+    @Test("같은 레벨 수에서 쓴 아이템은 iCloud의 예전 개수로 되살아나지 않는다")
+    func usedItemsDoNotComeBack() throws {
+        let cloud = played()
+        var here = cloud
+        let used = here.useBooster("bomb")
+        #expect(used)
+        #expect(here.merging(cloud).boosterCount("bomb") == 3)
+        #expect(cloud.merging(here).boosterCount("bomb") == 3)
+        let upload = try #require(CloudGate(local: here, now: start).upload(here, cloud: cloud))
+        #expect(upload.boosterCount("bomb") == 3)
+    }
+
+    @Test("부스터 변경 횟수는 저장했다 읽어도 남고, 예전 파일은 0이다")
+    func stampSurvivesCoding() throws {
+        let progress = played()
+        let decoded = try JSONDecoder().decode(GameProgress.self, from: JSONEncoder().encode(progress))
+        #expect(decoded.boosterStamp == progress.boosterStamp)
+        let old = try JSONDecoder().decode(GameProgress.self, from: Data(#"{"stars":{},"bestScores":{}}"#.utf8))
+        #expect(old.boosterStamp == 0)
+    }
+
+    @Test("시작 아이템은 예전 iCloud 기록(변경 횟수 0)의 아이템을 덮어쓰지 않는다")
+    func starterToolsDoNotOverwriteLegacyCloud() throws {
+        let legacy = try JSONDecoder().decode(GameProgress.self, from: Data(#"{"stars":{"seoul-001":3},"bestScores":{},"boosters":{"tool_hammer":9}}"#.utf8))
+        var fresh = GameProgress()
+        fresh.addBooster("tool_hammer", changesStamp: false)
+        #expect(fresh.merging(legacy).boosterCount("tool_hammer") == 9)
+        #expect(legacy.merging(fresh).boosterCount("tool_hammer") == 9)
+    }
 }

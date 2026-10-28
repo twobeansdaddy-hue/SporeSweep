@@ -44,12 +44,13 @@ import dev.code404.sporesweep.board.GameHaptic
 import dev.code404.sporesweep.board.GameSound
 import dev.code404.sporesweep.tr
 
-/** 설정 화면(iOS 판 SettingsView). iCloud 저장은 안드로이드에 없다. */
+/** 설정 화면(iOS 판 SettingsView). iCloud 저장 대신 안드로이드는 Play 게임즈에 저장한다. */
 @Composable
 fun SettingsScreen(model: AppModel, onClose: () -> Unit) {
     var music by remember { mutableStateOf(Music.isMusicEnabled) }
     var sound by remember { mutableStateOf(Sound.isSoundEnabled) }
     var haptics by remember { mutableStateOf(Sound.isHapticsEnabled) }
+    var cloud by remember { mutableStateOf(model.isCloudEnabled) }
     var confirmsReset by remember { mutableStateOf(false) }
     var didResetTutorials by remember { mutableStateOf(false) }
     Box(Modifier.fillMaxSize().background(Palette.backdrop)) {
@@ -65,6 +66,14 @@ fun SettingsScreen(model: AppModel, onClose: () -> Unit) {
                         ChunkyToggle(tr("진동"), haptics) { haptics = it; Sound.isHapticsEnabled = it; Sound.haptic(GameHaptic.LIGHT) }
                     }
                     Note(tr("다른 앱으로 음악을 듣고 있으면 배경 음악은 나오지 않아요."))
+                }
+                if (model.isCloudAvailable) {
+                    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                        Column(Modifier.fillMaxWidth().gamePanel().padding(16.dp)) {
+                            ChunkyToggle(tr("Google Play 게임즈에 저장"), cloud) { cloud = it; model.isCloudEnabled = it }
+                        }
+                        Note(tr("앱을 지웠다 다시 설치하거나 기기를 바꿔도 진행이 이어져요. 같은 Google 계정의 Play 게임즈로 맞춰져요."))
+                    }
                 }
                 Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                     ChunkyButton(if (didResetTutorials) tr("다음 판부터 다시 보여 드려요") else tr("레벨 설명 다시 보기"), tint = GameTint.BLUE, fills = true, enabled = !didResetTutorials) {

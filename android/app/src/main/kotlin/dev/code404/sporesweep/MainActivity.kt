@@ -23,6 +23,8 @@ class MainActivity : ComponentActivity() {
         RewardedAds.start(this, fake = args.bool("fakeAds"))
         RewardedAds.activity = this
         Platform.ads = RewardedAds
+        PlayGamesCloud.start(this)
+        Platform.cloud = PlayGamesCloud
         model = AppModel(args)
         android.util.Log.i("시작", "AppModel ${(System.nanoTime() - started) / 1_000_000}ms")
         setContent {
@@ -33,11 +35,13 @@ class MainActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         Music.refresh()
+        model.refreshCloud()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         if (RewardedAds.activity === this) RewardedAds.activity = null
+        if (PlayGamesCloud.activity === this) PlayGamesCloud.activity = null
     }
 
     override fun onPause() {

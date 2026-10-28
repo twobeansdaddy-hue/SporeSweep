@@ -26,6 +26,9 @@ val uploadKeyPassword: String? by lazy {
     }.getOrNull()
 }
 
+// 클라우드 저장(Play 게임즈 저장된 게임)의 게임즈 서비스 프로젝트 ID. 없으면 클라우드 저장을 끈다(PlayGamesCloud.kt).
+val playGamesAppId = config.getProperty("PLAY_GAMES_APP_ID", "").trim()
+
 val testAdmobAppId = "ca-app-pub-3940256099942544~3347511713"
 val testRewardedUnit = "ca-app-pub-3940256099942544/5224354917"
 
@@ -39,13 +42,15 @@ android {
         applicationId = "app.code404.sporesweep"
         minSdk = 26
         targetSdk = 36
-        versionCode = 4
+        versionCode = 5
         versionName = "0.2"
         manifestPlaceholders["admobAppId"] = config.getProperty("ADMOB_APP_ID", testAdmobAppId)
         buildConfigField("String", "REWARDED_AD_UNIT", "\"${config.getProperty("REWARDED_AD_UNIT_ID", testRewardedUnit)}\"")
         buildConfigField("String", "TEST_REWARDED_AD_UNIT", "\"$testRewardedUnit\"")
         // 출시 빌드는 실제 광고를 쓴다. 내부 테스트용으로 올릴 때는 -PtestAds를 붙여 시험 광고만 나오게 한다.
         buildConfigField("boolean", "TEST_ADS", (project.hasProperty("testAds")).toString())
+        buildConfigField("String", "PLAY_GAMES_APP_ID", "\"$playGamesAppId\"")
+        resValue("string", "game_services_project_id", playGamesAppId)
     }
 
     signingConfigs {
@@ -78,6 +83,7 @@ android {
     buildFeatures {
         compose = true
         buildConfig = true
+        resValues = true
     }
 
     sourceSets["main"].assets.directories.add(layout.buildDirectory.dir("generated/androidAssets").get().asFile.path)
@@ -115,6 +121,7 @@ dependencies {
     // 게임 화면과 규칙은 웹판과 함께 쓰는 :game에 있다.
     implementation(project(":game"))
     implementation("com.google.android.gms:play-services-ads:25.5.0")
+    implementation("com.google.android.gms:play-services-games-v2:22.1.0")
     implementation(platform("com.google.firebase:firebase-bom:35.0.0"))
     implementation("com.google.firebase:firebase-analytics")
 }

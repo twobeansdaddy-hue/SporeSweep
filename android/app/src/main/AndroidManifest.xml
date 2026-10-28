@@ -21,6 +21,10 @@
         <meta-data
             android:name="google_analytics_automatic_screen_reporting_enabled"
             android:value="false" />
+        <!-- 클라우드 저장(Play 게임즈 저장된 게임). 값은 config.properties의 PLAY_GAMES_APP_ID(build.gradle.kts의 resValue). -->
+        <meta-data
+            android:name="com.google.android.gms.games.APP_ID"
+            android:value="@string/game_services_project_id" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

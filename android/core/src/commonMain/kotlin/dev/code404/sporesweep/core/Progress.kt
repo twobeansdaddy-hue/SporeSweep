@@ -7,6 +7,7 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.int
+import kotlinx.serialization.json.intOrNull
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
@@ -188,6 +189,12 @@ class GameProgress {
     private val bestScores = HashMap<String, Int>()
     private val restoredParts = HashMap<String, MutableSet<String>>()
     private val boosters = HashMap<String, Int>()
+    /**
+     * 부스터가 바뀐 횟수(받거나 쓸 때마다 하나씩, 합칠 때는 큰 쪽). 두 기기의 부스터를 합칠 수 없어 한쪽을 고를 때
+     * 더 나중에 바꾼 쪽을 남긴다. 그래야 쓴 아이템이 클라우드의 예전 개수로 되살아나지 않는다.
+     */
+    var boosterStamp = 0
+        private set
     var lives = Lives()
     var daily = DailyGift()
 
@@ -197,6 +204,7 @@ class GameProgress {
         next.bestScores.putAll(bestScores)
         restoredParts.forEach { (k, v) -> next.restoredParts[k] = v.toMutableSet() }
         next.boosters.putAll(boosters)
+        next.boosterStamp = boosterStamp
         next.lives = lives.copy()
         next.daily = daily.copy()
         return next
@@ -204,14 +212,20 @@ class GameProgress {
 
     fun boosterCount(name: String) = boosters[name] ?: 0
 
-    fun addBooster(name: String, count: Int = 1) {
+    /**
+     * 부스터를 받는다. 시작 아이템처럼 클라우드의 진행을 받기 전에 주는 것은 `changesStamp`를 끈다.
+     * 바꾼 것으로 치면 예전 클라우드 기록(변경 횟수 0)보다 앞서서 가진 아이템을 덮어쓴다.
+     */
+    fun addBooster(name: String, count: Int = 1, changesStamp: Boolean = true) {
         if (count <= 0) return
         boosters[name] = boosterCount(name) + count
+        if (changesStamp) boosterStamp += 1
     }
 
     fun useBooster(name: String): Boolean {
         if (boosterCount(name) <= 0) return false
         boosters[name] = boosterCount(name) - 1
+        boosterStamp += 1
         return true
     }
 
@@ -247,17 +261,46 @@ class GameProgress {
         return index == 0 || isCleared(levelIDs[index - 1])
     }
 
-    /** 다른 진행과 합친다. 별과 점수는 높은 쪽, 복원은 합친 것, 부스터는 레벨을 더 깬 쪽. */
+    /**
+     * 다른 진행과 합친다(클라우드). 별과 점수는 높은 쪽, 복원은 합친 것, 부스터는 더 나중에 바꾼 쪽
+     * (`keepsBoosters`). 생명력과 일일 보상은 기기마다 따로라 이 기기의 것을 둔다.
+     */
     fun merging(other: GameProgress): GameProgress {
         val merged = copy()
         other.stars.forEach { (k, v) -> merged.stars[k] = maxOf(merged.stars[k] ?: v, v) }
         other.bestScores.forEach { (k, v) -> merged.bestScores[k] = maxOf(merged.bestScores[k] ?: v, v) }
         other.restoredParts.forEach { (k, v) -> merged.restoredParts.getOrPut(k) { HashSet() }.addAll(v) }
-        if (other.stars.size > stars.size) {
+        if (keepsBoosters(other)) {
             merged.boosters.clear()
             merged.boosters.putAll(other.boosters)
         }
+        merged.boosterStamp = maxOf(boosterStamp, other.boosterStamp)
         return merged
+    }
+
+    /** 깬 레벨도, 복원한 부위도 없는지. 새로 설치한 기기의 진행이다. */
+    val isEmpty get() = stars.isEmpty() && restoredParts.values.all { it.isEmpty() }
+
+    /** 부스터를 하나라도 가졌는지(개수가 0인 것은 빼고). */
+    val hasBoosters get() = boosters.values.any { it > 0 }
+
+    /** 기기마다 따로 두는 것(생명력, 일일 보상)을 빼고 같은지. 클라우드에 올릴 것이 있는지 볼 때 쓴다. */
+    fun sharesProgress(other: GameProgress) = stars == other.stars && bestScores == other.bestScores &&
+        restoredParts == other.restoredParts && boosters == other.boosters && boosterStamp == other.boosterStamp
+
+    /**
+     * 합칠 때 `candidate`의 부스터를 이 진행의 것 대신 남기는지. 부스터를 더 나중에 바꾼 쪽(`boosterStamp`), 같으면 레벨을 더
+     * 많이 깬 쪽, 같으면 부스터가 더 많은 쪽, 그래도 같으면 정해진 순서로 고른다. 어느 쪽에서 합쳐도 같은 쪽을 고르므로
+     * 두 기기가 서로 다시 올리기를 되풀이하지 않는다.
+     */
+    private fun keepsBoosters(candidate: GameProgress): Boolean {
+        if (candidate.boosterStamp != boosterStamp) return candidate.boosterStamp > boosterStamp
+        if (candidate.stars.size != stars.size) return candidate.stars.size > stars.size
+        val candidateTotal = candidate.boosters.values.sum()
+        val currentTotal = boosters.values.sum()
+        if (candidateTotal != currentTotal) return candidateTotal > currentTotal
+        fun order(map: Map<String, Int>) = map.entries.sortedBy { it.key }.joinToString(",") { "${it.key}=${it.value}" }
+        return order(candidate.boosters) > order(boosters)
     }
 
     fun toJson(): String = Json { prettyPrint = true }.encodeToString(
@@ -269,6 +312,7 @@ class GameProgress {
                 restoredParts.entries.sortedBy { it.key }.forEach { (k, v) -> putJsonArray(k) { v.sorted().forEach { add(JsonPrimitive(it)) } } }
             }
             putJsonObject("boosters") { boosters.entries.sortedBy { it.key }.forEach { (k, v) -> put(k, v) } }
+            put("boosterStamp", boosterStamp)
             put("lives", lives.toJson())
             put("daily", daily.toJson())
         },
@@ -291,6 +335,8 @@ class GameProgress {
                 progress.restoredParts[k] = v.jsonArray.map { it.jsonPrimitive.content }.toMutableSet()
             }
             progress.boosters.putAll(ints(o["boosters"]))
+            // 부스터 변경 횟수가 생기기 전에 저장한 파일에는 이 항목이 없다.
+            progress.boosterStamp = o["boosterStamp"]?.jsonPrimitive?.intOrNull ?: 0
             o["lives"]?.jsonObject?.let { progress.lives = Lives.fromJson(it) }
             o["daily"]?.jsonObject?.let { progress.daily = DailyGift.fromJson(it) }
             return progress

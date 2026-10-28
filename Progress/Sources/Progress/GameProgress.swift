@@ -12,6 +12,9 @@ public struct GameProgress: Hashable, Sendable, Codable {
     public private(set) var restoredParts: [String: Set<String>]
     /// 부스터의 이름 → 가진 개수. 이름은 `GameCore.Booster`의 원시 값이다.
     public private(set) var boosters: [String: Int]
+    /// 부스터가 바뀐 횟수(받거나 쓸 때마다 하나씩, 합칠 때는 큰 쪽). 두 기기의 부스터를 합칠 수 없어 한쪽을 고를 때
+    /// 더 나중에 바꾼 쪽을 남긴다. 그래야 쓴 아이템이 iCloud의 예전 개수로 되살아나지 않는다.
+    public private(set) var boosterStamp: Int
     /// 생명력(6장).
     public var lives: Lives
     /// 일일 보상(6장).
@@ -21,6 +24,7 @@ public struct GameProgress: Hashable, Sendable, Codable {
         lives = Lives()
         daily = DailyGift()
         boosters = [:]
+        boosterStamp = 0
         stars = [:]
         bestScores = [:]
         restoredParts = [:]
@@ -34,6 +38,8 @@ public struct GameProgress: Hashable, Sendable, Codable {
         restoredParts = try container.decodeIfPresent([String: Set<String>].self, forKey: .restoredParts) ?? [:]
         // 부스터가 생기기 전에 저장한 파일에는 이 항목이 없다.
         boosters = try container.decodeIfPresent([String: Int].self, forKey: .boosters) ?? [:]
+        // 부스터 변경 횟수가 생기기 전에 저장한 파일에는 이 항목이 없다.
+        boosterStamp = try container.decodeIfPresent(Int.self, forKey: .boosterStamp) ?? 0
         // 생명력이 생기기 전에 저장한 파일에는 이 항목이 없다. 가득 찬 채로 시작한다.
         lives = try container.decodeIfPresent(Lives.self, forKey: .lives) ?? Lives()
         daily = try container.decodeIfPresent(DailyGift.self, forKey: .daily) ?? DailyGift()
@@ -43,7 +49,7 @@ public struct GameProgress: Hashable, Sendable, Codable {
     ///
     /// 별과 점수는 레벨마다 높은 쪽을, 복원한 부위는 양쪽을 합친 것을 남긴다.
     /// 부스터와 아이템은 쓰면 줄어드는 것이라 합칠 수 없으므로, 레벨을 더 많이 깬 쪽의 것을 따른다
-    /// (같으면 부스터가 더 많은 쪽, `keepsBoosters`).
+    /// (더 나중에 바꾼 쪽, `keepsBoosters`).
     /// 생명력과 일일 보상은 기기마다 따로 둔다.
     public func merging(_ other: GameProgress) -> GameProgress {
         var merged = self
@@ -53,13 +59,17 @@ public struct GameProgress: Hashable, Sendable, Codable {
         if Self.keepsBoosters(of: other, over: self) {
             merged.boosters = other.boosters
         }
+        merged.boosterStamp = max(boosterStamp, other.boosterStamp)
         return merged
     }
 
     /// 합칠 때 `candidate`의 부스터를 `current`의 것 대신 남기는지.
-    /// 레벨을 더 많이 깬 쪽, 같으면 부스터가 더 많은 쪽, 그래도 같으면 정해진 순서로 고른다.
-    /// 어느 쪽에서 합쳐도 같은 쪽을 고르므로 두 기기가 서로 다시 올리기를 되풀이하지 않는다.
+    /// 부스터를 더 나중에 바꾼 쪽(`boosterStamp`), 같으면 레벨을 더 많이 깬 쪽, 같으면 부스터가 더 많은 쪽,
+    /// 그래도 같으면 정해진 순서로 고른다. 어느 쪽에서 합쳐도 같은 쪽을 고르므로 두 기기가 서로 다시 올리기를 되풀이하지 않는다.
     static func keepsBoosters(of candidate: GameProgress, over current: GameProgress) -> Bool {
+        if candidate.boosterStamp != current.boosterStamp {
+            return candidate.boosterStamp > current.boosterStamp
+        }
         if candidate.stars.count != current.stars.count {
             return candidate.stars.count > current.stars.count
         }
@@ -75,7 +85,7 @@ public struct GameProgress: Hashable, Sendable, Codable {
     /// 기기마다 따로 두는 것(생명력, 일일 보상)을 빼고 같은지. iCloud에 올릴 것이 있는지 볼 때 쓴다.
     public func sharesProgress(with other: GameProgress) -> Bool {
         stars == other.stars && bestScores == other.bestScores
-            && restoredParts == other.restoredParts && boosters == other.boosters
+            && restoredParts == other.restoredParts && boosters == other.boosters && boosterStamp == other.boosterStamp
     }
 
     /// 가진 부스터의 수.
@@ -84,9 +94,14 @@ public struct GameProgress: Hashable, Sendable, Codable {
     }
 
     /// 부스터를 받는다.
-    public mutating func addBooster(_ name: String, count: Int = 1) {
+    /// 시작 아이템처럼 iCloud의 진행을 받기 전에 주는 것은 `changesStamp`를 끈다.
+    /// 바꾼 것으로 치면 예전 iCloud 기록(변경 횟수 0)보다 앞서서 가진 아이템을 덮어쓴다.
+    public mutating func addBooster(_ name: String, count: Int = 1, changesStamp: Bool = true) {
         guard count > 0 else { return }
         boosters[name, default: 0] += count
+        if changesStamp {
+            boosterStamp += 1
+        }
     }
 
     /// 부스터 하나를 쓴다.
@@ -95,6 +110,7 @@ public struct GameProgress: Hashable, Sendable, Codable {
     public mutating func useBooster(_ name: String) -> Bool {
         guard boosterCount(name) > 0 else { return false }
         boosters[name] = boosterCount(name) - 1
+        boosterStamp += 1
         return true
     }
 

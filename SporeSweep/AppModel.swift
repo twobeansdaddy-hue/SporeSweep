@@ -544,8 +544,9 @@ final class AppModel {
             UserDefaults.standard.set(true, forKey: Self.starterToolsKey)
             return
         }
+        // iCloud의 진행보다 먼저 줄 수 있으므로 바꾼 것으로 치지 않는다(GameProgress.addBooster).
         for tool in Tool.allCases {
-            progress.addBooster(Self.key(tool))
+            progress.addBooster(Self.key(tool), changesStamp: false)
         }
         UserDefaults.standard.set(true, forKey: Self.starterToolsKey)
         save()
