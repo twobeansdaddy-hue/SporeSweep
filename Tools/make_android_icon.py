@@ -12,7 +12,7 @@ icon = Image.open("SporeSweep/Assets.xcassets/AppIcon.appiconset/AppIcon.png").c
 
 N = 432
 layer = icon.resize((N, N), Image.LANCZOS).filter(ImageFilter.GaussianBlur(60))
-inner = round(N * 0.62)
+inner = round(N * 0.76)  # 아이콘 가장자리가 보이는 72dp 밖에 오게 한다
 mask = Image.new("L", (inner, inner), 0)
 margin = round(inner * 0.04)
 ImageDraw.Draw(mask).ellipse((margin, margin, inner - margin, inner - margin), fill=255)

@@ -214,7 +214,9 @@ Edit the previous image. Keep exactly the same composition, camera, framing, bui
 Do not add any creatures, spores, fire, smoke, or text.
 ```
 
-## 7. 앱 아이콘 — `app_icon.png` (완료)
+## 7. 앱 아이콘 — `app_icon.png` (완료, 2026-10-29 다시 그림)
+
+2026-10-29에 귀여운 포자 캐릭터로 다시 그렸다. Codex에 예전 아이콘을 화풍·바탕 참조로 붙이고(모양은 따르지 않게), 후보 세 장(`Art/incoming/icon_v3/`) 가운데 C(분홍, 반짝임·비눗방울)를 골랐다. 프롬프트는 `codex exec -i`가 뒤의 문장을 그림으로 읽으므로 표준 입력으로 넘긴다. 아래는 예전 프롬프트다.
 
 가로 1024 × 세로 1024. 투명 없이 꽉 찬 정사각형이어야 한다(앱스토어 규정).
 
