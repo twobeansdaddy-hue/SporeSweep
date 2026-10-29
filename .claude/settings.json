@@ -20,7 +20,21 @@
       "Bash(git merge:*)",
       "Bash(git rebase:*)",
       "Bash(npx rea-agents:*)",
-      "mcp__rea"
+      "mcp__rea",
+      "Bash(npx @cookyman/skillmaru:*)",
+      "Bash(npx -y @cookyman/skillmaru:*)",
+      "Bash(skillmaru:*)",
+      "Bash(npm install -g @cookyman/skillmaru:*)",
+      "Bash(npx @cookyman/skillmaru@latest:*)",
+      "Bash(npx -y @cookyman/skillmaru@latest:*)",
+      "Bash(npx --yes @cookyman/skillmaru:*)",
+      "Bash(npx --yes @cookyman/skillmaru@latest:*)",
+      "Bash(npm exec --package=@cookyman/skillmaru:*)",
+      "Bash(npm exec @cookyman/skillmaru:*)",
+      "Bash(npm i -g @cookyman/skillmaru:*)",
+      "Bash(pnpm dlx @cookyman/skillmaru:*)",
+      "Bash(bunx @cookyman/skillmaru:*)",
+      "Bash(yarn dlx @cookyman/skillmaru:*)"
     ],
     "deny": [
       "Bash(rm -rf:*)",
