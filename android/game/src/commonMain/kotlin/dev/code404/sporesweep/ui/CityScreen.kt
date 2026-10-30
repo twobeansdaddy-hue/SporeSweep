@@ -49,9 +49,12 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dev.code404.sporesweep.AppModel
+import dev.code404.sporesweep.Platform
+import dev.code404.sporesweep.Tracker
 import dev.code404.sporesweep.Sound
 import dev.code404.sporesweep.board.GameHaptic
 import dev.code404.sporesweep.board.GameSound
@@ -93,14 +96,18 @@ fun CityScreen(model: AppModel, onSelect: (Int) -> Unit, onRestore: () -> Unit, 
                 model.city?.landmark?.let { landmark ->
                     LandmarkHeader(model, landmark)
                     if (model.isFullyRestored) {
-                        Row(
-                            Modifier.background(GameTint.GREEN.lip.copy(alpha = 0.45f), RoundedCornerShape(50))
-                                .border(1.5.dp, GameTint.GREEN.top.copy(alpha = 0.5f), RoundedCornerShape(50))
-                                .padding(horizontal = 18.dp, vertical = 9.dp),
-                            verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp),
-                        ) {
-                            Icon(Icons.Filled.Verified, null, tint = GameTint.GREEN.top, modifier = Modifier.size(18.dp))
-                            GameText(tr("복원 완료!"), 17f, color = GameTint.GREEN.top)
+                        // 다 복원했으면 더 갈 곳이 없으므로 버튼 대신 표시와 자랑하기만 둔다.
+                        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                            Row(
+                                Modifier.background(GameTint.GREEN.lip.copy(alpha = 0.45f), RoundedCornerShape(50))
+                                    .border(1.5.dp, GameTint.GREEN.top.copy(alpha = 0.5f), RoundedCornerShape(50))
+                                    .padding(horizontal = 18.dp, vertical = 9.dp),
+                                verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp),
+                            ) {
+                                Icon(Icons.Filled.Verified, null, tint = GameTint.GREEN.top, modifier = Modifier.size(18.dp))
+                                GameText(tr("복원 완료!"), 17f, color = GameTint.GREEN.top)
+                            }
+                            if (!model.isLabMode) ShareLandmarkButton(model, 15f)
                         }
                     } else {
                         val canRestore = landmark.parts.any { model.blocker(it) == null }
@@ -193,12 +200,32 @@ fun RestorationScreen(model: AppModel, onBack: () -> Unit) {
                 GameText(tr("복원 완료!"), 26f, color = Palette.star)
                 GameText(tr("%@을 되살렸어요. 선물로 시작 부스터를 받았어요!", model.city?.landmark?.name ?: ""), 15f)
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) { for (b in AppModel.completionRewards) BoosterIcon(b, 44f) }
-                ChunkyButton(tr("좋아요!"), size = 18f) {
-                    Sound.play(GameSound.TAP)
-                    model.justCompletedLandmark = false
+                Row(horizontalArrangement = Arrangement.spacedBy(10.dp), verticalAlignment = Alignment.CenterVertically) {
+                    ShareLandmarkButton(model, 18f)
+                    ChunkyButton(tr("좋아요!"), size = 18f) {
+                        Sound.play(GameSound.TAP)
+                        model.justCompletedLandmark = false
+                        // 기분 좋은 순간에 별점을 부탁한다. 띄울지는 운영체제가 다시 정한다.
+                        if (model.shouldRequestReview()) Platform.requestReview()
+                    }
                 }
             }
         }
+    }
+}
+
+/** 다 복원한 랜드마크의 자랑 그림을 공유하는 버튼. 공유할 수 없는 곳(웹판)에서는 보이지 않는다. */
+@Composable
+private fun ShareLandmarkButton(model: AppModel, size: Float) {
+    val share = Platform.share ?: return
+    val measurer = rememberTextMeasurer()
+    ChunkyButton(tr("자랑하기"), tint = GameTint.BLUE, size = size) {
+        Sound.play(GameSound.TAP)
+        val city = model.city ?: return@ChunkyButton
+        val art = LandmarkArt.of(city.id) ?: return@ChunkyButton
+        val name = city.landmark.name
+        share(ShareCard.render(art, name, measurer), tr("포자 대청소에서 %@을 되살렸어요! 같이 지구를 청소해요.", name) + "\n" + Platform.storeURL)
+        Tracker.log(Tracker.Event.LandmarkShare(city.id))
     }
 }
 

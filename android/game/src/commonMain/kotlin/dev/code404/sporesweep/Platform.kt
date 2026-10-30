@@ -98,6 +98,12 @@ object Platform {
     /** 기기의 언어가 한국어인지. */
     var isKorean = true
     var log: (String, String) -> Unit = { tag, message -> println("[$tag] $message") }
+    /** 자랑 그림과 글을 공유 창으로 보낸다. 없으면(웹판) 자랑하기 단추를 숨긴다. */
+    var share: ((image: ImageBitmap, text: String) -> Unit)? = null
+    /** 별점 창을 부탁한다. 실제로 띄울지는 운영체제가 정한다. */
+    var requestReview: () -> Unit = {}
+    /** 받는 곳. 공유하는 글에 붙인다. */
+    var storeURL = "https://code404.app/sporesweep/"
     /** 뒤로 가기를 받는다. 안드로이드는 뒤로 가기 단추, 웹은 Esc 키다. */
     var backHandler: @Composable (enabled: Boolean, onBack: () -> Unit) -> Unit = { _, _ -> }
 }

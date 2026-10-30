@@ -20,6 +20,7 @@ object Tracker {
         class DailyGift(day: Int) : Event("daily_gift", mapOf("day" to day))
         class LandmarkRestore(city: String, part: String, completed: Boolean) : Event("landmark_restore", mapOf("city" to city, "part" to part, "completed" to if (completed) 1 else 0))
         class CityClear(city: String) : Event("city_clear", mapOf("city" to city))
+        class LandmarkShare(city: String) : Event("landmark_share", mapOf("city" to city))
         class Ending(first: Boolean) : Event("ending", mapOf("first" to if (first) 1 else 0))
     }
 

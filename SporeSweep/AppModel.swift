@@ -413,6 +413,22 @@ final class AppModel {
         }
     }
 
+    /// 다 복원한 랜드마크 수.
+    var completedLandmarkCount: Int {
+        cities.count { $0.landmark.isFullyRestored(progress.restoredParts(in: $0.id)) }
+    }
+
+    /// 복원 완료 창을 닫을 때 부른다. 별점 창을 띄울 때면 `true`를 돌려주고, 물었다고 기기에 적어 둔다(8장).
+    func shouldRequestReview() -> Bool {
+        let key = "reviewAskedAt"
+        let completed = completedLandmarkCount
+        guard !isLabMode, ReviewPrompt.shouldAsk(completed: completed, askedAt: UserDefaults.standard.integer(forKey: key)) else {
+            return false
+        }
+        UserDefaults.standard.set(completed, forKey: key)
+        return true
+    }
+
     // MARK: - 생명력
 
     /// 생명력을 쓰는 판인지. 시험판은 쓰지 않는다.
