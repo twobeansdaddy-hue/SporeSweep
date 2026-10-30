@@ -63,6 +63,10 @@ export function loadEnv(root) {
   loadEnvFile(globalEnvPath());
 }
 
+// 키 파일(.env·공용 키 파일)에 값이 적힌 변수 이름. 셸에 같은 이름이 이미 있어서 대입하지 않았어도 기록한다
+// (env-run으로 실행된 키트 스크립트처럼 키가 셸에 들어와 있는 경우에도 외부 에이전트에 넘기지 않으려고).
+const loadedKeys = new Set();
+
 export function loadEnvFile(file) {
   if (!existsSync(file)) return;
   for (const line of readFileSync(file, 'utf8').split(/\r?\n/)) {
@@ -71,14 +75,17 @@ export function loadEnvFile(file) {
     let v = m[2].trim();
     if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) v = v.slice(1, -1);
     // 빈 값(KEY=)은 건너뛴다. .env.example을 그대로 복사한 프로젝트가 전역 키를 가리지 않게.
-    if (v !== '' && process.env[m[1]] === undefined) process.env[m[1]] = v;
+    if (v === '') continue;
+    loadedKeys.add(m[1]);
+    if (process.env[m[1]] === undefined) process.env[m[1]] = v;
   }
 }
 
-// 키트가 읽는 키. 외부 에이전트(codex·agy) 자식 프로세스에는 넘기지 않는다.
-const KIT_SECRET_RE = /^(CLOUDFLARE_|TYPESAFE_|OPENROUTER_|DECIDE_LOCAL_)/;
+// 외부 에이전트(codex·agy) 자식 프로세스에 넘기지 않는 키: 키 파일에서 읽은 모든 변수와,
+// 셸에 있더라도 키트·서비스 키로 알려진 이름(ElevenLabs 등). 프로젝트 스크립트에는 env-run.mjs로 넘긴다.
+const KIT_SECRET_RE = /^(CLOUDFLARE_|TYPESAFE_|OPENROUTER_|DECIDE_LOCAL_|ELEVENLABS_)/;
 export function childEnv() {
-  return Object.fromEntries(Object.entries(process.env).filter(([k]) => !KIT_SECRET_RE.test(k)));
+  return Object.fromEntries(Object.entries(process.env).filter(([k]) => !KIT_SECRET_RE.test(k) && !loadedKeys.has(k)));
 }
 
 export function loadConfig(root) {

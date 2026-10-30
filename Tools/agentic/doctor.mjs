@@ -5,7 +5,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { homedir } from 'node:os';
 import { fileURLToPath } from 'node:url';
-import { findRoot, loadEnv, loadConfig, globalEnvPath, readRegistry, compareVersions, stageSettings, codexModelArgs, agyModelArgs, hasCommand, run } from './lib.mjs';
+import { findRoot, loadEnv, loadConfig, childEnv, globalEnvPath, readRegistry, compareVersions, stageSettings, codexModelArgs, agyModelArgs, hasCommand, run } from './lib.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = findRoot(HERE);
@@ -29,7 +29,7 @@ for (const [cmd, hint] of [
 ]) add(hasCommand(cmd) ? 'OK' : (cmd === 'git' || cmd === 'claude' ? 'FAIL' : 'WARN'), `${cmd} 설치`, hasCommand(cmd) ? '' : hint);
 
 if (hasCommand('codex')) {
-  const r = await run('codex', ['login', 'status'], { timeoutMs: 20000 });
+  const r = await run('codex', ['login', 'status'], { timeoutMs: 20000, env: childEnv() });
   const lines = `${r.stdout}${r.stderr}`.trim().split('\n');
   const out = lines.find((l) => /logged in/i.test(l)) ?? lines.pop();
   add(r.code === 0 ? 'OK' : 'WARN', 'codex 로그인', r.code === 0 ? out : '`codex login` 실행 (ChatGPT 계정)');
@@ -51,6 +51,9 @@ if (hasCommand('agy')) {
 const cf = process.env.CLOUDFLARE_ACCOUNT_ID && process.env.CLOUDFLARE_API_TOKEN;
 add(cf ? 'OK' : 'WARN', 'Cloudflare 키', cf ? '' : `${globalEnvPath()} 에 채우기 (모든 프로젝트 공용) — 없으면 판정 단계를 건너뜀`);
 for (const k of ['TYPESAFE_API_KEY', 'OPENROUTER_API_KEY', 'DECIDE_LOCAL_URL']) if (process.env[k]) add('OK', `${k} 설정됨`);
+// 프로젝트 스크립트용 서비스 키 (env-run으로 넘겨줌). 없어도 키트 동작에는 문제없으므로 있을 때만 표시한다.
+const serviceKeys = ['ELEVENLABS_API_KEY', 'CLOUDFLARE_PAGES_API_TOKEN'].filter((k) => process.env[k]);
+if (serviceKeys.length) add('OK', `서비스 키 설정됨: ${serviceKeys.join(', ')}`, 'node tools/agentic/env-run.mjs -- <명령> 으로 프로젝트 스크립트에 넘김');
 
 if (ping) {
   const r = await run(process.execPath, [join(HERE, 'decide.mjs'), 'review-triage', '--state', 'Variable name `x` could be more descriptive.'], { cwd: ROOT, timeoutMs: 30000 });

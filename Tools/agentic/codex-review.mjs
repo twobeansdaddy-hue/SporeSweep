@@ -5,7 +5,7 @@
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { findRoot, loadEnv, loadConfig, stageSettings, codexModelArgs, hasCommand, run, exitFailure, EXIT_FALLBACK } from './lib.mjs';
+import { findRoot, loadEnv, loadConfig, childEnv, stageSettings, codexModelArgs, hasCommand, run, exitFailure, EXIT_FALLBACK } from './lib.mjs';
 
 const ROOT = findRoot(dirname(fileURLToPath(import.meta.url)));
 loadEnv(ROOT);
@@ -57,7 +57,7 @@ const res = await run('codex', [
   '--cd', ROOT,
   '--output-last-message', lastMsg,
   prompt,
-], { cwd: ROOT, timeoutMs: CFG.timeoutMs ?? 900000 });
+], { cwd: ROOT, timeoutMs: CFG.timeoutMs ?? 900000, env: childEnv() }); // 키 파일에서 읽은 키는 넘기지 않는다
 
 const combined = `${res.stdout}\n${res.stderr}`;
 if (res.timedOut) fallback('시간 초과');
