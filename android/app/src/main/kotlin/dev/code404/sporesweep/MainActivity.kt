@@ -25,6 +25,9 @@ class MainActivity : ComponentActivity() {
         Platform.ads = RewardedAds
         PlayGamesCloud.start(this)
         Platform.cloud = PlayGamesCloud
+        Platform.share = { image, text -> Sharing.share(this, image, text) }
+        Platform.requestReview = { Sharing.requestReview(this) }
+        Platform.storeURL = Sharing.STORE_URL
         model = AppModel(args)
         android.util.Log.i("시작", "AppModel ${(System.nanoTime() - started) / 1_000_000}ms")
         setContent {

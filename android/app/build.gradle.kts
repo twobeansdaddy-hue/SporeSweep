@@ -42,8 +42,8 @@ android {
         applicationId = "app.code404.sporesweep"
         minSdk = 26
         targetSdk = 36
-        versionCode = 5
-        versionName = "0.2"
+        versionCode = 6
+        versionName = "0.3"
         manifestPlaceholders["admobAppId"] = config.getProperty("ADMOB_APP_ID", testAdmobAppId)
         buildConfigField("String", "REWARDED_AD_UNIT", "\"${config.getProperty("REWARDED_AD_UNIT_ID", testRewardedUnit)}\"")
         buildConfigField("String", "TEST_REWARDED_AD_UNIT", "\"$testRewardedUnit\"")
@@ -122,6 +122,7 @@ dependencies {
     implementation(project(":game"))
     implementation("com.google.android.gms:play-services-ads:25.5.0")
     implementation("com.google.android.gms:play-services-games-v2:22.1.0")
+    implementation("com.google.android.play:review:2.0.2")
     implementation(platform("com.google.firebase:firebase-bom:35.0.0"))
     implementation("com.google.firebase:firebase-analytics")
 }

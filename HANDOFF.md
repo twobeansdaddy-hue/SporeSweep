@@ -8,7 +8,7 @@
 - **지금 상태와 다음 할 일**을 지금에 맞게 고친다.
 - 새로 생긴 계정, 비밀값의 위치, 주의할 점이 있으면 그 절에 적는다.
 
-마지막으로 고친 날: 2026-10-27
+마지막으로 고친 날: 2026-10-30
 
 ## 1. 프로젝트 한눈에
 
@@ -123,6 +123,8 @@
 8. **AdMob 지급 계좌 확인 대기.** Google이 2026-10-25쯤 ₩250 미만 시험 입금을 보냈다(10-27까지 계좌에 안 보임). 10-29~31에 은행 입금 내역에서 금액을 찾아 AdMob → 결제 → 결제 수단에서 고른다(계정 주인이 한다, 기회가 적다).
 7. **홍보 계정.** 유튜브 `@code404app`은 브랜드 계정으로 옮겼다(끝). 인스타 `code404.app`은 게시물 1개·팔로워 0이라 새로 만들지 않고, 계정 센터 연락처에 hello@code404.app을 더했다(끝, 개인 Gmail은 복구용으로 남김, 페이스북은 연결하지 않음). R2는 며칠 뒤 두 곳에 올린다.
 
+**1.0.1 새로운 기능 문구(2026-10-30).** 한국어: "· 랜드마크를 다 되살리면 '자랑하기'로 오염된 모습과 되살린 모습을 한 장에 담아 친구에게 보낼 수 있어요. · 진행이 iCloud에 저장돼요. 앱을 다시 설치하거나 다른 기기에서도 이어서 할 수 있어요. · 새 아이콘으로 바뀌었어요. · 앱 용량을 줄였어요." English: "· Restored a landmark? Tap Share to send a before-and-after picture to friends. · Your progress is now saved to iCloud, so you can pick up where you left off after reinstalling or on another device. · A brand-new app icon. · Smaller download size." 안드로이드(0.3) 테스터 노트는 iCloud 대신 "Google Play 게임즈에 진행 저장"이다.
+
 ## 8. 알아 둘 점
 
 - **Xcode 화면에서 올리면 프로젝트 파일에 팀 ID(`DEVELOPMENT_TEAM`)를 적어 넣는다.** 팀 ID는 `Config/Local.xcconfig`에서만 넣는다. 커밋 전에 `git diff SporeSweep.xcodeproj`로 보고 그 줄을 지운다(2026-10-24에 한 번 섞여 올라갔다가 지웠다. 예전 커밋에는 남아 있다). "암호화 안 씀"은 이제 빌드 설정 `INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO`에 있다.
@@ -138,6 +140,9 @@
 
 새것이 위다.
 
+- **2026-10-30** 1.0.1 준비(브랜치 `agentic/share-review`, 커밋 전, 계정 주인 지시): **자랑하기**(랜드마크를 다 복원하면 폐허·복원 모습을 위아래로 놓은 1080×1920 그림과 받는 곳 주소를 공유 창으로, iOS `ShareCard.swift`, 안드로이드 `ui/ShareCard.kt`·`app/Sharing.kt`+FileProvider, 웹판은 숨김, 사건 `landmark_share`)와 **별점 부탁**(복원 완료 창의 "좋아요!" 뒤, 다 복원한 랜드마크 1·3·6개째에 한 번씩, `ReviewPrompt`, iOS `requestReview`, 안드로이드 Play 인앱 리뷰 `com.google.android.play:review:2.0.2`). "처음부터 다시 하기" 안내에 iCloud/Play 게임즈 저장도 지워진다는 문구를 더했다. 버전 iOS 1.0.1(빌드 3), 안드로이드 versionCode 6(0.3). DESIGN.md 8장 "자랑하기와 별점 부탁", 10장 사건 표. Progress 테스트 48개·core jvm 테스트 통과, iOS·안드로이드·웹 빌드 성공. 시뮬레이터(`-shareCard seoul` 디버그 인자로 그림을 Documents에 씀)와 에뮬레이터(공유 창 뜸, 영어 긴 제목은 글자를 줄임)에서 그림 확인. 별점 창은 스토어에서 받은 빌드에서만 떠서 확인하지 못했다. Codex 리뷰 1차 should_fix 2(공유 파일 쓰기 실패 처리, 공유마다 새 파일) 고침, 2차 NO_ISSUES. 계정 주인 지시로 커밋해 main에 머지했다(푸시 전). "이번 버전의 새로운 기능" 문구는 아래 7절 메모. 남은 것: 푸시, iOS 아카이브와 업로드(Xcode 화면, 계정 주인), 안드로이드 AAB.
+- **2026-10-30** 계정 주인 지시로 새 앱 아이콘에 AI 생성 라벨을 달고 아이콘 변경 1건을 Google 검토로 전송했다(게시 개요 "검토 중인 변경사항"). 마케팅 방안을 정리해 계정 주인에게 제안했다(아직 PLAN.md에 적지 않음).
+- **2026-10-30** Play 콘솔: 기본 스토어 등록정보의 앱 아이콘을 새 `icon_512.png`로 바꿔 저장했다(게시 개요 "검토를 위해 변경사항 1개 제출" 대기, 아직 전송 전). 새 아이콘도 AI 생성이라 "AI 생성 애셋 라벨 지정"에서 새 아이콘에 라벨을 다는 일은 계정 주인이 한다. Play 게임즈 서비스 속성의 게임 아이콘도 같은 그림으로 바꾸고 게시했다. App Store 아이콘은 앱 바이너리에서 오므로 1.0.1을 올려야 바뀐다.
 - **2026-10-29** 아이콘을 후보 C로 바꿨다(계정 주인 결정, "너무 귀엽게 그렸나 싶기는 하다"는 말도 있었다): iOS `AppIcon.png`, `Art/incoming/app_icon.png`(예전 것은 `app_icon_v2.png`), 안드로이드 `ic_launcher.png`·적응형 층(`Tools/make_android_icon.py`), 웹 `icon.png`, Play 아이콘 `Marketing/store/play/icon_512.png`(`Tools/make_play_graphics.py`). DESIGN.md 10장과 Art/PROMPTS.md 7번을 고쳤다. 안드로이드 디버그·iOS 시뮬레이터 빌드 성공. 남은 것: App Store와 Play 스토어 등록정보·Play 게임즈 아이콘 바꾸기, iOS 1.0.1과 안드로이드 다음 versionCode에 담기. 같은 날 캣타워 통신판매업 신고의 "구매안전서비스 비적용 대상 확인서"를 채운 그림(제3호 체크, 소명 4줄)을 계정 주인 `~/Downloads`에 만들었다.
 - **2026-10-29** 연결이 풀려 Codex로 귀여운 포자 아이콘 후보 3장을 그렸다(`Art/incoming/icon_v3/icon_a.png` 분홍, `icon_b.png` 민트 윙크, `icon_c.png` 분홍+반짝임·비눗방울, 비교 `compare.png`). 계정 주인이 고르면 iOS·안드로이드 아이콘과 DESIGN.md 10장, 스토어·Play 게임즈 아이콘을 바꾼다.
 - **2026-10-28** 앱 아이콘이 혐오감을 줄 수 있다는 의견(번들거리는 분홍 덩어리 가운데 검붉은 핵이 눈알·고름처럼 보이고, 흘러내리는 방울이 살덩이 같다). 계정 주인 결정: **귀여운 포자 캐릭터**(동그랗고 말랑한 몸, 큰 눈과 웃는 얼굴, 흘러내림·검붉은 핵 없음)로 바꾼다. DESIGN.md 10장의 아이콘 설명은 새 그림을 고른 뒤 고친다. Codex 그림 생성(`Art/incoming/icon_v3/`에 후보 3장)은 이 맥에서 chatgpt.com·openai.com 연결이 TLS 단계에서 끊겨(api.openai.com은 됨) 실패했다. `codex exec -i`는 뒤의 문장까지 그림으로 읽으므로 프롬프트는 표준 입력으로 넘긴다.

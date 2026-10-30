@@ -144,7 +144,7 @@ fun LandmarkView(restored: Set<String>, art: LandmarkArt, modifier: Modifier = M
     }
 }
 
-private fun DrawScope.drawLandmark(art: LandmarkArt, restored: Set<String>, images: Map<String, ImageBitmap?>) {
+internal fun DrawScope.drawLandmark(art: LandmarkArt, restored: Set<String>, images: Map<String, ImageBitmap?>) {
     fun has(id: String) = id in restored
     val width = size.width
     val height = size.height

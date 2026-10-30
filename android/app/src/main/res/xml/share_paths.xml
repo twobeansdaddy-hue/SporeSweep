@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 자랑 그림을 공유 창에 넘길 때 쓰는 캐시 폴더(Sharing.kt). -->
+<paths>
+    <cache-path name="share" path="share/" />
+</paths>

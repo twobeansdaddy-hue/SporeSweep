@@ -33,6 +33,8 @@ enum Tracker {
         case landmarkRestore(city: String, part: String, completed: Bool)
         /// 도시의 레벨을 처음으로 모두 클리어했다.
         case cityClear(city: String)
+        /// 다 복원한 랜드마크의 자랑 그림을 공유 창으로 보냈다.
+        case landmarkShare(city: String)
         /// 엔딩 화면이 떴다. 마지막 레벨을 깨고 처음 본 것이면 `first`가 참이고, 설정에서 다시 본 것이면 거짓이다.
         case ending(first: Bool)
 
@@ -50,6 +52,7 @@ enum Tracker {
             case .dailyGift: "daily_gift"
             case .landmarkRestore: "landmark_restore"
             case .cityClear: "city_clear"
+            case .landmarkShare: "landmark_share"
             case .ending: "ending"
             }
         }
@@ -75,7 +78,7 @@ enum Tracker {
                 ["day": day]
             case let .landmarkRestore(city, part, completed):
                 ["city": city, "part": part, "completed": completed ? 1 : 0]
-            case let .cityClear(city):
+            case let .cityClear(city), let .landmarkShare(city):
                 ["city": city]
             case let .ending(first):
                 ["first": first ? 1 : 0]

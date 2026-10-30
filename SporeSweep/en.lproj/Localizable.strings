@@ -361,3 +361,12 @@
 "환상적이에요!" = "Fantastic!";
 "횃불" = "Torch";
 "효과음" = "Sound effects";
+"자랑하기" = "Share";
+"%@ 복원 완료!" = "%@ restored!";
+"포자가 뒤덮은 모습" = "Covered in spores";
+"내가 되살린 모습" = "Brought back by me";
+"블록을 맞춰 세계의 랜드마크를 되살려요" = "Match blocks to bring world landmarks back";
+"포자 대청소에서 %@을 되살렸어요! 같이 지구를 청소해요." = "I brought %@ back in SporeSweep! Come help clean up the planet.";
+"포자 대청소" = "SporeSweep";
+"레벨 기록과 복원한 랜드마크가 모두 지워져요. iCloud에 저장한 것도 함께 지워져요." = "Erases all level records and restored landmarks, including your iCloud save.";
+"레벨 기록과 복원한 랜드마크가 모두 지워져요. Google Play 게임즈에 저장한 것도 함께 지워져요." = "Erases all level records and restored landmarks, including your Google Play Games save.";

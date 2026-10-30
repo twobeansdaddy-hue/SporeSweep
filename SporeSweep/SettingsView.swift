@@ -121,7 +121,7 @@ struct SettingsView: View {
                             confirmsReset = true
                         }
                         .buttonStyle(ChunkyButtonStyle(tint: .slate, fills: true))
-                        note("레벨 기록과 복원한 랜드마크가 모두 지워져요.")
+                        note(model.isCloudEnabled ? "레벨 기록과 복원한 랜드마크가 모두 지워져요. iCloud에 저장한 것도 함께 지워져요." : "레벨 기록과 복원한 랜드마크가 모두 지워져요.")
                     }
                 }
                 .padding(.horizontal, 20)

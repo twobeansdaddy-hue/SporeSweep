@@ -151,7 +151,17 @@ struct RootView: View {
         }
         .tint(.white)
         // 도시 화면과 플레이 화면의 배경 음악이 다르다.
-        .onAppear { playMusic() }
+        .onAppear {
+            playMusic()
+            #if DEBUG
+            // 실행 인자 `-shareCard 도시ID`를 주면 그 도시의 자랑 그림을 앱의 Documents/share_card.png로 쓴다.
+            if let cityID = UserDefaults.standard.string(forKey: "shareCard"), let art = LandmarkArt.art(for: cityID),
+               let data = ShareCard.render(art: art, landmarkName: model.cities.first { $0.id == cityID }?.landmark.name ?? cityID)?.pngData(),
+               let folder = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                try? data.write(to: folder.appendingPathComponent("share_card.png"))
+            }
+            #endif
+        }
         .onChange(of: path) { playMusic() }
     }
 

@@ -150,7 +150,7 @@ fun SettingsScreen(model: AppModel, onClose: () -> Unit) {
                 }
                 Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                     ChunkyButton(tr("처음부터 다시 하기"), tint = GameTint.SLATE, fills = true) { Sound.play(GameSound.TAP); confirmsReset = true }
-                    Note(tr("레벨 기록과 복원한 랜드마크가 모두 지워져요."))
+                    Note(if (model.isCloudAvailable && model.isCloudEnabled) tr("레벨 기록과 복원한 랜드마크가 모두 지워져요. Google Play 게임즈에 저장한 것도 함께 지워져요.") else tr("레벨 기록과 복원한 랜드마크가 모두 지워져요."))
                 }
             }
         }

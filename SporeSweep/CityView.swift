@@ -2,6 +2,7 @@ import GameCore
 import GameScene
 import LevelData
 import Progress
+import StoreKit
 import SwiftUI
 
 /// 도시 화면. 위에 랜드마크를 고정해 두고, 그 아래에 복원 화면으로 가는 버튼과 레벨 목록을 둔다(8장).
@@ -46,14 +47,19 @@ struct CityView: View {
                 if let landmark = model.city?.landmark {
                     LandmarkHeader(landmark: landmark)
                     if model.isFullyRestored {
-                        // 다 복원했으면 더 갈 곳이 없으므로 버튼 대신 표시만 둔다.
-                        Label("복원 완료!", systemImage: "checkmark.seal.fill")
-                            .font(.game(17))
-                            .foregroundStyle(GameTint.green.top)
-                            .padding(.horizontal, 18)
-                            .padding(.vertical, 9)
-                            .background(GameTint.green.lip.opacity(0.45), in: Capsule())
-                            .overlay(Capsule().stroke(GameTint.green.top.opacity(0.5), lineWidth: 1.5))
+                        // 다 복원했으면 더 갈 곳이 없으므로 버튼 대신 표시와 자랑하기만 둔다.
+                        HStack(spacing: 10) {
+                            Label("복원 완료!", systemImage: "checkmark.seal.fill")
+                                .font(.game(17))
+                                .foregroundStyle(GameTint.green.top)
+                                .padding(.horizontal, 18)
+                                .padding(.vertical, 9)
+                                .background(GameTint.green.lip.opacity(0.45), in: Capsule())
+                                .overlay(Capsule().stroke(GameTint.green.top.opacity(0.5), lineWidth: 1.5))
+                            if !model.isLabMode {
+                                ShareLandmarkButton(size: 15)
+                            }
+                        }
                     } else {
                         restoreButton(landmark)
                     }
@@ -184,6 +190,7 @@ struct CityView: View {
 struct RestorationView: View {
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.requestReview) private var requestReview
 
     var body: some View {
         VStack(spacing: 14) {
@@ -230,11 +237,18 @@ struct RestorationView: View {
                                 BoosterIcon(booster: booster, size: 44)
                             }
                         }
-                        Button("좋아요!") {
-                            GameFeedback.shared.play(.tap)
-                            model.justCompletedLandmark = false
+                        HStack(spacing: 10) {
+                            ShareLandmarkButton(size: 18)
+                            Button("좋아요!") {
+                                GameFeedback.shared.play(.tap)
+                                model.justCompletedLandmark = false
+                                // 기분 좋은 순간에 별점을 부탁한다. 띄울지는 운영체제가 다시 정한다.
+                                if model.shouldRequestReview() {
+                                    requestReview()
+                                }
+                            }
+                            .buttonStyle(ChunkyButtonStyle(tint: .pink, size: 18))
                         }
-                        .buttonStyle(ChunkyButtonStyle(tint: .pink, size: 18))
                         .padding(.top, 4)
                     }
                     .foregroundStyle(.white)
@@ -246,6 +260,23 @@ struct RestorationView: View {
             }
         }
         .animation(.easeOut(duration: 0.2), value: model.justCompletedLandmark)
+    }
+}
+
+/// 다 복원한 랜드마크의 자랑 그림을 공유하는 버튼(8장).
+private struct ShareLandmarkButton: View {
+    @Environment(AppModel.self) private var model
+    var size: CGFloat
+
+    var body: some View {
+        Button {
+            GameFeedback.shared.play(.tap)
+            guard let city = model.city else { return }
+            LandmarkShare.share(cityID: city.id, landmarkName: city.landmark.name)
+        } label: {
+            Label("자랑하기", systemImage: "square.and.arrow.up")
+        }
+        .buttonStyle(ChunkyButtonStyle(tint: .blue, size: size))
     }
 }
 

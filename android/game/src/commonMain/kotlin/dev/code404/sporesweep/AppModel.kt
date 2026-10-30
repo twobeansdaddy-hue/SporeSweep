@@ -14,6 +14,7 @@ import dev.code404.sporesweep.core.GameStatus
 import dev.code404.sporesweep.core.Landmark
 import dev.code404.sporesweep.core.Level
 import dev.code404.sporesweep.core.LevelCatalog
+import dev.code404.sporesweep.core.ReviewPrompt
 import dev.code404.sporesweep.core.Lives
 import dev.code404.sporesweep.core.Region
 import dev.code404.sporesweep.core.RegionCatalog
@@ -117,6 +118,7 @@ class AppModel(val args: DebugArgs) {
         private const val STARTER_TOOLS = "grantedStarterTools"
         private const val CLOUD_ENABLED = "cloudEnabled"
         private const val CLOUD_CLEAR_PENDING = "cloudClearPending"
+        private const val REVIEW_ASKED_AT = "reviewAskedAt"
         private const val AD_TOOL_DAY = "adToolDay"
         private const val AD_TOOL_COUNT = "adToolCount"
         const val SEEN_INTRO = "seenIntro"
@@ -334,6 +336,17 @@ class AppModel(val args: DebugArgs) {
             Tracker.log(Tracker.Event.LandmarkRestore(c.id, part.id, isFullyRestored))
             save()
         }
+    }
+
+    /** 다 복원한 랜드마크 수. */
+    val completedLandmarkCount get() = cities.count { it.landmark.isFullyRestored(progress.restoredParts(it.id)) }
+
+    /** 복원 완료 창을 닫을 때 부른다. 별점 창을 띄울 때면 `true`를 돌려주고, 물었다고 기기에 적어 둔다. */
+    fun shouldRequestReview(): Boolean {
+        val completed = completedLandmarkCount
+        if (isLabMode || !ReviewPrompt.shouldAsk(completed, Platform.prefs.getInt(REVIEW_ASKED_AT, 0))) return false
+        Platform.prefs.edit().putInt(REVIEW_ASKED_AT, completed).apply()
+        return true
     }
 
     // MARK: 생명력
