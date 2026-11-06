@@ -254,7 +254,71 @@ def teaser():
                 audio=[dict(src=GAME_MUSIC, start=2, at=0, dur=19, volume=0.6)], layers=layers)
 
 
-for name, edit in [("R1", restore()), ("R2", teaser())]:
+SHARE_CARDS = OUT + "src/share_cards/"  # 시뮬레이터에서 -skipTitle 1 -shareCard <도시>로 쓴 실제 자랑 그림(1080×1920)
+
+
+def rounded(image, radius):
+    mask = Image.new("L", image.size, 0)
+    ImageDraw.Draw(mask).rounded_rectangle((0, 0, *image.size), radius=radius, fill=255)
+    return mask
+
+
+def share_frame(name, city, title, sub=None):
+    """앱이 만든 자랑 그림을 화면 가운데 휴대전화 크기로 놓고 위에 자막을 단다."""
+    back = gradient((24, 20, 60), (60, 30, 110)).convert("RGBA")
+    card = Image.open(f"{SHARE_CARDS}{city}.png").convert("RGB").resize((820, 1458), Image.LANCZOS)
+    shadow = Image.new("RGBA", back.size, (0, 0, 0, 0))
+    ImageDraw.Draw(shadow).rounded_rectangle((130, 420, 950, 1878), radius=48, fill=(10, 0, 30, 170))
+    back.alpha_composite(shadow.filter(ImageFilter.GaussianBlur(30)))
+    back.paste(card, (130, 400), rounded(card, 48))
+    draw = ImageDraw.Draw(back)
+    draw.text((W // 2 + 3, 175), title, font=font(92), fill=(0, 0, 0), anchor="mm")
+    draw.text((W // 2, 170), title, font=font(92), fill="white", anchor="mm")
+    if sub:
+        draw.text((W // 2, 300), sub, font=font(58), fill=YELLOW, anchor="mm")
+    path = A + name + ".jpg"
+    back.convert("RGB").save(path, quality=92)
+    return {"image": path, "frame": [0, 0, W, H]}
+
+
+def share_fan():
+    """자랑 그림 세 장을 부채꼴로 펼친다(권리 문제가 없는 서울·로마·파리만)."""
+    back = gradient((40, 20, 90), (124, 58, 237)).convert("RGBA")
+    for city, angle, x in [("rome", 9, 90), ("paris", -9, 470), ("seoul", 0, 280)]:
+        card = Image.open(f"{SHARE_CARDS}{city}.png").convert("RGBA").resize((520, 924), Image.LANCZOS)
+        card.putalpha(rounded(card, 36))
+        card = card.rotate(angle, resample=Image.BICUBIC, expand=True)
+        back.alpha_composite(card, (x, 560 - (card.height - 924) // 2))
+    draw = ImageDraw.Draw(back)
+    draw.text((W // 2, 260), "랜드마크 24곳", font=font(104), fill="white", anchor="mm")
+    draw.text((W // 2, 390), "하나씩 되살리고 자랑해요", font=font(64), fill=YELLOW, anchor="mm")
+    path = A + "share_fan.jpg"
+    back.convert("RGB").save(path, quality=92)
+    return {"image": path, "frame": [0, 0, W, H]}
+
+
+def brag():
+    """R3 자랑하기 편(1.0.1 새 기능), 16초. 자랑 그림은 앱이 실제로 만든 것을 쓴다."""
+    seoul = [landmark_card("seoul", "ruined", "서울, 숭례문"), landmark_card("seoul", "restored", "서울, 숭례문")]
+    layers = [
+        layer(seoul[0], 0, 2.9, scaleFrom=1.0, scaleTo=1.05),
+        layer(seoul[1], 1.1, 1.8, wipe=0.55),
+        layer(caption("b3_1", "랜드마크를\n다 되살리면?", 112), 0.2, 2.6, y=170, pop=True, fadeOut=0.15),
+        layer(share_frame("b3_seoul", "seoul", "'자랑하기' 한 번이면", "폐허와 복원을 한 장에!"), 2.9, 3.9, fadeIn=0.2, scaleFrom=0.97, scaleTo=1.0),
+        layer(share_frame("b3_rome", "rome", "친구에게 보내 보세요"), 6.8, 1.9, fadeIn=0.15),
+        layer(share_frame("b3_paris", "paris", "친구에게 보내 보세요"), 8.7, 1.9, fadeIn=0.15),
+        layer(share_fan(), 10.6, 2.6, fadeIn=0.2, scaleFrom=0.98, scaleTo=1.03),
+        layer(end_card("end_r3", "다 되살리고 자랑해요"), 13.2, 2.8, fadeIn=0.3),
+    ]
+    return dict(output=OUT + "R3_brag.mp4", duration=16,
+                segments=[seg(FX, 9, 0, 16)],  # 그림에 가려진다(영상 트랙 자리)
+                audio=[dict(src=INTRO_MUSIC, start=0, at=0, dur=16, volume=0.9)], layers=layers)
+
+
+# 이름을 주면 그것만 다시 만든다(이미 올린 R1·R2를 덮지 않게): python3 Tools/make_reels.py /tmp/promo_render R3
+EDITS = {"R1": restore, "R2": teaser, "R3": brag}
+for name in sys.argv[2:] or list(EDITS):
+    edit = EDITS[name]()
     path = f"{A}edit_{name}.json"
     json.dump(edit, open(path, "w"), ensure_ascii=False, indent=1)
     result = subprocess.run([sys.argv[1], path], capture_output=True, text=True)
