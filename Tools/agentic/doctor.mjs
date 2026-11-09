@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 // 환경 점검: 필요한 CLI, 로그인 상태, 키, 판정 모델 연결, Antigravity 금지 목록을 확인한다.
 // 사용: node tools/agentic/doctor.mjs [--ping]   (--ping: 판정 모델에 실제 요청 1건)
-import { existsSync, readFileSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, realpathSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
 import { join, dirname } from 'node:path';
 import { homedir } from 'node:os';
 import { fileURLToPath } from 'node:url';
+import { plan as ciPlan } from './ci.mjs';
 import { findRoot, loadEnv, loadConfig, childEnv, globalEnvPath, readRegistry, compareVersions, stageSettings, codexModelArgs, agyModelArgs, hasCommand, run } from './lib.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -104,11 +106,23 @@ const pending = [], kept = [];
     const rel = join(dir, e.name).slice(ROOT.length + 1);
     if (e.name.endsWith('.kit-new')) pending.push(rel);
     else if (e.name.endsWith('.kit-old') || e.name.endsWith('.kit-new.bak')) kept.push(rel);
-    else if (e.isDirectory() && ['.agentic', '.claude', 'tools', 'agents', 'commands', 'agentic', 'decisions'].includes(e.name)) scan(join(dir, e.name), depth + 1);
+    else if (e.isDirectory() && ['.agentic', '.claude', '.github', 'tools', 'agents', 'commands', 'agentic', 'decisions', 'references', 'workflows'].includes(e.name)) scan(join(dir, e.name), depth + 1);
   }
 })(ROOT, 0);
 if (pending.length) add('WARN', `합치지 않은 키트 새 버전 ${pending.length}개`, `${pending.join(', ')} — 원본과 비교해 합친 뒤 지우세요`);
 if (kept.length) add('WARN', `키트 업데이트 보관본 ${kept.length}개`, `${kept.join(', ')} — 확인한 뒤 지우세요`);
+
+// CI (.github/workflows/agentic-ci.yml + config.json의 ci)
+if (selfPkg?.name !== 'agentic-kit') {
+  const p = ciPlan(loadConfig(ROOT));
+  const top = spawnSync('git', ['-C', ROOT, 'rev-parse', '--show-toplevel'], { encoding: 'utf8' });
+  const atTop = top.status !== 0 || realpathSync(top.stdout.trim()) === realpathSync(ROOT);
+  if (!existsSync(join(ROOT, '.github', 'workflows', 'agentic-ci.yml'))) add('WARN', 'CI 워크플로 없음', 'install.mjs <경로> --update 로 .github/workflows/agentic-ci.yml 설치');
+  else if (!atTop) add('WARN', 'CI 워크플로가 동작하지 않는 위치', `키트가 저장소 하위 폴더에 설치됨 — GitHub은 ${top.stdout.trim()}/.github/workflows만 읽습니다. 최상위 워크플로에서 이 폴더를 working-directory로 지정하세요`);
+  else if (p.enabled) add('OK', `CI 켜짐 (${p.steps}단계, ${p.runner})`, '로컬 확인: node tools/agentic/ci.mjs run');
+  else add('OK', 'CI 비밀값 검사만', '프로젝트 검사를 켜려면 node tools/agentic/ci.mjs suggest');
+  for (const n of p.notes) add('WARN', 'CI 설정', n);
+}
 
 // 파일
 for (const f of ['AGENTS.md', 'CLAUDE.md', '.agentic/PIPELINE.md', '.claude/settings.json', '.mcp.json'])

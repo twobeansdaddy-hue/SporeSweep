@@ -62,5 +62,16 @@
         "effort": ""
       }
     }
+  },
+  "ci": {
+    "enabled": false,
+    "runner": "ubuntu-latest",
+    "node": "22",
+    "timeoutMinutes": 20,
+    "steps": [],
+    "secretScan": {
+      "enabled": true,
+      "ignore": []
+    }
   }
 }

@@ -1,0 +1,52 @@
+# agentic-kit이 설치·갱신하는 CI. 직접 고치면 다음 --update 때 보호되고 새 버전은 .kit-new로 남습니다.
+# 설정은 .agentic/config.json의 "ci" 항목에서 합니다 (기본: 비밀값 검사만).
+# 저장소 최상위에 키트를 설치했을 때만 동작합니다 (GitHub은 최상위 .github/workflows만 읽음).
+#   켜기: node tools/agentic/ci.mjs suggest --write   로컬 확인: node tools/agentic/ci.mjs run
+name: agentic-ci
+
+on:
+  pull_request:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: agentic-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  guard:
+    name: 비밀값 검사
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      enabled: ${{ steps.plan.outputs.enabled }}
+      runner: ${{ steps.plan.outputs.runner }}
+      node: ${{ steps.plan.outputs.node }}
+      timeout: ${{ steps.plan.outputs.timeout }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          package-manager-cache: false
+      - id: plan
+        run: node tools/agentic/ci.mjs plan
+      - run: node tools/agentic/ci.mjs guard
+
+  check:
+    name: 프로젝트 검사
+    needs: guard
+    if: needs.guard.outputs.enabled == 'true'
+    runs-on: ${{ needs.guard.outputs.runner }}
+    timeout-minutes: ${{ fromJSON(needs.guard.outputs.timeout) }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ needs.guard.outputs.node }}
+          package-manager-cache: false
+      - run: node tools/agentic/ci.mjs run

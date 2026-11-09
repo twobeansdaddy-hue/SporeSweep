@@ -30,6 +30,10 @@ node tools/agentic/decide.mjs route --state "<요청 원문 + 관련 파일 목�
 - 1순위: `node tools/agentic/agy-research.mjs "<조사 질문>"`
 - 종료 코드 75(한도·출력 없음·미설치)면 `researcher` 서브에이전트에게 같은 질문을 맡긴다.
 - 결과는 `.agentic/research/`에 남는다. 핵심만 요약해서 다음 단계에 쓴다.
+- 화면을 새로 만들거나 레이아웃·사용자 흐름을 바꾸는 작업이면 질문 앞에
+  "`<프로젝트 루트 절대 경로>/.agentic/references/ui-ux.md`를 먼저 읽고 그 조사 순서·출처·결과 형식을 따른다"를 붙인다
+  (agy는 다른 폴더에서 실행되므로 상대 경로가 아니라 절대 경로로 쓴다. researcher 서브에이전트에도 같은 문장을 넘긴다).
+  색·여백·문구만 바꾸는 작업에는 붙이지 않는다.
 - 사실 확인이 중요한 질문(버전, 지원 여부, API 동작)은 `codex exec --sandbox read-only`에도 같은 질문을 따로 하고,
   두 답이 다른 항목은 "미확인"으로 표시한다.
 
@@ -58,6 +62,8 @@ node tools/agentic/decide.mjs rea --state "<무엇을 알아야 하는지 + 대�
 ### 4. 구현
 - AGENTS.md 코드 규칙을 따른다. 테스트를 먼저 또는 함께 작성한다.
 - 테스트·린트·타입체크를 실제로 실행하고 통과시킨다.
+- `.agentic/config.json`의 `ci.enabled`가 참이면 `node tools/agentic/ci.mjs run`으로 CI와 같은 검사를 로컬에서 돌린다.
+  커밋 전에는 `node tools/agentic/ci.mjs guard`로 비밀값·`.env`가 섞이지 않았는지 확인한다.
 
 ### 5. 리스크 판정
 ```
@@ -84,6 +90,8 @@ node tools/agentic/decide.mjs done-gate --state "<요청 원문 + 테스트 결�
 ### 8. 보고
 - 무엇을 바꿨는지 3~5줄, 테스트 결과, 남은 이슈, 대체 경로를 쓴 단계를 보고한다.
 - 커밋은 해도 되지만 `git push`·머지는 사용자 승인 후에만 한다.
+- `ci.enabled`가 거짓인데 이 저장소에 테스트 명령이 있으면, 보고 끝에 한 줄로
+  "`node tools/agentic/ci.mjs suggest`로 CI 검사를 켤 수 있다"고 알린다 (켜는 것은 사용자가 정한다. 따로 묻지 않는다).
 
 ## 사람 승인 지점 (이것 외에는 묻지 말고 진행)
 1. 요구사항이 모호할 때 (1단계)
