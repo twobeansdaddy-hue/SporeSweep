@@ -27,15 +27,26 @@ jobs:
       runner: ${{ steps.plan.outputs.runner }}
       node: ${{ steps.plan.outputs.node }}
       timeout: ${{ steps.plan.outputs.timeout }}
+      ci: ${{ steps.kit.outputs.ci }}
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
         with:
           node-version: 22
           package-manager-cache: false
+      # 키트 폴더 이름의 대소문자가 다른 저장소(예: Xcode 프로젝트의 Tools/)도 찾는다. macOS는 대소문자를 구분하지 않지만 Linux 러너는 구분한다.
+      - id: kit
+        run: |
+          ci="$(git ls-files -- ':(icase)tools/agentic/ci.mjs' | head -n1)"
+          if [ -z "$ci" ]; then echo "::error title=agentic-ci::tools/agentic/ci.mjs가 저장소에 커밋돼 있지 않습니다. 키트 파일을 커밋하세요."; exit 1; fi
+          echo "ci=$ci" >> "$GITHUB_OUTPUT"
       - id: plan
-        run: node tools/agentic/ci.mjs plan
-      - run: node tools/agentic/ci.mjs guard
+        env:
+          CI_SCRIPT: ${{ steps.kit.outputs.ci }}
+        run: node "$CI_SCRIPT" plan
+      - env:
+          CI_SCRIPT: ${{ steps.kit.outputs.ci }}
+        run: node "$CI_SCRIPT" guard
 
   check:
     name: 프로젝트 검사
@@ -49,4 +60,6 @@ jobs:
         with:
           node-version: ${{ needs.guard.outputs.node }}
           package-manager-cache: false
-      - run: node tools/agentic/ci.mjs run
+      - env:
+          CI_SCRIPT: ${{ needs.guard.outputs.ci }}
+        run: node "$CI_SCRIPT" run

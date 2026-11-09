@@ -1,7 +1,7 @@
 {
-  "version": "0.5.0",
-  "commit": "a9db4ca",
-  "installedAt": "2026-11-09T01:53:41.045Z",
+  "version": "0.5.1",
+  "commit": "c030c5b",
+  "installedAt": "2026-11-09T02:29:06.454Z",
   "files": {
     ".agentic/decisions/done-gate.json": "4b46e7366df5e4d1a6d2f59236528503019fdaf929ca39e1645d06cf9e721475",
     ".agentic/decisions/rea.json": "4b3a332c93a793a119eefa74720aacd70af6b34f00fc72b52bd961a736b87303",
@@ -13,7 +13,7 @@
     ".claude/agents/researcher.md": "8f2e4a4bc1aee3d938d545d13ca1a858d4f7f78fba1c70b2dc7ae86247f881e9",
     ".claude/agents/reviewer.md": "9b53d38d843d2856fbd09cd44e9d649b3091ae9c50d159af8a1633b1d03e3109",
     ".claude/commands/task.md": "c91a3963eeefcb4d9c30f4686abf5e94d6e134f304cce16f1677d515afaf9f57",
-    ".github/workflows/agentic-ci.yml": "d2174e7de1a93f04801d80d01cc4c5bdc9d8e986ee7ed80fce316c51ebbde1a0",
+    ".github/workflows/agentic-ci.yml": "6bd5a1981b3f451f574a75f102cfc2c393aee72d2124589ed6c64dbe3d64a7b0",
     "AGENTS.md#agentic-kit": "a9475e3fd74ef58f472e239651c469d16c0d39d6082d6b6871368c60593bcb55",
     "tools/agentic/agy-guard.mjs": "12267c7972f756edc1e8ea761b83f10c3b03561e34b949af13d8665d527c8201",
     "tools/agentic/agy-research.mjs": "ef001f9d6bb98a887a8c6068e95d43741624b099530f10d4f1e5e2ab0c5462ac",
