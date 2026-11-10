@@ -126,6 +126,10 @@ export function codexModelArgs({ model, effort }) {
 // agy는 모델 ID에 강도가 붙어 있으면(…-low) 다른 --effort와 함께 쓰면 실행을 거부하고,
 // 표시 이름("Gemini 3.8 Flash (Low)")에는 --effort를 받지 않는다. 호출 전에 같은 규칙으로 막는다.
 const AGY_SUFFIX_RE = /-(low|medium|high|xhigh|max)$/;
+// 모델 값에 강도가 이미 들어 있는가 (…-low 같은 ID, 또는 표시 이름)
+export function agyPinned(model) {
+  return !!model && (AGY_SUFFIX_RE.test(model) || /[\s()]/.test(model));
+}
 export function agyModelArgs({ model, effort }) {
   checkModel(model); checkEffort(effort);
   if (model && effort) {
@@ -134,6 +138,67 @@ export function agyModelArgs({ model, effort }) {
     if (/[\s()]/.test(model)) throw new Error(`표시 이름 "${model}"에는 effort를 쓸 수 없습니다. \`agy models\`의 ID를 쓰거나 effort를 비우세요`);
   }
   return [...(model ? ['--model', model] : []), ...(effort ? ['--effort', effort] : [])];
+}
+
+// ── 요청 난이도 등급별 모델·추론 강도 (config.json의 autoSelect) ──
+// autoSelect.tiers.<등급>.<단계>.<에이전트> = { model, effort }. 빈 값은 stages 값을 그대로 쓴다.
+// 등급은 route 판정의 난이도 점수로 정하고(decide.mjs), 각 스크립트는 --tier <등급>으로 받는다.
+export function autoSelectOn(config) {
+  const a = config?.autoSelect;
+  return !!a && a.enabled !== false && !!a.tiers && typeof a.tiers === 'object' && !Array.isArray(a.tiers);
+}
+
+export function tierNames(config) {
+  return autoSelectOn(config) ? Object.keys(config.autoSelect.tiers) : [];
+}
+
+// 등급 값을 stages 위에 덮은 설정을 돌려준다 (원본은 바꾸지 않는다).
+// 자동 선택이 꺼져 있거나 등급을 주지 않으면 원래 설정 그대로. 없는 등급 이름은 예외.
+// fixed: { '<단계>.<에이전트>': 모델 } — 명령줄에서 직접 준 모델. 등급·stages의 모델 대신 이 모델을 기준으로 강도를 정한다.
+export function withTier(config, tier, fixed = {}) {
+  if (!tier || !autoSelectOn(config)) return config;
+  const tiers = config.autoSelect.tiers;
+  if (!Object.hasOwn(tiers, tier)) throw new Error(`알 수 없는 등급: ${tier} (가능: ${Object.keys(tiers).join(', ')})`);
+  const isObj = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
+  const stages = structuredClone(isObj(config.stages) ? config.stages : {});
+  for (const [stage, agents] of Object.entries(isObj(tiers[tier]) ? tiers[tier] : {})) {
+    for (const [agent, over] of Object.entries(isObj(agents) ? agents : {})) {
+      let o;
+      try { o = stageSettings({ stages: { [stage]: { [agent]: over } } }, stage, agent); }
+      catch (e) { throw new Error(`autoSelect.tiers.${tier}: ${e.message}`); }
+      const base = stageSettings(config, stage, agent);
+      if (fixed[`${stage}.${agent}`]) o.model = fixed[`${stage}.${agent}`];
+      // agy 모델에 강도가 이미 들어 있으면(…-low, 표시 이름) 강도를 따로 얹을 수 없다. 그 모델의 강도를 그대로 둔다.
+      // 등급이 그런 모델을 지정했으면 stages의 강도도 함께 비운다.
+      const pinned = agent === 'agy' && agyPinned(o.model || base.model);
+      if (!isObj(stages[stage])) stages[stage] = {};
+      const cur = isObj(stages[stage][agent]) ? stages[stage][agent] : (stages[stage][agent] = {});
+      if (o.model) cur.model = o.model;
+      if (pinned && o.model) cur.effort = '';
+      else if (o.effort && !pinned) cur.effort = o.effort;
+    }
+  }
+  return { ...config, stages };
+}
+
+// 한 등급에서 실제로 쓰일 값 (council 제외: 파이프라인이 부르지 않는다).
+export const TIER_TARGETS = [['review', 'codex'], ['research', 'agy'], ['subagents', 'reviewer'], ['subagents', 'researcher']];
+export function tierSelection(config, tier) {
+  const cfg = withTier(config, tier);
+  const out = {};
+  for (const [stage, agent] of TIER_TARGETS) (out[stage] ??= {})[agent] = stageSettings(cfg, stage, agent);
+  return out;
+}
+
+// 판정 정의의 tier 규칙 { from, levels: [{ below, tier }, …, { tier }] }과 요약된 답으로 등급을 고른다.
+// 점수가 below보다 작은 첫 단계, 없으면 below가 없는 마지막 단계.
+// 답이 없거나 점수가 숫자가 아니거나 0~max 범위를 벗어나면 null (오케스트레이터가 직접 고른다).
+export function pickTier(rule, answers, max = Infinity) {
+  const q = answers?.[rule?.from];
+  const v = q?.value;
+  if (!q || q.type !== 'score' || typeof v !== 'number' || !Number.isFinite(v) || v < 0 || v > max || !Array.isArray(rule.levels)) return null;
+  const level = rule.levels.find((l) => typeof l.below !== 'number' || v < l.below);
+  return level?.tier ? { tier: level.tier, uncertain: !!q.uncertain } : null;
 }
 
 export function hasCommand(cmd) {

@@ -22,6 +22,16 @@
         "Large: many files or multiple areas"
       ]
     },
+    "difficulty": {
+      "type": "score",
+      "instructions": "How much careful reasoning does this request need to get right? Judge the thinking required, not the amount of code.",
+      "criteria": [
+        "Mechanical: a lookup, rename, typo, or text change with one obvious answer",
+        "Routine: a familiar change following an existing pattern",
+        "Careful: several interacting parts, edge cases, or non-obvious behavior to work out",
+        "Hard: subtle correctness, security, concurrency, data integrity, or architecture trade-offs"
+      ]
+    },
     "research_needed": {
       "type": "noul",
       "instructions": "Does this task need external research (unfamiliar library, API, current versions or pricing, or comparing options) before implementation?"
@@ -60,5 +70,21 @@
         }
       ]
     }
+  },
+  "tier": {
+    "from": "difficulty",
+    "levels": [
+      {
+        "below": 0.75,
+        "tier": "light"
+      },
+      {
+        "below": 2.25,
+        "tier": "standard"
+      },
+      {
+        "tier": "deep"
+      }
+    ]
   }
 }

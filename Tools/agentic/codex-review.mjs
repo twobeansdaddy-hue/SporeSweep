@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 // Codex로 교차 리뷰를 받는다 (읽기 전용 샌드박스).
-// 사용: node tools/agentic/codex-review.mjs [--base main] [--uncommitted] [--focus "중점 사항"]
+// 사용: node tools/agentic/codex-review.mjs [--base main] [--uncommitted] [--focus "중점 사항"] [--tier 등급]
+//       --tier: 요청 난이도 등급(config.json의 autoSelect.tiers). 그 등급의 모델·추론 강도를 stages.review 위에 덮는다.
 // 종료 코드: 0 성공 / 75 대체 경로 필요(미설치·한도 초과·시간 초과·빈 출력) / 2 사용법 오류
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { findRoot, loadEnv, loadConfig, childEnv, stageSettings, codexModelArgs, hasCommand, run, exitFailure, EXIT_FALLBACK } from './lib.mjs';
+import { findRoot, loadEnv, loadConfig, childEnv, stageSettings, withTier, codexModelArgs, hasCommand, run, exitFailure, EXIT_FALLBACK } from './lib.mjs';
 
 const ROOT = findRoot(dirname(fileURLToPath(import.meta.url)));
 loadEnv(ROOT);
@@ -13,11 +14,12 @@ const CONFIG = loadConfig(ROOT);
 const CFG = CONFIG.codex ?? {};
 
 const args = process.argv.slice(2);
-let base = CONFIG.baseBranch ?? 'main', uncommitted = false, focus = '';
+let base = CONFIG.baseBranch ?? 'main', uncommitted = false, focus = '', tier = '';
 for (let i = 0; i < args.length; i++) {
   if (args[i] === '--base') base = args[++i];
   else if (args[i] === '--uncommitted') uncommitted = true;
   else if (args[i] === '--focus') focus = args[++i] ?? '';
+  else if (args[i] === '--tier') tier = args[++i] ?? '';
   else { console.error(`알 수 없는 인자: ${args[i]}`); process.exit(2); }
 }
 
@@ -48,7 +50,7 @@ const stamp = new Date().toISOString().replace(/[:.]/g, '-');
 const lastMsg = join(outDir, `codex-${stamp}.md`);
 
 let modelArgs;
-try { modelArgs = codexModelArgs(stageSettings(CONFIG, 'review', 'codex')); } catch (e) { console.error(e.message); process.exit(2); }
+try { modelArgs = codexModelArgs(stageSettings(withTier(CONFIG, tier), 'review', 'codex')); } catch (e) { console.error(e.message); process.exit(2); }
 
 const res = await run('codex', [
   'exec',

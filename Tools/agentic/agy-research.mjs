@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Antigravity CLI(agy)로 보조 리서치를 맡긴다. 결과는 .agentic/research/에 저장된다.
-// 사용: node tools/agentic/agy-research.mjs "<조사 질문>" [--dir 경로] [--model gemini-3.8-flash-low] [--effort low]
-//       --model·--effort를 주지 않으면 config.json의 stages.research.agy, 그것도 비면 agy 전역 기본값.
+// 사용: node tools/agentic/agy-research.mjs "<조사 질문>" [--dir 경로] [--model gemini-3.8-flash-low] [--effort low] [--tier 등급]
+//       --model·--effort를 주지 않으면 --tier 등급 값(config.json의 autoSelect.tiers), 다음은 stages.research.agy, 그것도 비면 agy 전역 기본값.
 // 종료 코드: 0 성공 / 75 대체 경로 필요(미설치·한도·시간 초과·빈 출력) / 2 사용법 오류
 //
 // 주의: agy의 print 모드는 모든 도구 호출을 자동 승인합니다.
@@ -9,7 +9,7 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { findRoot, loadEnv, loadConfig, childEnv, agyWorkspace, stageSettings, agyModelArgs, hasCommand, run, agyFailure, exitFailure, EXIT_FALLBACK } from './lib.mjs';
+import { findRoot, loadEnv, loadConfig, childEnv, agyWorkspace, stageSettings, withTier, agyModelArgs, agyPinned, hasCommand, run, agyFailure, exitFailure, EXIT_FALLBACK } from './lib.mjs';
 
 const ROOT = findRoot(dirname(fileURLToPath(import.meta.url)));
 loadEnv(ROOT);
@@ -17,19 +17,21 @@ const CONFIG = loadConfig(ROOT);
 const CFG = CONFIG.agy ?? {};
 
 const args = process.argv.slice(2);
-let question = '', dir = ROOT, model = '', effort = '';
+let question = '', dir = ROOT, model = '', effort = '', tier = '';
 for (let i = 0; i < args.length; i++) {
   if (args[i] === '--dir') dir = resolve(args[++i]);
   else if (args[i] === '--model') model = args[++i] ?? '';
   else if (args[i] === '--effort') effort = args[++i] ?? '';
+  else if (args[i] === '--tier') tier = args[++i] ?? '';
   else if (!question) question = args[i];
   else { console.error(`알 수 없는 인자: ${args[i]}`); process.exit(2); }
 }
-if (!question) { console.error('사용: agy-research.mjs "<조사 질문>" [--dir 경로] [--model 이름] [--effort 강도]'); process.exit(2); }
+if (!question) { console.error('사용: agy-research.mjs "<조사 질문>" [--dir 경로] [--model 이름] [--effort 강도] [--tier 등급]'); process.exit(2); }
 let modelArgs;
 try {
-  const stage = stageSettings(CONFIG, 'research', 'agy');
-  modelArgs = agyModelArgs({ model: model || stage.model, effort: effort || stage.effort });
+  const stage = stageSettings(withTier(CONFIG, tier, model ? { 'research.agy': model } : {}), 'research', 'agy');
+  // --model에 강도가 들어 있으면(…-low, 표시 이름) 설정·등급의 강도를 얹지 않는다.
+  modelArgs = agyModelArgs({ model: model || stage.model, effort: effort || (agyPinned(model) ? '' : stage.effort) });
 } catch (e) { console.error(e.message); process.exit(2); }
 
 function fallback(reason, detail = '') {

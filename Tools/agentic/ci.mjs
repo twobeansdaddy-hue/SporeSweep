@@ -86,10 +86,10 @@ function listFiles(root, { requireGit = false } = {}) {
   return { files: out, tracked: false };
 }
 
-function readText(path) {
+function readText(path, maxBytes = MAX_BYTES) {
   let st;
   try { st = statSync(path); } catch { return null; }
-  if (!st.isFile() || st.size > MAX_BYTES) return null;
+  if (!st.isFile() || st.size > maxBytes) return null;
   const fd = openSync(path, 'r');
   const head = Buffer.alloc(Math.min(8192, st.size));
   readSync(fd, head, 0, head.length, 0);
@@ -132,6 +132,32 @@ export function scanSecrets(root, { ignore = [], requireGit = false } = {}) {
       }
     }
   }
+  return findings;
+}
+
+// 올릴 폴더(빌드 결과물) 검사: git과 상관없이 폴더 안의 모든 파일을 본다 (cd.mjs가 배포 전에 쓴다).
+// 배포물은 공개되므로 .env 파일은 이름만으로 오류, 키 형식 값은 규칙의 등급을 그대로 쓴다.
+// 심볼릭 링크는 오류다 (wrangler는 링크 대상을 올리므로 폴더 밖 비밀 파일이 섞일 수 있음).
+// 큰 번들도 검사하도록 maxBytes까지 읽는다 (기본: Pages 파일 한도 25MiB).
+export function scanDir(dir, { maxBytes = 25 * 1024 * 1024 } = {}) {
+  const findings = [];
+  (function walk(abs, rel) {
+    for (const e of readdirSync(abs, { withFileTypes: true })) {
+      const a = join(abs, e.name), r = rel ? `${rel}/${e.name}` : e.name;
+      if (e.isSymbolicLink()) { findings.push({ file: r, line: 1, rule: 'symlink', severity: 'error', message: '심볼릭 링크는 올리지 않습니다 (링크 대상이 그대로 올라감) — 실제 파일로 바꾸세요' }); continue; }
+      if (e.isDirectory()) { walk(a, r); continue; }
+      if (!e.isFile()) continue;
+      if (ENV_FILE_RE.test(e.name)) { findings.push({ file: r, line: 1, rule: 'env-file', severity: 'error', message: `${e.name} 파일이 올릴 폴더에 있습니다` }); continue; }
+      const text = readText(a, maxBytes);
+      if (text === null) continue;
+      const lines = text.split('\n');
+      for (let i = 0; i < lines.length; i++) {
+        if (lines[i].includes(ALLOW_MARK)) continue;
+        const rule = SECRET_RULES.find((x) => x.re.test(lines[i]));
+        if (rule) findings.push({ file: r, line: i + 1, rule: rule.id, severity: rule.severity, message: `${rule.id} 형식의 값${rule.hint ? ` — ${rule.hint}` : ''}` });
+      }
+    }
+  })(dir, '');
   return findings;
 }
 
@@ -297,9 +323,12 @@ function main() {
     const current = ciConfig(config);
     const merged = mergeSuggestion(current, s.ci);
     console.log(`현재: ${current.enabled ? `켜짐 (${current.steps.length}단계, ${current.runner})` : '꺼짐 (비밀값 검사만)'}\n`);
-    if (s.ci.steps.length) console.log(`제안하는 .agentic/config.json "ci":\n${JSON.stringify(merged, null, 2)}`);
-    if (s.ci.steps.length && merged.runner !== s.ci.runner) console.log(`\n! 지금 설정한 러너(${merged.runner})를 유지합니다. 제안 러너는 ${s.ci.runner}입니다 — 바꾸려면 ci.runner를 직접 고치세요.`);
-    else console.log('자동으로 만들 수 있는 검사 단계가 없습니다.');
+    if (s.ci.steps.length) {
+      console.log(`제안하는 .agentic/config.json "ci":\n${JSON.stringify(merged, null, 2)}`);
+      if (merged.runner !== s.ci.runner) console.log(`\n! 지금 설정한 러너(${merged.runner})를 유지합니다. 제안 러너는 ${s.ci.runner}입니다 — 바꾸려면 ci.runner를 직접 고치세요.`);
+    } else {
+      console.log('자동으로 만들 수 있는 검사 단계가 없습니다.');
+    }
     if (s.candidates.length) console.log(`\nAGENTS.md에 적힌 명령 (필요하면 steps에 직접 추가):\n${s.candidates.map((c) => `  - ${c.label}: ${c.run}`).join('\n')}`);
     if (s.hints.length) console.log(`\n참고:\n${s.hints.map((h) => `  - ${h}`).join('\n')}`);
     if (args.includes('--write')) {

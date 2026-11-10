@@ -73,5 +73,96 @@
       "enabled": true,
       "ignore": []
     }
+  },
+  "autoSelect": {
+    "enabled": true,
+    "tiers": {
+      "light": {
+        "review": {
+          "codex": {
+            "model": "",
+            "effort": "low"
+          }
+        },
+        "research": {
+          "agy": {
+            "model": "",
+            "effort": "low"
+          }
+        },
+        "subagents": {
+          "reviewer": {
+            "model": "sonnet",
+            "effort": "low"
+          },
+          "researcher": {
+            "model": "haiku",
+            "effort": "low"
+          }
+        }
+      },
+      "standard": {},
+      "deep": {
+        "review": {
+          "codex": {
+            "model": "",
+            "effort": "high"
+          }
+        },
+        "research": {
+          "agy": {
+            "model": "",
+            "effort": "high"
+          }
+        },
+        "subagents": {
+          "reviewer": {
+            "model": "",
+            "effort": "high"
+          },
+          "researcher": {
+            "model": "",
+            "effort": "high"
+          }
+        }
+      }
+    }
+  },
+  "cd": {
+    "enabled": false,
+    "target": "",
+    "pages": {
+      "project": "",
+      "dir": "",
+      "branch": "main",
+      "wrangler": "4.151.3",
+      "node": "22",
+      "build": [],
+      "required": [
+        "index.html"
+      ],
+      "verifyUrl": "",
+      "verifyPaths": [
+        "/"
+      ]
+    },
+    "dockerSsh": {
+      "host": "",
+      "identityFile": "",
+      "remoteDir": "",
+      "composeProject": "",
+      "image": "",
+      "dockerfile": "Dockerfile",
+      "context": ".",
+      "platform": "linux/amd64",
+      "buildArgs": {},
+      "files": [],
+      "remoteHealthUrl": "",
+      "healthUrl": ""
+    },
+    "verify": {
+      "attempts": 6,
+      "delaySeconds": 10
+    }
   }
 }

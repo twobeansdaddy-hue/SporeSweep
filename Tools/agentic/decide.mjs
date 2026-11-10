@@ -6,11 +6,12 @@
 import { readFileSync, existsSync, mkdirSync, appendFileSync, readdirSync } from 'node:fs';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { findRoot, loadEnv, loadConfig } from './lib.mjs';
+import { findRoot, loadEnv, loadConfig, autoSelectOn, pickTier, tierSelection } from './lib.mjs';
 
 const ROOT = findRoot(dirname(fileURLToPath(import.meta.url)));
 loadEnv(ROOT);
-const CONFIG = loadConfig(ROOT).decide ?? {};
+const FULL_CONFIG = loadConfig(ROOT);
+const CONFIG = FULL_CONFIG.decide ?? {};
 const DECISIONS_DIR = join(ROOT, '.agentic', 'decisions');
 
 const PROVIDERS = {
@@ -99,9 +100,10 @@ function summarize(answers, minConfidence, noulMargin) {
       out[id] = { type: 'choice', value: a.choice, probabilities: a.probabilities, confidence: round(conf), uncertain: conf < minConfidence };
     } else if (a.type === 'score') {
       const conf = a.confidence ?? concentration(Object.values(a.probabilities ?? {}));
-      const idx = Math.round(Number(a.score));
-      const label = a.legend?.[String(idx)];
-      out[id] = { type: 'score', value: Number(a.score), label, confidence: round(conf), uncertain: conf < minConfidence };
+      // 점수가 숫자가 아니면(null 등) 0으로 읽지 않고 불확실로 둔다.
+      const valid = typeof a.score === 'number' && Number.isFinite(a.score);
+      const label = valid ? a.legend?.[String(Math.round(a.score))] : undefined;
+      out[id] = { type: 'score', value: valid ? a.score : null, label, confidence: round(conf), uncertain: !valid || conf < minConfidence };
     } else {
       out[id] = { type: a.type ?? 'unknown', raw: a, uncertain: true };
     }
@@ -126,6 +128,7 @@ function evalRule(rule, s) {
   if (!q) return 'uncertain';
   let v;
   if ('noulAtLeast' in rule) v = q.value >= rule.noulAtLeast;
+  else if ('noulBelow' in rule) v = q.value < rule.noulBelow;
   else if ('scoreAtLeast' in rule) v = q.value >= rule.scoreAtLeast;
   else if ('choiceIn' in rule) v = rule.choiceIn.includes(q.value);
   else return 'uncertain';
@@ -162,6 +165,18 @@ function log(entry) {
     mkdirSync(dir, { recursive: true });
     appendFileSync(join(dir, 'decisions.jsonl'), JSON.stringify(entry) + '\n');
   } catch { /* 로그 실패는 무시 */ }
+}
+
+// 판정 정의에 tier 규칙이 있으면(route) 난이도 등급과 그 등급의 모델·추론 강도를 함께 낸다.
+// 자동 선택이 꺼져 있으면 아무것도 붙이지 않는다. 설정 오류는 판정을 막지 않고 tierError로만 알린다.
+function tierResult(def, answers) {
+  if (!def.tier || !autoSelectOn(FULL_CONFIG)) return {};
+  const criteria = def.questions?.[def.tier.from]?.criteria;
+  const picked = pickTier(def.tier, answers, Array.isArray(criteria) ? criteria.length - 1 : Infinity);
+  if (!picked) return {};
+  const out = { tier: picked.tier, tierUncertain: picked.uncertain };
+  try { out.selection = tierSelection(FULL_CONFIG, picked.tier); } catch (e) { out.tierError = String(e.message ?? e); }
+  return out;
 }
 
 async function main() {
@@ -209,8 +224,9 @@ async function main() {
         verdict, answers, latencyMs: Date.now() - t0, usage: raw.usage,
         ...(attempts.length ? { attempts } : {}),
       };
+      Object.assign(result, tierResult(def, answers));
       console.log(JSON.stringify(result, null, 2));
-      log({ ts: new Date().toISOString(), kind: args.kind, provider: name, model: result.model, state: state.slice(0, 4000), answers, verdict });
+      log({ ts: new Date().toISOString(), kind: args.kind, provider: name, model: result.model, state: state.slice(0, 4000), answers, verdict, ...(result.tier ? { tier: result.tier } : {}) });
       return;
     } catch (e) {
       attempts.push({ provider: name, error: String(e.message ?? e).slice(0, 300) });

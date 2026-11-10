@@ -18,7 +18,7 @@ Claude Code, Codex, Antigravity가 모두 이 파일을 따릅니다. 프로젝�
 | 역할 | 담당 | 비고 |
 |---|---|---|
 | 결정권자 | 사용자 | 요구 정의, 승인 지점에서 최종 결정 |
-| 오케스트레이션·구현 | Claude Code | 사용자가 프롬프트를 입력하는 곳 |
+| 관리자(오케스트레이션·방향 결정)·구현 | Claude Code | 사용자가 프롬프트를 입력하는 곳. 다른 에이전트는 맡은 역할의 결과만 내고, 구현 방향은 에이전트끼리 협의하지 않는다 |
 | 교차 리뷰·검증 | Codex (`tools/agentic/codex-review.mjs`) | 한도 초과 시 Claude `reviewer` 서브에이전트 |
 | 보조 리서치·대용량 읽기 | Antigravity CLI (`tools/agentic/agy-research.mjs`) | 실패·한도 초과 시 Claude `researcher` 서브에이전트 |
 | 빠른 판정 (System 1) | 결정 모델 (`tools/agentic/decide.mjs`) | 기본 Clef-flash, 실패 시 판정 생략 |

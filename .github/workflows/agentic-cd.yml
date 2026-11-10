@@ -1,0 +1,48 @@
+# agentic-kit이 설치·갱신하는 배포(CD) 워크플로. 직접 고치면 다음 --update 때 보호되고 새 버전은 .kit-new로 남습니다.
+# Cloudflare Pages(cd.target "pages")만 지원하고, 수동 실행(Actions → agentic-cd → Run workflow)으로만 돕니다.
+# 누르는 것이 곧 배포 승인입니다. push로 자동 배포하지 않습니다. docker-ssh 대상은 로컬에서 cd.mjs deploy로 합니다.
+# 설정: .agentic/config.json의 "cd"  /  저장소 비밀값: CLOUDFLARE_PAGES_API_TOKEN(Pages:Edit 권한만), CLOUDFLARE_ACCOUNT_ID
+name: agentic-cd
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: agentic-cd
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Pages 배포
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          package-manager-cache: false
+      # 키트 폴더 이름의 대소문자가 다른 저장소(예: Tools/agentic)도 찾는다. Linux 러너는 대소문자를 구분한다.
+      - id: kit
+        run: |
+          cd_script="$(git ls-files -- ':(icase)tools/agentic/cd.mjs' | head -n1)"
+          if [ -z "$cd_script" ]; then echo "::error title=agentic-cd::tools/agentic/cd.mjs가 저장소에 커밋돼 있지 않습니다. 키트 파일을 커밋하세요."; exit 1; fi
+          echo "cd=$cd_script" >> "$GITHUB_OUTPUT"
+      - id: plan
+        env:
+          CD_SCRIPT: ${{ steps.kit.outputs.cd }}
+        run: node "$CD_SCRIPT" actions-plan
+      - if: steps.plan.outputs.enabled == 'true' && steps.plan.outputs.node != '22'
+        uses: actions/setup-node@v5
+        with:
+          node-version: ${{ steps.plan.outputs.node }}
+          package-manager-cache: false
+      - if: steps.plan.outputs.enabled == 'true'
+        env:
+          CD_SCRIPT: ${{ steps.kit.outputs.cd }}
+          CLOUDFLARE_PAGES_API_TOKEN: ${{ secrets.CLOUDFLARE_PAGES_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: node "$CD_SCRIPT" deploy --yes

@@ -7,7 +7,8 @@ import { join, dirname } from 'node:path';
 import { homedir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { plan as ciPlan } from './ci.mjs';
-import { findRoot, loadEnv, loadConfig, childEnv, globalEnvPath, readRegistry, compareVersions, stageSettings, codexModelArgs, agyModelArgs, hasCommand, run } from './lib.mjs';
+import { cdConfig, validate as cdValidate } from './cd.mjs';
+import { findRoot, loadEnv, loadConfig, childEnv, globalEnvPath, readRegistry, compareVersions, stageSettings, codexModelArgs, agyModelArgs, autoSelectOn, tierNames, withTier, TIER_TARGETS, hasCommand, run } from './lib.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = findRoot(HERE);
@@ -69,17 +70,36 @@ if (ping) {
 const CONFIG = loadConfig(ROOT);
 const AGY_EFFORTS = ['low', 'medium', 'high', 'xhigh', 'max'];          // agy --help 기준
 const SUBAGENT_MODELS = ['', 'inherit', 'sonnet', 'opus', 'haiku', 'fable']; // Agent 도구가 받는 별칭
-for (const [stage, agent] of [['review', 'codex'], ['council', 'codex'], ['council', 'agy'], ['research', 'agy'], ['subagents', 'reviewer'], ['subagents', 'researcher']]) {
+function stageCheck(cfg, stage, agent) {
   let model = '', effort = '';
   const problems = [];
-  try { ({ model, effort } = stageSettings(CONFIG, stage, agent)); } catch (e) { problems.push(e.message); }
+  try { ({ model, effort } = stageSettings(cfg, stage, agent)); } catch (e) { problems.push(e.message); }
   if (!problems.length && stage !== 'subagents') {
     try { (agent === 'agy' ? agyModelArgs : codexModelArgs)({ model, effort }); } catch (e) { problems.push(e.message); }
   }
   if (stage === 'subagents' && effort && !/^[a-z]+$/.test(effort)) problems.push(`강도 "${effort}"는 소문자 단어여야 함`);
   else if (effort && agent !== 'codex' && !AGY_EFFORTS.includes(effort)) problems.push(`강도는 ${AGY_EFFORTS.join('|')} 중 하나`);
   if (stage === 'subagents' && !SUBAGENT_MODELS.includes(model)) problems.push(`모델은 ${SUBAGENT_MODELS.filter(Boolean).join('|')} 중 하나`);
-  add(problems.length ? 'WARN' : 'OK', `모델 ${stage}.${agent}`, problems.length ? problems.join(', ') : `${model || '기본값'} / 강도 ${effort || '기본값'}`);
+  return { problems, text: `${model || '기본값'} / 강도 ${effort || '기본값'}` };
+}
+for (const [stage, agent] of [['review', 'codex'], ['council', 'codex'], ['council', 'agy'], ['research', 'agy'], ['subagents', 'reviewer'], ['subagents', 'researcher']]) {
+  const { problems, text } = stageCheck(CONFIG, stage, agent);
+  add(problems.length ? 'WARN' : 'OK', `모델 ${stage}.${agent}`, problems.length ? problems.join(', ') : text);
+}
+// 요청 난이도 등급별 값 (config.json autoSelect). 등급마다 stages 위에 덮은 결과를 같은 규칙으로 검사한다.
+if (!CONFIG.autoSelect) add('WARN', '난이도별 모델 선택 설정 없음', 'install.mjs <경로> --update 로 config.json에 autoSelect 추가');
+else if (!autoSelectOn(CONFIG)) add('OK', '난이도별 모델 선택 꺼짐', 'autoSelect.enabled를 true로 바꾸면 켜짐');
+else for (const tier of tierNames(CONFIG)) {
+  const problems = [], parts = [];
+  try {
+    const cfg = withTier(CONFIG, tier);
+    for (const [stage, agent] of TIER_TARGETS) {
+      const c = stageCheck(cfg, stage, agent);
+      problems.push(...c.problems.map((p) => `${stage}.${agent}: ${p}`));
+      parts.push(`${agent} ${c.text}`);
+    }
+  } catch (e) { problems.push(e.message); }
+  add(problems.length ? 'WARN' : 'OK', `등급 ${tier}`, problems.length ? problems.join(', ') : parts.join(' · '));
 }
 
 // 설치된 키트 버전 (install.mjs가 기록)
@@ -122,11 +142,30 @@ if (selfPkg?.name !== 'agentic-kit') {
   else if (p.enabled) add('OK', `CI 켜짐 (${p.steps}단계, ${p.runner})`, '로컬 확인: node tools/agentic/ci.mjs run');
   else add('OK', 'CI 비밀값 검사만', '프로젝트 검사를 켜려면 node tools/agentic/ci.mjs suggest');
   for (const n of p.notes) add('WARN', 'CI 설정', n);
+  // 배포 (config.json의 cd). 켜져 있을 때만 설정을 검사한다.
+  const cd = cdConfig(loadConfig(ROOT));
+  if (cd.enabled === true) {
+    const { errors } = cdValidate(cd, ROOT);
+    if (errors.length) add('WARN', `배포 설정 오류 ${errors.length}건 (${cd.target || '대상 없음'})`, errors[0]);
+    else add('OK', `배포 켜짐 (${cd.target})`, 'node tools/agentic/cd.mjs plan 으로 확인, 실제 배포는 승인 후 --yes');
+  }
 }
 
 // 파일
 for (const f of ['AGENTS.md', 'CLAUDE.md', '.agentic/PIPELINE.md', '.claude/settings.json', '.mcp.json'])
   add(existsSync(join(ROOT, f)) ? 'OK' : 'FAIL', `파일 ${f}`);
+
+// 프로필 (install.mjs --profile <이름>이 .agentic/kit.json에 기록). 절차 문서가 있고 CLAUDE.md가 불러오는지, AGENTS.md에 구역이 있는지 본다.
+let profiles = [];
+try { const p = JSON.parse(readFileSync(join(ROOT, '.agentic', 'kit.json'), 'utf8')).profiles; if (Array.isArray(p)) profiles = p.filter((n) => typeof n === 'string'); } catch { /* 기록 없음 */ }
+const readText = (f) => { try { return readFileSync(join(ROOT, f), 'utf8'); } catch { return ''; } };
+for (const name of profiles) {
+  const doc = `.agentic/PIPELINE.${name}.md`, problems = [];
+  if (!existsSync(join(ROOT, doc))) problems.push(`${doc} 없음`);
+  else if (!readText('CLAUDE.md').split(/\r?\n/).some((l) => l.trim() === `@${doc}`)) problems.push(`CLAUDE.md가 @${doc}를 불러오지 않음`);
+  if (!readText('AGENTS.md').includes(`<!-- agentic-kit:${name}:start -->`)) problems.push(`AGENTS.md에 ${name} 프로필 구역 없음`);
+  add(problems.length ? 'WARN' : 'OK', `프로필 ${name}`, problems.length ? `${problems.join(', ')} — install.mjs <경로> --update 로 복구` : '');
+}
 
 const icon = { OK: '✔', WARN: '!', FAIL: '✘' };
 console.log(`저장소: ${ROOT}\n`);
