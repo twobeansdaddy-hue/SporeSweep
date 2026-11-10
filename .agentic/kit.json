@@ -1,13 +1,18 @@
 {
   "version": "0.8.0",
   "commit": "162613f",
-  "installedAt": "2026-11-10T02:56:54.558Z",
+  "installedAt": "2026-11-10T02:57:13.741Z",
+  "profiles": [
+    "game"
+  ],
   "files": {
     ".agentic/decisions/done-gate.json": "4b46e7366df5e4d1a6d2f59236528503019fdaf929ca39e1645d06cf9e721475",
+    ".agentic/decisions/play-check.json": "b7e2e1c8f87e70ff54443b1371db8cdc11727b46326115eba808751c46dafec8",
     ".agentic/decisions/rea.json": "4b3a332c93a793a119eefa74720aacd70af6b34f00fc72b52bd961a736b87303",
     ".agentic/decisions/review-triage.json": "942bb069fbfbffab0a68129379d57feada98f9053dc161e1cb29132673653e23",
     ".agentic/decisions/risk.json": "a50ccc8294bc8bc03fe632fdd639c362f96ca5376d4f1a1e347aeb6c3b11c5ea",
     ".agentic/decisions/route.json": "57fef9187dc120378f5abd5a52664c232adb67aa247a2f4ed7a97eef94399d35",
+    ".agentic/PIPELINE.game.md": "f87ea7e83004ab79bb538d8a306814e2560a91269a4038164a91f36b85b4636f",
     ".agentic/PIPELINE.md": "d3ee5ca8ca822921e96715becae438094a356193a68c9930f57a8d3e045dc531",
     ".agentic/references/ui-ux.md": "23b2a72afd316bbd0a3f4bcde98b5cc981e368b090c7b97bb6da9e6daa98c539",
     ".claude/agents/researcher.md": "8f2e4a4bc1aee3d938d545d13ca1a858d4f7f78fba1c70b2dc7ae86247f881e9",
@@ -16,6 +21,7 @@
     ".github/workflows/agentic-cd.yml": "dea142d2058238067a2a8b4e99bb8b201242748aa406ddde8e9f7545b27fa5fe",
     ".github/workflows/agentic-ci.yml": "6bd5a1981b3f451f574a75f102cfc2c393aee72d2124589ed6c64dbe3d64a7b0",
     "AGENTS.md#agentic-kit": "a4c4623957bf27a59b7e40abc00936b3b04b37b8909e3f65b31a31c4c30e980c",
+    "AGENTS.md#agentic-kit-game": "522e4316397d5c7a53261d0d0e4ccf2c4b271381499c9897b6d116661c0edad6",
     "tools/agentic/agy-guard.mjs": "12267c7972f756edc1e8ea761b83f10c3b03561e34b949af13d8665d527c8201",
     "tools/agentic/agy-research.mjs": "af610a0c3b8c56f39e56195bdbdf5c45806044087220d9ac3617b7fb5bedfa1f",
     "tools/agentic/cd.mjs": "049ac82774f0fae9053a5c1cdd5527c4ba366c85644b5ba0c3a5102ce3a3c88c",

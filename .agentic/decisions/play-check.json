@@ -1,0 +1,26 @@
+{
+  "description": "게임: 플레이어가 보는 것이 바뀌었는지, 실제로 띄워 확인했는지 판정",
+  "questions": {
+    "player_facing": {
+      "type": "noul",
+      "instructions": "Does this change alter what the player sees, hears, or controls, or the game's balance numbers (as opposed to internal refactoring, tooling, tests, or documentation only)?"
+    },
+    "run_verified": {
+      "type": "noul",
+      "instructions": "Does the evidence show that the game was actually launched after the change and the changed part was observed (a run command with its result, a screenshot path, or a described observation), rather than only automated tests passing?"
+    },
+    "human_played": {
+      "type": "noul",
+      "instructions": "Does the evidence show that a human (not an AI agent or a script) played the changed part of the game?"
+    }
+  },
+  "verdict": {
+    "player_facing": { "from": "player_facing", "noulAtLeast": 0.6 },
+    "run_verified": { "from": "run_verified", "noulAtLeast": 0.6 },
+    "human_played": { "from": "human_played", "noulAtLeast": 0.6 },
+    "run_missing": { "all": [
+      { "from": "player_facing", "noulAtLeast": 0.6 },
+      { "from": "run_verified", "noulBelow": 0.4 }
+    ] }
+  }
+}

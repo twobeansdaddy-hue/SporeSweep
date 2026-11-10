@@ -1,5 +1,6 @@
 @AGENTS.md
 @.agentic/PIPELINE.md
+@.agentic/PIPELINE.game.md
 
 # CLAUDE.md
 
