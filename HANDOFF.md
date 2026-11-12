@@ -8,7 +8,7 @@
 - **지금 상태와 다음 할 일**을 지금에 맞게 고친다.
 - 새로 생긴 계정, 비밀값의 위치, 주의할 점이 있으면 그 절에 적는다.
 
-마지막으로 고친 날: 2026-11-06
+마지막으로 고친 날: 2026-11-13
 
 계정 이전(2026-11-06): 이제부터 **팀 계정**에서 작업한다. 개인 계정의 세션 기록은 팀 계정에서 보이지 않으므로 이 문서가 인계 기준이다. 이전 시점에 main은 원격과 같다(`3d1d98b`). 브라우저(Claude in Chrome)의 Play Console·App Store Connect·AdMob·Firebase 로그인은 사용자 몫이다.
 
@@ -78,7 +78,7 @@
 | iOS 광고 ID, 개발 팀 | `Config/Local.xcconfig` (예시: `Local.example.xcconfig`) | 시험 광고로 돈다 |
 | iOS Firebase | `SporeSweep/GoogleService-Info.plist` | 기록을 보내지 않는다 |
 | 안드로이드 광고 ID | `android/config.properties` (예시: `config.example.properties`) | 시험 광고로 돈다 |
-| 안드로이드 Firebase | `android/app/google-services.json` | 기록을 보내지 않는다. 예전 ID로 등록한 개발용 파일 둘은 `~/Developer/sporesweep-firebase-dev/`로 옮겨 두었다(새 ID와 맞지 않아 안드로이드 빌드가 실패한다) |
+| 안드로이드 Firebase | `android/app/google-services.json`(출시용 `sporesweep-7943b`, 2026-11-11에 받음) | 기록을 보내지 않는다. 예전 ID로 등록한 개발용 파일 둘은 `~/Developer/sporesweep-firebase-dev/`로 옮겨 두었다(새 ID와 맞지 않아 안드로이드 빌드가 실패한다) |
 | 웹 Firebase | `android/web/firebase-config.js` (예시: `firebase-config.example.js`) | 웹판이 기록을 보내지 않는다 |
 | 안드로이드 업로드 키 | `~/Developer/keys/` (저장소 밖). 비밀번호는 macOS 키체인 `sporesweep-upload-key` | 출시 묶음에 서명할 수 없다. 잃으면 Play Console에서 키 재설정을 해야 한다 |
 | ElevenLabs API 키 | macOS 키체인 `elevenlabs-api-key`. 스크립트 안에서만 꺼내 쓴다. 화면에 찍거나 파일에 적지 않는다 | 소리를 새로 만들 수 없다 |
@@ -114,6 +114,8 @@
 | Kotlin `:core:allTests` | JVM 36, Wasm 31, JS 31 (기준 기록 399레벨, 15,070수) |
 | mods판 | 8 (터미널 4, 데스크톱 4) |
 
+**안드로이드 프로덕션 출시 진행 중(2026-11-11).** 비공개 테스트 조건 셋(버전 게시, 12명 참여, 14일)이 모두 채워졌다. 순서: ① 프로덕션 액세스 신청 제출함(2026-11-11 오전 11:07) → ② 승인됨(2026-11-12) → ③ **지금: 프로덕션 버전 7 (1.0.1)과 국가(중국 제외 전체)를 Google 검토에 냈다(2026-11-13). 검토를 기다린다(보통 7일 안).** 관리형 게시가 꺼져 있어 승인되면 바로 공개된다. 공개되면 Play에서 받은 빌드로 광고·클라우드 저장·별점 창을 확인한다(자기 광고는 누르지 않는다). 원래 계획: 프로덕션 트랙에 versionCode 7(1.0.1, 실제 광고, 출시용 Firebase)을 올리고 국가를 넓혀 검토에 낸다 → ④ 출시 뒤 AdMob 안드로이드 앱에 Play 주소를 연결하고 code404.app의 "Android 준비 중"을 바꾼다. 프로덕션 출시 노트는 7절 끝의 1.0.1 문구에서 iCloud를 "Google Play 게임즈"로 바꿔 쓴다.
+
 **다음 할 일.**
 
 1. 동호회 사람들의 웹판·mods판 반응을 듣고 난이도와 화면을 고친다. Firebase의 `level_start`(시드 포함), `level_end`로 포기 지점을 본다.
@@ -142,6 +144,11 @@
 
 새것이 위다.
 
+- **2026-11-13** 계정 주인 승인으로 게시 개요의 변경 3개(7 (1.0.1) 전체 출시 시작, 176개 국가/지역 추가, 기타 국가 추가)를 "검토를 위해 변경사항 전송"으로 Google에 냈다. 빠른 검사를 지나 "변경사항을 검토 중입니다"가 됐다. 공개 뒤 할 일: Play 스토어 주소 확인, AdMob 안드로이드 앱에 Play 주소 연결과 앱 인증(app-ads.txt), code404.app의 "Android 준비 중"을 받기 단추로, 릴스·커뮤니티 글에 안드로이드 추가, 비공개 테스터에게 알리기.
+- **2026-11-12** 계정 주인이 `sporesweep-7-1.0.1.aab`를 프로덕션 버전에 올렸다. 미리보기: 7 (1.0.1), API 26 이상, 타겟 36, 신규 설치 21.3MB, 경고는 네이티브 디버그 기호 없음 1개(예전과 같다). 저장해 게시 개요에 변경 3개가 대기한다: "7 (1.0.1) 전체 출시 시작", "176개 국가/지역 추가", "기타 국가 추가"(중국 제외). 아직 Google에 전송하지 않았다.
+- **2026-11-12** 프로덕션 액세스가 승인됐다(계정 주인 확인). 프로덕션 트랙의 국가/지역을 전체에서 중국만 뺀 것으로 저장했다(게시 개요에 대기, 아직 전송 전). 프로덕션 버전 1을 만들어 출시명 "7 (1.0.1)"과 출시 노트(한국어·영어: 첫 정식 출시, 24개 도시 380레벨, 자랑하기, Play 게임즈 저장)를 넣고 임시보관함에 저장했다. 내장 브라우저로는 파일을 올릴 수 없어 `~/Downloads/sporesweep-release/sporesweep-7-1.0.1.aab`는 계정 주인이 끌어다 놓는다. 라이브러리의 예전 번들(3~6)은 시험 광고 판이라 프로덕션에 쓰지 않는다. 이날 Play 콘솔의 계정 순서가 `/u/0/`으로 바뀌어 있었다(주소의 `/u/N/`은 그때그때 확인).
+- **2026-11-11** 계정 주인 승인으로 프로덕션 액세스 신청서를 제출했다(오전 11:07, 대시보드에 "프로덕션 액세스 권한 신청을 접수했습니다"). 승인 메일이 오면 프로덕션 트랙에 `sporesweep-7-1.0.1.aab`를 올린다.
+- **2026-11-11** 안드로이드 프로덕션 출시 준비(브랜치 `claude/production-release-prep-44ad67`, 계정 주인 지시). Play Console에서 비공개 테스트 조건 셋이 모두 체크된 것을 확인했다. 출시용 Firebase `sporesweep-7943b`에 안드로이드 앱(`app.code404.sporesweep`)을 등록하고 `google-services.json`을 받아 `android/app/`에 넣었다(본 저장소 폴더와 작업 폴더 둘 다, 저장소에는 올리지 않는다. 닉네임이 "포자 대청소 Android"가 두 번 겹쳐 들어갔다, 보기에만 영향). 버전을 versionCode 7, versionName 1.0.1로 올렸다(계정 주인 결정: iOS와 번호를 맞춘다). 프로덕션 액세스 신청 양식 3쪽에 답변 초안을 넣었다(모집: 지인·동호회, 유료 업체 없음, 난이도 "어려웠음", 첫해 설치 "0~1만"). 제출("적용")은 계정 주인 확인 뒤에 한다. 내장 브라우저에서 Play·Firebase 콘솔은 구글 계정 순서 `/u/1/`(계정 주인 개인 Gmail)로 들어간다. 작업 폴더(worktree)에는 `android/config.properties`, `android/local.properties`, `google-services.json`이 없어 본 저장소 폴더에서 복사해야 빌드된다. 출시 묶음: `~/Downloads/sporesweep-release/sporesweep-7-1.0.1.aab`(26.4MB, `bundleRelease`를 `-PtestAds` 없이). 묶음 안에서 확인한 것: versionCode 7·1.0.1, 실제 AdMob 앱 ID(시험 ID 없음), `TEST_ADS=false`, 출시용 Firebase 앱 ID, 업로드 키 서명(SHA-1 `25:22:…:47:CF`). core JVM 시험 통과. 에뮬레이터(spore36, `-dns-server 8.8.8.8`)에 같은 설정의 출시 APK를 깔아 타이틀 화면이 뜨고 죽지 않는 것, Firebase 분석(FA)과 광고 SDK가 시작되는 것을 봤다(서명이 달라 에뮬레이터의 디버그 판과 그 진행은 지웠다). 실제 광고는 누르지 않았고, 실기기와 Play에서 받은 빌드로는 아직 보지 못했다. `adb shell monkey`로는 앱이 뜨지 않아 `am start -n app.code404.sporesweep/dev.code404.sporesweep.MainActivity`로 켰다. 커밋 전이다.
 - **2026-11-06** 릴스 R3 자랑하기 편(16초, 1.0.1 새 기능)을 만들었다: `Marketing/promo/R3_brag.mp4`, 올리기용 `R3_brag_upload.mp4`(6.4MB). 자랑 그림은 시뮬레이터에서 디버그 빌드를 `-skipTitle 1 -shareCard <도시>`로 켜서 앱이 그린 것(서울·로마·파리, `Marketing/promo/src/share_cards/`, `-skipTitle` 없이는 파일이 생기지 않는다). `Tools/make_reels.py`에 R3를 더하고, 이름을 주면 그것만 만들게 했다(R1·R2 덮지 않게). 계정 주인 승인으로 올렸다: 유튜브 쇼츠 https://youtube.com/shorts/b8t8FWCfyJM , 인스타 릴스 https://www.instagram.com/code404.app/reel/DfYYfkSqk-0/ (둘 다 AI 표시 켬, 기록은 `Marketing/promo/README.md` 올린 기록). 커뮤니티 글 1.0.1판을 `COMMUNITY_POSTS.md` 0절에 더했다(지어낸 사연 빼고, 다모앙에는 업데이트 알림 댓글).
 - **2026-11-06** code404.app 출시 반영을 Cloudflare Pages `code404-site`(프로덕션)에 올렸다(Claude in Chrome, 계정 주인 승인): 홈의 포자 대청소를 "곧 출시"→"App Store 출시"·"App Store에서 받기" 단추·"Android 준비 중", 연락처에 유튜브 @code404app, `/sporesweep/`에 받기 단추·Safari 스마트 배너(`app-id=6826591259`)·검색 설명·og 태그, 사이트의 옛 아이콘 두 장(`sporesweep/icon.png`, `games/sporesweep.png`)을 새 아이콘으로. 앱이 iPhone 전용 빌드라 "iPad"는 적지 않았다. 실제 사이트 파일이 로컬과 같고 `app-ads.txt`·처리방침이 200인 것을 확인했다. 캣타워는 아직 "곧 출시".
 - **2026-11-05** Google Play "판매자 상태 선언" 요구(마감 2027년 2월, 안 하면 전 세계 Play에서 개발자 프로필과 앱이 내려간다). 판매자로 선언하면 주소·전화·이메일이 공개된다. 계정 주인이 공개 개발자 이메일과 전화번호를 바꿨다. 남은 것: 법적 주소가 결제 프로필의 집 주소라 사업장 주소로 바꿀지 정한 뒤, 계정 주인이 선언한다(법적 신고라 Claude가 고르지 않는다).
