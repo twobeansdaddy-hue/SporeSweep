@@ -374,7 +374,10 @@ struct GameView: View {
                 // 보여줄 설명도 없고 고를 부스터도 없으면 카드를 건너뛰고 바로 시작한다.
                 let ownsBooster = !model.isLabMode && Booster.allCases.contains { model.boosterCount($0) > 0 }
                 showsStartCard = !autoPlays && (tutorial != nil || ownsBooster)
+                #if DEBUG
+                // 자동 진행(`-autoplay 1`)은 디버그 빌드에만 있다. Release에서 감싸지 않으면 "실행되지 않는 코드" 경고가 난다.
                 if autoPlays { tutorial = nil }
+                #endif
                 // 카드가 없으면 여기서 바로 시작한 것이다.
                 if !showsStartCard { logStart(boosters: 0) }
             }
