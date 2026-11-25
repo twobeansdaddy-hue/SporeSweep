@@ -125,6 +125,14 @@ object BlockSprite {
             spriteNode("obstacle_chain", cellSize)?.let {
                 it.name = "chain"
                 it.z = 0.25f
+                // 사슬은 철망 테두리와 겹쳐 폰 크기에서 철망처럼 보인다. 큰 자물쇠를 오른쪽 아래에 달아 구분한다.
+                spriteNode("obstacle_padlock", cellSize * 0.46f)?.let { lock ->
+                    lock.name = "chainLock"
+                    lock.x = cellSize * 0.25f
+                    lock.y = -cellSize * 0.25f
+                    lock.z = 0.05f
+                    it.addChild(lock)
+                }
                 node.addChild(it)
             }
         }
@@ -135,6 +143,8 @@ object BlockSprite {
         val ice = spriteNode("obstacle_ice", cellSize * 1.04f) ?: SpriteNode(SColor(0.72f, 0.9f, 1f, 0.6f), cellSize * 0.94f, cellSize * 0.94f)
         ice.name = "ice"
         ice.z = 0.3f
+        // 얼음 속 블록의 종류가 폰 크기에서도 보이도록 조금 비치게 그린다.
+        ice.alpha = 0.78f
         return ice
     }
 
@@ -180,7 +190,9 @@ object BlockSprite {
         badge.z = 0.3f
         val label = LabelNode("", side * 0.44f)
         label.name = TIMER_LABEL_NAME
-        label.y = -side * 0.05f
+        // 그림(다리 달린 기생체)의 어두운 창은 가운데보다 조금 오른쪽에 있다(창 지름은 배지 높이의 약 0.39배).
+        label.x = side * 0.05f
+        label.y = 0f
         label.z = 0.1f
         badge.addChild(label)
         setTimer(turns, badge)
@@ -192,6 +204,8 @@ object BlockSprite {
         val badge = if (node.name == TIMER_NAME) node else node.childNamed(TIMER_NAME)
         val label = badge?.childNamed(TIMER_LABEL_NAME) as? LabelNode ?: return
         label.text = "$turns"
+        // 두 자리(10)는 창 밖으로 나가지 않게 줄인다.
+        label.setScale(if (turns >= 10) 0.75f else 1f)
         label.fontColor = if (turns <= 2) SColor(1f, 0.35f, 0.3f) else SColor.white
     }
 
@@ -199,6 +213,14 @@ object BlockSprite {
         val texture = texture("obstacle_cocoon")
         val node: Node = if (texture != null) SpriteNode(texture, cellSize, cellSize) else SpriteNode(SColor(1f, 0.36f, 0.66f), cellSize * 0.94f, cellSize * 0.94f)
         node.name = name(Block.Cocoon(kind))
+        // 그림의 가운데 창은 연분홍이다. 분홍은 오염 물질에만 쓰므로 크림색 원으로 덮고 그 위에 블록을 놓는다.
+        val window = ShapeNode.circle(cellSize * 0.25f)
+        window.name = "cocoonWindow"
+        window.fillColor = SColor(1f, 0.95f, 0.86f)
+        window.strokeColor = SColor.clear
+        window.y = cellSize * 0.02f
+        window.z = 0.05f
+        node.addChild(window)
         val icon = makeNode(Block.Normal(kind), cellSize * 0.46f)
         icon.name = "cocoonKind"
         icon.y = cellSize * 0.02f
@@ -213,6 +235,8 @@ object BlockSprite {
         // 은청색 고철 위에서 묻히지 않도록 창살을 조금 어둡게 누른다.
         cage.color = SColor(0.16f, 0.18f, 0.28f)
         cage.colorBlendFactor = 0.5f
+        // 갇힌 블록(특히 유리·너트)이 창살에 묻히지 않도록 조금 비치게 그린다.
+        cage.alpha = 0.82f
         cage.z = 0.2f
         return cage
     }

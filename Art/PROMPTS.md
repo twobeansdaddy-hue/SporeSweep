@@ -44,6 +44,8 @@
 | `sheet_nest.png` | 포자 둥지(앱에서는 분홍을 짙은 포도주색으로 옮겨 쓴다. 고치와 안개도 색을 옮겼고, 옮기기 전 그림은 `old/sprites_pink/`)(가로 1024×512, 2칸). 왼쪽은 온전한 것, 오른쪽은 금이 간 것. 오염 고치 시트를 화풍 참조로 붙였다 |
 | `bangkok_restored.png`, `bangkok_ruined.png` | 왓 아룬. 인디아 게이트 그림을 구도와 화풍 참조로 붙여 그렸다. 가운데 큰 탑과 양옆의 작은 탑, 넓은 기단. `split_landmark.py`의 `wall` 모양으로 나눈다 |
 | `sheet_timer.png` | 시한 포자(1024×1024, 1칸). 심지가 달린 분홍 포자이고 가운데의 어두운 원은 비어 있다. 숫자는 앱이 적는다 |
+| `timer_v2/obstacle_timer_b.png` (시안 2, 앱에 아직 넣지 않음) | 시한 포자 두 번째 시안(2026-11-25). 기존 그림을 고치게 하지 않고 게임 전체 설명, 이 장애물의 역할(블록에 달라붙은 시한 기생체, 0이 되면 터짐), 피해야 할 이웃 그림 3장(오염 물질, 중화 폭탄, 포자 둥지)과 붙는 블록(유리)을 참조로 주고 새로 그리게 했다(계정 주인 제안). ElevenLabs `gpt-image-2.5-sunburst`, 1장, 1,160크레딧(참조 4장이라 비쌌다). 다리로 달라붙은 포도주색 진드기 모양에 라임색 반점. 초록 배경을 요청했지만 흰 배경으로 나와서 가장자리에서 이어진 흰색만 지우는 파이썬 한 번으로 잘랐다(원본 `timer_eleven_v2_raw.png`). 프롬프트는 아래 "시한 포자 v2-b" |
+| `timer_v2/obstacle_timer.png` (시안, 앱에 아직 넣지 않음) | 시한 포자 다시 그리기 시안(2026-11-25). AI 테스터 검토에서 오염 물질과 같은 분홍 가시 모양이라 헷갈린다고 나와 포도주색의 둥근 꼬투리로 바꿨다. ElevenLabs 이미지 생성(모델 `gpt-image-2.5-sunburst`, 이미지 편집, 1장, 433크레딧)으로 만들었고, 지금 `obstacle_timer.png`를 공개 저장소 주소로 참조로 붙였다. 원본 1280×720은 `timer_eleven_raw.png`, `swift Tools/cut_chroma.swift Art/incoming/timer_v2/timer_eleven_raw.png 1 1 Art/incoming/timer_v2 256 =obstacle_timer`로 잘랐다. 프롬프트는 아래 "시한 포자 v2". ElevenLabs 생성물의 상업 이용 조건은 아직 확인하지 않았다(넣기 전에 확인) |
 | `singapore_restored.png`, `singapore_ruined.png` | 마리나 베이 샌즈. 왓 아룬 그림을 구도와 화풍 참조로 붙여 그렸다. 건물에 하늘색을 쓰지 말라고 적어야 한다(하늘과 함께 지워진다) |
 | `sheet_fog.png` | 오염 안개(1024×1024, 1칸). 칸을 다 덮는 불투명한 보라색 구름 |
 | `map_world.png` | 세계 지도(가로 1536×1024). 권역의 번호는 앱이 얹는다 |
@@ -225,3 +227,44 @@ In the same art style, create a mobile app icon. Image size 1024x1024, fully opa
 
 A single hot-pink spiky alien spore with a dark maroon nucleus, large and centered, filling about 65% of the icon, on a deep navy-to-dark-purple gradient background with a faint pink glow behind the spore. Bold, simple, readable at small sizes.
 ```
+
+## 시한 포자 v2 (ElevenLabs, 2026-11-25)
+
+```text
+Redraw this game sprite as a new design, keeping exactly the same art style, framing and size: one single centered object filling about 85% of a square canvas. It is a "timed spore" obstacle badge for a match-3 game. It must NOT look like the attached pink spiky blob, because that pink spiky shape is used for a different object in the game.
+
+New object: a smooth, round, slightly squat seed pod / gourd-like capsule, with NO spikes and NO bumps around the edge, a clean circular silhouette. Body color: deep wine / burgundy red (#7A1838 base, #A3264E light side, #4A0A22 shadow), NOT pink, NOT magenta. Keep the short dark fuse with a tiny yellow-orange spark sticking out from the top-right, like the original. In the middle of the body there is one large, perfectly round, empty window filled with a very dark plum color (#2A0616), with a thin cream-colored rim around it; this window must stay completely empty (a number will be drawn on top by the game), and it sits slightly below the center. Add two or three small darker wine spots on the body for a fungal feel.
+
+(뒤에 위 "화풍 지시"를 그대로 붙였다)
+```
+
+## 시한 포자 v2-b (ElevenLabs, 2026-11-25)
+
+참조: 1 `material.png`(목표), 2 `block_bomb.png`(아군 특수 블록), 3 `obstacle_nest_1.png`(다른 장애물), 4 `block_glass.png`(붙는 블록). 모두 공개 저장소의 raw 주소로 붙였다.
+
+```text
+GAME CONTEXT. "SporeSweep" is a cute, candy-colored mobile match-3 puzzle game. Aliens sprayed pink alien goo over Earth's cities. ... Pink is reserved ONLY for the goo the player must collect. Obstacles use dark wine / burgundy colors. Helpful special blocks are glossy and navy-blue.
+THE ASSET TO DESIGN: the "timed spore", a small sticky parasite that clings to the lower-right corner of an ordinary block (about 60% of one cell). It carries a countdown number (3 to 20) in its center ... at 0 it bursts and turns the block and its four neighbours into sludge ... must read instantly as "a hostile, ticking parasite that is NOT the goal and NOT a power-up".
+ATTACHED IMAGES, for context only, do not copy them ... silhouette must clearly differ from images 1-3: no spiky star outline, no round-ball-with-fuse bomb shape, no crater/volcano shape.
+DESIGN: ... deep wine/burgundy with a sickly yellow-green or acid-lime accent ... one large, flat, very dark circular area (about 45% of the object's width) left empty for the number ...
+STYLE: (위 "화풍 지시"와 같다) Exactly one object, centered, filling about 80% of a square canvas.
+```
+(전문은 ElevenLabs 흐름 "SporeSweep timed spore redesign"에 남아 있다.)
+
+## 에셋 점검 1차 (ElevenLabs, 2026-11-25)
+
+`Art/ASSET_AUDIT.md`의 "다시 만들 목록"을 그렸다. 모두 ElevenLabs 이미지 생성(`gpt-image-2.5-sunburst`, 각 1장, 흐름 "SporeSweep timed spore redesign"). 방법은 시한 포자 v2-b와 같다: 게임 설명, 그 그림의 역할, 피해야 할 이웃 그림을 참조로 준다. 참조는 공개 저장소의 raw 주소로 붙였다. 원본은 `Art/incoming/asset_v2/*_raw.png`.
+
+| 앱 파일 | 참조 | 크레딧 | 프롬프트 요지 | 넣은 방법 |
+|---|---|---|---|---|
+| `obstacle_timer.png` | (시한 포자 v2-b) | 1,160 | 위 "시한 포자 v2-b" | `timer_v2/obstacle_timer_b.png`를 높이 256으로 |
+| `obstacle_egg.png` | `block_bomb.png`(피할 것), `obstacle_nest_2.png`(장애물 색) | 675 | 갑옷 두른 세로 알, 짙은 쇳빛·포도주색 판, 리벳 철띠 둘, 갈라진 틈에서 라임빛. 남색·주황·줄무늬·공+꼭지 모양 금지 | 투명 배경으로 왔다. 물체에 맞춰 잘라 예전 여백(30,7)-(226,248)에 맞춤 |
+| `obstacle_nest_1.png`(체력 1) | `obstacle_nest_2.png`(이미지 편집) | 433 | 같은 둥지를 크게 망가뜨림: 왼쪽 테두리가 떨어져 나가고, 라임빛 깊은 금 두세 줄, 기울어짐, 바닥에 조각 | 초록 배경 → `swift Tools/cut_chroma.swift Art/incoming/asset_v2/nest1_raw.png 1 1 Art/incoming/asset_v2 256 =nest1_cut`, 예전 여백에 바닥 맞춤 |
+| `obstacle_chain.png` | `obstacle_cage.png`(아래에 깔리는 철망) | 433 | 칸 가장자리만 감는 짙은 쇳빛 사슬 테두리, 오른쪽 아래 작은 자물쇠(라임 열쇠 구멍), 가운데 65%는 비움. 금색 금지 | 투명 배경(가운데도 투명)으로 왔다. (7,7)-(249,249)에 늘려 맞춤 |
+| `tokyo_building_ruined.png` | `tokyo_building_restored.png`(위치), `paris_building_ruined.png`(폐허 화풍) | 675 | 복원판과 같은 자리·폭·발 위치의 베이지 돌 폐허, 분홍·연어·빨강 금지 | 투명 배경. 물체를 1.35×0.82배(가로 627)로 키워 가운데, 발 끝 y=975. 1.0·1.2·1.35·세로 1.4배를 반쯤 복원한 모습으로 비교해 골랐다 |
+
+합계 3,376크레딧(시한 포자 시안 1의 433 포함하면 3,809). 배경은 초록을 요청해도 투명이나 흰색으로 오는 일이 많았다.
+
+**도쿄 폐허 층 맞춤(2026-11-25).** AI 테스터 검증에서 폐허의 전망대가 복원판보다 낮아(큰 전망대 0.62~0.715 대 0.545~0.645) 받침만 복원하면 폐허 전망대가 잘린다고 나왔다. 다시 만들지 않고 세로로만 구간별로 늘렸다(폭과 바닥 0.951은 그대로). 대응점(목표 y ← 원래 y, 그림 높이 비율): 0.051←0.215(꼭대기), 0.235←0.385, 0.30←0.445(윗 전망대), 0.545←0.62, 0.645←0.715(큰 전망대), 0.951←0.951. 늘리기 전 그림은 `Art/incoming/asset_v2/tokyo_ruined_unwarped.png`. 늘린 뒤 탑 포자 10개가 모두 폐허 위에 앉는다(가장 먼 안테나 포자 36px).
+
+**자물쇠 `obstacle_padlock.png`(2026-11-25, 생성 없음).** 쇠사슬이 폰 크기에서 그냥 철망과 비슷해 보여서(AI 테스터 지적), 쇠사슬 생성 원본 `Art/incoming/asset_v2/chain_raw.png`의 오른쪽 아래 자물쇠만 오려 따로 그림으로 만들었다. 몸통은 기울어진 네모 (864,588)-(1044,536)-(1074,690)-(892,724), 걸쇠는 타원 고리(바깥 912,494,1000,600 / 안쪽 934,516,978,600)를 따라 오리고 256 안에 맞췄다(`Art/incoming/asset_v2/padlock.png`). 앱은 쇠사슬 노드의 자식으로 칸의 0.46배 크기, 오른쪽 아래(0.25, -0.25)에 단다.

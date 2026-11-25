@@ -263,6 +263,13 @@ enum BlockSprite {
             if let chain = spriteNode(named: "obstacle_chain", cellSize: cellSize) {
                 chain.name = "chain"
                 chain.zPosition = 0.25
+                // 사슬은 철망 테두리와 겹쳐 폰 크기에서 철망처럼 보인다. 큰 자물쇠를 오른쪽 아래에 달아 구분한다.
+                if let lock = spriteNode(named: "obstacle_padlock", cellSize: cellSize * 0.46) {
+                    lock.name = "chainLock"
+                    lock.position = CGPoint(x: cellSize * 0.25, y: -cellSize * 0.25)
+                    lock.zPosition = 0.05
+                    chain.addChild(lock)
+                }
                 node.addChild(chain)
             } else {
                 let chain = cageOverlay(cellSize: cellSize * 1.08)
@@ -284,6 +291,8 @@ enum BlockSprite {
         if let ice = spriteNode(named: "obstacle_ice", cellSize: cellSize * 1.04) {
             ice.name = "ice"
             ice.zPosition = 0.3
+            // 얼음 속 블록의 종류가 폰 크기에서도 보이도록 조금 비치게 그린다.
+            ice.alpha = 0.78
             return ice
         }
         let side = cellSize * 0.94
@@ -394,8 +403,8 @@ enum BlockSprite {
         label.fontSize = side * 0.44
         label.verticalAlignmentMode = .center
         label.horizontalAlignmentMode = .center
-        // 그림의 어두운 원은 심지 때문에 한가운데보다 조금 아래에 있다.
-        label.position = CGPoint(x: 0, y: -side * 0.05)
+        // 그림(다리 달린 기생체)의 어두운 창은 가운데보다 조금 오른쪽에 있다(창 지름은 배지 높이의 약 0.39배).
+        label.position = CGPoint(x: side * 0.05, y: 0)
         label.zPosition = 0.1
         badge.addChild(label)
         setTimer(turns, on: badge)
@@ -407,6 +416,8 @@ enum BlockSprite {
         let badge = node.name == timerName ? node : node.childNode(withName: timerName)
         guard let label = badge?.childNode(withName: timerLabelName) as? SKLabelNode else { return }
         label.text = "\(turns)"
+        // 두 자리(10)는 창 밖으로 나가지 않게 줄인다.
+        label.setScale(turns >= 10 ? 0.75 : 1)
         label.fontColor = turns <= 2 ? SKColor(red: 1.0, green: 0.35, blue: 0.3, alpha: 1) : .white
     }
 
@@ -470,6 +481,14 @@ enum BlockSprite {
             node = box
         }
         node.name = name(for: .cocoon(kind))
+        // 그림의 가운데 창은 연분홍이다. 분홍은 오염 물질에만 쓰므로 크림색 원으로 덮고 그 위에 블록을 놓는다.
+        let window = SKShapeNode(circleOfRadius: cellSize * 0.25)
+        window.name = "cocoonWindow"
+        window.fillColor = SKColor(red: 1.0, green: 0.95, blue: 0.86, alpha: 1)
+        window.strokeColor = .clear
+        window.position = CGPoint(x: 0, y: cellSize * 0.02)
+        window.zPosition = 0.05
+        node.addChild(window)
         let icon = makeNode(block: .normal(kind), cellSize: cellSize * 0.46)
         icon.name = "cocoonKind"
         // 창은 고치의 가운데에 있다.
@@ -497,6 +516,8 @@ enum BlockSprite {
             // 은청색 고철 위에서 묻히지 않도록 창살을 조금 어둡게 누른다.
             cage.color = SKColor(red: 0.16, green: 0.18, blue: 0.28, alpha: 1)
             cage.colorBlendFactor = 0.5
+            // 갇힌 블록(특히 유리·너트)이 창살에 묻히지 않도록 조금 비치게 그린다.
+            cage.alpha = 0.82
             cage.zPosition = 0.2
             return cage
         }
