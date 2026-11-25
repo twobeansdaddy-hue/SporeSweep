@@ -29,12 +29,12 @@ struct CairoTests {
         #expect(!state.possibleMoves().isEmpty)
     }
 
-    @Test("피라미드와 스핑크스는 열 부위이고, 별 48개 가운데 43개면 다 복원한다")
+    @Test("피라미드와 스핑크스는 열 부위이고, 별 48개 가운데 40개면 다 복원한다")
     func landmark() throws {
         let city = try LevelCatalog.city("cairo")
         #expect(city.name == "카이로")
         #expect(city.landmark.parts.count == 10)
-        #expect(city.landmark.totalCost == 43)
+        #expect(city.landmark.totalCost == 40)
         let requires = Dictionary(uniqueKeysWithValues: city.landmark.parts.map { ($0.id, $0.requires) })
         #expect(requires["middle"] == ["base"])
         #expect(requires["peak"] == ["middle"])

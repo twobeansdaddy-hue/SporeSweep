@@ -37,13 +37,13 @@ struct NewDelhiTests {
         #expect(throws: LevelError.self) { try level.validate() }
     }
 
-    @Test("인디아 게이트는 열 부위이고, 별 48개 가운데 44개면 다 복원한다")
+    @Test("인디아 게이트는 열 부위이고, 별 48개 가운데 40개면 다 복원한다")
     func landmark() throws {
         let city = try LevelCatalog.city("newdelhi")
         #expect(city.name == "뉴델리")
         #expect(city.landmark.name == "인디아 게이트")
         #expect(city.landmark.parts.count == 10)
-        #expect(city.landmark.totalCost == 44)
+        #expect(city.landmark.totalCost == 40)
         let requires = Dictionary(uniqueKeysWithValues: city.landmark.parts.map { ($0.id, $0.requires) })
         #expect(requires["arch"] == ["pierLeft", "pierRight"])
         #expect(requires["crown"] == ["arch"])
