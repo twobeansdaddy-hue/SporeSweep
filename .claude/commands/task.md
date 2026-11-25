@@ -10,5 +10,5 @@ argument-hint: <하고 싶은 작업을 자연어로>
 진행 규칙:
 - 단계마다 TaskCreate로 작업 목록을 만들고 완료할 때마다 체크한다.
 - 사람 승인 지점 5곳 외에는 묻지 말고 진행한다.
-- 보조 도구(decide, agy-research, council, codex-review)가 실패하면 대체 경로로 넘어가고 멈추지 않는다.
+- 보조 도구(decide, agy-research, council, codex-review, codex-implement)가 실패하면 대체 경로로 넘어가고 멈추지 않는다.
 - 마지막 보고에 "대체 경로를 쓴 단계"를 반드시 적는다.

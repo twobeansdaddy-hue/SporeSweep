@@ -8,7 +8,7 @@ import { homedir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { plan as ciPlan } from './ci.mjs';
 import { cdConfig, validate as cdValidate } from './cd.mjs';
-import { findRoot, loadEnv, loadConfig, childEnv, globalEnvPath, readRegistry, compareVersions, stageSettings, codexModelArgs, agyModelArgs, autoSelectOn, tierNames, withTier, TIER_TARGETS, hasCommand, run } from './lib.mjs';
+import { findRoot, loadEnv, loadConfig, childEnv, globalEnvPath, readRegistry, compareVersions, stageSettings, codexModelArgs, agyModelArgs, autoSelectOn, tierNames, withTier, TIER_TARGETS, SUBAGENT_MODELS, hasCommand, run } from './lib.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = findRoot(HERE);
@@ -69,7 +69,6 @@ if (ping) {
 // 단계별 모델·추론 강도 (config.json stages). 빈 값은 도구 기본값.
 const CONFIG = loadConfig(ROOT);
 const AGY_EFFORTS = ['low', 'medium', 'high', 'xhigh', 'max'];          // agy --help 기준
-const SUBAGENT_MODELS = ['', 'inherit', 'sonnet', 'opus', 'haiku', 'fable']; // Agent 도구가 받는 별칭
 function stageCheck(cfg, stage, agent) {
   let model = '', effort = '';
   const problems = [];
@@ -82,7 +81,7 @@ function stageCheck(cfg, stage, agent) {
   if (stage === 'subagents' && !SUBAGENT_MODELS.includes(model)) problems.push(`모델은 ${SUBAGENT_MODELS.filter(Boolean).join('|')} 중 하나`);
   return { problems, text: `${model || '기본값'} / 강도 ${effort || '기본값'}` };
 }
-for (const [stage, agent] of [['review', 'codex'], ['council', 'codex'], ['council', 'agy'], ['research', 'agy'], ['subagents', 'reviewer'], ['subagents', 'researcher']]) {
+for (const [stage, agent] of [['review', 'codex'], ['implement', 'codex'], ['council', 'codex'], ['council', 'agy'], ['research', 'agy'], ['subagents', 'reviewer'], ['subagents', 'researcher']]) {
   const { problems, text } = stageCheck(CONFIG, stage, agent);
   add(problems.length ? 'WARN' : 'OK', `모델 ${stage}.${agent}`, problems.length ? problems.join(', ') : text);
 }
@@ -96,7 +95,7 @@ else for (const tier of tierNames(CONFIG)) {
     for (const [stage, agent] of TIER_TARGETS) {
       const c = stageCheck(cfg, stage, agent);
       problems.push(...c.problems.map((p) => `${stage}.${agent}: ${p}`));
-      parts.push(`${agent} ${c.text}`);
+      parts.push(`${agent === 'codex' ? `codex(${stage})` : agent} ${c.text}`);
     }
   } catch (e) { problems.push(e.message); }
   add(problems.length ? 'WARN' : 'OK', `등급 ${tier}`, problems.length ? problems.join(', ') : parts.join(' · '));

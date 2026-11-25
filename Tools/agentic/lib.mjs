@@ -84,8 +84,13 @@ export function loadEnvFile(file) {
 // 외부 에이전트(codex·agy) 자식 프로세스에 넘기지 않는 키: 키 파일에서 읽은 모든 변수와,
 // 셸에 있더라도 키트·서비스 키로 알려진 이름(ElevenLabs 등). 프로젝트 스크립트에는 env-run.mjs로 넘긴다.
 const KIT_SECRET_RE = /^(CLOUDFLARE_|TYPESAFE_|OPENROUTER_|DECIDE_LOCAL_|ELEVENLABS_)/;
-export function childEnv() {
-  return Object.fromEntries(Object.entries(process.env).filter(([k]) => !KIT_SECRET_RE.test(k) && !loadedKeys.has(k)));
+// strict: 파일을 고칠 수 있는 외부 에이전트(codex-implement)용. 이름이 비밀값처럼 보이는 셸 변수도 뺀다
+// (GITHUB_TOKEN, AWS_SECRET_ACCESS_KEY, NPM_TOKEN 등). Codex 자신의 인증에 쓰이는 OPENAI_·CODEX_ 변수는 남긴다.
+const GENERIC_SECRET_RE = /(TOKEN|SECRET|PASSWORD|PASSWD|API_?KEY|PRIVATE_?KEY|CREDENTIAL|SESSION_?KEY|ACCESS_?KEY)/i;
+const AGENT_OWN_RE = /^(OPENAI_|CODEX_)/;
+export function childEnv({ strict = false } = {}) {
+  return Object.fromEntries(Object.entries(process.env).filter(([k]) =>
+    !KIT_SECRET_RE.test(k) && !loadedKeys.has(k) && !(strict && GENERIC_SECRET_RE.test(k) && !AGENT_OWN_RE.test(k))));
 }
 
 export function loadConfig(root) {
@@ -140,6 +145,149 @@ export function agyModelArgs({ model, effort }) {
   return [...(model ? ['--model', model] : []), ...(effort ? ['--effort', effort] : [])];
 }
 
+// 서브에이전트(Agent 도구)가 받는 모델 별칭. 빈 값·inherit은 메인 세션 모델. 실제 가용 목록은 세션의 Agent 도구 선택지가 기준이다.
+export const SUBAGENT_MODELS = ['', 'inherit', 'sonnet', 'opus', 'haiku', 'fable'];
+
+// ── 실행 시점 가용 모델 (models.mjs) ──
+// 출력 형식이 바뀌거나 깨져도 예외를 내지 않고 빈 목록을 낸다. 목록이 비면 오케스트레이터는 설정 값(또는 전역 기본값)을 쓴다.
+const EFFORT_ORDER = ['none', 'minimal', 'low', 'medium', 'high', 'xhigh', 'max'];
+const byEffort = (a, b) => (EFFORT_ORDER.indexOf(a) + 1 || 99) - (EFFORT_ORDER.indexOf(b) + 1 || 99);
+// max보다 위이거나 키트가 모르는 강도 (예: 자동 위임이 붙은 ultra). 오케스트레이터는 사용자가 요청할 때만 쓴다.
+const beyondMax = (efforts) => efforts.filter((e) => !EFFORT_ORDER.includes(e));
+// CLI가 내준 설명은 그대로 오케스트레이터에게 가므로 제어 문자를 지우고 길이를 자른다.
+const cleanText = (v, max = 200) => (typeof v === 'string' ? v.replace(/[\x00-\x1f\x7f]+/g, ' ').trim().slice(0, max) : '');
+const SAFE_ID_RE = /^[\w.:][\w.:-]*$/; // -로 시작하면 CLI 옵션으로 읽히므로 뺀다 (checkModel과 같은 기준)
+
+// `codex debug models` JSON: { models: [{ slug, display_name, description, default_reasoning_level,
+//   supported_reasoning_levels: [{ effort, description }], visibility }] }.
+// 숨김(visibility: hide) 모델도 hidden: true로 남긴다. 고를 목록에서는 빼지만, 사용자가 설정에 적은 모델인지 대조할 때는 쓴다.
+export function parseCodexModels(text) {
+  let j;
+  try { j = JSON.parse(text); } catch { return []; }
+  return (Array.isArray(j?.models) ? j.models : [])
+    .filter((m) => m && typeof m.slug === 'string' && SAFE_ID_RE.test(m.slug))
+    .map((m) => {
+      const levels = (Array.isArray(m.supported_reasoning_levels) ? m.supported_reasoning_levels : [])
+        .map((l) => (typeof l === 'string' ? { effort: l } : l)).filter((l) => typeof l?.effort === 'string' && /^[a-z]+$/.test(l.effort));
+      const efforts = levels.map((l) => l.effort);
+      const notes = Object.fromEntries(levels.filter((l) => cleanText(l.description)).map((l) => [l.effort, cleanText(l.description)]));
+      return {
+        id: m.slug,
+        name: cleanText(m.display_name, 80) || m.slug,
+        description: cleanText(m.description),
+        defaultEffort: /^[a-z]+$/.test(m.default_reasoning_level ?? '') ? m.default_reasoning_level : '',
+        efforts,
+        beyondMax: beyondMax(efforts),
+        ...(Object.keys(notes).length ? { effortNotes: notes } : {}),
+        hidden: m.visibility === 'hide',
+      };
+    });
+}
+
+// `agy models` 출력: "<ID>\t<표시 이름>" 줄. 강도가 붙은 ID(gemini-3.8-flash-low)는 기본 이름으로 묶고 강도를 모은다.
+// 기본 이름 + --effort로 부르면 된다 (agyModelArgs). 강도가 없는 ID는 efforts가 빈 배열이고 --effort 없이 부른다.
+// 이름이 우연히 -max 등으로 끝나는 모델을 잘못 쪼개지 않도록, 표시 이름이 있으면 같은 "(강도)"로 끝날 때만 묶는다.
+export function parseAgyModels(text) {
+  const byBase = new Map();
+  for (const raw of String(text ?? '').split(/\r?\n/)) {
+    const line = raw.trim();
+    const [id, ...rest] = (line.includes('\t') ? line.split('\t') : line.split(/\s+/)).map((s) => s.trim());
+    // drift-check의 extractModels와 같은 기준에 영문자 하나 이상 ("12 models available" 같은 줄 제외)
+    if (!id || !/^[a-z0-9][\w.-]*$/.test(id) || !/\d/.test(id) || !/[a-z]/.test(id)) continue;
+    const display = cleanText(rest.join(' '), 80);
+    let effort = id.match(AGY_SUFFIX_RE)?.[1];
+    if (effort && display && !new RegExp(`\\(${effort}\\)$`, 'i').test(display)) effort = undefined;
+    const base = effort ? id.replace(AGY_SUFFIX_RE, '') : id;
+    const name = (effort ? display.replace(/\s*\([a-z]+\)$/i, '') : display).trim() || base;
+    const cur = byBase.get(base) ?? { id: base, name, efforts: [] };
+    if (effort && !cur.efforts.includes(effort)) cur.efforts.push(effort);
+    byBase.set(base, cur);
+  }
+  return [...byBase.values()].map((m) => ({ ...m, efforts: m.efforts.sort(byEffort) }));
+}
+
+// ~/.codex/config.toml 최상위의 model·model_reasoning_effort·profile·model_provider (첫 [표] 앞까지만 본다).
+// profile이나 model_provider가 있으면 실제 기본 모델이 다른 곳에서 정해지므로, 목록 대조 결과를 믿지 않는다 (models.mjs).
+export function parseCodexDefaults(text) {
+  const out = { model: '', effort: '', profile: '', provider: '' };
+  const KEYS = { model: 'model', model_reasoning_effort: 'effort', profile: 'profile', model_provider: 'provider' };
+  for (const line of String(text ?? '').split(/\r?\n/)) {
+    if (/^\s*\[/.test(line)) break;
+    const m = line.match(/^\s*(model|model_reasoning_effort|profile|model_provider)\s*=\s*["']([^"']*)["']/);
+    if (m) out[KEYS[m[1]]] = m[2];
+  }
+  return out;
+}
+
+// 스크립트의 --effort 값 고르기. default는 "강도를 넘기지 않음"(모델 기본값, none은 실제 강도 값일 수 있어 쓰지 않는다), 비면 설정·등급에서 물려받은 값.
+// --model로 모델을 바꿀 때는 물려받은 강도가 그 모델에 없을 수 있으므로 --effort도 같이 준다 (PIPELINE).
+export function pickEffort(cli, inherited) {
+  const v = String(cli ?? '').trim();
+  if (v === 'default') return '';
+  return v || inherited;
+}
+
+// ── 외부 CLI 업데이트 (cli-update.mjs) ──
+// 버전 문자열에서 첫 x.y.z (예: "codex-cli 0.151.0" → "0.151.0"). 없으면 빈 값.
+// 사전 공개 접미사(-alpha.3 등)는 버린다. 0.152.0-alpha.3은 0.152.0과 같은 버전으로 본다.
+export function parseVersion(text) {
+  return String(text ?? '').match(/\b(\d+\.\d+\.\d+)\b/)?.[1] ?? '';
+}
+
+// Node의 spawn(cmd)가 실제로 실행할 파일. Windows의 spawn은 PATH에서 .exe·.com만 찾고 .cmd(npm 전역 설치 실행 파일)는 실행하지 못한다.
+// whereOut: `where cmd`(Windows) 또는 `which -a cmd` 출력. { path: 실행될 파일 또는 '', all: 찾은 경로 전부 }
+export function resolveCommand(whereOut, platform = process.platform) {
+  const all = String(whereOut ?? '').split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
+  const path = platform === 'win32' ? (all.find((p) => /\.(exe|com)$/i.test(p)) ?? '') : (all[0] ?? '');
+  return { path, all };
+}
+
+// CLI 업데이트 설정은 이 컴퓨터 전역 상태를 바꾸므로 저장소가 아니라 사용자 설정에 둔다 (공용 키 파일과 같은 폴더).
+// 저장소 config에 두면 커밋 하나로 다른 사람의 오케스트레이터가 승인 없이 명령을 실행하게 만들 수 있다.
+// { "auto": false, "commands": { "codex": [], "agy": [] } }
+export function cliUpdateSettingsPath() {
+  return join(dirname(globalEnvPath()), 'cli-update.json');
+}
+export function loadCliUpdateSettings() {
+  try {
+    const j = JSON.parse(readFileSync(cliUpdateSettingsPath(), 'utf8'));
+    return { auto: j?.auto === true, commands: j?.commands && typeof j.commands === 'object' && !Array.isArray(j.commands) ? j.commands : {} };
+  } catch { return { auto: false, commands: {} }; }
+}
+
+// 실행 파일이 npm 전역 설치본인가. npm의 bin 링크는 `npm root -g` 안(…/node_modules/@openai/codex/…)으로 이어지므로
+// 실제 경로(realpath)가 그 안에 있을 때만 npm으로 본다. 접두 폴더(/usr/local 등)만 같은 Homebrew·apt·수동 설치본은 npm이 아니다.
+// 대소문자는 Windows·macOS에서만 무시한다.
+export function isNpmInstall(realPath, npmRoot, platform = process.platform) {
+  if (!realPath || !npmRoot) return false;
+  const norm = (p) => { const s = p.replace(/\\/g, '/').replace(/\/+$/, ''); return platform === 'win32' || platform === 'darwin' ? s.toLowerCase() : s; };
+  return norm(realPath).startsWith(`${norm(npmRoot)}/`);
+}
+
+// 앱에 들어 있는 CLI (Codex 데스크톱 앱이 함께 설치한 codex). 앱이 스스로 업데이트하므로 키트가 건드리지 않는다.
+export function isAppBundled(path) {
+  return /[\\/]Programs[\\/]OpenAI[\\/]Codex[\\/]/i.test(path) || /\.app\/Contents\//.test(path);
+}
+
+// 업데이트 계획. info: { installed, latest, path, method('npm'|'self'|'app'|''), override(사용자 설정 명령 배열) }
+// needsUpdate: true(설치본이 최신보다 낮음) / false / null(최신 버전을 알 수 없음)
+// command: 실행할 argv. 사용자 설정 명령이 있으면 그것, 없으면 설치 방식별 기본값. 방법이 없으면 null과 reason.
+// 'self'는 그 실행 파일의 도움말에 update 하위 명령이 있을 때만 정한다 (cli-update.mjs).
+const NPM_PKG = { codex: '@openai/codex' };
+const SAFE_ARG_RE = /^[\w@./:=+~-]+$/;
+export function updatePlan(tool, { installed = '', latest = '', path = '', method = '', override = [] } = {}) {
+  const needsUpdate = installed && latest ? compareVersions(installed, latest) < 0 : null;
+  let command = null, reason = '';
+  if (Array.isArray(override) && override.length) {
+    if (override.every((a) => typeof a === 'string' && SAFE_ARG_RE.test(a))) command = override;
+    else reason = `commands.${tool}의 인자에 허용하지 않는 문자가 있음 (영문·숫자·@./:=+~- 만, 공백·역슬래시 불가)`;
+  } else if (method === 'app') reason = 'Codex 앱에 들어 있는 CLI라 앱에서 업데이트해야 함 (키트가 업데이트하지 않음)';
+  else if (method === 'npm' && NPM_PKG[tool] && /^\d+\.\d+\.\d+$/.test(latest)) command = ['npm', 'install', '-g', `${NPM_PKG[tool]}@${latest}`];
+  else if (method === 'self' && tool === 'codex' && path) command = [path, 'update'];
+  else reason = tool === 'agy' ? 'agy에는 업데이트 명령이 없음 (수동 업데이트, 또는 사용자 설정 cli-update.json의 commands.agy에 명령 지정)' : '업데이트 방법을 정하지 못함';
+  return { tool, installed, latest, path, method, needsUpdate, command, ...(reason ? { reason } : {}) };
+}
+
 // ── 요청 난이도 등급별 모델·추론 강도 (config.json의 autoSelect) ──
 // autoSelect.tiers.<등급>.<단계>.<에이전트> = { model, effort }. 빈 값은 stages 값을 그대로 쓴다.
 // 등급은 route 판정의 난이도 점수로 정하고(decide.mjs), 각 스크립트는 --tier <등급>으로 받는다.
@@ -182,7 +330,7 @@ export function withTier(config, tier, fixed = {}) {
 }
 
 // 한 등급에서 실제로 쓰일 값 (council 제외: 파이프라인이 부르지 않는다).
-export const TIER_TARGETS = [['review', 'codex'], ['research', 'agy'], ['subagents', 'reviewer'], ['subagents', 'researcher']];
+export const TIER_TARGETS = [['review', 'codex'], ['implement', 'codex'], ['research', 'agy'], ['subagents', 'reviewer'], ['subagents', 'researcher']];
 export function tierSelection(config, tier) {
   const cfg = withTier(config, tier);
   const out = {};

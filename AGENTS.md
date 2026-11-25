@@ -4,15 +4,19 @@ Claude Code, Codex, Antigravity가 모두 이 파일을 따릅니다. 프로젝�
 
 ## 프로젝트
 
-- 이름: (프로젝트 이름)
-- 한 줄 설명: (무엇을 만드는지)
-- 기술 스택: (예: React + Node.js/Express + MongoDB, Docker)
-- 설치: `(예: npm install)`
-- 개발 서버: `(예: npm run dev)`
-- 테스트: `(예: npm test)`
-- 린트·타입체크: `(예: npm run lint && npm run typecheck)`
+- 이름: 포자 대청소 (SporeSweep)
+- 한 줄 설명: 오염 물질을 격리 컨테이너까지 내려보내 24개 도시의 랜드마크를 되살리는 매치3 모바일 게임 (380레벨)
+- 기술 스택: iOS는 Swift 6 + SpriteKit(기준), 안드로이드·웹·mods는 Kotlin Multiplatform + Compose
+- 기획서: `DESIGN.md` (키트 기본값 `docs/PLAN.md`가 아니다. 저장소 밖 `PLAN.md`는 출시·사업 계획서다)
+- 진행 상태 문서: `HANDOFF.md` (키트 기본값 `docs/STATUS.md`가 아니다. 모든 작업은 진행하면서 이 문서를 고친다)
+- 규칙 코드: `GameCore/`(Swift, 기준), `android/core`(Kotlin). 조정 값: 레벨 JSON `LevelData/Sources/LevelData/Levels/`와 `DESIGN.md`의 수치 표
+- 테스트: `cd GameCore && swift test` (GameScene·LevelData·Progress도 같다), `cd android && ./gradlew :core:allTests`
+- 빌드(경고 확인): `xcodebuild -project SporeSweep.xcodeproj -scheme SporeSweep -destination 'generic/platform=iOS Simulator' build`, `cd android && ./gradlew :app:assembleDebug`
+- 실행·스크린샷: iOS 시뮬레이터에 디버그 빌드를 깔고 `xcrun simctl launch`(디버그 인자 `-skipTitle 1`, `-seed <수>`, `-shareCard <도시>`) 뒤 `xcrun simctl io booted screenshot <파일>`. 안드로이드는 `./gradlew :app:installDebug` 뒤 `adb exec-out screencap -p`(에뮬레이터는 `-dns-server 8.8.8.8`)
+- 균형 측정: `cd LevelData && swift run -c release levelaudit --csv ../Reports/level_audit.csv` (`--recalibrate`는 약 1시간)
+- 에셋 기록 문서: `Art/PROMPTS.md`(그림 프롬프트), 소리는 `Art/sounds/`와 `Tools/`의 생성 스크립트
+- 자세한 명령과 저장소 밖 준비물은 `HANDOFF.md` 4~6절
 
-<!-- agentic-kit:start -->
 ## 역할
 
 | 역할 | 담당 | 비고 |
@@ -20,7 +24,8 @@ Claude Code, Codex, Antigravity가 모두 이 파일을 따릅니다. 프로젝�
 | 결정권자 | 사용자 | 요구 정의, 승인 지점에서 최종 결정 |
 | 관리자(오케스트레이션·방향 결정)·구현 | Claude Code | 사용자가 프롬프트를 입력하는 곳. 다른 에이전트는 맡은 역할의 결과만 내고, 구현 방향은 에이전트끼리 협의하지 않는다 |
 | 교차 리뷰·검증 | Codex (`tools/agentic/codex-review.mjs`) | 한도 초과 시 Claude `reviewer` 서브에이전트 |
-| 보조 리서치·대용량 읽기 | Antigravity CLI (`tools/agentic/agy-research.mjs`) | 실패·한도 초과 시 Claude `researcher` 서브에이전트 |
+| 범위가 정해진 조각의 구현 | Codex (`tools/agentic/codex-implement.mjs`) | Claude Code가 맡길 때만. 별도 워크트리에서 구현하고 커밋하지 않는다. 결과는 Claude Code가 검토해 가져온다. 막히면 Claude Code가 직접 구현 |
+| 보조 리서치·대용량 읽기·문서 초안 | Antigravity CLI (`tools/agentic/agy-research.mjs`, 초안은 `--draft`) | 실패·한도 초과 시 Claude `researcher` 서브에이전트. 초안은 제안이고, 채택은 Claude Code와 사용자가 정한다 |
 | 빠른 판정 (System 1) | 결정 모델 (`tools/agentic/decide.mjs`) | 기본 Clef-flash, 실패 시 판정 생략 |
 | 앱 내부 분석 | REA (MCP) | 판단 근거가 있을 때만, 사용자 승인 후 |
 
@@ -37,6 +42,8 @@ Claude Code, Codex, Antigravity가 모두 이 파일을 따릅니다. 프로젝�
 
 - `git push`, 머지, 배포, 데이터 삭제, DB 마이그레이션 실행은 사용자 승인 없이 하지 않는다.
 - `rm -rf`, 강제 푸시, 히스토리 재작성 금지.
+- 전역 CLI 설치·업데이트(`npm install -g`, `codex update`, `cli-update.mjs update --yes` 등)는 오케스트레이터만, 사용자 승인 후에 한다
+  (사용자 설정 `cli-update.json`의 `auto`가 참이면 승인 생략). 리뷰·리서치를 맡은 에이전트는 하지 않는다.
 - REA로 분석한 대상의 코드·디자인·문구·이미지를 결과물에 복사하지 않는다 (아래 클린룸 규칙).
 - UI 레퍼런스(`.agentic/references/ui-ux.md`의 출처, 경쟁 앱 캡처)도 같다. 배치·흐름 같은 패턴만 참고하고 화면·문구·이미지를 그대로 옮기지 않는다.
 
@@ -103,6 +110,8 @@ Claude Code, Codex, Antigravity가 모두 이 파일을 따릅니다. 프로젝�
 - 다른 게임의 이름, 캐릭터, 그림, 소리, 맵, 문구, 코드를 쓰지 않는다. 장르의 규칙과 구조만 참고한다 (위 클린룸 규칙과 같다).
 - 들여오거나 생성한 에셋은 출처와 라이선스를 기록한다. 라이선스를 확인하지 못한 에셋은 넣지 않는다.
 - 돈이 드는 생성(음성·음악·이미지 API)은 사용자 승인 없이 실행하지 않는다.
+- 실존 인물의 얼굴·목소리를 닮게 만든 에셋은 그 사람의 허락이 확인되지 않으면 만들지도 넣지도 않는다. 로컬에서 무료로 생성할 때도 같다.
+- 무료 라이브러리(Quixel Megascans 등)도 라이선스 문구를 확인한 날짜와 함께 기록한다. 무료 여부와 허용 범위는 바뀔 수 있다.
 
 ### 확인과 보고
 - 화면·조작·연출·수치가 바뀌면 테스트 통과만으로 완료라고 하지 않는다. 실제로 띄워 확인한 것과 확인하지 못한 것을 나눠 적는다.

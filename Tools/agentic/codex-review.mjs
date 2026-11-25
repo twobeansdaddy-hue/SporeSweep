@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 // Codex로 교차 리뷰를 받는다 (읽기 전용 샌드박스).
-// 사용: node tools/agentic/codex-review.mjs [--base main] [--uncommitted] [--focus "중점 사항"] [--tier 등급]
+// 사용: node tools/agentic/codex-review.mjs [--base main] [--uncommitted] [--focus "중점 사항"] [--tier 등급] [--model 이름] [--effort 강도]
 //       --tier: 요청 난이도 등급(config.json의 autoSelect.tiers). 그 등급의 모델·추론 강도를 stages.review 위에 덮는다.
+//       --model·--effort: 이번 리뷰에만 쓸 값 (models.mjs 목록에서 고른 값). 등급·stages 값보다 우선한다.
+//       --effort default: 강도를 넘기지 않는다 (모델 기본값). --model을 바꿀 때는 --effort도 같이 준다.
 // 종료 코드: 0 성공 / 75 대체 경로 필요(미설치·한도 초과·시간 초과·빈 출력) / 2 사용법 오류
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { findRoot, loadEnv, loadConfig, childEnv, stageSettings, withTier, codexModelArgs, hasCommand, run, exitFailure, EXIT_FALLBACK } from './lib.mjs';
+import { findRoot, loadEnv, loadConfig, childEnv, stageSettings, withTier, codexModelArgs, pickEffort, hasCommand, run, exitFailure, EXIT_FALLBACK } from './lib.mjs';
 
 const ROOT = findRoot(dirname(fileURLToPath(import.meta.url)));
 loadEnv(ROOT);
@@ -14,12 +16,17 @@ const CONFIG = loadConfig(ROOT);
 const CFG = CONFIG.codex ?? {};
 
 const args = process.argv.slice(2);
-let base = CONFIG.baseBranch ?? 'main', uncommitted = false, focus = '', tier = '';
+let base = CONFIG.baseBranch ?? 'main', uncommitted = false, focus = '', tier = '', model = '', effort = '';
 for (let i = 0; i < args.length; i++) {
   if (args[i] === '--base') base = args[++i];
   else if (args[i] === '--uncommitted') uncommitted = true;
   else if (args[i] === '--focus') focus = args[++i] ?? '';
   else if (args[i] === '--tier') tier = args[++i] ?? '';
+  else if (args[i] === '--model' || args[i] === '--effort') {
+    const v = args[++i];
+    if (v === undefined || v.trim() === '') { console.error(`${args[i - 1]}에 값이 없습니다`); process.exit(2); }
+    if (args[i - 1] === '--model') model = v; else effort = v;
+  }
   else { console.error(`알 수 없는 인자: ${args[i]}`); process.exit(2); }
 }
 
@@ -50,7 +57,10 @@ const stamp = new Date().toISOString().replace(/[:.]/g, '-');
 const lastMsg = join(outDir, `codex-${stamp}.md`);
 
 let modelArgs;
-try { modelArgs = codexModelArgs(stageSettings(withTier(CONFIG, tier), 'review', 'codex')); } catch (e) { console.error(e.message); process.exit(2); }
+try {
+  const stage = stageSettings(withTier(CONFIG, tier), 'review', 'codex');
+  modelArgs = codexModelArgs({ model: model.trim() || stage.model, effort: pickEffort(effort, stage.effort) });
+} catch (e) { console.error(e.message); process.exit(2); }
 
 const res = await run('codex', [
   'exec',
@@ -65,7 +75,7 @@ const combined = `${res.stdout}\n${res.stderr}`;
 if (res.timedOut) fallback('시간 초과');
 if (res.code !== 0) {
   const reason = exitFailure(res);
-  fallback(reason === '모델 용량 부족' ? 'Codex 모델 용량 부족 (잠시 뒤 다시 하거나 stages.review.codex.model로 다른 모델 지정)' : `Codex ${reason}`, combined);
+  fallback(reason === '모델 용량 부족' ? 'Codex 모델 용량 부족 (models.mjs 목록의 다른 모델을 --model로 한 번 다시 하거나 stages.review.codex.model로 지정)' : `Codex ${reason}`, combined);
 }
 
 const review = existsSync(lastMsg) ? readFileSync(lastMsg, 'utf8').trim() : res.stdout.trim();
