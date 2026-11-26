@@ -8,7 +8,7 @@
 - **지금 상태와 다음 할 일**을 지금에 맞게 고친다.
 - 새로 생긴 계정, 비밀값의 위치, 주의할 점이 있으면 그 절에 적는다.
 
-마지막으로 고친 날: 2026-11-25
+마지막으로 고친 날: 2026-11-26
 
 계정 이전(2026-11-06): 이제부터 **팀 계정**에서 작업한다. 개인 계정의 세션 기록은 팀 계정에서 보이지 않으므로 이 문서가 인계 기준이다. 이전 시점에 main은 원격과 같다(`3d1d98b`). 브라우저(Claude in Chrome)의 Play Console·App Store Connect·AdMob·Firebase 로그인은 사용자 몫이다.
 
@@ -129,7 +129,7 @@
 8. **AdMob 지급 계좌 확인 대기.** Google이 2026-10-25쯤 ₩250 미만 시험 입금을 보냈다(10-27까지 계좌에 안 보임). 10-29~31에 은행 입금 내역에서 금액을 찾아 AdMob → 결제 → 결제 수단에서 고른다(계정 주인이 한다, 기회가 적다).
 7. **홍보 계정.** 유튜브 `@code404app`은 브랜드 계정으로 옮겼다(끝). 인스타 `code404.app`은 게시물 1개·팔로워 0이라 새로 만들지 않고, 계정 센터 연락처에 hello@code404.app을 더했다(끝, 개인 Gmail은 복구용으로 남김, 페이스북은 연결하지 않음). R2는 며칠 뒤 두 곳에 올린다.
 
-**iOS 1.0.2 새로운 기능 문구(2026-11-25, App Store Connect에 넣고 심사 제출함).** 한국어: "· 장애물을 한눈에 알아보기 쉽게 다듬었어요. 시한 포자, 포자 알, 쇠사슬, 금 간 둥지가 새 모습이에요. · 쇠사슬에 자물쇠가 생겨 그냥 철망과 구분돼요. · 뉴델리와 카이로의 랜드마크를 다른 도시처럼 별 40개로 되살릴 수 있어요. · 도쿄 전파탑의 폐허 모습을 새로 그렸어요." English: "· Obstacles are easier to tell apart at a glance: new looks for the timed spore, spore egg, chains and cracked nest. · Chained blocks now show a padlock, so they stand out from plain cages. · New Delhi and Cairo landmarks now take 40 stars to restore, like the other cities. · A redrawn ruined Tokyo tower." 안드로이드는 이번에 내지 않는다(계정 주인 결정).
+**iOS 1.0.2 새로운 기능 문구(2026-11-26 빌드 5로 다시 심사 제출, 첫 줄을 보드 그림 전체 교체에 맞춰 고침).** 한국어: "· 보드의 블록과 장애물 그림을 모두 새로 그렸어요. 더 또렷하고 서로 구분하기 쉬워요. · 쇠사슬에 자물쇠가 생겨 그냥 철망과 구분돼요. · 뉴델리와 카이로의 랜드마크를 다른 도시처럼 별 40개로 되살릴 수 있어요. · 도쿄 전파탑의 폐허 모습을 새로 그렸어요." English: "· All board pieces and obstacles have been redrawn to be clearer and easier to tell apart. · Chained blocks now show a padlock, so they stand out from plain cages. · New Delhi and Cairo landmarks now take 40 stars to restore, like the other cities. · A redrawn ruined Tokyo tower." 안드로이드는 이번에 내지 않는다(계정 주인 결정).
 
 **1.0.1 새로운 기능 문구(2026-10-30).** 한국어: "· 랜드마크를 다 되살리면 '자랑하기'로 오염된 모습과 되살린 모습을 한 장에 담아 친구에게 보낼 수 있어요. · 진행이 iCloud에 저장돼요. 앱을 다시 설치하거나 다른 기기에서도 이어서 할 수 있어요. · 새 아이콘으로 바뀌었어요. · 앱 용량을 줄였어요." English: "· Restored a landmark? Tap Share to send a before-and-after picture to friends. · Your progress is now saved to iCloud, so you can pick up where you left off after reinstalling or on another device. · A brand-new app icon. · Smaller download size." 안드로이드(0.3) 테스터 노트는 iCloud 대신 "Google Play 게임즈에 진행 저장"이다.
 
@@ -148,6 +148,7 @@
 
 새것이 위다.
 
+- **2026-11-26** iOS 1.0.2(빌드 5)를 다시 심사에 냈다(계정 주인 지시 "제출해요", 앱 심사 화면 상태 "심사 대기 중"). 계정 주인이 Xcode로 빌드 5를 올렸고, App Store Connect의 1.0.2에서 빌드 4를 빼고 빌드 5를 연결했다. "새로운 기능" 첫 줄을 한국어·영어 모두 보드 그림 전체 교체에 맞게 바꿨다(7절). 출시 방식은 그대로(심사 통과 뒤 자동, 모든 사용자 즉시, 평점 유지). App Store Connect에 중국 본토 보안 평가·AIGC 신고 안내가 떠 있지만 중국 본토는 출시 국가에서 빠져 있어 이번 제출과 관계없다. 연령 등급 새 질문(위치 공유·데이팅)은 2027-01-15까지 답하면 된다.
 - **2026-11-26** iOS 빌드 번호를 4→5로 올렸다(계정 주인 지시 "커밋하고 머지, 배포 재진행"). 1.0.2 심사는 취소된 상태였고, 빌드 5에는 빌드 4의 내용에 Seedream 보드 그림 38장이 더해졌다. Release 빌드(서명 없이) 성공, Info.plist 1.0.2 / 5. 안드로이드는 이번에도 내지 않는다(11-25 결정 유지). 남은 것: 계정 주인이 본 폴더에서 Xcode로 아카이브·업로드 → App Store Connect의 1.0.2에 빌드 5를 연결하고 "새로운 기능"에 보드 그림이 바뀐 것을 더해 다시 심사 제출.
 - **2026-11-25** 계정 주인 결정 "Seedream(before)로 모두 가자": 보드 그림 38장을 앞선 Seedream 정리본으로 바꿨다(굵은 외곽선판은 쓰지 않음). 쇠사슬 그림에 자물쇠가 들어 있어 코드 자물쇠와 `obstacle_padlock.png`를 뺐고, 고치 창·시한 포자 숫자 자리를 새 그림에 맞췄고(iOS·안드로이드 둘 다), 얼음은 가운데를 비치게 했다. 자세한 것은 `Art/ASSET_AUDIT.md` 끝. 시험 GameScene 67개 통과(새 시험 1개), iOS 시뮬레이터 빌드 경고 0, 안드로이드 `:app:assembleDebug` 통과(안드로이드 화면은 띄워 보지 않음), iOS 시뮬레이터에서 장애물 보드를 띄워 확인. 사람이 아직 플레이하지 않았고 실기기 미확인. 커밋 전. iOS 1.0.2 심사는 취소된 상태라 이 그림을 담으려면 빌드 번호를 올려 다시 올려야 한다.
 - **2026-11-25** 보드 그림 33장을 굵은 외곽선 지시문으로 Seedream 5.5에서 다시 그렸다(계정 주인 지시, 3,234크레딧, Seedream 누계 7,252). 외곽선은 굵게 나와 44px에서도 또렷하지만, 개념만 설명하고 새로 쓰게 해서 모양·색이 지금 게임과 달라진 것이 많다(보호막·끈끈이가 라임 사각형, 아이템이 남색, 쇠사슬이 X자 등). 바꿔 넣을 후보는 블록 6종, 폭탄, 코어, 오염 물질 1×1·2×2, 얼음, 잔해, 시한 포자(`Art/ASSET_AUDIT.md` 끝, 비교 그림 `.agentic/tmp/shots/seedream_outline_compare_1.png`·`_2.png`). 앱에는 넣지 않았다. 생성 요청이 자동 승인 검사의 일시 오류로 몇 번 막혔다가 다시 보내 통과했다(과금 없음).
