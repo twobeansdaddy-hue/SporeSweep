@@ -268,3 +268,28 @@ STYLE: (위 "화풍 지시"와 같다) Exactly one object, centered, filling abo
 **도쿄 폐허 층 맞춤(2026-11-25).** AI 테스터 검증에서 폐허의 전망대가 복원판보다 낮아(큰 전망대 0.62~0.715 대 0.545~0.645) 받침만 복원하면 폐허 전망대가 잘린다고 나왔다. 다시 만들지 않고 세로로만 구간별로 늘렸다(폭과 바닥 0.951은 그대로). 대응점(목표 y ← 원래 y, 그림 높이 비율): 0.051←0.215(꼭대기), 0.235←0.385, 0.30←0.445(윗 전망대), 0.545←0.62, 0.645←0.715(큰 전망대), 0.951←0.951. 늘리기 전 그림은 `Art/incoming/asset_v2/tokyo_ruined_unwarped.png`. 늘린 뒤 탑 포자 10개가 모두 폐허 위에 앉는다(가장 먼 안테나 포자 36px).
 
 **자물쇠 `obstacle_padlock.png`(2026-11-25, 생성 없음).** 쇠사슬이 폰 크기에서 그냥 철망과 비슷해 보여서(AI 테스터 지적), 쇠사슬 생성 원본 `Art/incoming/asset_v2/chain_raw.png`의 오른쪽 아래 자물쇠만 오려 따로 그림으로 만들었다. 몸통은 기울어진 네모 (864,588)-(1044,536)-(1074,690)-(892,724), 걸쇠는 타원 고리(바깥 912,494,1000,600 / 안쪽 934,516,978,600)를 따라 오리고 256 안에 맞췄다(`Art/incoming/asset_v2/padlock.png`). 앱은 쇠사슬 노드의 자식으로 칸의 0.46배 크기, 오른쪽 아래(0.25, -0.25)에 단다.
+
+## 모델 비교: Seedream 5.5 (ElevenLabs, 2026-11-25)
+
+계정 주인 제안: 지금 그림은 Codex(ChatGPT)·`gpt-image-2.5-sunburst`로 만들어 같은 계열끼리 비교는 의미가 적으니, 다른 계열인 `bytedance-seedream-5.5`로 **참조 그림 없이 게임 컨셉·색 규칙·그 장애물의 역할을 글로 설명해 새로 그리게** 해서 비교한다. 시한 포자, 포자 알, 쇠사슬 각 1장(한 장 98크레딧, 모두 294). 앱에는 넣지 않았다. 원본은 `Art/incoming/seedream/*_raw.png`(2720×1536), 칸에 맞춘 것은 `*_256.png`, 비교 그림은 `.agentic/tmp/shots/seedream_compare.png`(저장소 밖).
+
+공통 앞부분(세 장 같음): 게임 컨셉(외계 분홍 점액, 잡동사니 블록, 격리 탱크, 랜드마크 복원, 반짝이는 장난감 같은 세계, 무섭거나 징그럽지 않게)과 색 규칙(분홍은 모을 점액만, 장애물은 포도주색·건메탈 + 위험 표시 산성 라임, 아군은 광택 남색 + 노랑·검정 줄무늬). 뒤에 그 그림의 역할과 피해야 할 모양, 화풍("polished casual mobile game icon, soft 3D cartoon render ... readable at 40 pixels ... fully transparent background")을 붙였다.
+
+| | gpt-image-2.5-sunburst (지금) | seedream-5.5 |
+|---|---|---|
+| 비용 | 433(참조 1장)~1,160(참조 4장) | 98(참조 없음), 참조를 붙이면 127~215(미리 잰 값) |
+| 배경 | 투명·흰색·초록이 섞여 옴 | 투명 2장, 흰색 1장(쇠사슬) |
+| 크기 | 1280×720 | 2720×1536 |
+| 시한 포자 | 라임 방울이 많아 보드가 어지러움 | 찡그린 얼굴의 작은 기생체, 라임은 촉수 끝만. 숫자 창이 크고 깔끔 |
+| 포자 알 | 광택 장난감 느낌, 블록과 화풍이 맞음 | 더 사실적인 3D 질감(판 갑옷), 아래쪽 회색 띠. 블록보다 덜 장난감 같음 |
+| 쇠사슬 | 테두리 사슬 + 따로 붙인 자물쇠 | 처음부터 테두리 사슬 + 자물쇠 한 그림, 사슬이 가늘고 중성 회색 |
+
+Claude 판단(사람이 실기기에서 본 것 아님): 시한 포자는 Seedream 쪽이 낫다. 포자 알은 지금 그림이 블록 화풍에 더 맞다. 쇠사슬은 비슷하다(지금은 코드로 자물쇠를 붙였고, Seedream은 한 그림에 들어 있다). 비용은 Seedream이 4~12배 싸다.
+
+## 굵은 외곽선 33장 (Seedream 5.5, ElevenLabs, 2026-11-25)
+
+- 모델 `bytedance-seedream-5.5`, 참고 그림 없음, 1장씩, 2720×1536, 한 장 98크레딧(모두 3,234). 상업 이용: ElevenLabs 유료 구독(계정 주인 확인).
+- 지시문 틀(물건마다 OBJECT 한 단락만 바꿈): "ONE ISOLATED GAME ICON, FULLY TRANSPARENT BACKGROUND, nothing else in the image … Game: "SporeSweep", a cute candy-colored mobile match-3 puzzle game (bright pink alien goo is the goal; obstacles are wine-red/gunmetal with acid-lime danger accents; power-ups are glossy navy with yellow-black stripes and cyan light). OBJECT: … STYLE (important): bold cartoon game icon with a THICK, clean, dark outline around the whole silhouette and around each main part (outline about 3% of the image width, a darker shade of the object's own color, never thin), vivid saturated colors, strong value contrast, simple chunky shapes with few details, smooth cel-style shading, one big white glossy highlight on the upper left. Must stay crisp and readable at 40 pixels. Centered, filling about 80% of a square 1:1 canvas, no shadow."
+- 덧붙인 조건: 오염 물질·슬러지·끈끈이 "NO FACE", 덮개(철망·얼음·보호막·끈끈이·쇠사슬) "FLAT FRONT VIEW, PERFECT SQUARE, EMPTY INSIDE", 두 상태 그림(콘크리트·둥지·굴뚝) "TWO ICONS SIDE BY SIDE … 16:9", 컨테이너 "VERY WIDE … 5 times wider than tall".
+- 생성 ID와 결과 판정은 `Art/ASSET_AUDIT.md`의 "굵은 외곽선으로 다시 생성". 앱에는 넣지 않았다.
+- 정리: `cut` 스크립트로 알파 40 미만 지움, 불투명 배경 5장은 가장자리에서 배경색(허용 오차 28) 채워 지움, 두 상태 그림은 가운데 빈 열에서 잘라 둘로 나눔.

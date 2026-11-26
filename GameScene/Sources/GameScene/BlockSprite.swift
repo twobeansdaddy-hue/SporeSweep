@@ -263,13 +263,7 @@ enum BlockSprite {
             if let chain = spriteNode(named: "obstacle_chain", cellSize: cellSize) {
                 chain.name = "chain"
                 chain.zPosition = 0.25
-                // 사슬은 철망 테두리와 겹쳐 폰 크기에서 철망처럼 보인다. 큰 자물쇠를 오른쪽 아래에 달아 구분한다.
-                if let lock = spriteNode(named: "obstacle_padlock", cellSize: cellSize * 0.46) {
-                    lock.name = "chainLock"
-                    lock.position = CGPoint(x: cellSize * 0.25, y: -cellSize * 0.25)
-                    lock.zPosition = 0.05
-                    chain.addChild(lock)
-                }
+                // 사슬 그림의 오른쪽 아래에 자물쇠가 함께 그려져 있어 그냥 철망과 구분된다.
                 node.addChild(chain)
             } else {
                 let chain = cageOverlay(cellSize: cellSize * 1.08)
@@ -403,8 +397,8 @@ enum BlockSprite {
         label.fontSize = side * 0.44
         label.verticalAlignmentMode = .center
         label.horizontalAlignmentMode = .center
-        // 그림(다리 달린 기생체)의 어두운 창은 가운데보다 조금 오른쪽에 있다(창 지름은 배지 높이의 약 0.39배).
-        label.position = CGPoint(x: side * 0.05, y: 0)
+        // 그림(다리 달린 기생체)의 어두운 창은 가운데보다 조금 아래에 있다(창 지름은 배지 높이의 약 0.4배).
+        label.position = CGPoint(x: -side * 0.016, y: -side * 0.071)
         label.zPosition = 0.1
         badge.addChild(label)
         setTimer(turns, on: badge)
@@ -481,18 +475,19 @@ enum BlockSprite {
             node = box
         }
         node.name = name(for: .cocoon(kind))
-        // 그림의 가운데 창은 연분홍이다. 분홍은 오염 물질에만 쓰므로 크림색 원으로 덮고 그 위에 블록을 놓는다.
-        let window = SKShapeNode(circleOfRadius: cellSize * 0.25)
+        // 그림의 가운데 창(크림색 고리 안)은 비어 있다. 크림색 원으로 채우고 그 위에 블록을 놓는다.
+        let windowCenter = CGPoint(x: -cellSize * 0.018, y: cellSize * 0.073)
+        let window = SKShapeNode(circleOfRadius: cellSize * 0.21)
         window.name = "cocoonWindow"
         window.fillColor = SKColor(red: 1.0, green: 0.95, blue: 0.86, alpha: 1)
         window.strokeColor = .clear
-        window.position = CGPoint(x: 0, y: cellSize * 0.02)
+        window.position = windowCenter
         window.zPosition = 0.05
         node.addChild(window)
-        let icon = makeNode(block: .normal(kind), cellSize: cellSize * 0.46)
+        let icon = makeNode(block: .normal(kind), cellSize: cellSize * 0.38)
         icon.name = "cocoonKind"
-        // 창은 고치의 가운데에 있다.
-        icon.position = CGPoint(x: 0, y: cellSize * 0.02)
+        // 창은 고치의 가운데보다 조금 위에 있다.
+        icon.position = windowCenter
         icon.zPosition = 0.1
         node.addChild(icon)
         return node

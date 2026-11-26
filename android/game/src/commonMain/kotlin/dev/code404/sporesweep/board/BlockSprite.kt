@@ -125,14 +125,7 @@ object BlockSprite {
             spriteNode("obstacle_chain", cellSize)?.let {
                 it.name = "chain"
                 it.z = 0.25f
-                // 사슬은 철망 테두리와 겹쳐 폰 크기에서 철망처럼 보인다. 큰 자물쇠를 오른쪽 아래에 달아 구분한다.
-                spriteNode("obstacle_padlock", cellSize * 0.46f)?.let { lock ->
-                    lock.name = "chainLock"
-                    lock.x = cellSize * 0.25f
-                    lock.y = -cellSize * 0.25f
-                    lock.z = 0.05f
-                    it.addChild(lock)
-                }
+                // 사슬 그림의 오른쪽 아래에 자물쇠가 함께 그려져 있어 그냥 철망과 구분된다.
                 node.addChild(it)
             }
         }
@@ -190,9 +183,9 @@ object BlockSprite {
         badge.z = 0.3f
         val label = LabelNode("", side * 0.44f)
         label.name = TIMER_LABEL_NAME
-        // 그림(다리 달린 기생체)의 어두운 창은 가운데보다 조금 오른쪽에 있다(창 지름은 배지 높이의 약 0.39배).
-        label.x = side * 0.05f
-        label.y = 0f
+        // 그림(다리 달린 기생체)의 어두운 창은 가운데보다 조금 아래에 있다(창 지름은 배지 높이의 약 0.4배).
+        label.x = -side * 0.016f
+        label.y = -side * 0.071f
         label.z = 0.1f
         badge.addChild(label)
         setTimer(turns, badge)
@@ -213,17 +206,19 @@ object BlockSprite {
         val texture = texture("obstacle_cocoon")
         val node: Node = if (texture != null) SpriteNode(texture, cellSize, cellSize) else SpriteNode(SColor(1f, 0.36f, 0.66f), cellSize * 0.94f, cellSize * 0.94f)
         node.name = name(Block.Cocoon(kind))
-        // 그림의 가운데 창은 연분홍이다. 분홍은 오염 물질에만 쓰므로 크림색 원으로 덮고 그 위에 블록을 놓는다.
-        val window = ShapeNode.circle(cellSize * 0.25f)
+        // 그림의 가운데 창(크림색 고리 안)은 비어 있다. 크림색 원으로 채우고 그 위에 블록을 놓는다.
+        val window = ShapeNode.circle(cellSize * 0.21f)
         window.name = "cocoonWindow"
         window.fillColor = SColor(1f, 0.95f, 0.86f)
         window.strokeColor = SColor.clear
-        window.y = cellSize * 0.02f
+        window.x = -cellSize * 0.018f
+        window.y = cellSize * 0.073f
         window.z = 0.05f
         node.addChild(window)
-        val icon = makeNode(Block.Normal(kind), cellSize * 0.46f)
+        val icon = makeNode(Block.Normal(kind), cellSize * 0.38f)
         icon.name = "cocoonKind"
-        icon.y = cellSize * 0.02f
+        icon.x = -cellSize * 0.018f
+        icon.y = cellSize * 0.073f
         icon.z = 0.1f
         node.addChild(icon)
         return node

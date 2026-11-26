@@ -384,6 +384,24 @@ struct BoardSceneTests {
         #expect(BlockSprite.makeNode(block: .concrete(hp: 1), cellSize: 48).frame.width <= 48)
     }
 
+    @Test("Seedream 그림에 맞춘 자리: 자물쇠는 사슬 그림에 들어 있고, 고치 창과 시한 포자 숫자는 그림의 창에 놓인다")
+    func seedreamSpriteAnchors() throws {
+        let chained = BlockSprite.makeNode(block: .chained(.wood), cellSize: 100)
+        let chain = try #require(chained.childNode(withName: "chain"))
+        #expect(chain.childNode(withName: "chainLock") == nil)
+        #expect(BlockSprite.texture(named: "obstacle_padlock") == nil)
+
+        let cocoon = BlockSprite.makeNode(block: .cocoon(.wood), cellSize: 100)
+        let window = try #require(cocoon.childNode(withName: "cocoonWindow"))
+        let icon = try #require(cocoon.childNode(withName: "cocoonKind"))
+        #expect(abs(window.position.x + 1.8) < 0.01 && abs(window.position.y - 7.3) < 0.01)
+        #expect(icon.position == window.position)
+
+        let timed = BlockSprite.makeNode(block: .timed(.wood, turns: 5), cellSize: 100)
+        let label = try #require(timed.childNode(withName: "//timerLabel"))
+        #expect(label.position.y < 0)
+    }
+
     func obstacleLevel() -> GameState {
         GameState(
             seed: 2,
